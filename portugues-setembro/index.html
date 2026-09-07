@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>📚 Português de Setembro 📚</title>
+<style>
+  :root{
+    --rosa:#ff6b9d; --roxo:#a06cd5; --azul:#4d96ff; --verde:#6bcB77;
+    --amarelo:#ffd93d; --laranja:#ff924c; --vermelho:#ff5e5e; --ceu:#b8e3ff;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0; height:100%;}
+  body{
+    font-family:'Comic Sans MS','Baloo',"Trebuchet MS",sans-serif;
+    background:linear-gradient(160deg,#ffe9f3 0%,#e6e2ff 50%,#dff3ff 100%);
+    color:#3a3a55; overflow-x:hidden; user-select:none;
+    min-height:100%; touch-action:manipulation;
+  }
+  #app{max-width:760px; margin:0 auto; padding:14px; min-height:100vh;}
+
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    background:#fff; border-radius:22px; padding:8px 14px; margin-bottom:14px;
+    box-shadow:0 6px 0 rgba(0,0,0,.08);
+  }
+  .topbar .home-btn{
+    background:var(--azul); color:#fff; border:none; border-radius:16px;
+    font-size:22px; padding:8px 14px; font-weight:bold; cursor:pointer; box-shadow:0 4px 0 #2f6fd0;
+  }
+  .topbar .home-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #2f6fd0;}
+  .stars{font-size:24px; font-weight:bold; color:var(--laranja); display:flex; align-items:center; gap:6px;}
+  .stars .num{background:var(--amarelo); border-radius:14px; padding:2px 12px; box-shadow:0 3px 0 #d9a800;}
+
+  .hero{
+    text-align:center; background:#fff; border-radius:30px; padding:22px 18px;
+    box-shadow:0 8px 0 rgba(0,0,0,.08); margin-bottom:18px;
+  }
+  .hero h1{font-size:32px; margin:6px 0; color:var(--roxo); line-height:1.2;}
+  .hero p{font-size:18px; margin:4px 0; color:#666;}
+  .mascote{font-size:78px; display:inline-block; animation:flutua 2.5s ease-in-out infinite;}
+  @keyframes flutua{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-14px) rotate(3deg);}}
+
+  .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+  .card{
+    border:none; border-radius:26px; padding:16px 10px; cursor:pointer;
+    color:#fff; font-size:19px; font-weight:bold; text-align:center;
+    box-shadow:0 7px 0 rgba(0,0,0,.18); transition:transform .08s;
+    display:flex; flex-direction:column; align-items:center; gap:6px; line-height:1.15;
+  }
+  .card:active{transform:translateY(4px); box-shadow:0 3px 0 rgba(0,0,0,.18);}
+  .card .ico{font-size:44px;}
+  .c1{background:var(--rosa);} .c2{background:var(--azul);} .c3{background:var(--verde);}
+  .c4{background:var(--laranja);} .c5{background:var(--roxo);} .c6{background:var(--vermelho);}
+  .c7{background:#19c3b1;} .c8{background:#f76eb0;} .c9{background:#7c83ff;}
+
+  .game{
+    background:#fff; border-radius:30px; padding:18px; box-shadow:0 8px 0 rgba(0,0,0,.08);
+    text-align:center;
+  }
+  .game-title{font-size:24px; color:var(--roxo); margin:0 0 4px;}
+  .progress{font-size:16px; color:#999; margin-bottom:10px;}
+  .question{
+    font-size:22px; font-weight:bold; color:#3a3a55; margin:6px 0 14px; line-height:1.35;
+    display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;
+  }
+  .speak-btn{
+    background:var(--amarelo); border:none; border-radius:50%; width:54px; height:54px;
+    font-size:28px; cursor:pointer; box-shadow:0 4px 0 #d9a800; flex:0 0 auto;
+  }
+  .speak-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #d9a800;}
+  .speak-btn.playing{animation:pulse .7s infinite;}
+  @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
+
+  .stage{
+    min-height:120px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+    gap:10px; margin:10px auto 18px; padding:16px;
+    background:linear-gradient(160deg,#fff7fd,#eef5ff); border-radius:22px; border:4px dashed #e3cdf5;
+    flex-direction:column;
+  }
+  .obj{font-size:74px; animation:pop .35s ease; line-height:1;}
+  @keyframes pop{0%{transform:scale(0);}70%{transform:scale(1.25);}100%{transform:scale(1);}}
+
+  /* ilustrações SVG */
+  .illo{display:inline-block; flex:0 0 auto; line-height:0; vertical-align:middle; animation:pop .4s ease;}
+  .illo svg{display:block; width:100%; height:100%;}
+  .illorow{display:flex; gap:10px; justify-content:center; align-items:center; flex-wrap:nowrap;}
+  .illocol{display:flex; flex-direction:column; align-items:center; gap:6px; flex:0 1 auto; min-width:0;}
+  .illocol .wordtiles{flex-wrap:nowrap;}
+  .illorow .seta{font-size:30px; flex:0 0 auto;}
+
+  /* palavra em quadradinhos de letras */
+  .wordtiles{display:flex; gap:5px; flex-wrap:wrap; justify-content:center; align-items:center;}
+  .lettile{
+    min-width:42px; height:52px; padding:0 4px; border:3px solid var(--roxo); border-radius:10px; background:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:29px; font-weight:bold; color:#3a3a55;
+  }
+  .lettile.hl{background:#fff3b0; border-color:var(--laranja); color:#e0651b;}
+  .lettile.miss{background:#ffe3ec; border-color:var(--vermelho); color:var(--vermelho); font-size:32px;}
+  .lettile.gap{background:#ffe3ec; border-color:var(--vermelho); color:var(--vermelho); min-width:64px; font-size:30px;}
+
+  /* frase com lacuna */
+  .frase{font-size:22px; font-weight:bold; color:#2f6fd0; line-height:1.5; max-width:460px;}
+  .frase .lac{display:inline-block; min-width:96px; border-bottom:5px solid var(--vermelho); color:var(--vermelho);}
+
+  /* capa de livro */
+  .capa{
+    width:230px; border-radius:12px; padding:12px 10px; border:6px solid #f3c34a;
+    box-shadow:0 8px 0 rgba(0,0,0,.18); display:flex; flex-direction:column; gap:6px; align-items:center;
+  }
+  .capa .cp-tit{font-size:23px; font-weight:bold; line-height:1.1; text-align:center;}
+  .capa .cp-lin{font-size:11px; font-weight:bold; text-align:center; line-height:1.25;}
+  .capa .cp-art{width:112px; height:112px; background:rgba(255,255,255,.55); border-radius:10px;}
+  .capa .cp-ed{font-size:10px; font-weight:bold; background:#fff; color:#5a4500; border-radius:6px; padding:3px 8px;}
+
+  /* fichas de sequência (montar a ordem) */
+  .seqslots{display:flex; flex-direction:column; gap:8px; align-items:stretch; max-width:520px; margin:0 auto;}
+  .seqslot{
+    min-height:52px; border:4px dashed #cbb6e6; border-radius:16px; background:#faf6ff;
+    display:flex; align-items:center; gap:10px; padding:8px 12px; font-size:16px; font-weight:bold; color:#8a7aa5;
+  }
+  .seqslot .nn{background:var(--roxo); color:#fff; border-radius:50%; width:32px; height:32px; flex:0 0 auto;
+               display:flex; align-items:center; justify-content:center; font-size:18px;}
+  .seqslot.filled{border-style:solid; border-color:var(--verde); background:#eefaf0; color:#2c5c38;}
+  .fichas{display:flex; flex-direction:column; gap:10px; margin-top:14px;}
+  .ficha{
+    border:none; border-radius:18px; padding:13px 14px; font-size:17px; font-weight:bold; text-align:left;
+    background:var(--azul); color:#fff; box-shadow:0 5px 0 #2f6fd0; cursor:pointer; line-height:1.25;
+  }
+  .ficha:active{transform:translateY(3px); box-shadow:0 2px 0 #2f6fd0;}
+  .ficha.used{background:#cfcfe0; box-shadow:0 5px 0 #a0a0c0; opacity:.55; cursor:default;}
+  .ficha.shake{animation:shake .4s;}
+  @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-8px);}75%{transform:translateX(8px);}}
+
+  .options{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(130px,1fr));}
+  .opt{
+    border:none; border-radius:22px; padding:16px 10px; font-size:23px; font-weight:bold;
+    cursor:pointer; background:var(--azul); color:#fff; box-shadow:0 6px 0 #2f6fd0;
+    min-height:80px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    overflow-wrap:break-word; line-height:1.15;
+  }
+  .opt .cap{font-size:17px;}
+  .opt-colors .opt{font-size:19px;}
+  .opt:active{transform:translateY(3px); box-shadow:0 3px 0 #2f6fd0;}
+  .opt.big{font-size:40px;}
+  .opt.ok{background:var(--verde)!important; box-shadow:0 6px 0 #3f9c4f!important; animation:tada .5s;}
+  .opt.no{background:#cfcfe0!important; box-shadow:0 6px 0 #a0a0c0!important; opacity:.7;}
+  @keyframes tada{0%{transform:scale(1);}30%{transform:scale(1.18) rotate(-4deg);}60%{transform:scale(1.1) rotate(4deg);}100%{transform:scale(1);}}
+
+  .opt-colors .opt:nth-child(1){background:var(--rosa); box-shadow:0 6px 0 #d44d7c;}
+  .opt-colors .opt:nth-child(2){background:var(--verde); box-shadow:0 6px 0 #3f9c4f;}
+  .opt-colors .opt:nth-child(3){background:var(--laranja); box-shadow:0 6px 0 #d96d2e;}
+  .opt-colors .opt:nth-child(4){background:var(--roxo); box-shadow:0 6px 0 #7a4db0;}
+
+  .feedback{font-size:25px; font-weight:bold; min-height:40px; margin-top:12px;}
+  .feedback.good{color:var(--verde);} .feedback.bad{color:var(--laranja);}
+
+  .next-btn{
+    margin-top:14px; background:var(--verde); color:#fff; border:none; border-radius:22px;
+    font-size:24px; font-weight:bold; padding:14px 34px; cursor:pointer; box-shadow:0 6px 0 #3f9c4f;
+  }
+  .next-btn:active{transform:translateY(3px); box-shadow:0 3px 0 #3f9c4f;}
+
+  #splash{
+    position:fixed; inset:0; background:linear-gradient(160deg,var(--roxo),var(--rosa));
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    color:#fff; text-align:center; z-index:50; cursor:pointer; padding:20px;
+  }
+  #splash h1{font-size:34px; margin:10px;}
+  #splash .big{font-size:100px; animation:flutua 2.5s infinite;}
+  #splash .play{
+    margin-top:24px; background:var(--amarelo); color:#5a4500; border:none; border-radius:30px;
+    font-size:30px; font-weight:bold; padding:18px 44px; box-shadow:0 8px 0 #d9a800; cursor:pointer;
+  }
+
+  #confetti{position:fixed; inset:0; pointer-events:none; z-index:40;}
+  .win{text-align:center; padding:20px;}
+  .win .trophy{font-size:90px; animation:tada 1s;}
+
+  @media(max-width:480px){
+    .hero h1{font-size:26px;} .question{font-size:19px;} .card{font-size:16px;}
+    .obj{font-size:60px;} .lettile{min-width:34px; height:44px; font-size:23px;}
+    .frase{font-size:19px;} .capa{width:196px;} .ficha{font-size:15px;}
+    .illocol .lettile{min-width:24px; height:36px; font-size:17px; border-width:2px;}
+    .illorow{gap:6px;} .illorow .seta{font-size:22px;}
+  }
+</style>
+</head>
+<body>
+
+<div id="splash">
+  <div class="big">📚</div>
+  <h1>Português<br>de Setembro!</h1>
+  <p style="font-size:20px;max-width:360px;">Vamos brincar com os contos, as capas de livro e os encontros consonantais! 🎉<br>Toque no botão para começar.</p>
+  <button class="play" id="startBtn">▶ COMEÇAR</button>
+</div>
+
+<canvas id="confetti"></canvas>
+<div id="app"></div>
+
+<script>
+/* ============================================================
+   PORTUGUÊS DE SETEMBRO — 1º ano (Bernoulli, Capítulo 4)
+   Módulo 7 do projeto. Mesma estrutura dos outros apps:
+   - narração por arquivos pré-gravados (pasta /audio) -> funciona
+     em qualquer aparelho, online ou offline;
+   - ilustrações em SVG desenhadas à mão (nada de imagem externa);
+   - estrelas, confete, sons de efeito; tudo jogável sozinho.
+   Conteúdos: ENCONTRO CONSONANTAL (com R e com L), formar palavras
+   novas acrescentando R e L, pares mínimos em frases, separar em
+   sílabas, o gênero CAPA DE LIVRO (título, autor, ilustrador,
+   editora), o gênero CONTO e suas partes (introdução,
+   desenvolvimento, conclusão) e a compreensão dos contos
+   Cachinhos Dourados, Os Três Porquinhos e O Soldadinho de Chumbo.
+   ============================================================ */
+
+const App = document.getElementById('app');
+let stars = parseInt(localStorage.getItem('vitor_port_set_stars')||'0',10);
+
+/* ============================================================
+   VOCABULÁRIO DE VOZ (chave -> texto falado).
+   Fonte da verdade para o gerar-audios.py (gera audio/<chave>.mp3).
+   ============================================================ */
+const VOICE = {
+  /* navegação e feedback */
+  greet:"Olá! Bem-vindo aos jogos de Português! Escolha uma brincadeira para começar.",
+  test:"Olá! Você está me ouvindo? Vamos brincar com as palavras e com os contos!",
+  win:"Parabéns! Você conseguiu! Que orgulho de você!",
+  choose:"As respostas são:",
+  ok1:"Muito bem!", ok2:"Isso aí!", ok3:"Você acertou!",
+  ok4:"Boa demais!", ok5:"Mandou bem!", ok6:"Perfeito!",
+  no1:"Quase! Tenta outra.", no2:"Hmm, tenta de novo.", no3:"Não foi essa, tenta outra.",
+
+  /* números de palmas */
+  p1:"uma palma", p2:"duas palmas", p3:"três palmas", p4:"quatro palmas", p5:"cinco palmas",
+  q_silaba:"Bata palmas e conte os pedacinhos. Quantas palmas tem a palavra",
+
+  /* ---------- PALAVRAS ---------- */
+  w_grama:"grama", w_bravo:"bravo", w_brinco:"brinco", w_prato:"prato",
+  w_dragao:"dragão", w_triste:"triste", w_blusa:"blusa", w_globo:"globo",
+  w_bloco:"bloco", w_clarinete:"clarinete", w_flor:"flor", w_planta:"planta",
+  w_zebra:"zebra", w_bicicleta:"bicicleta", w_flauta:"flauta", w_livro:"livro",
+  w_pedra:"pedra", w_trem:"trem", w_floco:"floco", w_flecha:"flecha",
+  w_placa:"placa", w_cravo:"cravo", w_floresta:"floresta", w_prateleira:"prateleira",
+  w_bailarina:"bailarina", w_dourados:"dourados", w_coracao:"coração", w_tres:"três",
+  w_soldadinho:"soldadinho", w_porquinho:"porquinho", w_castelo:"castelo", w_cabana:"cabana",
+  w_paca:"paca", w_pato:"pato", w_faca:"faca", w_fita:"fita", w_fio:"fio",
+  w_pano:"pano", w_foco:"foco", w_fecha:"fecha", w_caro:"caro", w_cima:"cima",
+  w_puma:"puma", w_gama:"gama", w_pego:"pego", w_cavo:"cavo", w_tem:"tem",
+  w_fraca:"fraca", w_frio:"frio", w_frita:"frita", w_prego:"prego",
+  w_claro:"claro", w_plano:"plano", w_clima:"clima", w_pluma:"pluma",
+  w_pronta:"pronta", w_ponta:"ponta", w_pata:"pata", w_prata:"prata",
+  w_foresta:"foresta",
+  /* palavras erradas (com o R ou o L no lugar errado) */
+  x_farca:"farca", x_facra:"facra", x_firo:"firo", x_fior:"fior",
+  x_firta:"firta", x_fitra:"fitra", x_term:"térme", x_temr:"temre",
+  x_patro:"patro", x_pator:"pator", x_garma:"garma", x_gamra:"gamra",
+  x_pergo:"pergo", x_pegro:"pegro", x_carvo:"carvo", x_cavro:"cavro",
+  x_palca:"palca", x_pacla:"pacla", x_folco:"folco", x_foclo:"foclo",
+  x_felcha:"felcha", x_fechla:"fechla", x_calro:"calro", x_cralo:"cralo",
+  x_palno:"palno", x_panlo:"panlo", x_cilma:"cilma", x_cimla:"cimla",
+  x_pulma:"pulma", x_pumla:"pumla",
+  x_pornta:"pornta", x_floersta:"floersta", x_patra:"patra",
+
+  /* ---------- 1. ENCONTRO CONSONANTAL ---------- */
+  e_oque:"O que é um encontro consonantal?",
+  eo_duas:"são duas consoantes juntinhas na mesma palavra",
+  eo_vogais:"são duas vogais juntinhas", eo_uma:"é uma letra sozinha",
+  e_qual:"Qual destas palavras tem encontro consonantal, ou seja, duas consoantes juntinhas?",
+  e_naotem:"Qual destas palavras NÃO tem encontro consonantal?",
+  e_dentro:"Olhe a palavra. Qual é o encontro consonantal que está dentro dela?",
+  e_letra_r:"Estes encontros consonantais são formados com a letra...",
+  e_letra_l:"Nos encontros bê ele, efe ele, cê ele, gê ele e pê ele, a segunda letra é sempre a letra...",
+  le_r:"a letra érre", le_l:"a letra ele", le_s:"a letra ésse", le_m:"a letra eme",
+  /* nomes dos encontros */
+  d_br:"bê érre", d_cr:"cê érre", d_dr:"dê érre", d_fr:"efe érre", d_gr:"gê érre",
+  d_pr:"pê érre", d_tr:"tê érre", d_vr:"vê érre",
+  d_bl:"bê ele", d_cl:"cê ele", d_fl:"efe ele", d_gl:"gê ele", d_pl:"pê ele",
+  d_ze:"zê e", d_pe:"pê e", d_li:"ele i", d_ta:"tê a",
+
+  /* ---------- 2 e 3. PÕE O R / PÕE O L ---------- */
+  r_q:"Acrescente a letra ÉRRE nesta palavra e forme a palavra do desenho. Qual delas está certa?",
+  l_q:"Acrescente a letra ELE nesta palavra e forme a palavra do desenho. Qual delas está certa?",
+  r_modelo:"Olhe o exemplo: pato, com o érre, vira prato.",
+  l_modelo:"Olhe o exemplo: paca, com o ele, vira placa.",
+  r_exp:"Isso! Com o érre a palavra ficou diferente.",
+  l_exp:"Isso! Com o ele a palavra ficou diferente.",
+
+  /* ---------- 4. COMPLETE A PALAVRA ---------- */
+  c_q:"Olhe o desenho e complete a palavra. Qual encontro consonantal está faltando?",
+  c_exp:"Muito bem! Agora a palavra ficou completa.",
+
+  /* ---------- 5. FRASE CERTA ---------- */
+  f_q:"Escute a frase e escolha a palavra certa para completar.",
+  f_mingau:"O mingau da mamãe ursa estava... o quê?",
+  f_tijolos:"A casa de tijolos demorou a ficar... o quê?",
+  f_vestido:"O vestido da bailarina era rosa... o quê?",
+  f_palha:"A casa de palha do porquinho era... o quê?",
+  f_batata:"Na festa da escola tinha batata... o quê?",
+  f_viagem:"O trilho é o caminho por onde anda o... o quê?",
+  f_perdeu:"Cachinhos Dourados se perdeu no meio da... o quê?",
+  f_lobo:"O lobo bateu na porta dos porquinhos com a... o quê?",
+
+  /* ---------- 6. CONTA SÍLABAS ---------- */
+
+  /* ---------- 7. CAPA DE LIVRO ---------- */
+  cp_oque:"Para que serve a capa de um livro?",
+  cpo_mostrar:"para mostrar do que o livro fala e chamar a atenção do leitor",
+  cpo_sentar:"para a gente sentar em cima", cpo_comer:"para guardar comida",
+  cp_titulo:"Olhe a capa. O TÍTULO é o nome do livro e vem escrito em letras bem grandes. Qual é o título deste livro?",
+  cp_autor:"Olhe a capa. O AUTOR é quem escreveu a história. Quem é o autor deste livro?",
+  cp_ilustrador:"Olhe a capa. O ILUSTRADOR é quem fez os desenhos. Quem ilustrou este livro?",
+  cp_editora:"Olhe a capa. A EDITORA é a empresa que produziu o livro. Qual é a editora deste livro?",
+  cp_maior:"Nas capas de livro, qual informação aparece escrita em letras maiores, com mais destaque?",
+  cp_quem_escreve:"Como se chama a pessoa que ESCREVEU a história do livro?",
+  cp_quem_desenha:"Como se chama a pessoa que fez os DESENHOS do livro?",
+  cp_editora_oq:"Como se chama a empresa que produz e publica o livro?",
+  pa_titulo:"o título", pa_autor:"o autor", pa_ilustrador:"o ilustrador",
+  pa_editora:"a editora", pa_leitor:"o leitor", pa_preco:"o preço",
+  cp_aventura:"Olhe estas duas capas. Qual delas parece contar uma história de aventura no espaço?",
+  cp_antes:"Antes de abrir o livro, o que a capa ajuda a gente a descobrir?",
+  cpa_historia:"uma ideia da história que vai ser contada",
+  cpa_final:"o final da história inteirinho", cpa_nada:"nada, a capa não conta nada",
+
+  /* nomes que aparecem nas capas */
+  nm_andersen:"Hans Christian Andersen", nm_signorini:"Fabiana Signorini",
+  nm_amfj:"Editora AMFJ", nm_jacobs:"Joseph Jacobs", nm_analuiza:"Ana Luiza Prado",
+  nm_estrelinha:"Editora Estrelinha", nm_southey:"Robert Southey",
+  nm_bruno:"Bruno Martins", nm_sol:"Editora Sol",
+  nm_ruth:"Ruth Rocha", nm_mariana:"Mariana Massarani", nm_andrea:"Andréa Avelar",
+  nm_luana:"Luana Chinaglia", nm_lua:"Editora Lua",
+  tt_soldadinho:"O Soldadinho de Chumbo", tt_porquinhos:"Os Três Porquinhos",
+  tt_cachinhos:"Cachinhos Dourados", tt_cinderela:"A Cinderela das Bonecas",
+  tt_estela:"Estela Estrela",
+
+  /* ---------- 8. OS CONTOS ---------- */
+  /* Cachinhos Dourados */
+  ca_local:"Na história de Cachinhos Dourados, onde ficava a casa dos três ursos?",
+  lo_cabana:"numa casinha de madeira no meio da floresta",
+  lo_castelo:"num castelo de pedra", lo_cidade:"num sobrado na cidade",
+  ca_momento:"Em que momento do dia acontece a história de Cachinhos Dourados? De manhã, à tarde ou à noite?",
+  mo_manha:"de manhã", mo_tarde:"à tarde", mo_noite:"à noite",
+  ca_mingau:"De quem era o mingau que Cachinhos Dourados comeu por completo?",
+  ca_cadeira:"De quem era a cadeira larga e desconfortável?",
+  ca_cama:"De quem era a cama enorme e muito dura?",
+  ur_papai:"do papai urso", ur_mamae:"da mamãe ursa", ur_filho:"do filho ursinho",
+  ca_quem:"Quem são os personagens da história de Cachinhos Dourados?",
+  pe_ursos:"uma menina e três ursos", pe_lobo:"um lobo e três porquinhos",
+  pe_soldado:"um soldadinho e uma bailarina",
+  /* Os Três Porquinhos */
+  po_titulo:"Estas palavras estão embaralhadas. Coloque na ordem certa e descubra o título da história.",
+  po_casa:"Na história dos Três Porquinhos, de que material era a casa que o lobo NÃO conseguiu derrubar?",
+  ma_tijolo:"de tijolos", ma_palha:"de palha", ma_madeira:"de madeira",
+  po_porque:"Por que as casas dos dois primeiros porquinhos foram derrubadas facilmente?",
+  pq_fracas:"porque eram feitas de palha e de madeira, materiais bem fracos",
+  pq_bonitas:"porque eram muito bonitas", pq_altas:"porque eram muito altas",
+  po_quem:"Quem queria derrubar a casa dos porquinhos?",
+  qu_lobo:"o lobo", qu_urso:"o urso", qu_peixe:"o peixe",
+  po_salvaram:"Quando o lobo derrubou as duas primeiras casas, o que os porquinhos fizeram?",
+  sa_correram:"correram para a casa de tijolos do irmão",
+  sa_dormiram:"foram dormir", sa_nadaram:"foram nadar no rio",
+  /* O Soldadinho de Chumbo */
+  so_quantos:"No conto, numa loja de brinquedos havia uma caixa com soldadinhos de chumbo. Quantos soldadinhos havia na caixa?",
+  n5:"cinco", n10:"dez", n15:"quinze", n25:"vinte e cinco", n30:"trinta", n50:"cinquenta",
+  so_diferente:"O que diferenciava um dos soldadinhos de todos os outros?",
+  di_perna:"ele tinha apenas uma perna",
+  di_chapeu:"ele não tinha chapéu", di_grande:"ele era muito maior",
+  so_onde:"Onde estava o soldadinho no começo da história?",
+  on_loja:"na loja de brinquedos", on_barco:"no barquinho de papel",
+  on_casa:"na casa do menino", on_janela:"no parapeito da janela",
+  so_amava:"Por quem o soldadinho de chumbo era apaixonado?",
+  am_bailarina:"pela bailarina", am_lobo:"pelo lobo", am_peixe:"pelo peixe",
+  so_engoliu:"O soldadinho caiu na água dentro de um barquinho de papel. Quem engoliu o soldadinho?",
+  so_restou:"No final, o soldadinho e a bailarina caíram no fogo. O que restou do soldadinho?",
+  re_coracao:"um pequeno coração de chumbo",
+  re_perna:"a perna dele", re_nada:"não restou nada",
+  so_navegou:"Em que o soldadinho navegou pela água?",
+  na_barquinho:"num barquinho de papel", na_navio:"num navio grande", na_peixe:"nas costas de um peixe",
+  so_quem:"Quais são os dois personagens principais do conto O Soldadinho de Chumbo?",
+
+  /* ---------- 9. PARTES E ORDEM DO CONTO ---------- */
+  ct_oque:"O que é um CONTO?",
+  co_pequena:"uma história pequena, com início, meio e fim",
+  co_receita:"uma lista de ingredientes", co_musica:"uma música para cantar",
+  ct_partes:"Os contos têm três partes. Quais são elas?",
+  pt_tres:"introdução, desenvolvimento e conclusão",
+  pt_letras:"vogais, consoantes e sílabas", pt_capa:"capa, meio e fundo",
+  ct_intro:"Como se chama a parte do conto em que aparecem os personagens e o lugar onde a história acontece?",
+  ct_desen:"Como se chama a parte do meio do conto, em que a história se desenrola e acontecem as coisas?",
+  ct_conclu:"Como se chama a parte final do conto, em que a história termina?",
+  na_intro:"a introdução", na_desen:"o desenvolvimento", na_conclu:"a conclusão",
+  ct_ordem:"Coloque os acontecimentos da história na ordem certa. Toque primeiro no que aconteceu ANTES de tudo.",
+  ct_ordem_ok:"Muito bem! Essa é a ordem certa da história.",
+
+  /* fichas de sequência — Soldadinho */
+  sq_s1:"O menino comprou uma caixa com soldadinhos de chumbo.",
+  sq_s2:"O soldadinho foi colocado dentro de um barquinho de papel.",
+  sq_s3:"O soldadinho de chumbo ficou feliz ao rever a bailarina.",
+  sq_s4:"O soldadinho e a bailarina caíram no fogo.",
+  /* fichas — Porquinhos */
+  sq_p1:"Os três porquinhos construíram as suas casas.",
+  sq_p2:"O lobo soprou e derrubou a casa de palha.",
+  sq_p3:"Os porquinhos correram para a casa de tijolos.",
+  sq_p4:"Os porquinhos espantaram o lobo e ficaram em paz.",
+  /* fichas — Cachinhos */
+  sq_c1:"Cachinhos Dourados se perdeu no meio da floresta.",
+  sq_c2:"Ela entrou na casinha dos três ursos.",
+  sq_c3:"Ela comeu o mingau e dormiu na cama do ursinho.",
+  sq_c4:"Os ursos voltaram e Cachinhos Dourados fugiu correndo.",
+
+  /* títulos embaralhados */
+  /* palavras dos títulos embaralhados */
+  ti_os:"os", ti_o:"o", ti_de:"de", ti_chumbo:"chumbo", ti_porquinhos:"porquinhos",
+  /* variação do enunciado quando não há desenho da palavra nova */
+  r_q2:"Acrescente a letra ÉRRE nesta palavra. Qual das três existe de verdade?",
+  l_q2:"Acrescente a letra ELE nesta palavra. Qual das três existe de verdade?",
+  or_q:"Toque nas palavras na ordem certa e monte o título da história.",
+};
+
+/* ============================================================
+   PLAYER DE ÁUDIO (clipes em sequência) — um único <audio>
+   destravado no 1º toque (compatível com iPhone/iPad).
+   ============================================================ */
+const AUDIO_DIR='audio/', AUDIO_EXT='.mp3';
+const player=new Audio();
+player.preload='auto';
+let playToken=0, audioOn=true;
+function stopAudio(){ playToken++; try{player.pause();}catch(e){} setPlayingBadge(false); }
+function playKeys(keys){
+  if(!audioOn) return;
+  stopAudio();
+  const list=[].concat(...keys.map(k=>Array.isArray(k)?k:[k])).filter(Boolean);
+  if(!list.length) return;
+  const my=playToken; let i=0;
+  setPlayingBadge(true);
+  const next=()=>{
+    if(my!==playToken) return;
+    if(i>=list.length){ setPlayingBadge(false); return; }
+    const key=list[i++];
+    player.src=AUDIO_DIR+key+AUDIO_EXT;
+    player.onended=next;
+    player.onerror=()=>{ setTimeout(next,10); };
+    const p=player.play();
+    if(p&&p.catch) p.catch(()=>setTimeout(next,10));
+  };
+  next();
+}
+function setPlayingBadge(on){
+  const b=document.getElementById('qspeak'); if(b) b.classList.toggle('playing',on);
+}
+function unlockAudio(){
+  try{ player.muted=true; player.src=AUDIO_DIR+'greet'+AUDIO_EXT;
+       const p=player.play();
+       if(p&&p.then) p.then(()=>{player.pause();player.currentTime=0;player.muted=false;})
+                      .catch(()=>{player.muted=false;});
+       else {player.pause();player.muted=false;}
+  }catch(e){ player.muted=false; }
+}
+
+/* ===== SONS DE EFEITO (Web Audio) ===== */
+let actx=null;
+function initAudio(){ try{ actx = actx || new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==='suspended') actx.resume(); }catch(e){} }
+function tone(freq,start,dur,type='sine',vol=0.2){
+  if(!actx) return;
+  const o=actx.createOscillator(), g=actx.createGain();
+  o.type=type; o.frequency.value=freq; o.connect(g); g.connect(actx.destination);
+  const t=actx.currentTime+start;
+  g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+0.02);
+  g.gain.exponentialRampToValueAtTime(0.001,t+dur);
+  o.start(t); o.stop(t+dur);
+}
+function sndClick(){ initAudio(); tone(540,0,0.07,'triangle',0.14); }
+function sndRight(){ initAudio(); [523,659,784,1047].forEach((f,i)=>tone(f,i*0.09,0.25,'triangle',0.18)); }
+function sndWrong(){ initAudio(); tone(300,0,0.18,'sine',0.13); tone(220,0.12,0.25,'sine',0.13); }
+function sndWin(){ initAudio(); [523,659,784,1047,784,1047,1319].forEach((f,i)=>tone(f,i*0.12,0.3,'triangle',0.2)); }
+
+/* ===== UTILIDADES ===== */
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function rint(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+function mix(){ return shuffle([].concat(...arguments)); }
+const OK_KEYS=['ok1','ok2','ok3','ok4','ok5','ok6'], NO_KEYS=['no1','no2','no3'];
+function emo(e,size){ return '<span class="obj" style="font-size:'+(size||74)+'px">'+e+'</span>'; }
+
+/* desenha uma ilustração SVG pelo nome (art_<nome>) */
+function illo(nome,size){
+  const fn=window['art_'+nome];
+  if(typeof fn!=='function') return emo('🖼️',size);
+  size=size||110;
+  return '<span class="illo" style="width:'+size+'px;height:'+size+'px">'+fn()+'</span>';
+}
+/* palavra em quadradinhos de letras; hl = pedaço a destacar */
+function tiles(palavra,hl){
+  return '<div class="wordtiles">'+palavra.split('').map((ch,i)=>{
+    const dentro = hl!==undefined && i>=hl[0] && i<hl[1];
+    return '<span class="lettile'+(dentro?' hl':'')+'">'+ch+'</span>';
+  }).join('')+'</div>';
+}
+/* palavra com uma lacuna no lugar do encontro consonantal */
+function tilesGap(pre,rest){
+  const a=pre.split('').map(c=>'<span class="lettile">'+c+'</span>').join('');
+  const b=rest.split('').map(c=>'<span class="lettile">'+c+'</span>').join('');
+  return '<div class="wordtiles">'+a+'<span class="lettile gap">?</span>'+b+'</div>';
+}
+
+function updateStars(){ const el=document.getElementById('starNum'); if(el) el.textContent=stars; localStorage.setItem('vitor_port_set_stars',stars); }
+function addStar(n=1){ stars+=n; updateStars(); }
+
+/* ---------------- CONFETE ---------------- */
+const cv=document.getElementById('confetti'), cx=cv.getContext('2d');
+let confs=[];
+function resizeCv(){cv.width=innerWidth;cv.height=innerHeight;}
+addEventListener('resize',resizeCv); resizeCv();
+function burst(){
+  const cols=['#ff6b9d','#ffd93d','#6bcB77','#4d96ff','#a06cd5','#ff924c'];
+  for(let i=0;i<70;i++){confs.push({x:innerWidth/2,y:innerHeight/3,vx:(Math.random()-0.5)*14,vy:Math.random()*-12-3,c:pick(cols),s:rint(7,14),r:Math.random()*6,vr:(Math.random()-.5)*.4});}
+}
+function loopConf(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  confs.forEach(p=>{p.vy+=0.35;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/2,p.s,p.s);cx.restore();});
+  confs=confs.filter(p=>p.y<cv.height+30);
+  requestAnimationFrame(loopConf);
+}
+loopConf();
+
+/* ===== SHELL ===== */
+function shell(inner){
+  App.innerHTML=`
+    <div class="topbar">
+      <button class="home-btn" onclick="sndClick();goHome()">🏠</button>
+      <div class="stars">⭐ <span class="num" id="starNum">${stars}</span></div>
+    </div>
+    ${inner}`;
+}
+
+/* ===== MENU ===== */
+const GAMES=[
+  {id:'encontro', ico:'🔤', nome:'Encontro Consonantal', sub:'Duas consoantes juntas', cls:'c1'},
+  {id:'poer',     ico:'Ⓡ', nome:'Põe o R!',             sub:'PATO vira PRATO',        cls:'c2'},
+  {id:'poel',     ico:'Ⓛ', nome:'Põe o L!',             sub:'PACA vira PLACA',        cls:'c3'},
+  {id:'completa', ico:'✍️', nome:'Complete a Palavra',   sub:'Qual pedaço falta?',     cls:'c4'},
+  {id:'frase',    ico:'📝', nome:'Frase Certa',          sub:'FIO ou FRIO?',           cls:'c5'},
+  {id:'silabas',  ico:'👏', nome:'Conta Sílabas',        sub:'Bater palmas',           cls:'c6'},
+  {id:'capa',     ico:'📕', nome:'Capa do Livro',        sub:'Título, autor, editora', cls:'c7'},
+  {id:'contos',   ico:'🐻', nome:'Os Contos',            sub:'Ursos, porquinhos...',   cls:'c8'},
+  {id:'ordem',    ico:'🧩', nome:'Ordem da História',    sub:'Início, meio e fim',     cls:'c9'},
+];
+function goHome(silent){
+  stopAudio();
+  shell(`
+    <div class="hero">
+      <div class="mascote">📚</div>
+      <h1>Olá!</h1>
+      <p>Escolha uma brincadeira 👇</p>
+      <button onclick="testSound()" style="margin-top:6px;background:var(--amarelo);color:#5a4500;border:none;border-radius:18px;padding:9px 18px;font-size:16px;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #d9a800;">🔈 Testar som</button>
+    </div>
+    <div class="grid">
+      ${GAMES.map(g=>`<button class="card ${g.cls}" onclick="sndClick();startGame('${g.id}')">
+        <span class="ico">${g.ico}</span><span>${g.nome}</span>
+        <span style="font-size:13px;font-weight:normal;opacity:.9">${g.sub}</span>
+      </button>`).join('')}
+    </div>
+    <p style="text-align:center;color:#a68ec0;margin-top:18px;font-size:14px;">Feito com 💜 para estudar pra prova</p>
+  `);
+  if(!silent) setTimeout(()=>playKeys(['greet']),250);
+}
+function testSound(){ initAudio(); sndClick(); playKeys(['test']); }
+
+/* ===== MOTOR DE RODADAS ===== */
+let current=null, locked=false, seqPos=0;
+function startGame(id){
+  const rounds=BUILDERS[id]();
+  current={id, title:GAMES.find(g=>g.id===id).nome, rounds, idx:0};
+  renderRound();
+}
+function gameFrame(c,r,bodyHtml){
+  shell(`
+    <div class="game">
+      <h2 class="game-title">${GAMES.find(g=>g.id===c.id).ico} ${c.title}</h2>
+      <div class="progress">Pergunta ${c.idx+1} de ${c.rounds.length}</div>
+      <div class="question">
+        <button class="speak-btn" id="qspeak" onclick="sndClick();speakRound()">🔊</button>
+        <span>${r.q}</span>
+      </div>
+      <div class="stage">${r.stage||''}</div>
+      ${bodyHtml}
+      <div style="font-size:14px;color:#aaa;margin-top:6px;">👆 Toque para responder. Toque no 🔊 para ouvir de novo.</div>
+      <div class="feedback" id="fb"></div>
+    </div>
+  `);
+}
+function renderRound(){
+  locked=false;
+  const c=current, r=c.rounds[c.idx];
+  if(r.mode==='seq'){ return renderSeq(c,r); }
+  gameFrame(c,r,`<div class="options ${r.colorOpts?'opt-colors':''}" id="opts"></div>`);
+  const shown=shuffle(r.options);
+  const opts=document.getElementById('opts');
+  shown.forEach(o=>{
+    const b=document.createElement('button');
+    b.className='opt'+(o.big?' big':'');
+    b.innerHTML=o.label;
+    b.onclick=()=>answer(b,o);
+    opts.appendChild(b);
+  });
+  window._roundKeys=[].concat(r.audio||[], ['choose'], shown.map(o=>o.aud));
+  setTimeout(()=>speakRound(),400);
+}
+function speakRound(){ playKeys(window._roundKeys||[]); }
+
+function showNextButton(){
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=null);
+  document.querySelectorAll('.ficha').forEach(b=>b.onclick=null);
+  const nb=document.createElement('button');
+  nb.className='next-btn';
+  const last=current.idx>=current.rounds.length-1;
+  nb.textContent=last?'🏆 Terminar':'Próxima ➡';
+  nb.onclick=()=>{sndClick();locked=false;if(last){winScreen();}else{current.idx++;renderRound();}};
+  document.querySelector('.game').appendChild(nb);
+}
+function correctFlow(extraAudio){
+  locked=true; sndRight(); burst(); addStar(1);
+  const fb=document.getElementById('fb'); if(fb){fb.className='feedback good'; fb.textContent='⭐ Muito bem!';}
+  playKeys(extraAudio.filter(Boolean));
+  showNextButton();
+}
+function answer(btn,opt){
+  if(locked) return;
+  if(opt.correct){
+    btn.classList.add('ok');
+    document.querySelectorAll('.opt').forEach(b=>{if(b!==btn)b.classList.add('no');});
+    correctFlow([opt.aud, pick(OK_KEYS), opt.expAud]);
+  }else{
+    btn.classList.add('no'); btn.onclick=null;
+    sndWrong();
+    const fb=document.getElementById('fb'); fb.className='feedback bad'; fb.textContent='🤔 Tenta de novo!';
+    playKeys([opt.aud, pick(NO_KEYS)].filter(Boolean));
+  }
+}
+
+/* ---- modo MONTAR A ORDEM (sequência do conto / título embaralhado) ---- */
+function renderSeq(c,r){
+  seqPos=0;
+  const slots=r.itens.map((_,i)=>`<div class="seqslot" id="sl${i}"><span class="nn">${i+1}</span><span class="tx">...</span></div>`).join('');
+  gameFrame(c,r,`
+    <div class="seqslots">${slots}</div>
+    <div class="fichas" id="fichas"></div>
+  `);
+  const box=document.getElementById('fichas');
+  shuffle(r.itens.map((it,i)=>({it,i}))).forEach(t=>{
+    const b=document.createElement('button');
+    b.className='ficha'; b.textContent=t.it.txt;
+    b.onclick=()=>tapFicha(b,t.i,r);
+    box.appendChild(b);
+  });
+  window._roundKeys=[].concat(r.audio||[]);
+  setTimeout(()=>speakRound(),400);
+}
+function tapFicha(btn,idx,r){
+  if(locked) return;
+  if(idx===seqPos){
+    const sl=document.getElementById('sl'+seqPos);
+    sl.querySelector('.tx').textContent=r.itens[idx].txt;
+    sl.classList.add('filled');
+    btn.classList.add('used'); btn.onclick=null;
+    sndClick(); playKeys([r.itens[idx].aud]);
+    seqPos++;
+    if(seqPos>=r.itens.length){
+      setTimeout(()=>correctFlow([pick(OK_KEYS), r.expAud]),600);
+    }
+  }else{
+    sndWrong();
+    btn.classList.add('shake'); setTimeout(()=>btn.classList.remove('shake'),420);
+    const fb=document.getElementById('fb'); fb.className='feedback bad'; fb.textContent='🤔 Esse não é o próximo!';
+    playKeys([r.itens[idx].aud, pick(NO_KEYS)]);
+  }
+}
+
+function winScreen(){
+  sndWin(); burst(); setTimeout(burst,400); setTimeout(burst,800);
+  const c=current;
+  shell(`
+    <div class="game win">
+      <div class="trophy">🏆</div>
+      <h2 class="game-title">Parabéns!</h2>
+      <p style="font-size:22px;">Você ganhou <b>${c.rounds.length}</b> estrelas! ⭐</p>
+      <p style="font-size:18px;color:#888;">Você está ficando craque em <b>${c.title}</b>!</p>
+      <button class="next-btn" onclick="sndClick();startGame('${c.id}')">🔁 Jogar de novo</button>
+      <br>
+      <button class="next-btn" style="background:var(--azul);box-shadow:0 6px 0 #2f6fd0;margin-top:10px;" onclick="sndClick();goHome()">🏠 Escolher outro</button>
+    </div>
+  `);
+  setTimeout(()=>playKeys(['win']),250);
+}
+
+/* opções a partir de um mapa de rótulos */
+function mkOpts(correct, all, lblMap, extra){
+  return shuffle(all).map(k=>{
+    const o={label:lblMap[k], aud:k, correct:k===correct};
+    if(extra) Object.assign(o, extra(k));
+    return o;
+  });
+}
+
+/* ============================================================
+   DADOS DO CONTEÚDO (Bernoulli — Capítulo 4)
+   ============================================================ */
+
+/* ---- os encontros consonantais estudados ---- */
+const ENC_R=['BR','CR','DR','FR','GR','PR','TR','VR'];
+const ENC_L=['BL','CL','FL','GL','PL'];
+const ENC_KEY={BR:'d_br',CR:'d_cr',DR:'d_dr',FR:'d_fr',GR:'d_gr',PR:'d_pr',TR:'d_tr',VR:'d_vr',
+               BL:'d_bl',CL:'d_cl',FL:'d_fl',GL:'d_gl',PL:'d_pl'};
+function encOpt(e,correct){ return {label:e, big:true, aud:ENC_KEY[e], correct:!!correct}; }
+/* 4 opções: a certa + 3 da MESMA família (com R ou com L) */
+function encOpts(correct){
+  const fam = ENC_R.indexOf(correct)>=0 ? ENC_R : ENC_L;
+  const outros = shuffle(fam.filter(e=>e!==correct)).slice(0,3);
+  return shuffle([correct,...outros]).map(e=>encOpt(e,e===correct));
+}
+
+/* ---- palavras COM encontro consonantal ----
+   pre + enc + rest = palavra;  syl = número de sílabas (palmas);
+   amb: o "miolo" da palavra também serviria para outro encontro
+        (BLOCO/FLOCO, BRAVO/CRAVO) -> fora do jogo Complete a Palavra. */
+const WORDS=[
+  {w:'GRAMA',    enc:'GR', pre:'',     rest:'AMA',     art:'grama',     syl:2, ak:'w_grama'},
+  {w:'BRAVO',    enc:'BR', pre:'',     rest:'AVO',     art:'bravo',     syl:2, ak:'w_bravo', amb:1},
+  {w:'BRINCO',   enc:'BR', pre:'',     rest:'INCO',    art:'brinco',    syl:2, ak:'w_brinco'},
+  {w:'PRATO',    enc:'PR', pre:'',     rest:'ATO',     art:'prato',     syl:2, ak:'w_prato'},
+  {w:'DRAGÃO',   enc:'DR', pre:'',     rest:'AGÃO',    art:'dragao',    syl:2, ak:'w_dragao'},
+  {w:'TRISTE',   enc:'TR', pre:'',     rest:'ISTE',    art:'triste',    syl:2, ak:'w_triste'},
+  {w:'BLUSA',    enc:'BL', pre:'',     rest:'USA',     art:'blusa',     syl:2, ak:'w_blusa'},
+  {w:'GLOBO',    enc:'GL', pre:'',     rest:'OBO',     art:'globo',     syl:2, ak:'w_globo'},
+  {w:'BLOCO',    enc:'BL', pre:'',     rest:'OCO',     art:'bloco',     syl:2, ak:'w_bloco', amb:1},
+  {w:'CLARINETE',enc:'CL', pre:'',     rest:'ARINETE', art:'clarinete', syl:4, ak:'w_clarinete'},
+  {w:'FLOR',     enc:'FL', pre:'',     rest:'OR',      art:'flor',      syl:1, ak:'w_flor'},
+  {w:'PLANTA',   enc:'PL', pre:'',     rest:'ANTA',    art:'planta',    syl:2, ak:'w_planta'},
+  {w:'ZEBRA',    enc:'BR', pre:'ZE',   rest:'A',       art:'zebra',     syl:2, ak:'w_zebra'},
+  {w:'BICICLETA',enc:'CL', pre:'BICI', rest:'ETA',     art:'bicicleta', syl:4, ak:'w_bicicleta'},
+  {w:'FLAUTA',   enc:'FL', pre:'',     rest:'AUTA',    art:'flauta',    syl:2, ak:'w_flauta'},
+  {w:'LIVRO',    enc:'VR', pre:'LI',   rest:'O',       art:'livro',     syl:2, ak:'w_livro'},
+  {w:'PEDRA',    enc:'DR', pre:'PE',   rest:'A',       art:'pedra',     syl:2, ak:'w_pedra'},
+  {w:'TREM',     enc:'TR', pre:'',     rest:'EM',      art:'trem',      syl:1, ak:'w_trem'},
+  {w:'FLOCO',    enc:'FL', pre:'',     rest:'OCO',     art:'floco',     syl:2, ak:'w_floco', amb:1},
+  {w:'FLECHA',   enc:'FL', pre:'',     rest:'ECHA',    art:'flecha',    syl:2, ak:'w_flecha'},
+  {w:'PLACA',    enc:'PL', pre:'',     rest:'ACA',     art:'placa',     syl:2, ak:'w_placa'},
+  {w:'CRAVO',    enc:'CR', pre:'',     rest:'AVO',     art:'cravo',     syl:2, ak:'w_cravo', amb:1},
+  {w:'FLORESTA', enc:'FL', pre:'',     rest:'ORESTA',  art:null,        syl:3, ak:'w_floresta'},
+];
+/* palavras SEM encontro consonantal (para contrastar) */
+const NOENC=[
+  {w:'BAILARINA', art:'bailarina', syl:4, ak:'w_bailarina'},
+  {w:'DOURADOS',  art:null,        syl:3, ak:'w_dourados'},
+  {w:'CORAÇÃO',   art:null,        syl:3, ak:'w_coracao'},
+  {w:'PACA',      art:'paca',      syl:2, ak:'w_paca'},
+  {w:'PATO',      art:'pato',      syl:2, ak:'w_pato'},
+  {w:'FACA',      art:'faca',      syl:2, ak:'w_faca'},
+  {w:'FITA',      art:'fita',      syl:2, ak:'w_fita'},
+  {w:'PANO',      art:'pano',      syl:2, ak:'w_pano'},
+  {w:'CABANA',    art:'cabana',    syl:3, ak:'w_cabana'},
+];
+function wordOpt(it,correct){
+  return {label:it.w, aud:it.ak, correct:!!correct};
+}
+
+/* ---- acrescentar a letra R ---- */
+const ADD_R=[
+  {base:'FACA', bAud:'w_faca', ok:'FRACA', okAud:'w_fraca', art:null, bArt:'faca',
+   wrong:[['FARCA','x_farca'],['FACRA','x_facra']]},
+  {base:'FIO',  bAud:'w_fio',  ok:'FRIO',  okAud:'w_frio',  art:null, bArt:'fio',
+   wrong:[['FIRO','x_firo'],['FIOR','x_fior']]},
+  {base:'FITA', bAud:'w_fita', ok:'FRITA', okAud:'w_frita', art:null, bArt:'fita',
+   wrong:[['FIRTA','x_firta'],['FITRA','x_fitra']]},
+  {base:'TEM',  bAud:'w_tem',  ok:'TREM',  okAud:'w_trem',  art:'trem',
+   wrong:[['TERM','x_term'],['TEMR','x_temr']]},
+  {base:'PATO', bAud:'w_pato', ok:'PRATO', okAud:'w_prato', art:'prato', bArt:'pato',
+   wrong:[['PATRO','x_patro'],['PATOR','x_pator']]},
+];
+/* ---- acrescentar a letra L ---- */
+const ADD_L=[
+  {base:'PACA',  bAud:'w_paca',  ok:'PLACA',  okAud:'w_placa',  art:'placa', bArt:'paca',
+   wrong:[['PALCA','x_palca'],['PACLA','x_pacla']]},
+  {base:'FOCO',  bAud:'w_foco',  ok:'FLOCO',  okAud:'w_floco',  art:'floco',
+   wrong:[['FOLCO','x_folco'],['FOCLO','x_foclo']]},
+  {base:'FECHA', bAud:'w_fecha', ok:'FLECHA', okAud:'w_flecha', art:'flecha',
+   wrong:[['FELCHA','x_felcha'],['FECHLA','x_fechla']]},
+  {base:'CARO',  bAud:'w_caro',  ok:'CLARO',  okAud:'w_claro',  art:null,
+   wrong:[['CALRO','x_calro'],['CRALO','x_cralo']]},
+  {base:'PANO',  bAud:'w_pano',  ok:'PLANO',  okAud:'w_plano',  art:null, bArt:'pano',
+   wrong:[['PALNO','x_palno'],['PANLO','x_panlo']]},
+  {base:'CIMA',  bAud:'w_cima',  ok:'CLIMA',  okAud:'w_clima',  art:null,
+   wrong:[['CILMA','x_cilma'],['CIMLA','x_cimla']]},
+  {base:'PUMA',  bAud:'w_puma',  ok:'PLUMA',  okAud:'w_pluma',  art:null,
+   wrong:[['PULMA','x_pulma'],['PUMLA','x_pumla']]},
+];
+
+/* ---- frases com par mínimo (com e sem encontro consonantal) ---- */
+const FRASES=[
+  {txt:'O mingau da mamãe ursa estava',            aud:'f_mingau',  art:'mingau',
+   ok:'FRIO',     okAud:'w_frio',     bad:'FIO',      badAud:'w_fio',      bad2:'FIRO',     bad2Aud:'x_firo'},
+  {txt:'A casa de tijolos demorou a ficar',        aud:'f_tijolos', art:'casatijolo',
+   ok:'PRONTA',   okAud:'w_pronta',   bad:'PONTA',    badAud:'w_ponta',    bad2:'PORNTA',   bad2Aud:'x_pornta'},
+  {txt:'O vestido da bailarina era rosa',          aud:'f_vestido', art:'bailarina',
+   ok:'CLARO',    okAud:'w_claro',    bad:'CARO',     badAud:'w_caro',     bad2:'CALRO',    bad2Aud:'x_calro'},
+  {txt:'A casa de palha do porquinho era',         aud:'f_palha',   art:'casapalha',
+   ok:'FRACA',    okAud:'w_fraca',    bad:'FACA',     badAud:'w_faca',     bad2:'FARCA',    bad2Aud:'x_farca'},
+  {txt:'Na festa da escola tinha batata',          aud:'f_batata',  art:null, emo:'🍟',
+   ok:'FRITA',    okAud:'w_frita',    bad:'FITA',     badAud:'w_fita',     bad2:'FIRTA',    bad2Aud:'x_firta'},
+  {txt:'O trilho é o caminho por onde anda o',     aud:'f_viagem',  art:'trem',
+   ok:'TREM',     okAud:'w_trem',     bad:'TEM',      badAud:'w_tem',      bad2:'TEMR',     bad2Aud:'x_temr'},
+  {txt:'Cachinhos Dourados se perdeu no meio da',  aud:'f_perdeu',  art:'cabana',
+   ok:'FLORESTA', okAud:'w_floresta', bad:'FORESTA',  badAud:'w_foresta',  bad2:'FLOERSTA', bad2Aud:'x_floersta'},
+  /* pegadinha ao contrário: aqui a palavra CERTA é a que NÃO tem encontro */
+  {txt:'O lobo bateu na porta dos porquinhos com a',aud:'f_lobo',   art:'lobo',
+   ok:'PATA',     okAud:'w_pata',     bad:'PRATA',    badAud:'w_prata',    bad2:'PATRA',    bad2Aud:'x_patra'},
+];
+
+/* ---- capas de livro ---- */
+const CAPAS=[
+  {tit:'O SOLDADINHO DE CHUMBO', titA:'tt_soldadinho',
+   aut:'HANS CHRISTIAN ANDERSEN', autA:'nm_andersen',
+   ilu:'FABIANA SIGNORINI', iluA:'nm_signorini',
+   edi:'EDITORA AMFJ', ediA:'nm_amfj',
+   art:'soldadinho', bg:'#8fd6ef', tc:'#123a5c'},
+  {tit:'OS TRÊS PORQUINHOS', titA:'tt_porquinhos',
+   aut:'JOSEPH JACOBS', autA:'nm_jacobs',
+   ilu:'ANA LUIZA PRADO', iluA:'nm_analuiza',
+   edi:'EDITORA ESTRELINHA', ediA:'nm_estrelinha',
+   art:'porquinho', bg:'#ffd6e6', tc:'#8a1f4d'},
+  {tit:'CACHINHOS DOURADOS', titA:'tt_cachinhos',
+   aut:'ROBERT SOUTHEY', autA:'nm_southey',
+   ilu:'BRUNO MARTINS', iluA:'nm_bruno',
+   edi:'EDITORA SOL', ediA:'nm_sol',
+   art:'ursos', bg:'#ffe9b8', tc:'#7a4a12'},
+  {tit:'ESTELA ESTRELA', titA:'tt_estela',
+   aut:'ANDRÉA AVELAR', autA:'nm_andrea',
+   ilu:'LUANA CHINAGLIA', iluA:'nm_luana',
+   edi:'EDITORA LUA', ediA:'nm_lua',
+   art:'globo', bg:'#ffcf9e', tc:'#8a3c05'},
+];
+function capaHtml(c){
+  return '<div class="capa" style="background:'+c.bg+';color:'+c.tc+'">'+
+    '<div class="cp-tit">'+c.tit+'</div>'+
+    '<div class="cp-art">'+illo(c.art,112)+'</div>'+
+    '<div class="cp-lin">AUTOR(A): '+c.aut+'</div>'+
+    '<div class="cp-lin">ILUSTRAÇÕES: '+c.ilu+'</div>'+
+    '<div class="cp-ed">'+c.edi+'</div>'+
+  '</div>';
+}
+/* opções para uma pergunta de capa: o valor certo + valores do MESMO campo
+   das outras capas (assim as alternativas são sempre plausíveis) */
+function capaOpts(alvo, campo, audCampo){
+  const certos={label:alvo[campo], aud:alvo[audCampo], correct:true};
+  const outros=shuffle(CAPAS.filter(c=>c!==alvo)).slice(0,2)
+    .map(c=>({label:c[campo], aud:c[audCampo], correct:false}));
+  return shuffle([certos,...outros]);
+}
+
+/* ---- rótulos reutilizados ---- */
+const URSO_LBL={ur_papai:'🐻<span class="cap">Papai urso</span>',
+                ur_mamae:'🐻<span class="cap">Mamãe ursa</span>',
+                ur_filho:'🧸<span class="cap">Filho ursinho</span>'};
+const PARTE_LBL={na_intro:'1️⃣<span class="cap">A introdução</span>',
+                 na_desen:'2️⃣<span class="cap">O desenvolvimento</span>',
+                 na_conclu:'3️⃣<span class="cap">A conclusão</span>'};
+
+/* ---- sequências dos contos (montar a ordem) ---- */
+const SEQS=[
+  {nome:'O Soldadinho de Chumbo', art:'soldadinho', itens:[
+    {txt:'O menino comprou uma caixa com soldadinhos de chumbo.', aud:'sq_s1'},
+    {txt:'O soldadinho foi colocado dentro de um barquinho de papel.', aud:'sq_s2'},
+    {txt:'O soldadinho ficou feliz ao rever a bailarina.', aud:'sq_s3'},
+    {txt:'O soldadinho e a bailarina caíram no fogo.', aud:'sq_s4'}]},
+  {nome:'Os Três Porquinhos', art:'porquinho', itens:[
+    {txt:'Os três porquinhos construíram as suas casas.', aud:'sq_p1'},
+    {txt:'O lobo soprou e derrubou a casa de palha.', aud:'sq_p2'},
+    {txt:'Os porquinhos correram para a casa de tijolos.', aud:'sq_p3'},
+    {txt:'Os porquinhos espantaram o lobo e ficaram em paz.', aud:'sq_p4'}]},
+  {nome:'Cachinhos Dourados', art:'ursos', itens:[
+    {txt:'Cachinhos Dourados se perdeu no meio da floresta.', aud:'sq_c1'},
+    {txt:'Ela entrou na casinha dos três ursos.', aud:'sq_c2'},
+    {txt:'Ela comeu o mingau e dormiu na cama do ursinho.', aud:'sq_c3'},
+    {txt:'Os ursos voltaram e Cachinhos Dourados fugiu correndo.', aud:'sq_c4'}]},
+];
+/* ---- títulos embaralhados (como na atividade 1 da página 130) ---- */
+const TITULOS=[
+  {art:'porquinho', itens:[{txt:'OS',aud:'ti_os'},{txt:'TRÊS',aud:'w_tres'},{txt:'PORQUINHOS',aud:'ti_porquinhos'}]},
+  {art:'soldadinho', itens:[{txt:'O',aud:'ti_o'},{txt:'SOLDADINHO',aud:'w_soldadinho'},{txt:'DE',aud:'ti_de'},{txt:'CHUMBO',aud:'ti_chumbo'}]},
+];
+
+/* ============================================================
+   ILUSTRAÇÕES — SVG desenhados à mão (nenhuma imagem externa)
+   ============================================================ */
+function art_grama(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#EAF7FF"/><ellipse cx="50" cy="88" rx="42" ry="9" fill="#8B5E3C" stroke="#4A3018" stroke-width="2"/><path d="M50 88 C 44 62 42 40 36 18 C 48 34 52 60 54 88 Z" fill="#4CAF50" stroke="#1B5E20" stroke-width="2.5" stroke-linejoin="round"/><path d="M46 88 C 34 68 24 54 12 40 C 30 50 42 68 50 88 Z" fill="#66BB6A" stroke="#1B5E20" stroke-width="2.5" stroke-linejoin="round"/><path d="M54 88 C 66 68 76 54 88 40 C 70 50 58 68 50 88 Z" fill="#66BB6A" stroke="#1B5E20" stroke-width="2.5" stroke-linejoin="round"/><path d="M52 88 C 56 62 62 44 72 24 C 66 46 60 64 58 88 Z" fill="#2E7D32" stroke="#134A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M48 88 C 42 70 32 60 22 54 C 34 66 42 76 46 88 Z" fill="#2E7D32" stroke="#134A17" stroke-width="2.5" stroke-linejoin="round"/></svg>';}
+function art_brinco(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#FFF6E5"/><circle cx="30" cy="18" r="5" fill="#FFD54F" stroke="#7A5B00" stroke-width="2.5"/><line x1="30" y1="23" x2="30" y2="48" stroke="#C9A227" stroke-width="3.5" stroke-linecap="round"/><circle cx="30" cy="66" r="17" fill="#E53935" stroke="#7B1010" stroke-width="3"/><ellipse cx="24" cy="59" rx="5" ry="3.5" fill="#FF8A80" opacity="0.9"/><circle cx="70" cy="18" r="5" fill="#FFD54F" stroke="#7A5B00" stroke-width="2.5"/><line x1="70" y1="23" x2="70" y2="48" stroke="#C9A227" stroke-width="3.5" stroke-linecap="round"/><circle cx="70" cy="66" r="17" fill="#E53935" stroke="#7B1010" stroke-width="3"/><ellipse cx="64" cy="59" rx="5" ry="3.5" fill="#FF8A80" opacity="0.9"/></svg>';}
+function art_prato(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#DFF3FF"/><circle cx="50" cy="50" r="44" fill="#FFFFFF" stroke="#2B3A55" stroke-width="3"/><circle cx="50" cy="50" r="44" fill="none" stroke="#FFC107" stroke-width="6" opacity="0.95"/><circle cx="50" cy="50" r="44" fill="none" stroke="#2B3A55" stroke-width="2.5"/><circle cx="50" cy="50" r="38" fill="#FFFDF7" stroke="#E53935" stroke-width="2.5"/><circle cx="50" cy="50" r="27" fill="#FFFFFF" stroke="#2B3A55" stroke-width="2.5"/><circle cx="50" cy="23" r="4" fill="#42A5F5" stroke="#0D47A1" stroke-width="1.5"/><circle cx="77" cy="50" r="4" fill="#66BB6A" stroke="#1B5E20" stroke-width="1.5"/><circle cx="50" cy="77" r="4" fill="#42A5F5" stroke="#0D47A1" stroke-width="1.5"/><circle cx="23" cy="50" r="4" fill="#66BB6A" stroke="#1B5E20" stroke-width="1.5"/></svg>';}
+function art_dragao(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#FFF3D6"/><path d="M20 72 C 6 74 4 60 14 54 C 6 50 12 40 22 44 C 20 56 26 64 20 72 Z" fill="#8BC34A" stroke="#1B5E20" stroke-width="2.5" stroke-linejoin="round"/><ellipse cx="48" cy="62" rx="27" ry="20" fill="#4CAF50" stroke="#1B5E20" stroke-width="3"/><path d="M46 46 C 58 26 82 30 84 46 C 74 42 60 44 52 54 Z" fill="#7CB342" stroke="#1B5E20" stroke-width="3" stroke-linejoin="round"/><circle cx="72" cy="34" r="17" fill="#66BB6A" stroke="#1B5E20" stroke-width="3"/><path d="M60 22 C 58 14 64 12 68 18 Z" fill="#FFC107" stroke="#7A5B00" stroke-width="2" stroke-linejoin="round"/><path d="M74 17 C 74 9 80 9 82 16 Z" fill="#FFC107" stroke="#7A5B00" stroke-width="2" stroke-linejoin="round"/><circle cx="78" cy="30" r="5.5" fill="#FFFFFF" stroke="#1B5E20" stroke-width="2"/><circle cx="79.5" cy="30" r="2.6" fill="#1B1B1B"/><ellipse cx="87" cy="40" rx="5" ry="4" fill="#81C784" stroke="#1B5E20" stroke-width="2"/><circle cx="86" cy="39" r="1.2" fill="#1B5E20"/><path d="M80 46 C 84 49 88 48 90 46" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round"/><path d="M22 66 C 10 68 8 82 20 86 C 26 88 30 82 27 79 C 23 82 18 80 19 75 C 20 71 24 70 26 71 Z" fill="#4CAF50" stroke="#1B5E20" stroke-width="2.5" stroke-linejoin="round"/><path d="M36 80 L 36 90 L 44 90 L 44 79 Z" fill="#43A047" stroke="#1B5E20" stroke-width="2.5" stroke-linejoin="round"/><path d="M56 80 L 56 90 L 64 90 L 64 79 Z" fill="#43A047" stroke="#1B5E20" stroke-width="2.5" stroke-linejoin="round"/><path d="M30 48 L 36 40 L 40 48 L 46 40 L 50 48" fill="none" stroke="#FFC107" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>';}
+function art_blusa(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#E8F5FF"/><path d="M36 12 L 26 18 L 8 34 L 20 48 L 28 41 L 28 90 L 72 90 L 72 41 L 80 48 L 92 34 L 74 18 L 64 12 C 60 22 40 22 36 12 Z" fill="#FF9800" stroke="#7A3E00" stroke-width="3" stroke-linejoin="round"/><path d="M36 12 C 40 24 60 24 64 12" fill="none" stroke="#7A3E00" stroke-width="2.5"/><path d="M36 12 C 42 20 58 20 64 12" fill="#FFCC80" stroke="#7A3E00" stroke-width="2.5" stroke-linejoin="round"/><rect x="28" y="76" width="44" height="6" fill="#F57C00" stroke="#7A3E00" stroke-width="2"/><circle cx="50" cy="52" r="9" fill="#FFEB3B" stroke="#7A3E00" stroke-width="2.5"/></svg>';}
+function art_globo(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#FFF7E8"/><path d="M30 92 L 70 92 L 62 84 L 38 84 Z" fill="#8B5E3C" stroke="#3E2510" stroke-width="2.5" stroke-linejoin="round"/><rect x="46" y="70" width="8" height="16" fill="#A1673F" stroke="#3E2510" stroke-width="2.5"/><path d="M18 40 C 18 76 82 76 82 40" fill="none" stroke="#FFC107" stroke-width="5" stroke-linecap="round"/><circle cx="50" cy="42" r="32" fill="#2196F3" stroke="#0B3D91" stroke-width="3"/><path d="M28 26 C 36 22 44 26 46 32 C 40 38 34 38 28 34 Z" fill="#4CAF50" stroke="#1B5E20" stroke-width="2" stroke-linejoin="round"/><path d="M52 20 C 64 20 70 28 66 34 C 58 36 52 30 52 20 Z" fill="#4CAF50" stroke="#1B5E20" stroke-width="2" stroke-linejoin="round"/><path d="M34 48 C 44 44 52 50 54 60 C 48 70 38 66 32 58 Z" fill="#66BB6A" stroke="#1B5E20" stroke-width="2" stroke-linejoin="round"/><path d="M62 46 C 72 46 78 52 74 60 C 66 60 60 54 62 46 Z" fill="#66BB6A" stroke="#1B5E20" stroke-width="2" stroke-linejoin="round"/><circle cx="50" cy="42" r="32" fill="none" stroke="#0B3D91" stroke-width="3"/></svg>';}
+function art_bloco(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#F2F7FF"/><rect x="18" y="68" width="64" height="22" rx="3" fill="#E53935" stroke="#7B1010" stroke-width="3"/><rect x="26" y="61" width="12" height="8" rx="3" fill="#E53935" stroke="#7B1010" stroke-width="3"/><rect x="44" y="61" width="12" height="8" rx="3" fill="#E53935" stroke="#7B1010" stroke-width="3"/><rect x="62" y="61" width="12" height="8" rx="3" fill="#E53935" stroke="#7B1010" stroke-width="3"/><rect x="24" y="40" width="46" height="21" rx="3" fill="#FFEB3B" stroke="#7A5B00" stroke-width="3"/><rect x="32" y="33" width="12" height="8" rx="3" fill="#FFEB3B" stroke="#7A5B00" stroke-width="3"/><rect x="50" y="33" width="12" height="8" rx="3" fill="#FFEB3B" stroke="#7A5B00" stroke-width="3"/><rect x="30" y="13" width="30" height="21" rx="3" fill="#2196F3" stroke="#0B3D91" stroke-width="3"/><rect x="38" y="6" width="12" height="8" rx="3" fill="#2196F3" stroke="#0B3D91" stroke-width="3"/></svg>';}
+function art_clarinete(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#FFF1DC"/><g transform="rotate(-40 50 50)"><rect x="46" y="8" width="8" height="8" rx="2" fill="#3E2723" stroke="#120A07" stroke-width="2"/><rect x="44" y="14" width="12" height="8" rx="2" fill="#BDBDBD" stroke="#3E3E3E" stroke-width="2"/><rect x="42" y="20" width="16" height="52" rx="4" fill="#212121" stroke="#000000" stroke-width="2.5"/><rect x="41" y="70" width="18" height="6" rx="2" fill="#BDBDBD" stroke="#3E3E3E" stroke-width="2"/><path d="M40 76 C 34 84 32 90 30 94 L 70 94 C 68 90 66 84 60 76 Z" fill="#212121" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/><circle cx="50" cy="28" r="3.4" fill="#E0E0E0" stroke="#3E3E3E" stroke-width="1.8"/><circle cx="50" cy="38" r="3.4" fill="#E0E0E0" stroke="#3E3E3E" stroke-width="1.8"/><circle cx="50" cy="48" r="3.4" fill="#E0E0E0" stroke="#3E3E3E" stroke-width="1.8"/><circle cx="50" cy="58" r="3.4" fill="#E0E0E0" stroke="#3E3E3E" stroke-width="1.8"/><rect x="56" y="42" width="7" height="4" rx="2" fill="#BDBDBD" stroke="#3E3E3E" stroke-width="1.6"/><rect x="37" y="52" width="7" height="4" rx="2" fill="#BDBDBD" stroke="#3E3E3E" stroke-width="1.6"/></g></svg>';}
+function art_flor(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#F0FFF2"/><path d="M50 92 C 50 70 50 56 50 40" fill="none" stroke="#2E7D32" stroke-width="5" stroke-linecap="round"/><path d="M50 70 C 34 68 26 60 24 50 C 40 50 48 58 50 70 Z" fill="#4CAF50" stroke="#1B5E20" stroke-width="2.5" stroke-linejoin="round"/><path d="M50 80 C 66 78 74 70 76 60 C 60 60 52 68 50 80 Z" fill="#66BB6A" stroke="#1B5E20" stroke-width="2.5" stroke-linejoin="round"/><ellipse cx="50" cy="16" rx="11" ry="14" fill="#7E57C2" stroke="#311B92" stroke-width="2.5"/><ellipse cx="74" cy="34" rx="11" ry="14" fill="#5C6BC0" stroke="#311B92" stroke-width="2.5" transform="rotate(72 74 34)"/><ellipse cx="65" cy="60" rx="11" ry="14" fill="#7E57C2" stroke="#311B92" stroke-width="2.5" transform="rotate(144 65 60)"/><ellipse cx="35" cy="60" rx="11" ry="14" fill="#5C6BC0" stroke="#311B92" stroke-width="2.5" transform="rotate(216 35 60)"/><ellipse cx="26" cy="34" rx="11" ry="14" fill="#7E57C2" stroke="#311B92" stroke-width="2.5" transform="rotate(288 26 34)"/><circle cx="50" cy="38" r="12" fill="#FFEB3B" stroke="#7A5B00" stroke-width="2.5"/><circle cx="46" cy="34" r="3" fill="#FFF9C4"/></svg>';}
+function art_planta(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#FFF9E8"/><path d="M50 62 L 50 20" fill="none" stroke="#2E7D32" stroke-width="4" stroke-linecap="round"/><ellipse cx="30" cy="30" rx="17" ry="10" fill="#4CAF50" stroke="#1B5E20" stroke-width="2.5" transform="rotate(-25 30 30)"/><ellipse cx="70" cy="30" rx="17" ry="10" fill="#66BB6A" stroke="#1B5E20" stroke-width="2.5" transform="rotate(25 70 30)"/><ellipse cx="34" cy="50" rx="16" ry="9" fill="#66BB6A" stroke="#1B5E20" stroke-width="2.5" transform="rotate(-18 34 50)"/><ellipse cx="66" cy="50" rx="16" ry="9" fill="#4CAF50" stroke="#1B5E20" stroke-width="2.5" transform="rotate(18 66 50)"/><ellipse cx="50" cy="16" rx="10" ry="13" fill="#43A047" stroke="#1B5E20" stroke-width="2.5"/><path d="M24 62 L 76 62 L 68 92 L 32 92 Z" fill="#FFFFFF" stroke="#37474F" stroke-width="3" stroke-linejoin="round"/><rect x="20" y="56" width="60" height="10" rx="3" fill="#F5F5F5" stroke="#37474F" stroke-width="3"/><path d="M36 72 L 40 86" fill="none" stroke="#B0BEC5" stroke-width="2.5" stroke-linecap="round"/></svg>';}
+function art_pedra(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#EAF7FF"/><ellipse cx="50" cy="86" rx="40" ry="7" fill="#C8E6C9" stroke="#7CB342" stroke-width="2"/><path d="M14 80 C 8 62 18 40 34 28 C 52 16 82 22 90 46 C 96 64 86 82 74 86 Z" fill="#9E9E9E" stroke="#37474F" stroke-width="3" stroke-linejoin="round"/><path d="M34 28 C 52 16 82 22 90 46 C 74 40 54 38 34 28 Z" fill="#BDBDBD" stroke="#37474F" stroke-width="2.5" stroke-linejoin="round"/><path d="M22 66 C 34 60 46 62 56 70" fill="none" stroke="#616161" stroke-width="2.5" stroke-linecap="round"/><path d="M64 52 C 72 54 78 60 80 68" fill="none" stroke="#616161" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="42" cy="46" rx="7" ry="4" fill="#E0E0E0" opacity="0.85"/></svg>';}
+function art_trem(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#E8F6FF"/><ellipse cx="24" cy="16" rx="9" ry="6" fill="#FFFFFF" stroke="#B0BEC5" stroke-width="2"/><ellipse cx="34" cy="12" rx="7" ry="5" fill="#FFFFFF" stroke="#B0BEC5" stroke-width="2"/><rect x="4" y="80" width="92" height="5" fill="#8B5E3C" stroke="#3E2510" stroke-width="2"/><rect x="10" y="46" width="46" height="30" rx="4" fill="#1E88E5" stroke="#0B3D91" stroke-width="3"/><rect x="56" y="34" width="34" height="42" rx="4" fill="#E53935" stroke="#7B1010" stroke-width="3"/><rect x="62" y="40" width="22" height="16" rx="3" fill="#B3E5FC" stroke="#0B3D91" stroke-width="2.5"/><rect x="18" y="28" width="14" height="20" rx="2" fill="#E53935" stroke="#7B1010" stroke-width="3"/><rect x="14" y="22" width="22" height="8" rx="3" fill="#FFC107" stroke="#7A5B00" stroke-width="2.5"/><rect x="8" y="70" width="84" height="8" rx="2" fill="#FFC107" stroke="#7A5B00" stroke-width="2.5"/><circle cx="26" cy="82" r="9" fill="#37474F" stroke="#1B1B1B" stroke-width="3"/><circle cx="26" cy="82" r="3.5" fill="#ECEFF1"/><circle cx="52" cy="82" r="9" fill="#37474F" stroke="#1B1B1B" stroke-width="3"/><circle cx="52" cy="82" r="3.5" fill="#ECEFF1"/><circle cx="78" cy="82" r="9" fill="#37474F" stroke="#1B1B1B" stroke-width="3"/><circle cx="78" cy="82" r="3.5" fill="#ECEFF1"/><circle cx="88" cy="62" r="5" fill="#FFEB3B" stroke="#7A5B00" stroke-width="2.5"/></svg>';}
+function art_floco(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#E3F4FD"/><circle cx="16" cy="18" r="3" fill="#FFFFFF" stroke="#64B5F6" stroke-width="1.5"/><circle cx="86" cy="26" r="2.6" fill="#FFFFFF" stroke="#64B5F6" stroke-width="1.5"/><circle cx="22" cy="86" r="2.6" fill="#FFFFFF" stroke="#64B5F6" stroke-width="1.5"/><circle cx="84" cy="82" r="3" fill="#FFFFFF" stroke="#64B5F6" stroke-width="1.5"/><g stroke="#1976D2" stroke-width="3.4" stroke-linecap="round" fill="none"><g><line x1="50" y1="12" x2="50" y2="88"/><line x1="50" y1="24" x2="40" y2="16"/><line x1="50" y1="24" x2="60" y2="16"/><line x1="50" y1="44" x2="41" y2="37"/><line x1="50" y1="44" x2="59" y2="37"/><line x1="50" y1="76" x2="40" y2="84"/><line x1="50" y1="76" x2="60" y2="84"/><line x1="50" y1="56" x2="41" y2="63"/><line x1="50" y1="56" x2="59" y2="63"/></g><g transform="rotate(60 50 50)"><line x1="50" y1="12" x2="50" y2="88"/><line x1="50" y1="24" x2="40" y2="16"/><line x1="50" y1="24" x2="60" y2="16"/><line x1="50" y1="76" x2="40" y2="84"/><line x1="50" y1="76" x2="60" y2="84"/></g><g transform="rotate(120 50 50)"><line x1="50" y1="12" x2="50" y2="88"/><line x1="50" y1="24" x2="40" y2="16"/><line x1="50" y1="24" x2="60" y2="16"/><line x1="50" y1="76" x2="40" y2="84"/><line x1="50" y1="76" x2="60" y2="84"/></g></g><g stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" fill="none"><line x1="50" y1="14" x2="50" y2="86"/><g transform="rotate(60 50 50)"><line x1="50" y1="14" x2="50" y2="86"/></g><g transform="rotate(120 50 50)"><line x1="50" y1="14" x2="50" y2="86"/></g></g><circle cx="50" cy="50" r="7" fill="#FFFFFF" stroke="#1976D2" stroke-width="3"/></svg>';}
+function art_flecha(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#FFF6E0"/><g transform="rotate(-45 50 50)"><rect x="46" y="24" width="8" height="58" rx="2" fill="#A1673F" stroke="#3E2510" stroke-width="2.5"/><path d="M50 6 L 64 30 L 50 26 L 36 30 Z" fill="#B0BEC5" stroke="#263238" stroke-width="2.5" stroke-linejoin="round"/><path d="M50 6 L 50 26 L 36 30 Z" fill="#ECEFF1" stroke="#263238" stroke-width="2.5" stroke-linejoin="round"/><path d="M46 62 C 32 64 26 74 26 84 C 36 82 44 76 46 68 Z" fill="#E53935" stroke="#7B1010" stroke-width="2.5" stroke-linejoin="round"/><path d="M54 62 C 68 64 74 74 74 84 C 64 82 56 76 54 68 Z" fill="#FFC107" stroke="#7A5B00" stroke-width="2.5" stroke-linejoin="round"/><path d="M46 74 C 34 76 30 82 30 88 C 38 87 44 82 46 78 Z" fill="#EF5350" stroke="#7B1010" stroke-width="2.2" stroke-linejoin="round"/><path d="M54 74 C 66 76 70 82 70 88 C 62 87 56 82 54 78 Z" fill="#FFD54F" stroke="#7A5B00" stroke-width="2.2" stroke-linejoin="round"/><rect x="46" y="82" width="8" height="8" rx="2" fill="#795548" stroke="#3E2510" stroke-width="2.5"/></g></svg>';}
+function art_zebra(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#CFF3B8"/><ellipse cx="50" cy="52" rx="30" ry="20" fill="#FFFFFF" stroke="#222222" stroke-width="3"/><path d="M34 34 L38 70" stroke="#222222" stroke-width="6" fill="none"/><path d="M46 32 L50 72" stroke="#222222" stroke-width="6" fill="none"/><path d="M58 33 L62 71" stroke="#222222" stroke-width="6" fill="none"/><path d="M69 38 L71 66" stroke="#222222" stroke-width="5" fill="none"/><rect x="30" y="68" width="8" height="22" rx="3" fill="#FFFFFF" stroke="#222222" stroke-width="3"/><rect x="44" y="68" width="8" height="22" rx="3" fill="#FFFFFF" stroke="#222222" stroke-width="3"/><rect x="58" y="68" width="8" height="22" rx="3" fill="#FFFFFF" stroke="#222222" stroke-width="3"/><rect x="70" y="68" width="8" height="22" rx="3" fill="#FFFFFF" stroke="#222222" stroke-width="3"/><path d="M79 44 Q92 40 90 24" stroke="#222222" stroke-width="4" fill="none" stroke-linecap="round"/><ellipse cx="25" cy="30" rx="15" ry="11" fill="#FFFFFF" stroke="#222222" stroke-width="3" transform="rotate(-25 25 30)"/><path d="M22 22 L18 36" stroke="#222222" stroke-width="4"/><path d="M30 24 L27 38" stroke="#222222" stroke-width="4"/><polygon points="16,20 12,10 22,15" fill="#FFFFFF" stroke="#222222" stroke-width="3"/><polygon points="30,16 32,6 38,14" fill="#FFFFFF" stroke="#222222" stroke-width="3"/><circle cx="20" cy="28" r="3" fill="#222222"/><ellipse cx="12" cy="38" rx="5" ry="4" fill="#F7A8C0" stroke="#222222" stroke-width="2"/></svg>';}
+function art_bicicleta(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#FFF3C4"/><circle cx="28" cy="62" r="20" fill="none" stroke="#222222" stroke-width="6"/><circle cx="28" cy="62" r="20" fill="none" stroke="#E23B3B" stroke-width="2"/><circle cx="72" cy="62" r="20" fill="none" stroke="#222222" stroke-width="6"/><circle cx="72" cy="62" r="20" fill="none" stroke="#E23B3B" stroke-width="2"/><path d="M28 62 L48 62 L60 34 L72 62 M48 62 L60 62" stroke="#1E88E5" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M28 62 L38 36 L60 34" stroke="#1E88E5" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M38 36 L32 28" stroke="#222222" stroke-width="5" stroke-linecap="round"/><path d="M24 28 L40 28" stroke="#E23B3B" stroke-width="6" stroke-linecap="round"/><path d="M52 34 L68 30" stroke="#222222" stroke-width="4" stroke-linecap="round"/><ellipse cx="62" cy="29" rx="9" ry="5" fill="#E23B3B" stroke="#222222" stroke-width="3"/><circle cx="48" cy="62" r="6" fill="#FFD23F" stroke="#222222" stroke-width="3"/><circle cx="14" cy="84" r="8" fill="#FFD23F" stroke="#222222" stroke-width="3"/><circle cx="88" cy="84" r="8" fill="#FFD23F" stroke="#222222" stroke-width="3"/><path d="M28 62 L14 84 M72 62 L88 84" stroke="#222222" stroke-width="4"/></svg>';}
+function art_flauta(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#E8F4FF"/><g transform="rotate(-40 50 50)"><rect x="12" y="42" width="76" height="17" rx="8" fill="#D9A15B" stroke="#6B4522" stroke-width="3"/><path d="M12 50 Q6 50 8 44 L14 43" fill="#C98A45" stroke="#6B4522" stroke-width="3"/><rect x="22" y="41" width="6" height="19" rx="2" fill="#8B5E30" stroke="#6B4522" stroke-width="2"/><rect x="76" y="40" width="8" height="21" rx="3" fill="#C98A45" stroke="#6B4522" stroke-width="3"/><circle cx="36" cy="50" r="3" fill="#4A2E13"/><circle cx="46" cy="50" r="3" fill="#4A2E13"/><circle cx="56" cy="50" r="3" fill="#4A2E13"/><circle cx="66" cy="50" r="3" fill="#4A2E13"/><rect x="24" y="43" width="3" height="7" fill="#4A2E13"/></g><circle cx="18" cy="16" r="4" fill="#FFB3D9" stroke="#C2185B" stroke-width="2"/><circle cx="84" cy="82" r="4" fill="#9BE39B" stroke="#2E7D32" stroke-width="2"/></svg>';}
+function art_livro(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#FDF2D0"/><polygon points="20,30 78,18 90,30 32,42" fill="#B71C1C" stroke="#4A0000" stroke-width="3" stroke-linejoin="round"/><polygon points="20,30 32,42 32,84 20,72" fill="#8E1010" stroke="#4A0000" stroke-width="3" stroke-linejoin="round"/><polygon points="32,42 90,30 90,72 32,84" fill="#E53935" stroke="#4A0000" stroke-width="3" stroke-linejoin="round"/><polygon points="34,44 88,32 88,68 34,80" fill="none" stroke="#FFD23F" stroke-width="2"/><rect x="86" y="32" width="4" height="40" fill="#FFF6E0" stroke="#4A0000" stroke-width="2"/><path d="M70 30 L70 72" stroke="#FFD23F" stroke-width="2"/><circle cx="60" cy="56" r="9" fill="#FFD23F" stroke="#4A0000" stroke-width="3"/><path d="M56 56 L64 56 M60 52 L60 60" stroke="#4A0000" stroke-width="3" stroke-linecap="round"/></svg>';}
+function art_placa(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#CDEBFF"/><ellipse cx="50" cy="93" rx="26" ry="6" fill="#8BC34A" stroke="#33691E" stroke-width="2"/><rect x="45" y="50" width="10" height="42" fill="#9E9E9E" stroke="#333333" stroke-width="3"/><polygon points="35,8 65,8 86,29 86,59 65,80 35,80 14,59 14,29" fill="#E53935" stroke="#7F0000" stroke-width="4" stroke-linejoin="round"/><polygon points="38,14 62,14 80,32 80,56 62,74 38,74 20,56 20,32" fill="none" stroke="#FFFFFF" stroke-width="3"/><text x="50" y="52" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#FFFFFF" text-anchor="middle">STOP</text></svg>';}
+function art_paca(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#DFF5C8"/><ellipse cx="52" cy="55" rx="33" ry="21" fill="#A4703C" stroke="#4A2B0F" stroke-width="3"/><circle cx="34" cy="46" r="3" fill="#FFE9C4"/><circle cx="46" cy="43" r="3" fill="#FFE9C4"/><circle cx="58" cy="43" r="3" fill="#FFE9C4"/><circle cx="70" cy="47" r="3" fill="#FFE9C4"/><circle cx="40" cy="58" r="3" fill="#FFE9C4"/><circle cx="52" cy="57" r="3" fill="#FFE9C4"/><circle cx="64" cy="58" r="3" fill="#FFE9C4"/><circle cx="76" cy="55" r="3" fill="#FFE9C4"/><rect x="32" y="70" width="9" height="17" rx="4" fill="#8B5A2B" stroke="#4A2B0F" stroke-width="3"/><rect x="48" y="72" width="9" height="15" rx="4" fill="#8B5A2B" stroke="#4A2B0F" stroke-width="3"/><rect x="66" y="70" width="9" height="17" rx="4" fill="#8B5A2B" stroke="#4A2B0F" stroke-width="3"/><ellipse cx="22" cy="40" rx="15" ry="13" fill="#B98047" stroke="#4A2B0F" stroke-width="3"/><ellipse cx="16" cy="27" rx="5" ry="6" fill="#B98047" stroke="#4A2B0F" stroke-width="3"/><circle cx="18" cy="37" r="3.5" fill="#222222"/><circle cx="17" cy="36" r="1.2" fill="#FFFFFF"/><ellipse cx="9" cy="45" rx="5" ry="4" fill="#5D3A1A" stroke="#4A2B0F" stroke-width="2"/><path d="M10 48 L2 46 M10 50 L3 53" stroke="#4A2B0F" stroke-width="2" stroke-linecap="round"/><path d="M85 52 Q92 50 90 44" stroke="#4A2B0F" stroke-width="4" fill="none" stroke-linecap="round"/></svg>';}
+function art_pato(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#CDEBFF"/><rect x="0" y="76" width="100" height="24" fill="#4FC3F7"/><path d="M0 78 Q12 72 24 78 T48 78 T72 78 T100 78" fill="none" stroke="#0288D1" stroke-width="3"/><ellipse cx="52" cy="64" rx="30" ry="19" fill="#8D6E3A" stroke="#3E2A0C" stroke-width="3"/><path d="M34 58 Q50 46 68 58 Q52 66 34 58 Z" fill="#B08D4E" stroke="#3E2A0C" stroke-width="3"/><path d="M80 60 Q94 48 88 44 Q84 54 76 56 Z" fill="#B08D4E" stroke="#3E2A0C" stroke-width="3"/><path d="M30 52 Q26 22 44 20 Q60 20 56 48" fill="#2E9E4F" stroke="#14532D" stroke-width="3"/><ellipse cx="42" cy="30" rx="16" ry="14" fill="#2E9E4F" stroke="#14532D" stroke-width="3"/><rect x="36" y="44" width="16" height="8" fill="#FFFFFF" stroke="#14532D" stroke-width="2"/><circle cx="37" cy="26" r="3.5" fill="#222222"/><circle cx="36" cy="25" r="1.2" fill="#FFFFFF"/><path d="M28 32 Q14 30 16 36 Q22 42 30 38 Z" fill="#FFC107" stroke="#B37700" stroke-width="3" stroke-linejoin="round"/><path d="M18 35 L28 35" stroke="#B37700" stroke-width="2"/><path d="M44 82 L38 92 L52 92 Z" fill="#FFC107" stroke="#B37700" stroke-width="3" stroke-linejoin="round"/></svg>';}
+function art_faca(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gB_faca" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="0.5" stop-color="#D7DDE4"/><stop offset="1" stop-color="#9AA5B1"/></linearGradient></defs><rect x="0" y="0" width="100" height="100" fill="#FFF0E0"/><g transform="rotate(-20 50 50)"><path d="M8 46 L58 40 Q66 44 58 58 L10 56 Q4 51 8 46 Z" fill="url(#gB_faca)" stroke="#333F4B" stroke-width="3" stroke-linejoin="round"/><path d="M10 55 L58 57" stroke="#7A8894" stroke-width="2"/><rect x="58" y="41" width="6" height="17" rx="2" fill="#B0BEC5" stroke="#333F4B" stroke-width="3"/><rect x="63" y="40" width="30" height="19" rx="8" fill="#8B5E30" stroke="#4A2B0F" stroke-width="3"/><circle cx="72" cy="50" r="2.5" fill="#4A2B0F"/><circle cx="83" cy="50" r="2.5" fill="#4A2B0F"/></g><circle cx="14" cy="86" r="4" fill="#FFB3D9" stroke="#C2185B" stroke-width="2"/></svg>';}
+function art_fita(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#FFF6FB"/><path d="M46 44 Q16 22 12 44 Q10 64 46 56 Z" fill="#F06292" stroke="#AD1457" stroke-width="3" stroke-linejoin="round"/><path d="M54 44 Q84 22 88 44 Q90 64 54 56 Z" fill="#F06292" stroke="#AD1457" stroke-width="3" stroke-linejoin="round"/><path d="M22 38 Q34 44 42 50" fill="none" stroke="#AD1457" stroke-width="2"/><path d="M78 38 Q66 44 58 50" fill="none" stroke="#AD1457" stroke-width="2"/><path d="M44 54 Q34 74 26 90 L44 86 Z" fill="#EC407A" stroke="#AD1457" stroke-width="3" stroke-linejoin="round"/><path d="M56 54 Q66 74 74 90 L56 86 Z" fill="#EC407A" stroke="#AD1457" stroke-width="3" stroke-linejoin="round"/><ellipse cx="50" cy="50" rx="12" ry="11" fill="#F8BBD0" stroke="#AD1457" stroke-width="3"/><path d="M44 46 Q50 52 56 46" fill="none" stroke="#AD1457" stroke-width="2"/><circle cx="50" cy="52" r="3" fill="#FFFFFF" stroke="#AD1457" stroke-width="2"/></svg>';}
+function art_fio(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#EAF7EA"/><circle cx="45" cy="55" r="32" fill="#FF7043" stroke="#7F2A00" stroke-width="3"/><path d="M17 40 Q45 52 73 41" fill="none" stroke="#FFD23F" stroke-width="4"/><path d="M14 55 Q45 68 76 56" fill="none" stroke="#42A5F5" stroke-width="4"/><path d="M18 70 Q45 82 72 70" fill="none" stroke="#66BB6A" stroke-width="4"/><path d="M30 27 Q40 55 32 82" fill="none" stroke="#AB47BC" stroke-width="4"/><path d="M60 27 Q52 55 60 82" fill="none" stroke="#FFFFFF" stroke-width="4"/><path d="M74 38 Q90 26 82 14 Q74 6 88 6" fill="none" stroke="#FF7043" stroke-width="4" stroke-linecap="round"/><circle cx="88" cy="6" r="3" fill="#FF7043" stroke="#7F2A00" stroke-width="2"/></svg>';}
+function art_pano(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="gB_pano" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="16" height="16" fill="#FFFFFF"/><rect width="8" height="16" fill="#64B5F6"/><rect y="0" width="16" height="8" fill="#1E88E5" opacity="0.55"/></pattern></defs><rect x="0" y="0" width="100" height="100" fill="#FFF8E1"/><rect x="10" y="52" width="80" height="36" rx="4" fill="url(#gB_pano)" stroke="#0D47A1" stroke-width="3"/><rect x="16" y="30" width="70" height="26" rx="4" fill="url(#gB_pano)" stroke="#0D47A1" stroke-width="3"/><path d="M16 44 Q51 36 86 44" fill="none" stroke="#0D47A1" stroke-width="3"/><path d="M10 66 L90 66" stroke="#0D47A1" stroke-width="2"/><path d="M12 86 Q20 80 28 86 Q36 80 44 86 Q52 80 60 86 Q68 80 76 86 Q84 80 88 86" fill="none" stroke="#0D47A1" stroke-width="2"/></svg>';}
+function art_cravo(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#EAF7FF"/><path d="M50 92 L50 46" stroke="#2E7D32" stroke-width="6" stroke-linecap="round"/><path d="M50 70 Q28 66 22 50 Q42 48 50 62" fill="#43A047" stroke="#1B5E20" stroke-width="3" stroke-linejoin="round"/><path d="M50 80 Q72 78 78 62 Q58 60 50 74" fill="#43A047" stroke="#1B5E20" stroke-width="3" stroke-linejoin="round"/><path d="M38 44 L62 44 L58 34 L42 34 Z" fill="#388E3C" stroke="#1B5E20" stroke-width="3" stroke-linejoin="round"/><path d="M26 30 Q22 12 36 10 Q42 2 52 8 Q62 0 70 10 Q82 12 76 30 Q64 40 50 40 Q36 40 26 30 Z" fill="#E53935" stroke="#7F0000" stroke-width="3" stroke-linejoin="round"/><path d="M30 20 Q34 28 40 32 M50 8 Q50 24 50 36 M70 20 Q66 28 60 32 M38 12 Q42 22 46 34 M62 12 Q58 22 54 34" fill="none" stroke="#B71C1C" stroke-width="2.5" stroke-linecap="round"/><path d="M26 30 Q50 24 76 30" fill="none" stroke="#B71C1C" stroke-width="2.5"/></svg>';}
+function art_bravo(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#FFE0E0"/><path d="M18 40 Q20 10 50 8 Q80 10 82 40" fill="#5D3A1A" stroke="#3B2410" stroke-width="3"/><circle cx="50" cy="52" r="34" fill="#FFCC9C" stroke="#8B5E30" stroke-width="3"/><path d="M18 40 Q22 16 50 14 Q78 16 82 40 Q66 30 50 32 Q32 30 18 40 Z" fill="#5D3A1A" stroke="#3B2410" stroke-width="3" stroke-linejoin="round"/><ellipse cx="14" cy="54" rx="6" ry="8" fill="#FFCC9C" stroke="#8B5E30" stroke-width="3"/><ellipse cx="86" cy="54" rx="6" ry="8" fill="#FFCC9C" stroke="#8B5E30" stroke-width="3"/><path d="M28 44 L44 50" stroke="#3B2410" stroke-width="5" stroke-linecap="round"/><path d="M72 44 L56 50" stroke="#3B2410" stroke-width="5" stroke-linecap="round"/><circle cx="38" cy="58" r="4.5" fill="#222222"/><circle cx="62" cy="58" r="4.5" fill="#222222"/><circle cx="36.5" cy="56.5" r="1.5" fill="#FFFFFF"/><circle cx="60.5" cy="56.5" r="1.5" fill="#FFFFFF"/><circle cx="26" cy="66" r="6" fill="#F4787A" opacity="0.8"/><circle cx="74" cy="66" r="6" fill="#F4787A" opacity="0.8"/><path d="M36 78 Q50 68 64 78" fill="none" stroke="#8B2E2E" stroke-width="5" stroke-linecap="round"/><path d="M12 26 L4 20 M50 6 L50 0 M88 26 L96 20" stroke="#E53935" stroke-width="3" stroke-linecap="round"/></svg>';}
+function art_triste(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#DCE9F7"/><circle cx="50" cy="52" r="34" fill="#FFCC9C" stroke="#8B5E30" stroke-width="3"/><path d="M18 42 Q22 14 50 12 Q78 14 82 42 Q66 30 50 32 Q32 30 18 42 Z" fill="#6B4A22" stroke="#3B2410" stroke-width="3" stroke-linejoin="round"/><ellipse cx="14" cy="54" rx="6" ry="8" fill="#FFCC9C" stroke="#8B5E30" stroke-width="3"/><ellipse cx="86" cy="54" rx="6" ry="8" fill="#FFCC9C" stroke="#8B5E30" stroke-width="3"/><path d="M28 48 Q36 42 44 48" fill="none" stroke="#3B2410" stroke-width="4" stroke-linecap="round"/><path d="M56 48 Q64 42 72 48" fill="none" stroke="#3B2410" stroke-width="4" stroke-linecap="round"/><circle cx="37" cy="60" r="5" fill="#222222"/><circle cx="63" cy="60" r="5" fill="#222222"/><circle cx="35.5" cy="58.5" r="1.6" fill="#FFFFFF"/><circle cx="61.5" cy="58.5" r="1.6" fill="#FFFFFF"/><path d="M36 82 Q50 70 64 82" fill="none" stroke="#8B2E2E" stroke-width="5" stroke-linecap="round"/><path d="M35 70 Q30 78 33 82 Q38 84 39 79 Q39 75 35 70 Z" fill="#42A5F5" stroke="#0D47A1" stroke-width="2"/><circle cx="24" cy="70" r="5" fill="#F4A8A8" opacity="0.7"/><circle cx="76" cy="70" r="5" fill="#F4A8A8" opacity="0.7"/></svg>';}
+function art_cabana(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#BFE8FF"/><rect x="0" y="72" width="100" height="28" fill="#7CC96B" stroke="#2E6B33" stroke-width="1.5"/><rect x="10" y="40" width="5" height="34" fill="#7A4A22" stroke="#3E2410" stroke-width="1.5"/><polygon points="12.5,22 3,42 22,42" fill="#2E8B3A" stroke="#1B5424" stroke-width="1.8"/><polygon points="12.5,32 4,50 21,50" fill="#3AA84A" stroke="#1B5424" stroke-width="1.8"/><rect x="85" y="40" width="5" height="34" fill="#7A4A22" stroke="#3E2410" stroke-width="1.5"/><polygon points="87.5,22 78,42 97,42" fill="#2E8B3A" stroke="#1B5424" stroke-width="1.8"/><polygon points="87.5,32 79,50 96,50" fill="#3AA84A" stroke="#1B5424" stroke-width="1.8"/><rect x="66" y="46" width="4" height="28" fill="#7A4A22" stroke="#3E2410" stroke-width="1.4"/><polygon points="68,30 60,48 76,48" fill="#2E8B3A" stroke="#1B5424" stroke-width="1.6"/><rect x="26" y="48" width="48" height="28" fill="#C98A4B" stroke="#4A2A10" stroke-width="2"/><line x1="26" y1="55" x2="74" y2="55" stroke="#4A2A10" stroke-width="1.4"/><line x1="26" y1="62" x2="74" y2="62" stroke="#4A2A10" stroke-width="1.4"/><line x1="26" y1="69" x2="74" y2="69" stroke="#4A2A10" stroke-width="1.4"/><polygon points="50,28 20,50 80,50" fill="#B03A2E" stroke="#5A1A12" stroke-width="2"/><rect x="44" y="60" width="13" height="16" fill="#7A4A22" stroke="#3E2410" stroke-width="1.8"/><circle cx="54" cy="68" r="1.4" fill="#FFD84D"/><rect x="31" y="57" width="10" height="9" fill="#FFE27A" stroke="#3E2410" stroke-width="1.6"/><line x1="36" y1="57" x2="36" y2="66" stroke="#3E2410" stroke-width="1.2"/><rect x="60" y="57" width="10" height="9" fill="#FFE27A" stroke="#3E2410" stroke-width="1.6"/><line x1="65" y1="57" x2="65" y2="66" stroke="#3E2410" stroke-width="1.2"/><rect x="60" y="30" width="7" height="12" fill="#8E5A2B" stroke="#3E2410" stroke-width="1.5"/></svg>';}
+function art_castelo(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#BFE8FF"/><rect x="0" y="82" width="100" height="18" fill="#7CC96B" stroke="#2E6B33" stroke-width="1.5"/><rect x="30" y="46" width="40" height="36" fill="#C9CDD4" stroke="#4A4F58" stroke-width="2"/><rect x="30" y="40" width="6" height="6" fill="#C9CDD4" stroke="#4A4F58" stroke-width="1.6"/><rect x="43" y="40" width="6" height="6" fill="#C9CDD4" stroke="#4A4F58" stroke-width="1.6"/><rect x="56" y="40" width="6" height="6" fill="#C9CDD4" stroke="#4A4F58" stroke-width="1.6"/><rect x="12" y="38" width="18" height="44" fill="#DDE2E8" stroke="#4A4F58" stroke-width="2"/><polygon points="21,14 8,38 34,38" fill="#D93A2B" stroke="#6E1A12" stroke-width="2"/><rect x="70" y="38" width="18" height="44" fill="#DDE2E8" stroke="#4A4F58" stroke-width="2"/><polygon points="79,14 66,38 92,38" fill="#D93A2B" stroke="#6E1A12" stroke-width="2"/><rect x="42" y="18" width="16" height="28" fill="#DDE2E8" stroke="#4A4F58" stroke-width="2"/><polygon points="50,2 38,18 62,18" fill="#D93A2B" stroke="#6E1A12" stroke-width="2"/><rect x="17" y="48" width="8" height="11" rx="4" fill="#3B6EA5" stroke="#1E3A5C" stroke-width="1.6"/><rect x="75" y="48" width="8" height="11" rx="4" fill="#3B6EA5" stroke="#1E3A5C" stroke-width="1.6"/><rect x="46" y="26" width="8" height="11" rx="4" fill="#3B6EA5" stroke="#1E3A5C" stroke-width="1.6"/><path d="M42 82 L42 62 a8 8 0 0 1 16 0 L58 82 Z" fill="#8E5A2B" stroke="#3E2410" stroke-width="2"/><line x1="50" y1="60" x2="50" y2="82" stroke="#3E2410" stroke-width="1.4"/><circle cx="55" cy="72" r="1.5" fill="#FFD84D"/><line x1="17" y1="52" x2="25" y2="52" stroke="#1E3A5C" stroke-width="1"/><rect x="34" y="60" width="7" height="8" fill="#3B6EA5" stroke="#1E3A5C" stroke-width="1.5"/><rect x="59" y="60" width="7" height="8" fill="#3B6EA5" stroke="#1E3A5C" stroke-width="1.5"/></svg>';}
+function art_casamoderna(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#BFE8FF"/><rect x="0" y="78" width="100" height="22" fill="#9AA3AC" stroke="#4A4F58" stroke-width="1.5"/><rect x="0" y="74" width="100" height="6" fill="#CFCFCF" stroke="#4A4F58" stroke-width="1.2"/><line x1="10" y1="89" x2="26" y2="89" stroke="#FFFFFF" stroke-width="2.6"/><line x1="42" y1="89" x2="58" y2="89" stroke="#FFFFFF" stroke-width="2.6"/><line x1="74" y1="89" x2="90" y2="89" stroke="#FFFFFF" stroke-width="2.6"/><rect x="16" y="20" width="68" height="54" fill="#FFFFFF" stroke="#333A42" stroke-width="2"/><rect x="16" y="20" width="68" height="8" fill="#D93A2B" stroke="#333A42" stroke-width="2"/><rect x="16" y="44" width="68" height="6" fill="#D93A2B" stroke="#333A42" stroke-width="1.8"/><rect x="24" y="30" width="14" height="12" fill="#6FC3F0" stroke="#333A42" stroke-width="1.8"/><line x1="31" y1="30" x2="31" y2="42" stroke="#333A42" stroke-width="1.2"/><rect x="46" y="30" width="14" height="12" fill="#6FC3F0" stroke="#333A42" stroke-width="1.8"/><line x1="53" y1="30" x2="53" y2="42" stroke="#333A42" stroke-width="1.2"/><rect x="66" y="30" width="12" height="12" fill="#6FC3F0" stroke="#333A42" stroke-width="1.8"/><rect x="22" y="54" width="14" height="12" fill="#6FC3F0" stroke="#333A42" stroke-width="1.8"/><line x1="29" y1="54" x2="29" y2="66" stroke="#333A42" stroke-width="1.2"/><rect x="64" y="54" width="14" height="12" fill="#6FC3F0" stroke="#333A42" stroke-width="1.8"/><line x1="71" y1="54" x2="71" y2="66" stroke="#333A42" stroke-width="1.2"/><rect x="44" y="54" width="14" height="20" fill="#8E5A2B" stroke="#3E2410" stroke-width="2"/><circle cx="55" cy="64" r="1.5" fill="#FFD84D"/><rect x="70" y="10" width="7" height="11" fill="#B0B6BD" stroke="#333A42" stroke-width="1.6"/></svg>';}
+function art_ursos(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#FFF0D6"/><rect x="0" y="86" width="100" height="14" fill="#9BD48C" stroke="#2E6B33" stroke-width="1.4"/><circle cx="17" cy="27" r="6" fill="#8B5A2B" stroke="#3E2410" stroke-width="1.8"/><circle cx="35" cy="27" r="6" fill="#8B5A2B" stroke="#3E2410" stroke-width="1.8"/><ellipse cx="26" cy="33" rx="13" ry="12" fill="#A9682F" stroke="#3E2410" stroke-width="2"/><ellipse cx="26" cy="66" rx="15" ry="22" fill="#A9682F" stroke="#3E2410" stroke-width="2"/><ellipse cx="26" cy="70" rx="9" ry="14" fill="#E0B57E" stroke="#3E2410" stroke-width="1.4"/><ellipse cx="26" cy="37" rx="6" ry="4.5" fill="#E0B57E" stroke="#3E2410" stroke-width="1.4"/><circle cx="26" cy="35" r="1.8" fill="#2B1A0C"/><circle cx="21" cy="29" r="1.6" fill="#2B1A0C"/><circle cx="31" cy="29" r="1.6" fill="#2B1A0C"/><path d="M22 40 q4 3 8 0" stroke="#2B1A0C" stroke-width="1.4" fill="none"/><ellipse cx="12" cy="90" rx="6" ry="4" fill="#8B5A2B" stroke="#3E2410" stroke-width="1.6"/><ellipse cx="40" cy="90" rx="6" ry="4" fill="#8B5A2B" stroke="#3E2410" stroke-width="1.6"/><circle cx="53" cy="45" r="4.5" fill="#8B5A2B" stroke="#3E2410" stroke-width="1.6"/><circle cx="67" cy="45" r="4.5" fill="#8B5A2B" stroke="#3E2410" stroke-width="1.6"/><ellipse cx="60" cy="50" rx="10" ry="9" fill="#A9682F" stroke="#3E2410" stroke-width="1.8"/><ellipse cx="60" cy="72" rx="11" ry="16" fill="#A9682F" stroke="#3E2410" stroke-width="1.8"/><ellipse cx="60" cy="75" rx="6.5" ry="10" fill="#E0B57E" stroke="#3E2410" stroke-width="1.2"/><ellipse cx="60" cy="53" rx="4.5" ry="3.4" fill="#E0B57E" stroke="#3E2410" stroke-width="1.2"/><circle cx="60" cy="51.5" r="1.4" fill="#2B1A0C"/><circle cx="56.5" cy="47" r="1.3" fill="#2B1A0C"/><circle cx="63.5" cy="47" r="1.3" fill="#2B1A0C"/><path d="M57 55.5 q3 2.5 6 0" stroke="#2B1A0C" stroke-width="1.2" fill="none"/><ellipse cx="51" cy="90" rx="5" ry="3.4" fill="#8B5A2B" stroke="#3E2410" stroke-width="1.4"/><ellipse cx="69" cy="90" rx="5" ry="3.4" fill="#8B5A2B" stroke="#3E2410" stroke-width="1.4"/><circle cx="83" cy="60" r="3.4" fill="#8B5A2B" stroke="#3E2410" stroke-width="1.4"/><circle cx="93" cy="60" r="3.4" fill="#8B5A2B" stroke="#3E2410" stroke-width="1.4"/><ellipse cx="88" cy="64" rx="7.5" ry="7" fill="#C08040" stroke="#3E2410" stroke-width="1.6"/><ellipse cx="88" cy="79" rx="8" ry="11" fill="#C08040" stroke="#3E2410" stroke-width="1.6"/><ellipse cx="88" cy="81" rx="4.6" ry="7" fill="#F0D2A6" stroke="#3E2410" stroke-width="1.1"/><ellipse cx="88" cy="66.5" rx="3.4" ry="2.6" fill="#F0D2A6" stroke="#3E2410" stroke-width="1.1"/><circle cx="88" cy="65.5" r="1.1" fill="#2B1A0C"/><circle cx="85.4" cy="62" r="1.1" fill="#2B1A0C"/><circle cx="90.6" cy="62" r="1.1" fill="#2B1A0C"/><path d="M85.8 68.5 q2.2 2 4.4 0" stroke="#2B1A0C" stroke-width="1.1" fill="none"/><ellipse cx="82" cy="90" rx="4" ry="3" fill="#8B5A2B" stroke="#3E2410" stroke-width="1.3"/><ellipse cx="94" cy="90" rx="4" ry="3" fill="#8B5A2B" stroke="#3E2410" stroke-width="1.3"/></svg>';}
+function art_mingau(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#FFF6E0"/><rect x="0" y="72" width="100" height="10" fill="#C98A4B" stroke="#4A2A10" stroke-width="2"/><rect x="12" y="82" width="8" height="18" fill="#8E5A2B" stroke="#4A2A10" stroke-width="1.8"/><rect x="80" y="82" width="8" height="18" fill="#8E5A2B" stroke="#4A2A10" stroke-width="1.8"/><path d="M14 24 q4 -7 0 -13 q-4 -6 0 -11" stroke="#D8D8D8" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M50 20 q5 -8 0 -14 q-5 -7 0 -12" stroke="#D8D8D8" stroke-width="3.4" fill="none" stroke-linecap="round"/><path d="M76 24 q4 -7 0 -13 q-4 -6 0 -11" stroke="#D8D8D8" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M62 60 L84 28" stroke="#B0B6BD" stroke-width="4" stroke-linecap="round"/><ellipse cx="86" cy="25" rx="7" ry="5" fill="#D5DBE0" stroke="#4A4F58" stroke-width="1.8" transform="rotate(-35 86 25)"/><path d="M18 42 L82 42 a32 30 0 0 1 -64 0 Z" fill="#F04E5E" stroke="#6E1A12" stroke-width="2.2"/><ellipse cx="50" cy="42" rx="32" ry="8" fill="#FFF3D6" stroke="#6E1A12" stroke-width="2.2"/><ellipse cx="50" cy="42" rx="26" ry="5.6" fill="#E8C77A" stroke="#B08A3A" stroke-width="1.4"/><circle cx="40" cy="41" r="2" fill="#C0392B"/><circle cx="58" cy="43" r="2" fill="#C0392B"/><circle cx="49" cy="44" r="1.6" fill="#8E44AD"/><ellipse cx="50" cy="72" rx="20" ry="4" fill="#F04E5E" stroke="#6E1A12" stroke-width="2"/><path d="M20 52 L80 52" stroke="#FFD9DD" stroke-width="2.4"/></svg>';}
+function art_cama(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#EAF6FF"/><rect x="0" y="84" width="100" height="16" fill="#C98A4B" stroke="#4A2A10" stroke-width="1.5"/><rect x="6" y="24" width="18" height="60" rx="3" fill="#A9682F" stroke="#3E2410" stroke-width="2"/><rect x="78" y="42" width="16" height="42" rx="3" fill="#A9682F" stroke="#3E2410" stroke-width="2"/><rect x="14" y="52" width="72" height="12" fill="#FFFFFF" stroke="#3E2410" stroke-width="2"/><rect x="14" y="62" width="72" height="20" rx="3" fill="#3CB4E0" stroke="#134E63" stroke-width="2"/><rect x="14" y="62" width="72" height="6" fill="#F2C230" stroke="#134E63" stroke-width="1.6"/><circle cx="26" cy="75" r="3" fill="#F04E5E" stroke="#134E63" stroke-width="1.2"/><circle cx="44" cy="75" r="3" fill="#8BD34E" stroke="#134E63" stroke-width="1.2"/><circle cx="62" cy="75" r="3" fill="#F2C230" stroke="#134E63" stroke-width="1.2"/><circle cx="78" cy="75" r="3" fill="#F04E5E" stroke="#134E63" stroke-width="1.2"/><rect x="26" y="38" width="30" height="15" rx="6" fill="#FFF6E0" stroke="#3E2410" stroke-width="2"/><path d="M32 45 q9 4 18 0" stroke="#D8C79A" stroke-width="1.4" fill="none"/><rect x="16" y="84" width="5" height="12" fill="#7A4A22" stroke="#3E2410" stroke-width="1.5"/><rect x="80" y="84" width="5" height="12" fill="#7A4A22" stroke="#3E2410" stroke-width="1.5"/></svg>';}
+function art_cadeira(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#FFF6E0"/><line x1="0" y1="92" x2="100" y2="92" stroke="#C98A4B" stroke-width="6"/><rect x="24" y="8" width="9" height="60" rx="3" fill="#A9682F" stroke="#3E2410" stroke-width="2"/><rect x="30" y="16" width="34" height="7" rx="3" fill="#C98A4B" stroke="#3E2410" stroke-width="1.8"/><rect x="30" y="30" width="34" height="7" rx="3" fill="#C98A4B" stroke="#3E2410" stroke-width="1.8"/><rect x="58" y="8" width="9" height="52" rx="3" fill="#A9682F" stroke="#3E2410" stroke-width="2"/><rect x="20" y="50" width="56" height="10" rx="3" fill="#D89A55" stroke="#3E2410" stroke-width="2"/><rect x="26" y="60" width="8" height="32" rx="2" fill="#A9682F" stroke="#3E2410" stroke-width="2"/><rect x="62" y="60" width="8" height="32" rx="2" fill="#A9682F" stroke="#3E2410" stroke-width="2"/><rect x="30" y="74" width="36" height="6" rx="2" fill="#C98A4B" stroke="#3E2410" stroke-width="1.6"/><rect x="24" y="4" width="9" height="6" rx="3" fill="#C98A4B" stroke="#3E2410" stroke-width="1.6"/><rect x="58" y="4" width="9" height="6" rx="3" fill="#C98A4B" stroke="#3E2410" stroke-width="1.6"/></svg>';}
+function art_porquinho(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#E7F7C8"/><ellipse cx="50" cy="88" rx="30" ry="6" fill="#B9DE8A"/><path d="M22 30 L18 12 L38 22 Z" fill="#F58FB0" stroke="#9E2F55" stroke-width="2"/><path d="M78 30 L82 12 L62 22 Z" fill="#F58FB0" stroke="#9E2F55" stroke-width="2"/><ellipse cx="50" cy="76" rx="26" ry="16" fill="#F7A8C4" stroke="#9E2F55" stroke-width="2"/><ellipse cx="30" cy="90" rx="6" ry="5" fill="#E88BAE" stroke="#9E2F55" stroke-width="1.8"/><ellipse cx="70" cy="90" rx="6" ry="5" fill="#E88BAE" stroke="#9E2F55" stroke-width="1.8"/><path d="M76 70 q10 -2 8 -10" stroke="#9E2F55" stroke-width="2.4" fill="none" stroke-linecap="round"/><circle cx="50" cy="45" r="26" fill="#FBBDD4" stroke="#9E2F55" stroke-width="2.2"/><ellipse cx="50" cy="55" rx="11" ry="8" fill="#F58FB0" stroke="#9E2F55" stroke-width="2"/><ellipse cx="45.5" cy="55" rx="2.2" ry="3" fill="#9E2F55"/><ellipse cx="54.5" cy="55" rx="2.2" ry="3" fill="#9E2F55"/><circle cx="39" cy="38" r="4.5" fill="#FFFFFF" stroke="#9E2F55" stroke-width="1.6"/><circle cx="61" cy="38" r="4.5" fill="#FFFFFF" stroke="#9E2F55" stroke-width="1.6"/><circle cx="40" cy="39" r="2.2" fill="#2B1A0C"/><circle cx="62" cy="39" r="2.2" fill="#2B1A0C"/><path d="M33 62 q17 12 34 0" stroke="#9E2F55" stroke-width="2.2" fill="none" stroke-linecap="round"/><circle cx="30" cy="50" r="3.4" fill="#F27C9E" opacity="0.6"/><circle cx="70" cy="50" r="3.4" fill="#F27C9E" opacity="0.6"/></svg>';}
+function art_casapalha(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#CDEEFF"/><rect x="0" y="80" width="100" height="20" fill="#8BD34E" stroke="#2E6B33" stroke-width="1.5"/><polygon points="50,8 8,46 92,46" fill="#F2C230" stroke="#8A6410" stroke-width="2.2"/><line x1="24" y1="46" x2="44" y2="14" stroke="#C99B14" stroke-width="1.6"/><line x1="36" y1="46" x2="50" y2="12" stroke="#C99B14" stroke-width="1.6"/><line x1="52" y1="46" x2="60" y2="18" stroke="#C99B14" stroke-width="1.6"/><line x1="66" y1="46" x2="72" y2="28" stroke="#C99B14" stroke-width="1.6"/><rect x="16" y="46" width="68" height="34" fill="#FFD75E" stroke="#8A6410" stroke-width="2.2"/><line x1="16" y1="54" x2="84" y2="54" stroke="#C99B14" stroke-width="1.6"/><line x1="16" y1="62" x2="84" y2="62" stroke="#C99B14" stroke-width="1.6"/><line x1="16" y1="70" x2="84" y2="70" stroke="#C99B14" stroke-width="1.6"/><rect x="42" y="58" width="16" height="22" rx="2" fill="#C98A4B" stroke="#4A2A10" stroke-width="2"/><circle cx="54" cy="70" r="1.6" fill="#3E2410"/><rect x="22" y="56" width="13" height="12" fill="#6FC3F0" stroke="#8A6410" stroke-width="1.8"/><line x1="28.5" y1="56" x2="28.5" y2="68" stroke="#8A6410" stroke-width="1.2"/><rect x="65" y="56" width="13" height="12" fill="#6FC3F0" stroke="#8A6410" stroke-width="1.8"/><line x1="71.5" y1="56" x2="71.5" y2="68" stroke="#8A6410" stroke-width="1.2"/></svg>';}
+function art_casamadeira(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#CDEEFF"/><rect x="0" y="80" width="100" height="20" fill="#8BD34E" stroke="#2E6B33" stroke-width="1.5"/><polygon points="50,8 8,46 92,46" fill="#8E5A2B" stroke="#3E2410" stroke-width="2.2"/><line x1="30" y1="46" x2="50" y2="10" stroke="#5E3A18" stroke-width="1.8"/><line x1="50" y1="10" x2="70" y2="46" stroke="#5E3A18" stroke-width="1.8"/><line x1="20" y1="38" x2="80" y2="38" stroke="#5E3A18" stroke-width="1.6"/><rect x="16" y="46" width="68" height="34" fill="#C98A4B" stroke="#3E2410" stroke-width="2.2"/><rect x="16" y="46" width="11" height="34" fill="#D89A55" stroke="#5E3A18" stroke-width="1.5"/><rect x="27" y="46" width="11" height="34" fill="#B87A3C" stroke="#5E3A18" stroke-width="1.5"/><rect x="38" y="46" width="11" height="34" fill="#D89A55" stroke="#5E3A18" stroke-width="1.5"/><rect x="49" y="46" width="11" height="34" fill="#B87A3C" stroke="#5E3A18" stroke-width="1.5"/><rect x="60" y="46" width="11" height="34" fill="#D89A55" stroke="#5E3A18" stroke-width="1.5"/><rect x="71" y="46" width="13" height="34" fill="#B87A3C" stroke="#5E3A18" stroke-width="1.5"/><rect x="42" y="58" width="16" height="22" rx="2" fill="#7A4A22" stroke="#3E2410" stroke-width="2"/><circle cx="54" cy="70" r="1.6" fill="#FFD84D"/><rect x="22" y="56" width="13" height="12" fill="#6FC3F0" stroke="#3E2410" stroke-width="1.8"/><line x1="28.5" y1="56" x2="28.5" y2="68" stroke="#3E2410" stroke-width="1.2"/><rect x="65" y="56" width="13" height="12" fill="#6FC3F0" stroke="#3E2410" stroke-width="1.8"/><line x1="71.5" y1="56" x2="71.5" y2="68" stroke="#3E2410" stroke-width="1.2"/></svg>';}
+function art_casatijolo(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#CDEEFF"/><rect x="0" y="80" width="100" height="20" fill="#8BD34E" stroke="#2E6B33" stroke-width="1.5"/><rect x="66" y="12" width="12" height="20" fill="#B03A2E" stroke="#5A1A12" stroke-width="2"/><rect x="64" y="9" width="16" height="5" fill="#8E2A20" stroke="#5A1A12" stroke-width="1.6"/><circle cx="72" cy="6" r="4" fill="#E8E8E8" opacity="0.9"/><circle cx="79" cy="2" r="3" fill="#E8E8E8" opacity="0.8"/><polygon points="50,14 8,46 92,46" fill="#7A4A22" stroke="#3E2410" stroke-width="2.2"/><rect x="16" y="46" width="68" height="34" fill="#E05B3E" stroke="#5A1A12" stroke-width="2.2"/><line x1="16" y1="52" x2="84" y2="52" stroke="#FFE8DC" stroke-width="1.4"/><line x1="16" y1="58" x2="84" y2="58" stroke="#FFE8DC" stroke-width="1.4"/><line x1="16" y1="64" x2="84" y2="64" stroke="#FFE8DC" stroke-width="1.4"/><line x1="16" y1="70" x2="84" y2="70" stroke="#FFE8DC" stroke-width="1.4"/><line x1="16" y1="76" x2="84" y2="76" stroke="#FFE8DC" stroke-width="1.4"/><line x1="28" y1="46" x2="28" y2="52" stroke="#FFE8DC" stroke-width="1.4"/><line x1="50" y1="46" x2="50" y2="52" stroke="#FFE8DC" stroke-width="1.4"/><line x1="72" y1="46" x2="72" y2="52" stroke="#FFE8DC" stroke-width="1.4"/><line x1="20" y1="52" x2="20" y2="58" stroke="#FFE8DC" stroke-width="1.4"/><line x1="40" y1="52" x2="40" y2="58" stroke="#FFE8DC" stroke-width="1.4"/><line x1="62" y1="52" x2="62" y2="58" stroke="#FFE8DC" stroke-width="1.4"/><line x1="80" y1="52" x2="80" y2="58" stroke="#FFE8DC" stroke-width="1.4"/><line x1="20" y1="64" x2="20" y2="70" stroke="#FFE8DC" stroke-width="1.4"/><line x1="40" y1="64" x2="40" y2="70" stroke="#FFE8DC" stroke-width="1.4"/><line x1="62" y1="64" x2="62" y2="70" stroke="#FFE8DC" stroke-width="1.4"/><line x1="80" y1="64" x2="80" y2="70" stroke="#FFE8DC" stroke-width="1.4"/><line x1="30" y1="76" x2="30" y2="80" stroke="#FFE8DC" stroke-width="1.4"/><line x1="70" y1="76" x2="70" y2="80" stroke="#FFE8DC" stroke-width="1.4"/><rect x="42" y="58" width="16" height="22" rx="2" fill="#7A4A22" stroke="#3E2410" stroke-width="2"/><circle cx="54" cy="70" r="1.6" fill="#FFD84D"/><rect x="22" y="55" width="13" height="12" fill="#6FC3F0" stroke="#3E2410" stroke-width="1.8"/><line x1="28.5" y1="55" x2="28.5" y2="67" stroke="#3E2410" stroke-width="1.2"/><rect x="65" y="55" width="13" height="12" fill="#6FC3F0" stroke="#3E2410" stroke-width="1.8"/><line x1="71.5" y1="55" x2="71.5" y2="67" stroke="#3E2410" stroke-width="1.2"/></svg>';}
+function art_lobo(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#DCE9F2"/><ellipse cx="58" cy="92" rx="34" ry="6" fill="#B9C9D6"/><path d="M62 22 L58 6 L76 16 Z" fill="#8E9AA6" stroke="#333A42" stroke-width="2"/><path d="M84 26 L88 8 L92 28 Z" fill="#8E9AA6" stroke="#333A42" stroke-width="2"/><ellipse cx="72" cy="70" rx="24" ry="18" fill="#9AA7B4" stroke="#333A42" stroke-width="2"/><path d="M94 66 q10 6 6 18 q-2 -8 -8 -10 Z" fill="#8E9AA6" stroke="#333A42" stroke-width="2"/><ellipse cx="60" cy="86" rx="6" ry="4" fill="#8E9AA6" stroke="#333A42" stroke-width="1.6"/><ellipse cx="84" cy="86" rx="6" ry="4" fill="#8E9AA6" stroke="#333A42" stroke-width="1.6"/><path d="M78 46 q-10 -22 -34 -20 q-14 1 -20 12 q-4 8 4 12 q14 6 24 4 q18 -3 26 -8 Z" fill="#B3BEC9" stroke="#333A42" stroke-width="2.2"/><ellipse cx="26" cy="44" rx="6" ry="5" fill="#4A4F58" stroke="#22262B" stroke-width="1.8"/><circle cx="24" cy="43" r="1.5" fill="#22262B"/><path d="M28 50 q10 4 20 2" stroke="#333A42" stroke-width="1.8" fill="none"/><polygon points="30,50 32,56 34,50" fill="#FFFFFF" stroke="#333A42" stroke-width="1"/><polygon points="38,51 40,57 42,51" fill="#FFFFFF" stroke="#333A42" stroke-width="1"/><ellipse cx="52" cy="34" rx="6" ry="4.4" fill="#FFF2C4" stroke="#333A42" stroke-width="1.6"/><circle cx="52" cy="34" r="2.4" fill="#2B1A0C"/><path d="M46 28 q6 -4 12 -1" stroke="#333A42" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M18 40 q-6 -3 -12 -1" stroke="#7FB8E0" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.9"/><path d="M18 46 q-8 1 -14 5" stroke="#7FB8E0" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.9"/><path d="M18 43 q-9 -1 -15 2" stroke="#A8D4F0" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.9"/></svg>';}
+function art_soldadinho(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#FFF1DA"/><ellipse cx="50" cy="95" rx="22" ry="4" fill="#E0C79E"/><rect x="34" y="8" width="32" height="10" rx="3" fill="#2B2B33" stroke="#111114" stroke-width="2"/><rect x="30" y="16" width="40" height="5" rx="2" fill="#1A1A20" stroke="#111114" stroke-width="1.6"/><circle cx="50" cy="12" r="3" fill="#F2C230" stroke="#111114" stroke-width="1.2"/><rect x="38" y="20" width="24" height="16" rx="6" fill="#FFD9B0" stroke="#8A5A2B" stroke-width="2"/><circle cx="44" cy="27" r="1.8" fill="#2B1A0C"/><circle cx="56" cy="27" r="1.8" fill="#2B1A0C"/><circle cx="39" cy="31" r="2.6" fill="#F58FB0" opacity="0.7"/><circle cx="61" cy="31" r="2.6" fill="#F58FB0" opacity="0.7"/><path d="M45 32 q5 3 10 0" stroke="#8A5A2B" stroke-width="1.6" fill="none" stroke-linecap="round"/><rect x="34" y="35" width="32" height="30" rx="4" fill="#D93A2B" stroke="#6E1A12" stroke-width="2.2"/><line x1="50" y1="35" x2="50" y2="65" stroke="#6E1A12" stroke-width="1.6"/><circle cx="45" cy="42" r="1.7" fill="#F2C230" stroke="#6E1A12" stroke-width="0.8"/><circle cx="45" cy="50" r="1.7" fill="#F2C230" stroke="#6E1A12" stroke-width="0.8"/><circle cx="45" cy="58" r="1.7" fill="#F2C230" stroke="#6E1A12" stroke-width="0.8"/><path d="M34 38 L50 50 L66 38" stroke="#FFFFFF" stroke-width="2.4" fill="none"/><rect x="24" y="37" width="10" height="26" rx="4" fill="#D93A2B" stroke="#6E1A12" stroke-width="2"/><circle cx="29" cy="66" r="4" fill="#FFD9B0" stroke="#8A5A2B" stroke-width="1.6"/><rect x="66" y="37" width="10" height="26" rx="4" fill="#D93A2B" stroke="#6E1A12" stroke-width="2"/><circle cx="71" cy="66" r="4" fill="#FFD9B0" stroke="#8A5A2B" stroke-width="1.6"/><rect x="76" y="24" width="4" height="44" rx="2" fill="#8E5A2B" stroke="#3E2410" stroke-width="1.6"/><polygon points="78,16 74,26 82,26" fill="#C0C6CC" stroke="#333A42" stroke-width="1.4"/><rect x="32" y="63" width="36" height="6" rx="2" fill="#2B2B33" stroke="#111114" stroke-width="1.8"/><rect x="43" y="68" width="14" height="20" rx="4" fill="#2E6BB5" stroke="#14355E" stroke-width="2.2"/><rect x="38" y="86" width="24" height="9" rx="3" fill="#1A1A20" stroke="#111114" stroke-width="2"/></svg>';}
+function art_bailarina(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#FFF0F6"/><ellipse cx="50" cy="96" rx="20" ry="3.5" fill="#F0CADB"/><path d="M50 6 q-6 8 -10 14 q10 -4 20 0 q-4 -6 -10 -14 Z" fill="#F2C230" stroke="#B07A10" stroke-width="1.6"/><path d="M40 24 q-4 -12 10 -12 q14 0 10 12 q-2 6 -10 6 q-8 0 -10 -6 Z" fill="#6B3A18" stroke="#3E2410" stroke-width="1.8"/><circle cx="50" cy="26" r="10" fill="#FFD9B0" stroke="#8A5A2B" stroke-width="2"/><circle cx="46" cy="25" r="1.6" fill="#2B1A0C"/><circle cx="54" cy="25" r="1.6" fill="#2B1A0C"/><circle cx="42" cy="29" r="2.4" fill="#F58FB0" opacity="0.7"/><circle cx="58" cy="29" r="2.4" fill="#F58FB0" opacity="0.7"/><path d="M46 31 q4 3 8 0" stroke="#8A5A2B" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M40 20 q10 -8 20 0" stroke="#3E2410" stroke-width="2" fill="none"/><path d="M42 36 L58 36 L56 58 L44 58 Z" fill="#F7A8C4" stroke="#B3527A" stroke-width="2"/><path d="M32 58 q18 -10 36 0 q-10 10 -18 10 q-8 0 -18 -10 Z" fill="#FBC9DC" stroke="#B3527A" stroke-width="2"/><path d="M34 58 q16 8 32 0" stroke="#FFFFFF" stroke-width="1.6" fill="none"/><path d="M42 38 q-14 -10 -12 -24" stroke="#FFD9B0" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M58 38 q14 -10 12 -24" stroke="#FFD9B0" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="30" cy="13" r="3.4" fill="#FFD9B0" stroke="#8A5A2B" stroke-width="1.4"/><circle cx="70" cy="13" r="3.4" fill="#FFD9B0" stroke="#8A5A2B" stroke-width="1.4"/><path d="M48 66 L46 88" stroke="#FFD9B0" stroke-width="6" stroke-linecap="round"/><path d="M53 66 q9 12 4 22" stroke="#FFD9B0" stroke-width="6" stroke-linecap="round" fill="none"/><ellipse cx="45" cy="91" rx="5" ry="4" fill="#F58FB0" stroke="#B3527A" stroke-width="1.6"/><ellipse cx="59" cy="88" rx="5" ry="4" fill="#F58FB0" stroke="#B3527A" stroke-width="1.6" transform="rotate(25 59 88)"/><path d="M45 88 q-4 -4 -2 -8" stroke="#F58FB0" stroke-width="1.6" fill="none"/></svg>';}
+function art_peixe(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#2E9BD6"/><rect x="0" y="0" width="100" height="14" fill="#6FC3F0" opacity="0.6"/><rect x="0" y="92" width="100" height="8" fill="#E0C79E" stroke="#B08A3A" stroke-width="1.4"/><circle cx="14" cy="24" r="5" fill="#BFEBFF" stroke="#FFFFFF" stroke-width="1.6" opacity="0.85"/><circle cx="26" cy="14" r="3.4" fill="#BFEBFF" stroke="#FFFFFF" stroke-width="1.4" opacity="0.85"/><circle cx="20" cy="38" r="2.6" fill="#BFEBFF" stroke="#FFFFFF" stroke-width="1.2" opacity="0.85"/><circle cx="84" cy="20" r="4" fill="#BFEBFF" stroke="#FFFFFF" stroke-width="1.4" opacity="0.85"/><circle cx="92" cy="34" r="2.6" fill="#BFEBFF" stroke="#FFFFFF" stroke-width="1.2" opacity="0.85"/><path d="M92 40 q6 14 0 30 q-10 -14 -18 -14 q8 -4 18 -16 Z" fill="#F2952B" stroke="#8A4A0E" stroke-width="2"/><path d="M78 56 q-16 -28 -42 -20 q-16 5 -22 20 q6 15 22 20 q26 8 42 -20 Z" fill="#F7B733" stroke="#8A4A0E" stroke-width="2.2"/><path d="M14 56 q6 -12 16 -16 q-6 16 0 32 q-10 -4 -16 -16 Z" fill="#FFD75E" stroke="#8A4A0E" stroke-width="2"/><path d="M14 56 a11 13 0 0 1 12 -13 q-5 6 -5 13 q0 7 5 13 a11 13 0 0 1 -12 -13 Z" fill="#E05B3E" stroke="#8A4A0E" stroke-width="2"/><path d="M56 34 q6 -12 16 -10 q-8 6 -10 14 Z" fill="#F2952B" stroke="#8A4A0E" stroke-width="1.8"/><path d="M52 78 q4 10 14 10 q-8 -6 -8 -13 Z" fill="#F2952B" stroke="#8A4A0E" stroke-width="1.8"/><path d="M46 40 q10 16 0 32" stroke="#D98A14" stroke-width="1.8" fill="none"/><path d="M58 42 q8 14 0 28" stroke="#D98A14" stroke-width="1.8" fill="none"/><path d="M70 46 q6 10 0 20" stroke="#D98A14" stroke-width="1.8" fill="none"/><circle cx="30" cy="48" r="5" fill="#FFFFFF" stroke="#8A4A0E" stroke-width="1.8"/><circle cx="29" cy="48" r="2.4" fill="#2B1A0C"/></svg>';}
+function art_barquinho(){return '<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="#BFE8FF"/><rect x="0" y="58" width="100" height="42" fill="#2E9BD6"/><path d="M0 58 q12 -6 25 0 q13 6 25 0 q12 -6 25 0 q13 6 25 0 L100 62 L0 62 Z" fill="#6FC3F0" stroke="#1B6B99" stroke-width="1.4"/><path d="M0 74 q12 -5 25 0 q13 5 25 0 q12 -5 25 0 q13 5 25 0" stroke="#BFEBFF" stroke-width="2" fill="none" opacity="0.8"/><path d="M0 88 q12 -5 25 0 q13 5 25 0 q12 -5 25 0 q13 5 25 0" stroke="#BFEBFF" stroke-width="2" fill="none" opacity="0.8"/><circle cx="82" cy="16" r="9" fill="#FFD84D" stroke="#C79A10" stroke-width="1.6"/><path d="M18 62 L50 62 L82 62 L68 42 L50 46 L32 42 Z" fill="#FFFFFF" stroke="#3A4650" stroke-width="2.2"/><polygon points="50,16 20,44 50,46" fill="#F2F6FA" stroke="#3A4650" stroke-width="2.2"/><polygon points="50,16 80,44 50,46" fill="#DCE6EE" stroke="#3A4650" stroke-width="2.2"/><line x1="50" y1="16" x2="50" y2="46" stroke="#3A4650" stroke-width="1.6"/><path d="M20 44 L32 42 L50 46 L68 42 L80 44" fill="none" stroke="#3A4650" stroke-width="2"/><path d="M18 62 q32 10 64 0" fill="#F2F6FA" stroke="#3A4650" stroke-width="2"/><ellipse cx="50" cy="66" rx="34" ry="4" fill="#8FD6F5" opacity="0.7"/></svg>';}
+
+/* ============================================================
+   CONSTRUTORES DAS RODADAS (um por mini-game)
+   Regra de ouro: a pergunta NUNCA mostra nem fala a resposta.
+   ============================================================ */
+const BUILDERS={
+
+  /* 1. ENCONTRO CONSONANTAL — reconhecer e identificar */
+  encontro(){
+    const rounds=[];
+    /* (a) qual palavra TEM encontro consonantal */
+    shuffle(WORDS).slice(0,3).forEach(it=>{
+      const distr=shuffle(NOENC).slice(0,2);
+      rounds.push({
+        q:'Qual destas palavras tem <b>encontro consonantal</b> (duas consoantes juntinhas)? 🔤',
+        audio:['e_qual'], stage:emo('🔤',64), colorOpts:true,
+        options:shuffle([wordOpt(it,true),...distr.map(d=>wordOpt(d,false))])
+      });
+    });
+    /* (b) qual palavra NÃO tem */
+    shuffle(NOENC).slice(0,2).forEach(it=>{
+      const distr=shuffle(WORDS).slice(0,2);
+      rounds.push({
+        q:'Qual destas palavras <b>NÃO</b> tem encontro consonantal? 🚫',
+        audio:['e_naotem'], stage:emo('🚫🔤',56), colorOpts:true,
+        options:shuffle([wordOpt(it,true),...distr.map(d=>wordOpt(d,false))])
+      });
+    });
+    /* (c) qual é o encontro que está dentro da palavra (sem destacar!) */
+    shuffle(WORDS).slice(0,3).forEach(it=>{
+      rounds.push({
+        q:'Olhe a palavra. Qual é o <b>encontro consonantal</b> que está dentro dela? 🔍',
+        audio:['e_dentro',it.ak],
+        stage:(it.art?illo(it.art,96):'')+tiles(it.w),
+        options:encOpts(it.enc)
+      });
+    });
+    /* (d) conceito */
+    const conc=[
+      {q:'O que é um <b>encontro consonantal</b>? 🤔', audio:['e_oque'], stage:emo('🤔🔤',56), colorOpts:true,
+       options:mkOpts('eo_duas',['eo_duas','eo_vogais','eo_uma'],{
+         eo_duas:'🔠<span class="cap">Duas consoantes juntinhas</span>',
+         eo_vogais:'🅰️<span class="cap">Duas vogais juntinhas</span>',
+         eo_uma:'1️⃣<span class="cap">Uma letra sozinha</span>'})},
+      {q:'Em <b>BR, CR, DR, FR, GR, PR, TR</b> e <b>VR</b>, qual é sempre a <b>segunda</b> letra? ✏️',
+       audio:['e_letra_r'], stage:'<div class="wordtiles"><span class="lettile">B</span><span class="lettile hl">?</span><span class="lettile">C</span><span class="lettile hl">?</span><span class="lettile">P</span><span class="lettile hl">?</span></div>', colorOpts:true,
+       options:mkOpts('le_r',['le_r','le_l','le_s','le_m'],{le_r:'R',le_l:'L',le_s:'S',le_m:'M'},k=>({big:true}))},
+      {q:'Em <b>BL, CL, FL, GL</b> e <b>PL</b>, qual é sempre a <b>segunda</b> letra? ✏️',
+       audio:['e_letra_l'], stage:'<div class="wordtiles"><span class="lettile">B</span><span class="lettile hl">?</span><span class="lettile">F</span><span class="lettile hl">?</span><span class="lettile">G</span><span class="lettile hl">?</span></div>', colorOpts:true,
+       options:mkOpts('le_l',['le_l','le_r','le_s','le_m'],{le_l:'L',le_r:'R',le_s:'S',le_m:'M'},k=>({big:true}))},
+    ];
+    return mix(rounds, shuffle(conc).slice(0,2));
+  },
+
+  /* 2. PÕE O R! */
+  poer(){ return buildAdd(ADD_R,'r_q','r_q2','r_modelo','r_exp','R'); },
+  /* 3. PÕE O L! */
+  poel(){ return buildAdd(ADD_L,'l_q','l_q2','l_modelo','l_exp','L'); },
+
+  /* 4. COMPLETE A PALAVRA — qual encontro consonantal falta */
+  completa(){
+    const pool=WORDS.filter(w=>!w.amb && w.art);
+    return shuffle(pool).slice(0,8).map(it=>({
+      q:'Olhe o desenho e <b>complete</b> a palavra. Qual pedacinho está faltando? ✍️',
+      audio:['c_q',it.ak],
+      stage:illo(it.art,110)+tilesGap(it.pre,it.rest),
+      options:encOpts(it.enc).map(o=>Object.assign(o,{expAud:o.correct?'c_exp':null}))
+    }));
+  },
+
+  /* 5. FRASE CERTA — par mínimo dentro de uma frase dos contos */
+  frase(){
+    return shuffle(FRASES).slice(0,7).map(it=>({
+      q:'Complete a frase com a palavra certa: 📝',
+      audio:['f_q',it.aud],
+      stage:(it.art?illo(it.art,110):emo(it.emo||'❓',66))+
+            '<div class="frase">'+it.txt+' <span class="lac">?</span></div>',
+      options:shuffle([
+        {label:it.ok,   aud:it.okAud,   correct:true},
+        {label:it.bad,  aud:it.badAud,  correct:false},
+        {label:it.bad2, aud:it.bad2Aud, correct:false}
+      ])
+    }));
+  },
+
+  /* 6. CONTA SÍLABAS — a palavra NÃO aparece separada (a criança separa) */
+  silabas(){
+    const pool=WORDS.filter(w=>w.art).concat(NOENC.filter(w=>w.art));
+    return shuffle(pool).slice(0,8).map(it=>{
+      const set=new Set([it.syl]);
+      while(set.size<4) set.add(rint(1,5));
+      return {
+        q:'Bata palmas e conte os pedacinhos de <b>'+it.w+'</b> 👏',
+        audio:['q_silaba',it.ak],
+        stage:illo(it.art,110)+tiles(it.w)+'<div style="font-size:32px;margin-top:6px">👏</div>',
+        options:shuffle([...set]).map(v=>({
+          label:'<span style="font-size:40px">'+v+'</span>', aud:'p'+v, correct:v===it.syl
+        }))
+      };
+    });
+  },
+
+  /* 7. CAPA DE LIVRO — título, autor, ilustrador, editora */
+  capa(){
+    const campos=[
+      {q:'Olhe a capa. Qual é o <b>TÍTULO</b> deste livro? (é o nome da história, em letras bem grandes) 📕',
+       a:'cp_titulo', c:'tit', ca:'titA'},
+      {q:'Olhe a capa. Quem <b>escreveu</b> este livro (o autor ou a autora)? ✍️',
+       a:'cp_autor', c:'aut', ca:'autA'},
+      {q:'Olhe a capa. Quem <b>ILUSTROU</b> este livro? (é quem fez os desenhos) 🎨',
+       a:'cp_ilustrador', c:'ilu', ca:'iluA'},
+      {q:'Olhe a capa. Qual é a <b>EDITORA</b> deste livro? (é a empresa que produziu o livro) 🏭',
+       a:'cp_editora', c:'edi', ca:'ediA'},
+    ];
+    const rounds=[];
+    const ordemCampos=shuffle(campos);
+    shuffle(CAPAS).slice(0,4).forEach((cp,i)=>{
+      const campo=ordemCampos[i%ordemCampos.length];
+      rounds.push({ q:campo.q, audio:[campo.a], stage:capaHtml(cp), colorOpts:true,
+                    options:capaOpts(cp,campo.c,campo.ca) });
+    });
+    const conc=[
+      {q:'Para que serve a <b>capa</b> de um livro? 📗', audio:['cp_oque'], stage:illo('livro',110), colorOpts:true,
+       options:mkOpts('cpo_mostrar',['cpo_mostrar','cpo_sentar','cpo_comer'],{
+         cpo_mostrar:'👀<span class="cap">Mostrar do que o livro fala e chamar a atenção</span>',
+         cpo_sentar:'🪑<span class="cap">Servir de banquinho</span>',
+         cpo_comer:'🍎<span class="cap">Guardar comida</span>'})},
+      {q:'Nas capas, qual informação aparece com <b>letras maiores</b>, bem em destaque? 🔠',
+       audio:['cp_maior'], stage:capaHtml(CAPAS[0]), colorOpts:true,
+       options:mkOpts('pa_titulo',['pa_titulo','pa_autor','pa_editora'],{
+         pa_titulo:'📕<span class="cap">O título</span>', pa_autor:'✍️<span class="cap">O autor</span>',
+         pa_editora:'🏭<span class="cap">A editora</span>'})},
+      {q:'Como se chama a pessoa que <b>escreveu</b> a história? ✍️', audio:['cp_quem_escreve'],
+       stage:emo('✍️📖',56), colorOpts:true,
+       options:mkOpts('pa_autor',['pa_autor','pa_ilustrador','pa_leitor'],{
+         pa_autor:'✍️<span class="cap">O autor</span>', pa_ilustrador:'🎨<span class="cap">O ilustrador</span>',
+         pa_leitor:'👦<span class="cap">O leitor</span>'})},
+      {q:'Como se chama a pessoa que fez os <b>desenhos</b> do livro? 🎨', audio:['cp_quem_desenha'],
+       stage:emo('🎨🖍️',56), colorOpts:true,
+       options:mkOpts('pa_ilustrador',['pa_ilustrador','pa_autor','pa_editora'],{
+         pa_ilustrador:'🎨<span class="cap">O ilustrador</span>', pa_autor:'✍️<span class="cap">O autor</span>',
+         pa_editora:'🏭<span class="cap">A editora</span>'})},
+      {q:'Antes de abrir o livro, o que a capa ajuda a gente a descobrir? 🔍', audio:['cp_antes'],
+       stage:illo('livro',110), colorOpts:true,
+       options:mkOpts('cpa_historia',['cpa_historia','cpa_final','cpa_nada'],{
+         cpa_historia:'💡<span class="cap">Uma ideia da história que vai ser contada</span>',
+         cpa_final:'🔚<span class="cap">O final inteirinho</span>',
+         cpa_nada:'🚫<span class="cap">Nada</span>'})},
+    ];
+    return mix(rounds, shuffle(conc).slice(0,3));
+  },
+
+  /* 8. OS CONTOS — compreensão de Cachinhos, Porquinhos e Soldadinho */
+  contos(){
+    const CACHINHOS=[
+      {q:'Na história de <b>Cachinhos Dourados</b>, onde ficava a casa dos três ursos? 🏡',
+       audio:['ca_local'], stage:emo('🐻🏡',56), colorOpts:true,
+       options:[{label:illo('cabana',100),aud:'lo_cabana',correct:true},
+                {label:illo('castelo',100),aud:'lo_castelo',correct:false},
+                {label:illo('casamoderna',100),aud:'lo_cidade',correct:false}]},
+      {q:'Em que <b>momento do dia</b> acontece a história de Cachinhos Dourados? ⏰',
+       audio:['ca_momento'], stage:illo('cabana',110), colorOpts:true,
+       options:mkOpts('mo_manha',['mo_manha','mo_tarde','mo_noite'],{
+         mo_manha:'🌅<span class="cap">De manhã</span>', mo_tarde:'🌇<span class="cap">À tarde</span>',
+         mo_noite:'🌙<span class="cap">À noite</span>'})},
+      {q:'De quem era o <b>mingau</b> que Cachinhos Dourados comeu por completo? 🥣',
+       audio:['ca_mingau'], stage:illo('mingau',110), colorOpts:true,
+       options:mkOpts('ur_filho',['ur_papai','ur_mamae','ur_filho'],URSO_LBL)},
+      {q:'De quem era a <b>cadeira larga e desconfortável</b>? 🪑',
+       audio:['ca_cadeira'], stage:illo('cadeira',110), colorOpts:true,
+       options:mkOpts('ur_mamae',['ur_papai','ur_mamae','ur_filho'],URSO_LBL)},
+      {q:'De quem era a <b>cama enorme e muito dura</b>? 🛏️',
+       audio:['ca_cama'], stage:illo('cama',110), colorOpts:true,
+       options:mkOpts('ur_papai',['ur_papai','ur_mamae','ur_filho'],URSO_LBL)},
+      {q:'Quem são os <b>personagens</b> da história de Cachinhos Dourados? 👧',
+       audio:['ca_quem'], stage:illo('ursos',110), colorOpts:true,
+       options:mkOpts('pe_ursos',['pe_ursos','pe_lobo','pe_soldado'],{
+         pe_ursos:'👧🐻<span class="cap">Uma menina e três ursos</span>',
+         pe_lobo:'🐺🐷<span class="cap">Um lobo e três porquinhos</span>',
+         pe_soldado:'🎖️🩰<span class="cap">Um soldadinho e uma bailarina</span>'})},
+    ];
+    const PORQUINHOS=[
+      {q:'De que material era a casa que o lobo <b>NÃO</b> conseguiu derrubar? 🧱',
+       audio:['po_casa'], stage:illo('lobo',110), colorOpts:true,
+       options:[{label:illo('casatijolo',100),aud:'ma_tijolo',correct:true},
+                {label:illo('casapalha',100),aud:'ma_palha',correct:false},
+                {label:illo('casamadeira',100),aud:'ma_madeira',correct:false}]},
+      {q:'Por que as casas dos <b>dois primeiros</b> porquinhos caíram com tanta facilidade? 💨',
+       audio:['po_porque'], stage:illo('casapalha',110), colorOpts:true,
+       options:mkOpts('pq_fracas',['pq_fracas','pq_bonitas','pq_altas'],{
+         pq_fracas:'🌾<span class="cap">Eram de palha e de madeira, bem fracas</span>',
+         pq_bonitas:'✨<span class="cap">Eram muito bonitas</span>',
+         pq_altas:'📏<span class="cap">Eram muito altas</span>'})},
+      {q:'Quem queria derrubar a casa dos porquinhos? 😾',
+       audio:['po_quem'], stage:illo('porquinho',110), colorOpts:true,
+       options:mkOpts('qu_lobo',['qu_lobo','qu_urso','qu_peixe'],{
+         qu_lobo:'🐺<span class="cap">O lobo</span>', qu_urso:'🐻<span class="cap">O urso</span>',
+         qu_peixe:'🐟<span class="cap">O peixe</span>'})},
+      {q:'Quando o lobo derrubou as duas primeiras casas, o que os porquinhos fizeram? 🏃',
+       audio:['po_salvaram'], stage:illo('casatijolo',110), colorOpts:true,
+       options:mkOpts('sa_correram',['sa_correram','sa_dormiram','sa_nadaram'],{
+         sa_correram:'🏃<span class="cap">Correram para a casa de tijolos</span>',
+         sa_dormiram:'😴<span class="cap">Foram dormir</span>',
+         sa_nadaram:'🏊<span class="cap">Foram nadar no rio</span>'})},
+    ];
+    const SOLDADINHO=[
+      {q:'Na loja havia uma caixa de soldadinhos de chumbo. <b>Quantos</b> eram? 🔢',
+       audio:['so_quantos'], stage:illo('soldadinho',110),
+       options:shuffle([{label:'25',big:true,aud:'n25',correct:true},
+                        {label:'10',big:true,aud:'n10',correct:false},
+                        {label:'15',big:true,aud:'n15',correct:false},
+                        {label:'50',big:true,aud:'n50',correct:false}])},
+      {q:'O que <b>diferenciava</b> um dos soldadinhos de todos os outros? 🎖️',
+       audio:['so_diferente'], stage:illo('soldadinho',110), colorOpts:true,
+       options:mkOpts('di_perna',['di_perna','di_chapeu','di_grande'],{
+         di_perna:'🦵<span class="cap">Tinha só uma perna</span>',
+         di_chapeu:'🎩<span class="cap">Não tinha chapéu</span>',
+         di_grande:'📏<span class="cap">Era bem maior</span>'})},
+      {q:'Onde estava o soldadinho no <b>começo</b> da história? 🧸',
+       audio:['so_onde'], stage:illo('soldadinho',110), colorOpts:true,
+       options:mkOpts('on_loja',['on_loja','on_barco','on_casa','on_janela'],{
+         on_loja:'🧸<span class="cap">Na loja de brinquedos</span>',
+         on_barco:'⛵<span class="cap">No barquinho de papel</span>',
+         on_casa:'🏠<span class="cap">Na casa do menino</span>',
+         on_janela:'🪟<span class="cap">No parapeito da janela</span>'})},
+      {q:'Por quem o soldadinho de chumbo era <b>apaixonado</b>? 💛',
+       audio:['so_amava'], stage:illo('bailarina',110), colorOpts:true,
+       options:mkOpts('am_bailarina',['am_bailarina','am_lobo','am_peixe'],{
+         am_bailarina:'🩰<span class="cap">Pela bailarina</span>',
+         am_lobo:'🐺<span class="cap">Pelo lobo</span>', am_peixe:'🐟<span class="cap">Pelo peixe</span>'})},
+      {q:'O soldadinho caiu na água. Quem <b>engoliu</b> o soldadinho? 🌊',
+       audio:['so_engoliu'], stage:illo('barquinho',110), colorOpts:true,
+       options:[{label:illo('peixe',96)+'<span class="cap">O peixe</span>',aud:'qu_peixe',correct:true},
+                {label:illo('lobo',96)+'<span class="cap">O lobo</span>',aud:'qu_lobo',correct:false},
+                {label:illo('ursos',96)+'<span class="cap">O urso</span>',aud:'qu_urso',correct:false}]},
+      {q:'Em que o soldadinho <b>navegou</b> pela água? ⛵',
+       audio:['so_navegou'], stage:illo('peixe',110), colorOpts:true,
+       options:mkOpts('na_barquinho',['na_barquinho','na_navio','na_peixe'],{
+         na_barquinho:'⛵<span class="cap">Num barquinho de papel</span>',
+         na_navio:'🚢<span class="cap">Num navio grande</span>',
+         na_peixe:'🐟<span class="cap">Nas costas de um peixe</span>'})},
+      {q:'No final, os dois caíram no fogo. O que <b>restou</b> do soldadinho? 🔥',
+       audio:['so_restou'], stage:illo('bailarina',110), colorOpts:true,
+       options:mkOpts('re_coracao',['re_coracao','re_perna','re_nada'],{
+         re_coracao:'❤️<span class="cap">Um pequenino coração de chumbo</span>',
+         re_perna:'🦵<span class="cap">A perna dele</span>',
+         re_nada:'💨<span class="cap">Não restou nada</span>'})},
+      {q:'Quais são os <b>dois personagens principais</b> do Soldadinho de Chumbo? 🎖️',
+       audio:['so_quem'], stage:illo('soldadinho',110), colorOpts:true,
+       options:mkOpts('pe_soldado',['pe_soldado','pe_ursos','pe_lobo'],{
+         pe_soldado:'🎖️🩰<span class="cap">O soldadinho e a bailarina</span>',
+         pe_ursos:'👧🐻<span class="cap">Uma menina e três ursos</span>',
+         pe_lobo:'🐺🐷<span class="cap">Um lobo e três porquinhos</span>'})},
+    ];
+    return mix(shuffle(CACHINHOS).slice(0,3), shuffle(PORQUINHOS).slice(0,2), shuffle(SOLDADINHO).slice(0,4));
+  },
+
+  /* 9. ORDEM DA HISTÓRIA — partes do conto + montar a sequência */
+  ordem(){
+    const seq=pick(SEQS);
+    const tit=pick(TITULOS);
+    const rounds=[
+      {mode:'seq', q:'Toque nos acontecimentos de <b>'+seq.nome+'</b> na <b>ordem certa</b>. 🧩',
+       audio:['ct_ordem'], stage:illo(seq.art,110), itens:seq.itens, expAud:'ct_ordem_ok'},
+      {mode:'seq', q:'Estas palavras estão embaralhadas. Toque nelas em ordem e monte o <b>título</b>! 🔀',
+       audio:['or_q'], stage:illo(tit.art,110), itens:tit.itens, expAud:null},
+    ];
+    const conc=[
+      {q:'O que é um <b>CONTO</b>? 📖', audio:['ct_oque'], stage:illo('livro',110), colorOpts:true,
+       options:mkOpts('co_pequena',['co_pequena','co_receita','co_musica'],{
+         co_pequena:'📖<span class="cap">História pequena, com início, meio e fim</span>',
+         co_receita:'🍰<span class="cap">Uma lista de ingredientes</span>',
+         co_musica:'🎵<span class="cap">Uma música para cantar</span>'})},
+      {q:'Os contos têm <b>três partes</b>. Quais são elas? 1️⃣2️⃣3️⃣', audio:['ct_partes'],
+       stage:emo('📖1️⃣2️⃣3️⃣',48), colorOpts:true,
+       options:mkOpts('pt_tres',['pt_tres','pt_letras','pt_capa'],{
+         pt_tres:'✅<span class="cap">Introdução, desenvolvimento e conclusão</span>',
+         pt_letras:'🔤<span class="cap">Vogais, consoantes e sílabas</span>',
+         pt_capa:'📕<span class="cap">Capa, meio e fundo</span>'})},
+      {q:'Como se chama a parte do conto em que aparecem os <b>personagens</b> e o <b>lugar</b>? 🚪',
+       audio:['ct_intro'], stage:emo('🚪📖',56), colorOpts:true,
+       options:mkOpts('na_intro',['na_intro','na_desen','na_conclu'],PARTE_LBL)},
+      {q:'Como se chama a parte do <b>meio</b>, em que a história se desenrola? 🌀',
+       audio:['ct_desen'], stage:emo('🌀📖',56), colorOpts:true,
+       options:mkOpts('na_desen',['na_intro','na_desen','na_conclu'],PARTE_LBL)},
+      {q:'Como se chama a parte <b>final</b>, em que a história termina? 🏁',
+       audio:['ct_conclu'], stage:emo('🏁📖',56), colorOpts:true,
+       options:mkOpts('na_conclu',['na_intro','na_desen','na_conclu'],PARTE_LBL)},
+    ];
+    return mix(rounds, shuffle(conc).slice(0,4));
+  },
+};
+
+/* construtor comum dos jogos "Põe o R" e "Põe o L" */
+function buildAdd(lista, qArt, qSemArt, modeloAud, expAud, letra){
+  return shuffle(lista).slice(0,7).map((it,ix)=>{
+    const primeira = ix===0;
+    const alvo = it.art ? illo(it.art,92) : '<span class="obj" style="font-size:52px">❓</span>';
+    const base = (it.bArt?illo(it.bArt,72):'')+tiles(it.base);
+    return {
+      q:'Acrescente a letra <b>'+letra+'</b> em <b>'+it.base+'</b>. Qual palavra ficou certa? ➕',
+      audio:(primeira?[modeloAud]:[]).concat([it.art?qArt:qSemArt, it.bAud]),
+      stage:'<div class="illorow"><div class="illocol">'+base+'</div>'+
+            '<span class="seta">➡️</span>'+
+            '<div class="illocol">'+alvo+'</div></div>',
+      options:shuffle([
+        {label:it.ok, aud:it.okAud, correct:true, expAud:expAud},
+        ...it.wrong.map(w=>({label:w[0], aud:w[1], correct:false}))
+      ])
+    };
+  });
+}
+
+/* ===== SPLASH -> INÍCIO ===== */
+function enterApp(){
+  initAudio();
+  unlockAudio();
+  document.getElementById('splash').style.display='none';
+  goHome(true);
+  setTimeout(()=>playKeys(['greet']),350);
+}
+document.getElementById('startBtn').addEventListener('click',enterApp);
+document.getElementById('splash').addEventListener('click',e=>{ if(e.target.id!=='startBtn'){ enterApp(); } });
+</script>
+</body>
+</html>

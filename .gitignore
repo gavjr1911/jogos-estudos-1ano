@@ -9,3 +9,6 @@ _apptest.html
 *.JPEG
 *.heic
 *.HEIC
+
+# screenshots de QA
+_shots/
