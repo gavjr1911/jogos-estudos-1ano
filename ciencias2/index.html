@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🌍 Ciências 2 🌍</title>
+<style>
+  :root{
+    --rosa:#ff6b9d; --roxo:#a06cd5; --azul:#4d96ff; --verde:#6bcB77;
+    --amarelo:#ffd93d; --laranja:#ff924c; --vermelho:#ff5e5e; --ceu:#b8e3ff;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0; height:100%;}
+  body{
+    font-family:'Comic Sans MS','Baloo',"Trebuchet MS",sans-serif;
+    background:linear-gradient(160deg,#e8fbe9 0%,#dff3ff 50%,#f3ecff 100%);
+    color:#3a3a55; overflow-x:hidden; user-select:none;
+    min-height:100%; touch-action:manipulation;
+  }
+  #app{max-width:760px; margin:0 auto; padding:14px; min-height:100vh;}
+
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    background:#fff; border-radius:22px; padding:8px 14px; margin-bottom:14px;
+    box-shadow:0 6px 0 rgba(0,0,0,.08);
+  }
+  .topbar .home-btn{
+    background:var(--azul); color:#fff; border:none; border-radius:16px;
+    font-size:22px; padding:8px 14px; font-weight:bold; cursor:pointer; box-shadow:0 4px 0 #2f6fd0;
+  }
+  .topbar .home-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #2f6fd0;}
+  .stars{font-size:24px; font-weight:bold; color:var(--laranja); display:flex; align-items:center; gap:6px;}
+  .stars .num{background:var(--amarelo); border-radius:14px; padding:2px 12px; box-shadow:0 3px 0 #d9a800;}
+
+  .hero{
+    text-align:center; background:#fff; border-radius:30px; padding:22px 18px;
+    box-shadow:0 8px 0 rgba(0,0,0,.08); margin-bottom:18px;
+  }
+  .hero h1{font-size:32px; margin:6px 0; color:var(--verde); line-height:1.2;}
+  .hero p{font-size:18px; margin:4px 0; color:#666;}
+  .mascote{font-size:78px; display:inline-block; animation:flutua 2.5s ease-in-out infinite;}
+  @keyframes flutua{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-14px) rotate(3deg);}}
+
+  .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+  .card{
+    border:none; border-radius:26px; padding:16px 10px; cursor:pointer;
+    color:#fff; font-size:19px; font-weight:bold; text-align:center;
+    box-shadow:0 7px 0 rgba(0,0,0,.18); transition:transform .08s;
+    display:flex; flex-direction:column; align-items:center; gap:6px; line-height:1.15;
+  }
+  .card:active{transform:translateY(4px); box-shadow:0 3px 0 rgba(0,0,0,.18);}
+  .card .ico{font-size:44px;}
+  .c1{background:var(--laranja);} .c2{background:var(--azul);} .c3{background:var(--roxo);}
+  .c4{background:var(--rosa);} .c5{background:var(--verde);} .c6{background:#19c3b1;}
+  .c7{background:#b07d4b;} .c8{background:#3aa7e8;} .c9{background:#7cab3a;}
+
+  .game{
+    background:#fff; border-radius:30px; padding:18px; box-shadow:0 8px 0 rgba(0,0,0,.08);
+    text-align:center;
+  }
+  .game-title{font-size:24px; color:var(--verde); margin:0 0 4px;}
+  .progress{font-size:16px; color:#999; margin-bottom:10px;}
+  .question{
+    font-size:22px; font-weight:bold; color:#3a3a55; margin:6px 0 14px; line-height:1.35;
+    display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;
+  }
+  .speak-btn{
+    background:var(--amarelo); border:none; border-radius:50%; width:54px; height:54px;
+    font-size:28px; cursor:pointer; box-shadow:0 4px 0 #d9a800; flex:0 0 auto;
+  }
+  .speak-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #d9a800;}
+  .speak-btn.playing{animation:pulse .7s infinite;}
+  @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
+
+  .stage{
+    min-height:120px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+    gap:10px; margin:10px auto 18px; padding:16px;
+    background:linear-gradient(160deg,#f3fff5,#eef7ff); border-radius:22px; border:4px dashed #bfe6c6;
+    flex-direction:column;
+  }
+  .obj{font-size:74px; animation:pop .35s ease; line-height:1;}
+  @keyframes pop{0%{transform:scale(0);}70%{transform:scale(1.25);}100%{transform:scale(1);}}
+  .cardtxt{font-size:19px; font-weight:bold; color:#5a7a5f; margin-top:4px; line-height:1.3; max-width:430px;}
+
+  /* fichas de sequência (montar a ordem) */
+  .seqslots{display:flex; flex-direction:column; gap:8px; align-items:stretch; max-width:520px; margin:0 auto;}
+  .seqslot{
+    min-height:52px; border:4px dashed #bfe0c6; border-radius:16px; background:#f7fff9;
+    display:flex; align-items:center; gap:10px; padding:8px 12px; font-size:16px; font-weight:bold; color:#8aa593;
+  }
+  .seqslot .nn{background:var(--verde); color:#fff; border-radius:50%; width:32px; height:32px; flex:0 0 auto;
+               display:flex; align-items:center; justify-content:center; font-size:18px;}
+  .seqslot.filled{border-style:solid; border-color:var(--verde); background:#eefaf0; color:#2c5c38;}
+  .fichas{display:flex; flex-direction:column; gap:10px; margin-top:14px;}
+  .ficha{
+    border:none; border-radius:18px; padding:13px 14px; font-size:17px; font-weight:bold; text-align:left;
+    background:var(--azul); color:#fff; box-shadow:0 5px 0 #2f6fd0; cursor:pointer; line-height:1.25;
+  }
+  .ficha:active{transform:translateY(3px); box-shadow:0 2px 0 #2f6fd0;}
+  .ficha.used{background:#cfcfe0; box-shadow:0 5px 0 #a0a0c0; opacity:.55; cursor:default;}
+  .ficha.shake{animation:shake .4s;}
+  @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-8px);}75%{transform:translateX(8px);}}
+
+  .options{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));}
+  .opt{
+    border:none; border-radius:22px; padding:16px 10px; font-size:23px; font-weight:bold;
+    cursor:pointer; background:var(--azul); color:#fff; box-shadow:0 6px 0 #2f6fd0;
+    min-height:80px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    overflow-wrap:break-word; line-height:1.15;
+  }
+  .opt .cap{font-size:17px; font-weight:bold;}
+  .opt:active{transform:translateY(3px); box-shadow:0 3px 0 #2f6fd0;}
+  .opt.big{font-size:40px;}
+  .opt.ok{background:var(--verde)!important; box-shadow:0 6px 0 #3f9c4f!important; animation:tada .5s;}
+  .opt.no{background:#cfcfe0!important; box-shadow:0 6px 0 #a0a0c0!important; opacity:.7;}
+  @keyframes tada{0%{transform:scale(1);}30%{transform:scale(1.18) rotate(-4deg);}60%{transform:scale(1.1) rotate(4deg);}100%{transform:scale(1);}}
+
+  /* nenhuma cor de opção pode ser VERDE: verde é o sinal de "acertou" */
+  .opt-colors .opt{font-size:19px;}
+  .opt-colors .opt:nth-child(1){background:var(--rosa); box-shadow:0 6px 0 #d44d7c;}
+  .opt-colors .opt:nth-child(2){background:var(--azul); box-shadow:0 6px 0 #2f6fd0;}
+  .opt-colors .opt:nth-child(3){background:var(--laranja); box-shadow:0 6px 0 #d96d2e;}
+  .opt-colors .opt:nth-child(4){background:var(--roxo); box-shadow:0 6px 0 #7a4db0;}
+
+  .feedback{font-size:25px; font-weight:bold; min-height:40px; margin-top:12px;}
+  .feedback.good{color:var(--verde);} .feedback.bad{color:var(--laranja);}
+
+  .next-btn{
+    margin-top:14px; background:var(--verde); color:#fff; border:none; border-radius:22px;
+    font-size:24px; font-weight:bold; padding:14px 34px; cursor:pointer; box-shadow:0 6px 0 #3f9c4f;
+  }
+  .next-btn:active{transform:translateY(3px); box-shadow:0 3px 0 #3f9c4f;}
+
+  #splash{
+    position:fixed; inset:0; background:linear-gradient(160deg,#4fb477,#3aa7e8);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    color:#fff; text-align:center; z-index:50; cursor:pointer; padding:20px;
+  }
+  #splash h1{font-size:34px; margin:10px;}
+  #splash .big{font-size:100px; animation:flutua 2.5s infinite;}
+  #splash .play{
+    margin-top:24px; background:var(--amarelo); color:#5a4500; border:none; border-radius:30px;
+    font-size:30px; font-weight:bold; padding:18px 44px; box-shadow:0 8px 0 #d9a800; cursor:pointer;
+  }
+
+  #confetti{position:fixed; inset:0; pointer-events:none; z-index:40;}
+  .win{text-align:center; padding:20px;}
+  .win .trophy{font-size:90px; animation:tada 1s;}
+
+  @media(max-width:480px){
+    .hero h1{font-size:26px;} .question{font-size:19px;} .card{font-size:16px;}
+    .obj{font-size:60px;} .cardtxt{font-size:17px;}
+    .opt{font-size:20px;} .opt .cap{font-size:15px;} .ficha{font-size:15px;}
+  }
+</style>
+</head>
+<body>
+
+<div id="splash">
+  <div class="big">🌍</div>
+  <h1>Ciências 2!</h1>
+  <p style="font-size:20px;max-width:380px;">Vamos descobrir o que dá energia ao corpo e o que faz a vida acontecer no ambiente! 🌱<br>Toque no botão para começar.</p>
+  <button class="play" id="startBtn">▶ COMEÇAR</button>
+</div>
+
+<canvas id="confetti"></canvas>
+<div id="app"></div>
+
+<script>
+/* ============================================================
+   CIÊNCIAS 2 — 1º ano (Bernoulli, Capítulos 4, 5 e 6)
+   Módulo 8 do projeto. Mesma estrutura dos outros apps:
+   - narração por arquivos pré-gravados (pasta /audio) -> funciona
+     em qualquer aparelho, online ou offline;
+   - estrelas, confete, sons de efeito; tudo jogável sozinho.
+   Conteúdos: EQUILÍBRIO PARA VIVER BEM (energia dos alimentos,
+   corpo em movimento, sono e rotina da noite, corpo e mente),
+   AMBIENTE (componentes vivos e não vivos, diferenças entre os
+   seres vivos, adaptações, materiais naturais e artificiais) e
+   O QUE FAZ A VIDA ACONTECER (água, solo, luz do sol e os
+   recursos naturais).
+   ============================================================ */
+
+const App = document.getElementById('app');
+let stars = parseInt(localStorage.getItem('vitor_ci2_stars')||'0',10);
+
+/* ============================================================
+   VOCABULÁRIO DE VOZ (chave -> texto falado).
+   Fonte da verdade para o gerar-audios.py (gera audio/<chave>.mp3).
+   ============================================================ */
+const VOICE = {
+  /* navegação e feedback */
+  greet:"Olá! Bem-vindo aos jogos de Ciências! Escolha uma brincadeira para começar.",
+  test:"Olá! Você está me ouvindo? Vamos descobrir como o corpo e a natureza funcionam!",
+  win:"Parabéns! Você conseguiu! Que orgulho de você!",
+  choose:"As respostas são:",
+  ok1:"Muito bem!", ok2:"Isso aí!", ok3:"Você acertou!",
+  ok4:"Boa demais!", ok5:"Mandou bem!", ok6:"Perfeito!",
+  no1:"Quase! Tenta outra.", no2:"Hmm, tenta de novo.", no3:"Não foi essa, tenta outra.",
+
+  /* ============ 1. ENERGIA DO CORPO ============ */
+  en_q_onde:"De onde o nosso corpo tira a energia para brincar e aprender?",
+  en_alimentos:"Dos alimentos que comemos",
+  en_vento:"Do vento que venta lá fora",
+  en_tv:"Da televisão quando está ligada",
+  en_q_celulas:"Onde a energia fica guardada dentro do nosso corpo?",
+  en_celulas:"Nas células",
+  en_pedras:"Nas pedrinhas",
+  en_cabelos:"Nos cabelos",
+  en_q_coracao:"A energia ajuda o coração a fazer o quê?",
+  en_bater:"Bater",
+  en_respirar:"Respirar",
+  en_pensar:"Pensar",
+  en_q_pulmao:"A energia ajuda o pulmão a fazer o quê?",
+  en_q_pensar:"Qual parte do corpo a energia ajuda a pensar?",
+  en_q_mexer:"Qual parte do corpo a energia ajuda a se mexer?",
+  og_cerebro:"O cérebro",
+  og_coracao:"O coração",
+  og_musculos:"Os músculos",
+  og_pulmao:"O pulmão",
+  en_q_disposicao:"O que deixa a gente acordar com energia para brincar e aprender?",
+  en_comerdormir:"Comer bem e dormir bem",
+  en_ficarparado:"Ficar parado o dia inteiro",
+  en_naocomer:"Não comer nada",
+  en_q_pouca:"Às vezes falta disposição para brincar. Quando isso acontece?",
+  en_cansados:"Quando estamos cansados, tristes ou preocupados",
+  en_alegres:"Quando estamos bem alegres e descansados",
+  en_correndo:"Quando estamos correndo e pulando no parque",
+  en_q_combustivel:"A energia é como um combustível. De onde o corpo retira esse combustível?",
+  en_comida:"Da comida",
+  en_agua_torneira:"Da torneira",
+  en_pilha:"De uma pilha",
+
+  /* ============ 2. CORPO EM MOVIMENTO ============ */
+  mv_q_coracao:"Quando você corre bastante, o que acontece com o seu coração?",
+  mv_acelera:"Bate mais rápido",
+  mv_para:"Para de bater",
+  mv_devagar:"Bate bem devagar",
+  mv_q_respira:"Quando você corre bastante, o que acontece com a sua respiração?",
+  mv_rapida:"Fica mais rápida",
+  mv_lenta:"Fica bem lenta",
+  mv_some:"A gente para de respirar",
+  mv_q_normal:"O coração acelera depois de correr. O que isso quer dizer?",
+  mv_saudavel:"É normal! O corpo está saudável",
+  mv_doente:"Quer dizer que você ficou doente",
+  mv_parar:"Que você nunca mais pode correr",
+  mv_q_musculos:"Quando você pula e dança, qual parte do corpo se mexe?",
+  mv_unhas:"As unhas",
+  mv_q_mente:"Depois de correr e brincar, o que acontece também com a nossa mente?",
+  mv_mente:"Ficamos mais animados e com vontade de aprender",
+  mv_menos:"Ficamos mais tristes e sem vontade",
+  mv_nada:"Não muda nada na nossa cabeça",
+  mv_q_equilibrio:"Além de se mexer bastante, do que mais o corpo precisa?",
+  mv_descanso:"De momentos de calma e descanso",
+  mv_sempre:"De correr sem parar o dia inteiro",
+  mv_nunca:"De nunca mais se mexer",
+  mv_q_classifica:"Isto é mexer o corpo ou é ficar parado?",
+  mv_mexer:"É mexer o corpo",
+  mv_parado:"É ficar parado",
+  ac_correr:"Correr no parque",
+  ac_pular:"Pular corda",
+  ac_nadar:"Nadar na piscina",
+  ac_bicicleta:"andar de bicicleta",
+  ac_dancar:"dançar",
+  ac_bola:"jogar bola",
+  ac_tv:"assistir televisão deitado",
+  ac_ler:"ler um livro sentado",
+  ac_dormir:"dormir",
+  ac_video:"jogar videogame sentado",
+
+  /* ============ 3. HORA DE DORMIR ============ */
+  so_q_serve:"Para que serve o sono?",
+  so_energia:"Para recuperar a energia do dia",
+  so_fome:"Para sentir mais fome durante a noite",
+  so_cansaco:"Para o corpo gastar mais energia",
+  so_q_enquanto:"Enquanto a gente dorme, o que acontece com o corpo?",
+  so_cresce:"Ele cresce e guarda a memória",
+  so_encolhe:"Ele para de crescer e fica menor",
+  so_para:"Ele fica igualzinho, sem mudar nada",
+  so_q_rotina:"Toque na rotina da noite na ordem certa, do começo até a hora de dormir.",
+  so_jantar:"Jantar cedo",
+  so_escovar:"Escovar os dentes",
+  so_historia:"Ouvir uma história",
+  so_dormir:"Dormir",
+  so_rotina_ok:"Isso mesmo! Jantar cedo, escovar os dentes, ouvir uma história e dormir tranquilo.",
+  so_q_acalma:"O que ajuda o corpo a se acalmar na hora de dormir?",
+  so_historia_op:"Ouvir uma história ou música suave",
+  so_correr:"Correr e pular bastante pela casa",
+  so_telas:"Ficar no celular vendo vídeos",
+  so_q_atrapalha:"O que atrapalha o sono chegar?",
+  so_telas2:"As telas e as brincadeiras agitadas",
+  so_escuro:"Um quarto tranquilo e bem escurinho",
+  so_banho:"Um banho morno antes de deitar",
+  so_q_jantar:"Por que é bom jantar cedo?",
+  so_nutrientes:"Porque o corpo aproveita os nutrientes antes de dormir",
+  so_sonho:"Para a gente sonhar com comida gostosa a noite toda",
+  so_tarde:"Para a gente conseguir dormir bem mais tarde",
+  so_q_dentes:"O que a gente precisa fazer todo dia antes de dormir?",
+  so_escovar_op:"Escovar os dentes",
+  so_doce:"Comer um doce",
+  so_tv_op:"Assistir televisão até tarde",
+  so_q_lugar:"Como deve ser o lugar onde a gente dorme?",
+  so_tranquilo:"Tranquilo e limpo",
+  so_barulho:"Cheio de barulho",
+  so_bagunca:"Bem bagunçado",
+  so_q_luz:"Quando a noite vai chegando, o que o corpo começa a fazer?",
+  so_prepara:"Começa a se preparar para descansar",
+  so_acorda:"Começa a acordar bem animado para brincar",
+  so_correr2:"Começa a querer correr e pular mais",
+
+  /* ============ 4. CORPO E MENTE ============ */
+  me_q_mente:"A mente é como um guia. O que ela ajuda a gente a fazer?",
+  me_guia:"Perceber o que acontece e escolher o que fazer",
+  me_correr:"Correr muito mais rápido do que antes",
+  me_comer:"Mastigar e engolir a comida do almoço",
+  me_q_lugar:"O que pode mudar o jeito que a gente se sente num lugar?",
+  me_ambiente:"O barulho, a luz, o calor e as pessoas por perto",
+  me_cor_cabelo:"A cor do cabelo de quem está ali",
+  me_nada2:"Nada muda o jeito que a gente se sente",
+  me_q_triste:"Quando você está triste, qual é uma boa atitude?",
+  me_falar:"Falar sobre o que está sentindo",
+  me_guardar:"Guardar tudo e não contar para ninguém",
+  me_gritar:"Gritar com alguém",
+  me_q_bemestar:"Qual destas atitudes traz bem-estar?",
+  me_divertir:"Se divertir com as pessoas queridas",
+  me_sozinho_bravo:"Ficar bravo sozinho no quarto",
+  me_dormir_pouco:"Dormir bem pouquinho toda noite",
+  me_q_aprender:"Buscar conhecimentos novos e aprender coisas faz o quê?",
+  me_fazbem:"Faz bem e deixa a gente mais animado",
+  me_fazmal:"Faz mal e deixa a gente cansado",
+  me_tantofaz:"Não faz nenhuma diferença na vida",
+  me_q_precisa:"Do que o corpo e a mente precisam para funcionar bem?",
+  me_calma:"De calma, descanso e cuidado",
+  me_pressa:"De pressa e correria o tempo todo",
+  me_barulho:"De muito barulho o dia inteiro",
+
+  /* ============ 5. VIVO OU NÃO VIVO? ============ */
+  vv_q:"Isto é um ser vivo ou não é um ser vivo?",
+  vv_vivo:"É um ser vivo",
+  vv_naovivo:"Não é um ser vivo",
+  sv_cachorro:"um cachorro",
+  sv_arvore:"uma árvore",
+  sv_borboleta:"uma borboleta",
+  sv_sagui:"um sagui",
+  sv_picapau:"um pica-pau",
+  sv_cogumelo:"um cogumelo",
+  sv_crianca:"uma criança",
+  sv_flor:"uma flor",
+  sv_peixe:"um peixe",
+  sv_minhoca:"uma minhoca",
+  nv_pedra:"uma pedra",
+  nv_agua:"a água",
+  nv_sol:"a luz do sol",
+  nv_ar:"o ar",
+  nv_casa:"uma casa",
+  nv_carro:"um carro",
+  nv_brinquedo:"um brinquedo",
+  nv_roupa:"uma roupa",
+  nv_predio:"um prédio",
+  nv_poste:"um poste",
+  vv_q_oque:"O que todo ser vivo faz?",
+  vv_nasce:"Nasce, cresce, pode ter filhotes e morre",
+  vv_nunca:"Fica do mesmo tamanho a vida inteira",
+  vv_fabrica:"É fabricado dentro de uma fábrica grande",
+  vv_q_natural:"Qual destes é um componente da natureza que NÃO tem vida?",
+  vv_q_construido:"Qual destes foi construído pelos seres humanos?",
+  vv_q_reproduzir:"Reproduzir quer dizer o quê?",
+  vv_rep_filhotes:"Produzir novos seres, como os filhotes",
+  vv_rep_crescer:"Ficar mais alto e mais forte",
+  vv_rep_comer:"Comer bastante todos os dias",
+  vv_q_outros:"Além dos animais e das plantas, o que mais é ser vivo?",
+  vv_fungos:"As algas, os fungos e as bactérias",
+  vv_pedras:"As pedras e a areia da praia",
+  vv_carros:"Os carros e os prédios da cidade",
+  vv_q_ambiente:"O que é o ambiente?",
+  vv_amb_tudo:"Tudo o que há no lugar, com vida e sem vida",
+  vv_amb_so_animais:"Só os animais e as plantas que vivem ali",
+  vv_amb_so_casa:"Só as casas e os objetos construídos ali",
+  vv_q_naovivos:"A luz do sol, o ar, a água e o solo são componentes de que tipo?",
+  vv_nat_naovivo:"São componentes naturais sem vida",
+  vv_nat_vivo:"São todos seres vivos",
+  vv_nat_feito:"São coisas construídas pelas pessoas",
+
+  /* ============ 6. CADA UM É DIFERENTE ============ */
+  df_q_maior:"Qual é o maior mamífero que existe no mundo?",
+  df_baleia:"A baleia-azul",
+  df_sapo:"O sapinho",
+  df_q_sapo:"Um dos menores sapos do mundo é brasileiro. Ele é do tamanho de quê?",
+  df_dedo:"Ele cabe na ponta do dedo",
+  df_carro:"Ele é do tamanho de um carro",
+  df_cachorro:"Ele é do tamanho de um cachorro",
+  df_q_come:"O que este animal come?",
+  al_plantas:"Come plantas",
+  al_carne:"Come outros animais",
+  al_vaca:"a vaca",
+  al_ovelha:"a ovelha",
+  al_jacare:"o jacaré",
+  df_q_sagui:"O sagui é um mamífero. Do que ele se alimenta?",
+  df_sagui_come:"De insetos e de frutas",
+  df_sagui_nectar:"Só do néctar das flores",
+  df_sagui_pedra:"De pedrinhas",
+  df_q_borboleta:"A borboleta é um inseto. Do que ela se alimenta?",
+  df_nectar:"Do néctar das flores",
+  df_larvas:"De larvas que ficam dentro das árvores",
+  df_capim:"De capim",
+  df_q_picapau:"O pica-pau é uma ave. De onde ele tira o alimento dele?",
+  df_arvore_dentro:"De dentro das árvores",
+  df_mar:"Do fundo do mar",
+  df_ceu:"De cima das nuvens",
+  df_q_urso:"Por que o urso-polar tem a pelagem branca?",
+  df_camufla_neve:"Para se camuflar na neve",
+  df_bonito:"Só para ficar bonito",
+  df_frio_branco:"Porque o frio pinta os pelos dele",
+  df_q_gordura:"O que protege o urso-polar do frio muito forte?",
+  df_gordura:"Uma camada grossa de gordura",
+  df_casaco:"Um casaco de lã bem grosso",
+  df_fogo:"Uma fogueira acesa perto dele",
+  df_q_bichopau:"O bicho-pau parece com o quê?",
+  df_graveto:"Parece um graveto",
+  df_pedra_bp:"Parece uma pedra",
+  df_flor_bp:"Parece uma flor",
+  df_q_camuflagem:"Para que serve a camuflagem?",
+  df_esconder:"Para o animal se esconder dos predadores",
+  df_correr_cam:"Para o animal correr bem mais rápido",
+  df_voar:"Para o animal conseguir voar bem alto",
+  df_q_cogumelo:"Todo cogumelo pode ser comido?",
+  df_toxicos:"Não! Alguns são tóxicos",
+  df_todos:"Sim, todos podem ser comidos",
+  df_nenhum:"Nenhum cogumelo pode ser comido",
+  df_q_oliveira:"De qual árvore vem a azeitona?",
+  df_oliveira:"Da oliveira",
+  df_bananeira:"Da bananeira",
+  df_cogumelo_op:"Do cogumelo",
+  df_q_diferencas:"Em que os seres vivos podem ser diferentes uns dos outros?",
+  df_dif_ok:"No tamanho, na cor, no tempo de vida e no que comem",
+  df_dif_x:"Todos os seres vivos são exatamente iguais",
+  df_dif_y:"Só no nome que a gente dá para eles",
+
+  /* ============ 7. NATURAL OU ARTIFICIAL? ============ */
+  ma_q_classifica:"Este material é natural ou artificial?",
+  na_natural:"É material natural",
+  na_artificial:"É material artificial",
+  ma_madeira:"a madeira",
+  ma_areia:"a areia",
+  ma_algodao:"o algodão",
+  ma_ferro:"o ferro",
+  ma_rocha:"a rocha",
+  ma_papel:"o papel",
+  ma_vidro:"o vidro",
+  ma_tecido:"o tecido",
+  ma_aco:"o aço",
+  ma_plastico:"o plástico",
+  ma_q_papel:"O papel é fabricado a partir de qual material?",
+  ma_q_vidro:"O vidro é fabricado com qual material aquecido?",
+  ma_q_tecido:"O tecido das roupas é feito com qual fibra natural?",
+  ma_q_aco:"O aço é fabricado a partir de qual material?",
+  ma_q_ferro:"De onde é extraído o ferro?",
+  ma_q_oque_nat:"O que é um material natural?",
+  ma_def_nat:"É usado do jeito que vem da natureza",
+  ma_def_art2:"Foi fabricado pelas pessoas numa fábrica",
+  ma_def_x:"É colorido e brilha bastante na luz",
+  ma_q_oque_art:"O que é um material artificial?",
+  ma_def_art:"Foi mudado ou fabricado pelas pessoas",
+  ma_def_nat2:"Já vem prontinho lá da natureza",
+  ma_def_y:"É sempre molhado e escorregadio",
+  ma_q_ordem:"Toque na ordem certa e mostre como a madeira vira papel.",
+  tr_arvore:"A árvore cresce na floresta",
+  tr_madeira:"A madeira é retirada do tronco",
+  tr_fabrica:"A fábrica transforma a madeira",
+  tr_papel:"O papel fica pronto",
+  tr_ok:"Isso mesmo! O papel é um material artificial feito a partir da madeira.",
+
+  /* ============ 8. ÁGUA, SOLO E SOL ============ */
+  ag_q_tres:"Quais são os três elementos que existem em todos os lugares e mantêm a vida?",
+  ag_tres:"A água, o solo e a luz do sol",
+  ag_tres_x:"O chocolate, a bala e o pirulito",
+  ag_tres_y:"O carro, a casa e o celular",
+  ag_q_onde:"Em que lugares a água pode estar?",
+  ag_onde_ok:"Nos rios, na chuva, no céu e embaixo da terra",
+  ag_onde_x:"Só dentro dos rios e de mais nenhum lugar",
+  ag_onde_y:"Só dentro das nuvens lá no alto do céu",
+  ag_q_corpo:"Quanta água tem no corpo dos seres vivos?",
+  ag_corpo_sim:"Mais da metade do corpo",
+  ag_corpo_nao:"Nenhuma gotinha de água",
+  ag_corpo_pouca:"Só uma gotinha bem pequena",
+  ag_q_planta:"Para que a planta usa a água e a luz do sol?",
+  ag_planta_ok:"Para crescer e fabricar o próprio alimento",
+  ag_planta_x:"Para pintar as folhas de verde",
+  ag_planta_y:"Para fazer música com o vento",
+  ag_q_raiz:"Onde as plantas fixam as raízes e pegam os nutrientes?",
+  ag_solo_op:"No solo",
+  ag_ar_op:"No ar",
+  ag_fogo:"No fogo",
+  ag_q_minhoca:"Qual animal cava túneis no solo e tira dele o alimento?",
+  ag_q_dia:"Por que fica dia em um lugar da Terra?",
+  ag_dia_ok:"Porque a luz do sol chega naquele lugar",
+  ag_dia_x:"Porque alguém acende uma lâmpada",
+  ag_dia_y:"Porque a lua vai embora do céu",
+  ag_q_noite:"E por que fica noite em um lugar da Terra?",
+  ag_noite_ok:"Porque a luz do sol não chega naquele lugar",
+  ag_noite_x:"Porque todo mundo do lugar foi dormir",
+  ag_noite_y:"Porque o sol se apaga durante a noite",
+  ag_q_estacoes:"A luz do sol aquece o planeta e define o quê?",
+  ag_estacoes:"As estações do ano",
+  ag_estacoes_x:"Os aniversários",
+  ag_estacoes_y:"Os números",
+  ag_q_tartaruga:"Para que as tartarugas precisam da luz do sol?",
+  ag_tarta_ok:"Para se aquecer e chocar os ovos",
+  ag_tarta_x:"Para ficar com o casco colorido",
+  ag_tarta_y:"Para aprender a nadar no mar",
+  ag_q_placas:"O que as placas solares fazem com a luz do sol?",
+  ag_placa_ok:"Transformam a luz do sol em energia elétrica",
+  ag_placa_x:"Transformam a luz do sol em água da chuva",
+  ag_placa_y:"Transformam a luz do sol em comida quentinha",
+  ag_q_solo_onde:"Em que lugares existe solo?",
+  ag_solo_todo:"Em todo lugar, até embaixo das ruas",
+  ag_solo_so_fazenda:"Só na fazenda, longe da cidade",
+  ag_solo_so_praia:"Só na praia, pertinho do mar",
+  ag_q_solo_tem:"O solo é feito de quê?",
+  ag_solo_tem_ok:"De rochinhas, água, ar e seres bem pequenos",
+  ag_solo_tem_x:"Só de areia branquinha, igualzinha à da praia",
+  ag_solo_tem_y:"De plástico feito na fábrica",
+  ag_q_agua_vive:"Quem vive dentro da água?",
+  ag_agua_vive_ok:"Peixes, plantas, tartarugas e bactérias",
+  ag_agua_vive_x:"Ninguém consegue viver dentro da água",
+  ag_agua_vive_y:"Só os carros e os brinquedos de plástico",
+
+  /* ============ 9. RECURSOS NATURAIS ============ */
+  rn_q_oque:"O que são os recursos naturais?",
+  rn_def:"O que as pessoas tiram da natureza para viver",
+  rn_def_x:"As coisas feitas só dentro das fábricas",
+  rn_def_y:"Os brinquedos comprados nas lojas grandes",
+  rn_q_qual:"Qual destes é um recurso natural?",
+  rn_agua:"A água",
+  rn_video:"O videogame",
+  rn_boneco:"O boneco de plástico",
+  rn_q_mel:"Qual recurso natural a pessoa tira da colmeia?",
+  rn_mel:"O mel das abelhas",
+  rn_leite:"O leite das vacas",
+  rn_plastico:"O plástico da fábrica",
+  rn_q_pesca:"O pescador tira o alimento dele de onde?",
+  rn_rio:"Da água do rio ou do mar",
+  rn_supermercado:"Só do supermercado da esquina",
+  rn_ceu:"Do céu, quando chove",
+  rn_q_planta:"O agricultor planta e colhe usando quais recursos da natureza?",
+  rn_solo_agua_sol:"O solo, a água e a luz do sol",
+  rn_x:"O celular e a televisão",
+  rn_y:"O gelo e a neve do congelador",
+  rn_q_agua_uso:"Como devemos usar a água?",
+  rn_cuidado:"Com cuidado, sem gastar à toa",
+  rn_gastar:"Deixando a torneira aberta o tempo todo",
+  rn_sujar:"Jogando lixo dentro do rio",
+  rn_q_sem:"E se não existisse água, luz do sol nem plantas? O que aconteceria?",
+  rn_sem_ok:"A vida não seria do jeito que a gente conhece",
+  rn_sem_x:"Não mudaria nada na vida do planeta",
+  rn_sem_y:"Tudo ficaria bem melhor para todo mundo",
+  rn_q_cuidar:"O que a gente pode fazer para cuidar do ambiente onde vive?",
+  rn_cuidar_ok:"Cuidar da água, do solo e das plantas",
+  rn_cuidar_x:"Jogar o lixo no chão da rua",
+  rn_cuidar_y:"Cortar todas as árvores do lugar",
+  rn_q_madeira_rec:"A madeira que vira papel é um recurso tirado de onde?",
+  rn_mad_arvore:"Da árvore",
+  rn_mad_fabrica:"Da fábrica",
+  rn_mad_loja:"Da loja",
+  /* ---- perguntas novas (conteúdo do livro que faltava) ---- */
+  me_q_rotina:"As pequenas atitudes de bem-estar deixam a nossa rotina como?",
+  me_rot_leve:"Mais leve e mais tranquila",
+  me_rot_pesada:"Mais pesada e mais corrida",
+  me_rot_igual:"Exatamente igual de sempre",
+  vv_q_ar:"O ar não pode ser visto. Por que a gente sabe que ele existe?",
+  vv_ar_ok:"Pela respiração e pelo vento",
+  vv_ar_x:"Porque ele é azul e brilhante",
+  vv_ar_y:"Porque dá para pegar com a mão",
+  df_q_ambientes:"Como podem ser os diferentes ambientes da Terra?",
+  df_amb_ok:"Quentes ou frios, secos ou úmidos",
+  df_amb_x:"Todos são exatamente iguaizinhos",
+  df_amb_y:"Só quentes e bem ensolarados",
+  ag_q_habitat:"O que é o hábitat de um animal?",
+  ag_hab_ok:"É o lugar onde ele vive e cresce",
+  ag_hab_x:"É o nome dos filhotes dele",
+  ag_hab_y:"É a comida preferida dele",
+  ag_q_lencois:"Onde fica guardada a água embaixo da terra?",
+  ag_len_ok:"Nos lençóis freáticos",
+  ag_len_x:"Nas nuvens lá do céu",
+  ag_len_y:"Dentro das pedras secas",
+  ag_q_ar_animais:"O ar ajuda quais animais a se movimentarem?",
+  ag_ar_aves:"As aves e os insetos",
+  ag_ar_peixes:"Os peixes e as tartarugas",
+  ag_ar_minhocas:"As minhocas e os caracóis",
+  ag_q_polen:"O vento leva o pólen das flores. O que pode se formar depois disso?",
+  ag_polen_ok:"Sementes e frutos",
+  ag_polen_x:"Pedras e areia",
+  ag_polen_y:"Nuvens de chuva",
+  rn_q_usos:"Para quais coisas as pessoas usam a água todo dia?",
+  rn_usos_ok:"Para beber, cozinhar, plantar e tomar banho",
+  rn_usos_x:"Só para encher a piscina do quintal",
+  rn_usos_y:"Só para lavar o carro da família",
+
+  be_q:"Esta atitude traz bem-estar?",
+  be_sim:"Sim, traz bem-estar",
+  be_nao:"Não traz bem-estar",
+  be_falar:"Falar sobre as próprias emoções",
+  be_divertir:"Se divertir com os amigos",
+  be_aprender:"Buscar conhecimentos novos",
+  be_pessoas:"Viver boas experiências com pessoas queridas",
+  be_gritar:"Gritar com quem está por perto",
+  be_calado:"Guardar a tristeza e não contar para ninguém",
+  be_celular:"Passar a noite inteira no celular",
+
+  /* ---- frases de reforço, faladas depois do acerto (o app ensina, não só testa) ---- */
+  exp_energia:"A energia vem dos alimentos e fica guardada nas células do corpo.",
+  exp_movimento:"Coração acelerado e respiração rápida depois de correr são sinais de um corpo saudável.",
+  exp_sono:"Dormindo, o corpo descansa, cresce e guarda o que a gente aprendeu.",
+  exp_servivo:"Os seres vivos nascem, crescem, podem ter filhotes e um dia morrem.",
+  exp_ambiente:"O ambiente é tudo o que existe no lugar: os seres vivos e também a água, o ar, o solo e os objetos.",
+  exp_camuflagem:"A camuflagem faz o animal se parecer com o lugar onde ele vive, para conseguir se esconder.",
+  exp_natural:"Material natural é o que vem pronto da natureza, como a madeira, a areia e o algodão.",
+  exp_artificial:"Material artificial é o que as pessoas fabricam, como o papel, o vidro e o tecido.",
+  exp_tres:"A água, o solo e a luz do sol existem em todo lugar e mantêm a vida na Terra.",
+  exp_recursos:"Recursos naturais são os bens que tiramos da natureza, como a água, o mel e os alimentos.",
+};
+
+/* ============================================================
+   PLAYER DE ÁUDIO (clipes em sequência) — um único <audio>
+   destravado no 1º toque (compatível com iPhone/iPad).
+   ============================================================ */
+const AUDIO_DIR='audio/', AUDIO_EXT='.mp3';
+const player=new Audio();
+player.preload='auto';
+let playToken=0, audioOn=true;
+function stopAudio(){ playToken++; try{player.pause();}catch(e){} setPlayingBadge(false); }
+function playKeys(keys){
+  if(!audioOn) return;
+  stopAudio();
+  const list=[].concat(...keys.map(k=>Array.isArray(k)?k:[k])).filter(Boolean);
+  if(!list.length) return;
+  const my=playToken; let i=0;
+  setPlayingBadge(true);
+  const next=()=>{
+    if(my!==playToken) return;
+    if(i>=list.length){ setPlayingBadge(false); return; }
+    const key=list[i++];
+    player.src=AUDIO_DIR+key+AUDIO_EXT;
+    player.onended=next;
+    player.onerror=()=>{ setTimeout(next,10); };
+    const p=player.play();
+    if(p&&p.catch) p.catch(()=>setTimeout(next,10));
+  };
+  next();
+}
+function setPlayingBadge(on){
+  const b=document.getElementById('qspeak'); if(b) b.classList.toggle('playing',on);
+}
+function unlockAudio(depois){
+  const pronto=()=>{ player.muted=false; if(depois){ const f=depois; depois=null; f(); } };
+  try{ player.muted=true; player.src=AUDIO_DIR+'greet'+AUDIO_EXT;
+       const p=player.play();
+       if(p&&p.then) p.then(()=>{player.pause();player.currentTime=0;pronto();}).catch(pronto);
+       else { player.pause(); pronto(); }
+       setTimeout(pronto,1200);   /* se a promise nunca resolver, a saudação toca assim mesmo */
+  }catch(e){ pronto(); }
+}
+
+/* ===== SONS DE EFEITO (Web Audio) ===== */
+let actx=null;
+function initAudio(){ try{ actx = actx || new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==='suspended') actx.resume(); }catch(e){} }
+function tone(freq,start,dur,type='sine',vol=0.2){
+  if(!actx) return;
+  const o=actx.createOscillator(), g=actx.createGain();
+  o.type=type; o.frequency.value=freq; o.connect(g); g.connect(actx.destination);
+  const t=actx.currentTime+start;
+  g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+0.02);
+  g.gain.exponentialRampToValueAtTime(0.001,t+dur);
+  o.start(t); o.stop(t+dur);
+}
+function sndClick(){ initAudio(); tone(540,0,0.07,'triangle',0.14); }
+function sndRight(){ initAudio(); [523,659,784,1047].forEach((f,i)=>tone(f,i*0.09,0.25,'triangle',0.18)); }
+function sndWrong(){ initAudio(); tone(300,0,0.18,'sine',0.13); tone(220,0.12,0.25,'sine',0.13); }
+function sndWin(){ initAudio(); [523,659,784,1047,784,1047,1319].forEach((f,i)=>tone(f,i*0.12,0.3,'triangle',0.2)); }
+
+/* ===== UTILIDADES ===== */
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function rint(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+function mix(){ return shuffle([].concat(...arguments)); }
+const OK_KEYS=['ok1','ok2','ok3','ok4','ok5','ok6'], NO_KEYS=['no1','no2','no3'];
+function emo(e,size){ return '<span class="obj" style="font-size:'+(size||74)+'px">'+e+'</span>'; }
+function cena(e,txt,size){ return emo(e,size||88)+(txt?'<div class="cardtxt">'+txt+'</div>':''); }
+
+function updateStars(){ const el=document.getElementById('starNum'); if(el) el.textContent=stars; localStorage.setItem('vitor_ci2_stars',stars); }
+function addStar(n=1){ stars+=n; updateStars(); }
+
+/* ---------------- CONFETE ---------------- */
+const cv=document.getElementById('confetti'), cx=cv.getContext('2d');
+let confs=[];
+function resizeCv(){cv.width=innerWidth;cv.height=innerHeight;}
+addEventListener('resize',resizeCv); resizeCv();
+function burst(){
+  const cols=['#ff6b9d','#ffd93d','#6bcB77','#4d96ff','#a06cd5','#ff924c'];
+  for(let i=0;i<70;i++){confs.push({x:innerWidth/2,y:innerHeight/3,vx:(Math.random()-0.5)*14,vy:Math.random()*-12-3,c:pick(cols),s:rint(7,14),r:Math.random()*6,vr:(Math.random()-.5)*.4});}
+}
+function loopConf(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  confs.forEach(p=>{p.vy+=0.35;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/2,p.s,p.s);cx.restore();});
+  confs=confs.filter(p=>p.y<cv.height+30);
+  requestAnimationFrame(loopConf);
+}
+loopConf();
+
+/* ===== SHELL ===== */
+function shell(inner){
+  App.innerHTML=`
+    <div class="topbar">
+      <button class="home-btn" onclick="sndClick();goHome()">🏠</button>
+      <div class="stars">⭐ <span class="num" id="starNum">${stars}</span></div>
+    </div>
+    ${inner}`;
+}
+
+/* ===== MENU ===== */
+const GAMES=[
+  {id:'energia',  ico:'⚡', nome:'Energia do Corpo',    sub:'De onde vem a energia',   cls:'c1'},
+  {id:'movimento',ico:'🏃', nome:'Corpo em Movimento',  sub:'Correr, pular, dançar',   cls:'c2'},
+  {id:'sono',     ico:'😴', nome:'Hora de Dormir',      sub:'A rotina da noite',       cls:'c3'},
+  {id:'mente',    ico:'💚', nome:'Corpo e Mente',       sub:'Emoções e bem-estar',     cls:'c4'},
+  {id:'vivos',    ico:'🌳', nome:'Vivo ou Não Vivo?',   sub:'Os componentes do ambiente', cls:'c5'},
+  {id:'diferente',ico:'🔍', nome:'Cada Um é Diferente', sub:'Tamanho, comida, camuflagem', cls:'c6'},
+  {id:'materiais',ico:'🪵', nome:'Natural ou Artificial?', sub:'Madeira vira papel',   cls:'c7'},
+  {id:'elementos',ico:'💧', nome:'Água, Solo e Sol',    sub:'O que mantém a vida',     cls:'c8'},
+  {id:'recursos', ico:'🌾', nome:'Recursos Naturais',   sub:'O que tiramos da natureza', cls:'c9'},
+];
+function goHome(silent){
+  stopAudio();
+  shell(`
+    <div class="hero">
+      <div class="mascote">🌍</div>
+      <h1>Olá!</h1>
+      <p>Escolha uma brincadeira 👇</p>
+      <button onclick="testSound()" style="margin-top:6px;background:var(--amarelo);color:#5a4500;border:none;border-radius:18px;padding:9px 18px;font-size:16px;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #d9a800;">🔈 Testar som</button>
+    </div>
+    <div class="grid">
+      ${GAMES.map(g=>`<button class="card ${g.cls}" onclick="sndClick();startGame('${g.id}')">
+        <span class="ico">${g.ico}</span><span>${g.nome}</span>
+        <span style="font-size:13px;font-weight:normal;opacity:.9">${g.sub}</span>
+      </button>`).join('')}
+    </div>
+    <p style="text-align:center;color:#8aa593;margin-top:18px;font-size:14px;">Feito com 💚 para estudar pra prova</p>
+  `);
+  if(!silent) setTimeout(()=>playKeys(['greet']),250);
+}
+function testSound(){ initAudio(); sndClick(); playKeys(['test']); }
+
+/* ===== MOTOR DE RODADAS ===== */
+let current=null, locked=false, seqPos=0;
+function startGame(id){
+  const rounds=BUILDERS[id]();
+  current={id, title:GAMES.find(g=>g.id===id).nome, rounds, idx:0};
+  renderRound();
+}
+function gameFrame(c,r,bodyHtml){
+  shell(`
+    <div class="game">
+      <h2 class="game-title">${GAMES.find(g=>g.id===c.id).ico} ${c.title}</h2>
+      <div class="progress">Pergunta ${c.idx+1} de ${c.rounds.length}</div>
+      <div class="question">
+        <button class="speak-btn" id="qspeak" onclick="sndClick();speakRound()">🔊</button>
+        <span>${r.q}</span>
+      </div>
+      <div class="stage">${r.stage||''}</div>
+      ${bodyHtml}
+      <div style="font-size:14px;color:#aaa;margin-top:6px;">👆 Toque para responder. Toque no 🔊 para ouvir de novo.</div>
+      <div class="feedback" id="fb"></div>
+    </div>
+  `);
+}
+function renderRound(){
+  locked=false;
+  const c=current, r=c.rounds[c.idx];
+  if(r.mode==='seq'){ return renderSeq(c,r); }
+  gameFrame(c,r,`<div class="options ${r.colorOpts?'opt-colors':''}" id="opts"></div>`);
+  const shown=shuffle(r.options);
+  const opts=document.getElementById('opts');
+  shown.forEach(o=>{
+    const b=document.createElement('button');
+    b.className='opt'+(o.big?' big':'');
+    b.innerHTML=o.label;
+    b.onclick=()=>answer(b,o);
+    opts.appendChild(b);
+  });
+  window._roundKeys=[].concat(r.audio||[], ['choose'], shown.map(o=>o.aud));
+  setTimeout(()=>speakRound(),400);
+}
+function speakRound(){ playKeys(window._roundKeys||[]); }
+
+function showNextButton(){
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=null);
+  document.querySelectorAll('.ficha').forEach(b=>b.onclick=null);
+  const nb=document.createElement('button');
+  nb.className='next-btn';
+  const last=current.idx>=current.rounds.length-1;
+  nb.textContent=last?'🏆 Terminar':'Próxima ➡';
+  nb.onclick=()=>{
+    nb.onclick=null;            /* trava o 2º toque: o 1º já troca a tela inteira */
+    sndClick();
+    if(last){ winScreen(); return; }
+    current.idx++; renderRound();
+    locked=true; setTimeout(()=>{locked=false;},350);  /* o 2º toque cairia na tela nova */
+  };
+  document.querySelector('.game').appendChild(nb);
+}
+function correctFlow(extraAudio){
+  locked=true; sndRight(); burst(); addStar(1);
+  const fb=document.getElementById('fb'); if(fb){fb.className='feedback good'; fb.textContent='⭐ Muito bem!';}
+  playKeys(extraAudio.filter(Boolean));
+  showNextButton();
+}
+function answer(btn,opt){
+  if(locked) return;
+  if(opt.correct){
+    btn.classList.add('ok');
+    document.querySelectorAll('.opt').forEach(b=>{if(b!==btn)b.classList.add('no');});
+    correctFlow([opt.aud, pick(OK_KEYS), opt.expAud]);
+  }else{
+    btn.classList.add('no'); btn.onclick=null;
+    sndWrong();
+    const fb=document.getElementById('fb'); fb.className='feedback bad'; fb.textContent='🤔 Tenta de novo!';
+    playKeys([opt.aud, pick(NO_KEYS)].filter(Boolean));
+  }
+}
+
+/* ---- modo MONTAR A ORDEM ---- */
+function renderSeq(c,r){
+  seqPos=0;
+  const slots=r.itens.map((_,i)=>`<div class="seqslot" id="sl${i}"><span class="nn">${i+1}</span><span class="tx">...</span></div>`).join('');
+  gameFrame(c,r,`
+    <div class="seqslots">${slots}</div>
+    <div class="fichas" id="fichas"></div>
+  `);
+  const box=document.getElementById('fichas');
+  shuffle(r.itens.map((it,i)=>({it,i}))).forEach(t=>{
+    const b=document.createElement('button');
+    b.className='ficha'; b.textContent=t.it.txt;
+    b.onclick=()=>tapFicha(b,t.i,r);
+    box.appendChild(b);
+  });
+  window._roundKeys=[].concat(r.audio||[]);
+  setTimeout(()=>speakRound(),400);
+}
+function tapFicha(btn,idx,r){
+  if(locked) return;
+  if(idx===seqPos){
+    const sl=document.getElementById('sl'+seqPos);
+    sl.querySelector('.tx').textContent=r.itens[idx].txt;
+    sl.classList.add('filled');
+    btn.classList.add('used'); btn.onclick=null;
+    sndClick(); playKeys([r.itens[idx].aud]);
+    seqPos++;
+    if(seqPos>=r.itens.length){
+      setTimeout(()=>correctFlow([pick(OK_KEYS), r.expAud]),600);
+    }
+  }else{
+    sndWrong();
+    btn.classList.add('shake'); setTimeout(()=>btn.classList.remove('shake'),420);
+    const fb=document.getElementById('fb'); fb.className='feedback bad'; fb.textContent='🤔 Esse não é o próximo!';
+    playKeys([r.itens[idx].aud, pick(NO_KEYS)]);
+  }
+}
+
+function winScreen(){
+  sndWin(); burst(); setTimeout(burst,400); setTimeout(burst,800);
+  const c=current;
+  shell(`
+    <div class="game win">
+      <div class="trophy">🏆</div>
+      <h2 class="game-title">Parabéns!</h2>
+      <p style="font-size:22px;">Você ganhou <b>${c.rounds.length}</b> estrelas! ⭐</p>
+      <p style="font-size:18px;color:#888;">Você está ficando craque em <b>${c.title}</b>!</p>
+      <button class="next-btn" onclick="sndClick();startGame('${c.id}')">🔁 Jogar de novo</button>
+      <br>
+      <button class="next-btn" style="background:var(--azul);box-shadow:0 6px 0 #2f6fd0;margin-top:10px;" onclick="sndClick();goHome()">🏠 Escolher outro</button>
+    </div>
+  `);
+  setTimeout(()=>playKeys(['win']),250);
+}
+
+/* opções a partir de um mapa de rótulos */
+function mkOpts(correct, all, lblMap, extra){
+  return shuffle(all).map(k=>{
+    const o={label:lblMap[k], aud:k, correct:k===correct};
+    if(extra) Object.assign(o, extra(k));
+    return o;
+  });
+}
+/* marca a resposta certa com uma frase de reforço, falada após o acerto */
+function exp(options, expAud){ options.forEach(o=>{ if(o.correct) o.expAud=expAud; }); return options; }
+/* rótulo com emoji em cima e legenda embaixo */
+function L(e,txt){ return e+'<span class="cap">'+txt+'</span>'; }
+
+/* ============================================================
+   DADOS DO CONTEÚDO (Bernoulli — Capítulos 4, 5 e 6)
+   ============================================================ */
+
+/* ---------- 1. ENERGIA ---------- */
+const ORGAO_LBL={
+  og_cerebro:L('🧠','O cérebro'), og_coracao:L('❤️','O coração'),
+  og_musculos:L('💪','Os músculos'), og_pulmao:L('🫁','O pulmão'),
+};
+const FUNC_LBL={ en_bater:L('❤️','Bater'), en_respirar:L('🫁','Respirar'), en_pensar:L('🧠','Pensar') };
+
+/* ---------- 2. MOVIMENTO ---------- */
+const ACOES=[
+  {k:'ac_correr',   e:'🏃', txt:'Correr no parque',        mexe:true},
+  {k:'ac_pular',    e:'🤸', txt:'Pular corda',             mexe:true},
+  {k:'ac_nadar',    e:'🏊', txt:'Nadar na piscina',        mexe:true},
+  {k:'ac_bicicleta',e:'🚴', txt:'Andar de bicicleta',      mexe:true},
+  {k:'ac_dancar',   e:'💃', txt:'Dançar',                  mexe:true},
+  {k:'ac_bola',     e:'⚽', txt:'Jogar bola',              mexe:true},
+  {k:'ac_tv',       e:'📺', txt:'Assistir televisão deitado', mexe:false},
+  {k:'ac_ler',      e:'📖', txt:'Ler um livro sentado',    mexe:false},
+  {k:'ac_dormir',   e:'😴', txt:'Dormir',                  mexe:false},
+  {k:'ac_video',    e:'🎮', txt:'Jogar videogame sentado', mexe:false},
+];
+const MEXE_LBL={ mv_mexer:L('🏃','É mexer o corpo'), mv_parado:L('🛋️','É ficar parado') };
+
+/* ---------- 4. MENTE: atitudes de bem-estar (livro, p.118) ---------- */
+const BEMESTAR=[
+  {k:'be_falar',   e:'🗣️', txt:'Falar sobre as próprias emoções',          bem:true},
+  {k:'be_divertir',e:'🎉', txt:'Se divertir com os amigos',                bem:true},
+  {k:'be_aprender',e:'📚', txt:'Buscar conhecimentos novos',               bem:true},
+  {k:'be_pessoas', e:'👨‍👩‍👧', txt:'Viver boas experiências com pessoas queridas', bem:true},
+  {k:'be_gritar',  e:'😡', txt:'Gritar com quem está por perto',           bem:false},
+  {k:'be_calado',  e:'🤐', txt:'Guardar a tristeza e não contar para ninguém', bem:false},
+  {k:'be_celular', e:'📱', txt:'Passar a noite inteira no celular',        bem:false},
+];
+const BEM_LBL={ be_sim:L('💚','Sim, traz bem-estar'), be_nao:L('🚫','Não traz bem-estar') };
+
+/* ---------- 5. VIVOS ---------- */
+const SERES=[
+  {k:'sv_cachorro', e:'🐕', txt:'Um cachorro', vivo:true},
+  {k:'sv_arvore',   e:'🌳', txt:'Uma árvore',  vivo:true},
+  {k:'sv_borboleta',e:'🦋', txt:'Uma borboleta',vivo:true},
+  {k:'sv_sagui',    e:'🐒', txt:'Um sagui',    vivo:true},
+  {k:'sv_picapau',  e:'🐦', txt:'Um pica-pau', vivo:true},
+  {k:'sv_cogumelo', e:'🍄', txt:'Um cogumelo', vivo:true},
+  {k:'sv_crianca',  e:'🧒', txt:'Uma criança', vivo:true},
+  {k:'sv_flor',     e:'🌻', txt:'Uma flor',    vivo:true},
+  {k:'sv_peixe',    e:'🐟', txt:'Um peixe',    vivo:true},
+  {k:'sv_minhoca',  e:'🪱', txt:'Uma minhoca', vivo:true},
+  {k:'nv_pedra',    e:'🪨', txt:'Uma pedra',   vivo:false},
+  {k:'nv_agua',     e:'💧', txt:'A água',      vivo:false},
+  {k:'nv_sol',      e:'☀️', txt:'A luz do sol',vivo:false},
+  {k:'nv_ar',       e:'💨', txt:'O ar',        vivo:false},
+  {k:'nv_casa',     e:'🏠', txt:'Uma casa',    vivo:false},
+  {k:'nv_carro',    e:'🚗', txt:'Um carro',    vivo:false},
+  {k:'nv_brinquedo',e:'🧸', txt:'Um brinquedo',vivo:false},
+  {k:'nv_roupa',    e:'👕', txt:'Uma roupa',   vivo:false},
+  {k:'nv_predio',   e:'🏢', txt:'Um prédio',   vivo:false},
+  {k:'nv_poste',    e:'🪧', txt:'Um poste',    vivo:false},
+];
+const VIVO_LBL={ vv_vivo:L('🌱','É um ser vivo'), vv_naovivo:L('🪨','Não é um ser vivo') };
+const SER_LBL={}; SERES.forEach(s=>SER_LBL[s.k]=L(s.e,s.txt));
+
+/* ---------- 6. DIFERENÇAS ---------- */
+const COMIDAS=[
+  {k:'al_vaca',     e:'🐄', txt:'A vaca',      come:'al_plantas'},
+  {k:'al_ovelha',   e:'🐑', txt:'A ovelha',    come:'al_plantas'},
+  {k:'al_jacare',   e:'🐊', txt:'O jacaré',    come:'al_carne'},
+];
+const COME_LBL={ al_plantas:L('🌿','Come plantas'), al_carne:L('🍖','Come outros animais') };
+
+/* ---------- 7. MATERIAIS ---------- */
+const MATERIAIS=[
+  {k:'ma_madeira', e:'🪵', txt:'A madeira',  nat:true},
+  {k:'ma_areia',   e:'🏖️', txt:'A areia',    nat:true},
+  {k:'ma_algodao', e:'🌱', txt:'O algodão',  nat:true},
+  {k:'ma_ferro',   e:'⛏️', txt:'O ferro',    nat:true},
+  {k:'ma_rocha',   e:'🪨', txt:'A rocha',    nat:true},
+  {k:'ma_papel',   e:'📄', txt:'O papel',    nat:false},
+  {k:'ma_vidro',   e:'🥛', txt:'O vidro',    nat:false},
+  {k:'ma_tecido',  e:'👕', txt:'O tecido',   nat:false},
+  {k:'ma_aco',     e:'🔩', txt:'O aço',      nat:false},
+  {k:'ma_plastico',e:'🧴', txt:'O plástico', nat:false},
+];
+const NATART_LBL={ na_natural:L('🌿','É material natural'), na_artificial:L('🏭','É material artificial') };
+const MAT_LBL={}; MATERIAIS.forEach(m=>MAT_LBL[m.k]=L(m.e,m.txt));
+
+/* ============================================================
+   CONSTRUTORES DE RODADAS
+   ============================================================ */
+const BUILDERS={
+
+  /* 1. ENERGIA DO CORPO */
+  energia(){
+    const fixas=[
+      {q:'De onde o nosso corpo tira a <b>energia</b> para brincar e aprender? ⚡',
+       audio:['en_q_onde'], stage:cena('🍎⚡'), colorOpts:true,
+       options:exp(mkOpts('en_alimentos',['en_alimentos','en_vento','en_tv'],
+         {en_alimentos:L('🍎','Dos alimentos que comemos'), en_vento:L('💨','Do vento que venta lá fora'), en_tv:L('📺','Da televisão quando está ligada')}),'exp_energia')},
+      {q:'A energia é como um <b>combustível</b>. De onde o corpo retira esse combustível? ⛽',
+       audio:['en_q_combustivel'], stage:cena('⛽🍲'), colorOpts:true,
+       options:mkOpts('en_comida',['en_comida','en_agua_torneira','en_pilha'],
+         {en_comida:L('🍲','Da comida'), en_agua_torneira:L('🚰','Da torneira'), en_pilha:L('🔋','De uma pilha')})},
+      {q:'Onde a energia fica <b>guardada</b> dentro do nosso corpo? 🔬',
+       audio:['en_q_celulas'], stage:cena('🔬'), colorOpts:true,
+       options:mkOpts('en_celulas',['en_celulas','en_pedras','en_cabelos'],
+         {en_celulas:L('🔬','Nas células'), en_pedras:L('🪨','Nas pedrinhas'), en_cabelos:L('💇','Nos cabelos')})},
+      {q:'A energia ajuda o <b>coração</b> a fazer o quê? ❤️',
+       audio:['en_q_coracao'], stage:cena('❤️'), colorOpts:true,
+       options:mkOpts('en_bater',['en_bater','en_respirar','en_pensar'],FUNC_LBL)},
+      {q:'A energia ajuda o <b>pulmão</b> a fazer o quê? 🫁',
+       audio:['en_q_pulmao'], stage:cena('🫁'), colorOpts:true,
+       options:mkOpts('en_respirar',['en_bater','en_respirar','en_pensar'],FUNC_LBL)},
+      {q:'Qual parte do corpo a energia ajuda a <b>pensar</b>? 💭',
+       audio:['en_q_pensar'], stage:cena('💭'), colorOpts:true,
+       options:mkOpts('og_cerebro',['og_cerebro','og_coracao','og_musculos'],ORGAO_LBL)},
+      {q:'Qual parte do corpo a energia ajuda a <b>se mexer</b>? 🤸',
+       audio:['en_q_mexer'], stage:cena('🤸'), colorOpts:true,
+       options:mkOpts('og_musculos',['og_musculos','og_cerebro','og_pulmao'],ORGAO_LBL)},
+      {q:'O que deixa a gente acordar <b>cheio de energia</b>? 🌞',
+       audio:['en_q_disposicao'], stage:cena('🌞😃'), colorOpts:true,
+       options:mkOpts('en_comerdormir',['en_comerdormir','en_ficarparado','en_naocomer'],
+         {en_comerdormir:L('🍎😴','Comer bem e dormir bem'), en_ficarparado:L('🛋️','Ficar parado o dia inteiro'), en_naocomer:L('🚫','Não comer nada')})},
+      {q:'Às vezes falta <b>disposição</b> para brincar. Quando isso acontece? 😔',
+       audio:['en_q_pouca'], stage:cena('😔'), colorOpts:true,
+       options:mkOpts('en_cansados',['en_cansados','en_alegres','en_correndo'],
+         {en_cansados:L('😔','Quando estamos cansados, tristes ou preocupados'),
+          en_alegres:L('😀','Quando estamos bem alegres e descansados'),
+          en_correndo:L('🏃','Quando estamos correndo e pulando no parque')})},
+    ];
+    return shuffle(fixas).slice(0,7);
+  },
+
+  /* 2. CORPO EM MOVIMENTO */
+  movimento(){
+    const classif=shuffle(ACOES).slice(0,3).map(a=>({
+      q:'Isto é <b>mexer o corpo</b> ou é <b>ficar parado</b>? 🤔',
+      audio:[a.k,'mv_q_classifica'], stage:cena(a.e,a.txt), colorOpts:true,
+      options:mkOpts(a.mexe?'mv_mexer':'mv_parado',['mv_mexer','mv_parado'],MEXE_LBL)
+    }));
+    const fixas=[
+      {q:'Quando você corre bastante, o que acontece com o <b>coração</b>? ❤️‍🔥',
+       audio:['mv_q_coracao'], stage:cena('🏃❤️'), colorOpts:true,
+       options:mkOpts('mv_acelera',['mv_acelera','mv_para','mv_devagar'],
+         {mv_acelera:L('❤️‍🔥','Bate mais rápido'), mv_para:L('⏸️','Para de bater'), mv_devagar:L('🐢','Bate bem devagar')})},
+      {q:'Quando você corre bastante, o que acontece com a <b>respiração</b>? 🫁',
+       audio:['mv_q_respira'], stage:cena('🏃🫁'), colorOpts:true,
+       options:mkOpts('mv_rapida',['mv_rapida','mv_lenta','mv_some'],
+         {mv_rapida:L('💨','Fica mais rápida'), mv_lenta:L('😴','Fica bem lenta'), mv_some:L('🚫','A gente para de respirar')})},
+      {q:'O coração <b>acelera</b> depois de correr. O que isso quer dizer? 💚',
+       audio:['mv_q_normal'], stage:cena('💚🏃'), colorOpts:true,
+       options:exp(mkOpts('mv_saudavel',['mv_saudavel','mv_doente','mv_parar'],
+         {mv_saudavel:L('💚','É normal! O corpo está saudável'), mv_doente:L('🤒','Quer dizer que você ficou doente'), mv_parar:L('🛑','Que você nunca mais pode correr')}),'exp_movimento')},
+      {q:'Quando você pula e dança, qual parte do corpo <b>se mexe</b>? 💪',
+       audio:['mv_q_musculos'], stage:cena('💃'), colorOpts:true,
+       options:mkOpts('og_musculos',['og_musculos','og_cerebro','mv_unhas'],
+         Object.assign({mv_unhas:L('💅','As unhas')},ORGAO_LBL))},
+      {q:'Depois de correr e brincar, o que acontece também com a nossa <b>mente</b>? 🧠',
+       audio:['mv_q_mente'], stage:cena('🧠✨'), colorOpts:true,
+       options:mkOpts('mv_mente',['mv_mente','mv_menos','mv_nada'],
+         {mv_mente:L('😃','Ficamos mais animados e com vontade de aprender'), mv_menos:L('😞','Ficamos mais tristes e sem vontade'), mv_nada:L('🤷','Não muda nada na nossa cabeça')})},
+      {q:'Além de se mexer bastante, do que mais o corpo precisa? ⚖️',
+       audio:['mv_q_equilibrio'], stage:cena('⚖️😌'), colorOpts:true,
+       options:mkOpts('mv_descanso',['mv_descanso','mv_sempre','mv_nunca'],
+         {mv_descanso:L('😌','De momentos de calma e descanso'), mv_sempre:L('🏃','De correr sem parar o dia inteiro'), mv_nunca:L('🚫','De nunca mais se mexer')})},
+    ];
+    return mix(classif, shuffle(fixas).slice(0,4));
+  },
+
+  /* 3. HORA DE DORMIR */
+  sono(){
+    const rotina={mode:'seq',
+      q:'Toque na <b>rotina da noite</b> na ordem certa, do começo até a hora de dormir. 🌙',
+      audio:['so_q_rotina'], stage:cena('🌙🛏️'),
+      itens:[{txt:'🍽️ Jantar cedo', aud:'so_jantar'},
+             {txt:'🪥 Escovar os dentes', aud:'so_escovar'},
+             {txt:'📖 Ouvir uma história', aud:'so_historia'},
+             {txt:'😴 Dormir', aud:'so_dormir'}],
+      expAud:'so_rotina_ok'};
+    const fixas=[
+      {q:'Para que serve o <b>sono</b>? 😴',
+       audio:['so_q_serve'], stage:cena('😴🔋'), colorOpts:true,
+       options:exp(mkOpts('so_energia',['so_energia','so_fome','so_cansaco'],
+         {so_energia:L('🔋','Para recuperar a energia do dia'), so_fome:L('🍽️','Para sentir mais fome durante a noite'), so_cansaco:L('😩','Para o corpo gastar mais energia')}),'exp_sono')},
+      {q:'Enquanto a gente dorme, o que acontece com o corpo? 🌱',
+       audio:['so_q_enquanto'], stage:cena('🛏️📏'), colorOpts:true,
+       options:mkOpts('so_cresce',['so_cresce','so_encolhe','so_para'],
+         {so_cresce:L('📏🧠','Ele cresce e guarda a memória'), so_encolhe:L('🔽','Ele para de crescer e fica menor'), so_para:L('⏹️','Ele fica igualzinho, sem mudar nada')})},
+      {q:'O que ajuda o corpo a <b>se acalmar</b> na hora de dormir? 🎵',
+       audio:['so_q_acalma'], stage:cena('📖🎵'), colorOpts:true,
+       options:mkOpts('so_historia_op',['so_historia_op','so_correr','so_telas'],
+         {so_historia_op:L('📖','Ouvir uma história ou música suave'), so_correr:L('🏃','Correr e pular bastante pela casa'), so_telas:L('📱','Ficar no celular vendo vídeos')})},
+      {q:'O que <b>atrapalha</b> o sono chegar? 🚫',
+       audio:['so_q_atrapalha'], stage:cena('📱🎮'), colorOpts:true,
+       options:mkOpts('so_telas2',['so_telas2','so_escuro','so_banho'],
+         {so_telas2:L('📱🎮','As telas e as brincadeiras agitadas'), so_escuro:L('🌙','Um quarto tranquilo e bem escurinho'), so_banho:L('🛁','Um banho morno antes de deitar')})},
+      {q:'Por que é bom <b>jantar cedo</b>? 🍽️',
+       audio:['so_q_jantar'], stage:cena('🍽️🕕'), colorOpts:true,
+       options:mkOpts('so_nutrientes',['so_nutrientes','so_sonho','so_tarde'],
+         {so_nutrientes:L('🍽️','Porque o corpo aproveita os nutrientes antes de dormir'), so_sonho:L('💭','Para a gente sonhar com comida gostosa a noite toda'), so_tarde:L('⏰','Para a gente conseguir dormir bem mais tarde')})},
+      {q:'O que a gente precisa fazer <b>todo dia</b> antes de dormir? 🪥',
+       audio:['so_q_dentes'], stage:cena('🪥'), colorOpts:true,
+       options:mkOpts('so_escovar_op',['so_escovar_op','so_doce','so_tv_op'],
+         {so_escovar_op:L('🪥','Escovar os dentes'), so_doce:L('🍬','Comer um doce'), so_tv_op:L('📺','Assistir televisão até tarde')})},
+      {q:'Como deve ser o <b>lugar</b> onde a gente dorme? 🛏️',
+       audio:['so_q_lugar'], stage:cena('🛏️✨'), colorOpts:true,
+       options:mkOpts('so_tranquilo',['so_tranquilo','so_barulho','so_bagunca'],
+         {so_tranquilo:L('🛏️','Tranquilo e limpo'), so_barulho:L('🔊','Cheio de barulho'), so_bagunca:L('🧦','Bem bagunçado')})},
+      {q:'Quando a <b>noite</b> vai chegando, o que o corpo começa a fazer? 🌆',
+       audio:['so_q_luz'], stage:cena('🌆'), colorOpts:true,
+       options:mkOpts('so_prepara',['so_prepara','so_acorda','so_correr2'],
+         {so_prepara:L('🌆','Começa a se preparar para descansar'), so_acorda:L('⏰','Começa a acordar bem animado para brincar'), so_correr2:L('🏃','Começa a querer correr e pular mais')})},
+    ];
+    return mix([rotina], shuffle(fixas).slice(0,6));
+  },
+
+  /* 4. CORPO E MENTE */
+  mente(){
+    /* uma rodada concreta, com a atitude ilustrada, antes das perguntas de conceito */
+    const bem=shuffle(BEMESTAR).slice(0,1).map(b=>({
+      q:'Esta atitude traz <b>bem-estar</b>? 💚',
+      audio:[b.k,'be_q'], stage:cena(b.e,b.txt), colorOpts:true,
+      options:mkOpts(b.bem?'be_sim':'be_nao',['be_sim','be_nao'],BEM_LBL)
+    }));
+    const fixas=[
+      {q:'A <b>mente</b> é como um guia. O que ela ajuda a gente a fazer? 🧭',
+       audio:['me_q_mente'], stage:cena('🧠🧭'), colorOpts:true,
+       options:mkOpts('me_guia',['me_guia','me_correr','me_comer'],
+         {me_guia:L('🧭','Perceber o que acontece e escolher o que fazer'), me_correr:L('🏃','Correr muito mais rápido do que antes'), me_comer:L('🍽️','Mastigar e engolir a comida do almoço')})},
+      {q:'O que pode mudar o jeito que a gente <b>se sente</b> num lugar? 🌈',
+       audio:['me_q_lugar'], stage:cena('🔊💡'), colorOpts:true,
+       options:mkOpts('me_ambiente',['me_ambiente','me_cor_cabelo','me_nada2'],
+         {me_ambiente:L('🔊💡','O barulho, a luz, o calor e as pessoas por perto'), me_cor_cabelo:L('💇','A cor do cabelo de quem está ali'), me_nada2:L('🤷','Nada muda o jeito que a gente se sente')})},
+      {q:'Quando você está <b>triste</b>, qual é uma boa atitude? 💬',
+       audio:['me_q_triste'], stage:cena('😢💬'), colorOpts:true,
+       options:mkOpts('me_falar',['me_falar','me_guardar','me_gritar'],
+         {me_falar:L('🗣️','Falar sobre o que está sentindo'), me_guardar:L('🤐','Guardar tudo e não contar para ninguém'), me_gritar:L('😡','Gritar com alguém')})},
+      {q:'Qual destas atitudes traz <b>bem-estar</b>? 💚',
+       audio:['me_q_bemestar'], stage:cena('💚🎉'), colorOpts:true,
+       options:mkOpts('me_divertir',['me_divertir','me_sozinho_bravo','me_dormir_pouco'],
+         {me_divertir:L('🎉','Se divertir com as pessoas queridas'), me_sozinho_bravo:L('😠','Ficar bravo sozinho no quarto'), me_dormir_pouco:L('🌙','Dormir bem pouquinho toda noite')})},
+      {q:'Aprender coisas novas e <b>buscar conhecimentos</b> faz o quê? 📚',
+       audio:['me_q_aprender'], stage:cena('📚✨'), colorOpts:true,
+       options:mkOpts('me_fazbem',['me_fazbem','me_fazmal','me_tantofaz'],
+         {me_fazbem:L('📚','Faz bem e deixa a gente mais animado'), me_fazmal:L('😖','Faz mal e deixa a gente cansado'), me_tantofaz:L('🤷','Não faz nenhuma diferença na vida')})},
+      {q:'As pequenas atitudes de bem-estar deixam a nossa <b>rotina</b> como? 🌤️',
+       audio:['me_q_rotina'], stage:cena('🌤️💚'), colorOpts:true,
+       options:mkOpts('me_rot_leve',['me_rot_leve','me_rot_pesada','me_rot_igual'],
+         {me_rot_leve:L('🌤️','Mais leve e mais tranquila'), me_rot_pesada:L('🥵','Mais pesada e mais corrida'), me_rot_igual:L('🟰','Exatamente igual de sempre')})},
+      {q:'Do que o <b>corpo</b> e a <b>mente</b> precisam para funcionar bem? 😌',
+       audio:['me_q_precisa'], stage:cena('😌💚'), colorOpts:true,
+       options:mkOpts('me_calma',['me_calma','me_pressa','me_barulho'],
+         {me_calma:L('😌','De calma, descanso e cuidado'), me_pressa:L('⏩','De pressa e correria o tempo todo'), me_barulho:L('🔊','De muito barulho o dia inteiro')})},
+    ];
+    return mix(bem, shuffle(fixas).slice(0,6));
+  },
+
+  /* 5. VIVO OU NÃO VIVO? */
+  vivos(){
+    const classif=shuffle(SERES).slice(0,3).map(s=>({
+      q:'Isto é um <b>ser vivo</b> ou <b>não</b> é um ser vivo? 🌱',
+      audio:[s.k,'vv_q'], stage:cena(s.e,s.txt), colorOpts:true,
+      options:mkOpts(s.vivo?'vv_vivo':'vv_naovivo',['vv_vivo','vv_naovivo'],VIVO_LBL)
+    }));
+    /* cada pergunta sorteia o SEU trio: senão a 2ª sai por eliminação da 1ª */
+    const trio=()=>[pick(['nv_sol','nv_agua','nv_ar','nv_pedra']),
+                    pick(['sv_arvore','sv_borboleta','sv_peixe','sv_cachorro']),
+                    pick(['nv_casa','nv_carro','nv_predio','nv_brinquedo'])];
+    const t1=trio(), t2=trio();
+    const escolhas=[
+      {q:'Qual destes é um componente da <b>natureza</b> que <b>não tem vida</b>? 🪨',
+       audio:['vv_q_natural'], stage:cena('🌍'), colorOpts:true,
+       options:mkOpts(t1[0],t1,SER_LBL)},
+      {q:'Qual destes foi <b>construído pelos seres humanos</b>? 🏗️',
+       audio:['vv_q_construido'], stage:cena('🏗️'), colorOpts:true,
+       options:mkOpts(t2[2],t2,SER_LBL)},
+    ];
+    const conc=[
+      {q:'O que <b>todo ser vivo</b> faz? 🌱',
+       audio:['vv_q_oque'], stage:cena('🌱🐣'), colorOpts:true,
+       options:exp(mkOpts('vv_nasce',['vv_nasce','vv_nunca','vv_fabrica'],
+         {vv_nasce:L('🌱','Nasce, cresce, pode ter filhotes e morre'), vv_nunca:L('📏','Fica do mesmo tamanho a vida inteira'), vv_fabrica:L('🏭','É fabricado dentro de uma fábrica grande')}),'exp_servivo')},
+      {q:'<b>Reproduzir</b> quer dizer o quê? 👶',
+       audio:['vv_q_reproduzir'], stage:cena('🐣👶'), colorOpts:true,
+       options:mkOpts('vv_rep_filhotes',['vv_rep_filhotes','vv_rep_crescer','vv_rep_comer'],
+         {vv_rep_filhotes:L('👶','Produzir novos seres, como os filhotes'), vv_rep_crescer:L('📏','Ficar mais alto e mais forte'), vv_rep_comer:L('🍽️','Comer bastante todos os dias')})},
+      {q:'Além dos animais e das plantas, o que mais é <b>ser vivo</b>? 🍄',
+       audio:['vv_q_outros'], stage:cena('🍄🦠'), colorOpts:true,
+       options:mkOpts('vv_fungos',['vv_fungos','vv_pedras','vv_carros'],
+         {vv_fungos:L('🍄🦠','As algas, os fungos e as bactérias'), vv_pedras:L('🪨','As pedras e a areia da praia'), vv_carros:L('🚗','Os carros e os prédios da cidade')})},
+      {q:'O que é o <b>ambiente</b>? 🌍',
+       audio:['vv_q_ambiente'], stage:cena('🌍'), colorOpts:true,
+       options:exp(mkOpts('vv_amb_tudo',['vv_amb_tudo','vv_amb_so_animais','vv_amb_so_casa'],
+         {vv_amb_tudo:L('🌍','Tudo o que há no lugar, com vida e sem vida'), vv_amb_so_animais:L('🐕','Só os animais e as plantas que vivem ali'), vv_amb_so_casa:L('🏠','Só as casas e os objetos construídos ali')}),'exp_ambiente')},
+      {q:'O <b>ar</b> não pode ser visto. Por que a gente sabe que ele existe? 💨',
+       audio:['vv_q_ar'], stage:cena('💨🍃'), colorOpts:true,
+       options:mkOpts('vv_ar_ok',['vv_ar_ok','vv_ar_x','vv_ar_y'],
+         {vv_ar_ok:L('🫁🍃','Pela respiração e pelo vento'), vv_ar_x:L('🔵','Porque ele é azul e brilhante'), vv_ar_y:L('✋','Porque dá para pegar com a mão')})},
+      {q:'A luz do sol, o ar, a água e o solo são componentes de que tipo? ☀️💧',
+       audio:['vv_q_naovivos'], stage:cena('☀️💧💨'), colorOpts:true,
+       options:mkOpts('vv_nat_naovivo',['vv_nat_naovivo','vv_nat_vivo','vv_nat_feito'],
+         {vv_nat_naovivo:L('🌿','São componentes naturais sem vida'), vv_nat_vivo:L('🐕','São todos seres vivos'), vv_nat_feito:L('🏭','São coisas construídas pelas pessoas')})},
+    ];
+    return mix(classif.slice(0,3), escolhas, shuffle(conc).slice(0,2));
+  },
+
+  /* 6. CADA UM É DIFERENTE */
+  diferente(){
+    const comidas=shuffle(COMIDAS).slice(0,2).map(a=>({
+      q:'O que este animal <b>come</b>? 🍽️',
+      audio:[a.k,'df_q_come'], stage:cena(a.e,a.txt), colorOpts:true,
+      options:mkOpts(a.come,['al_plantas','al_carne'],COME_LBL)
+    }));
+    const fixas=[
+      {q:'Qual é o <b>maior mamífero</b> que existe no mundo? 🐋',
+       audio:['df_q_maior'], stage:cena('🌊'), colorOpts:true,
+       options:mkOpts('df_baleia',['df_baleia','df_sapo','al_vaca'],
+         {df_baleia:L('🐋','A baleia-azul'), df_sapo:L('🐸','O sapinho'), al_vaca:L('🐄','A vaca')})},
+      {q:'Um dos <b>menores sapos</b> do mundo é brasileiro. Ele é do tamanho de quê? 🐸',
+       audio:['df_q_sapo'], stage:cena('🐸'), colorOpts:true,
+       options:mkOpts('df_dedo',['df_dedo','df_carro','df_cachorro'],
+         {df_dedo:L('👆','Ele cabe na ponta do dedo'), df_carro:L('🚗','Ele é do tamanho de um carro'), df_cachorro:L('🐕','Ele é do tamanho de um cachorro')})},
+      {q:'O <b>sagui</b> é um mamífero. Do que ele se alimenta? 🐒',
+       audio:['df_q_sagui'], stage:cena('🐒'), colorOpts:true,
+       options:mkOpts('df_sagui_come',['df_sagui_come','df_sagui_nectar','df_sagui_pedra'],
+         {df_sagui_come:L('🐛🍌','De insetos e de frutas'), df_sagui_nectar:L('🌺','Só do néctar das flores'), df_sagui_pedra:L('🪨','De pedrinhas')})},
+      {q:'A <b>borboleta</b> é um inseto. Do que ela se alimenta? 🦋',
+       audio:['df_q_borboleta'], stage:cena('🦋'), colorOpts:true,
+       options:mkOpts('df_nectar',['df_nectar','df_larvas','df_capim'],
+         {df_nectar:L('🌼','Do néctar das flores'), df_larvas:L('🐛','De larvas que ficam dentro das árvores'), df_capim:L('🌿','De capim')})},
+      {q:'O <b>pica-pau</b> é uma ave. De onde ele tira o alimento? 🐦',
+       audio:['df_q_picapau'], stage:cena('🐦'), colorOpts:true,
+       options:mkOpts('df_arvore_dentro',['df_arvore_dentro','df_mar','df_ceu'],
+         {df_arvore_dentro:L('🌳','De dentro das árvores'), df_mar:L('🌊','Do fundo do mar'), df_ceu:L('☁️','De cima das nuvens')})},
+      {q:'Por que o <b>urso-polar</b> tem a pelagem branca? ❄️',
+       audio:['df_q_urso'], stage:cena('🐻‍❄️'), colorOpts:true,
+       options:mkOpts('df_camufla_neve',['df_camufla_neve','df_bonito','df_frio_branco'],
+         {df_camufla_neve:L('❄️','Para se camuflar na neve'), df_bonito:L('✨','Só para ficar bonito'), df_frio_branco:L('🥶','Porque o frio pinta os pelos dele')})},
+      {q:'O que protege o <b>urso-polar</b> do frio muito forte? 🐻‍❄️',
+       audio:['df_q_gordura'], stage:cena('🐻‍❄️❄️'), colorOpts:true,
+       options:mkOpts('df_gordura',['df_gordura','df_casaco','df_fogo'],
+         {df_gordura:L('🐻‍❄️','Uma camada grossa de gordura'), df_casaco:L('🧥','Um casaco de lã bem grosso'), df_fogo:L('🔥','Uma fogueira acesa perto dele')})},
+      {q:'O <b>bicho-pau</b> parece com o quê? 🌿',
+       audio:['df_q_bichopau'], stage:cena('🌿🦗'), colorOpts:true,
+       options:mkOpts('df_graveto',['df_graveto','df_pedra_bp','df_flor_bp'],
+         {df_graveto:L('🌿','Parece um graveto'), df_pedra_bp:L('🪨','Parece uma pedra'), df_flor_bp:L('🌸','Parece uma flor')})},
+      {q:'Para que serve a <b>camuflagem</b>? 🫣',
+       audio:['df_q_camuflagem'], stage:cena('🫣🌿'), colorOpts:true,
+       options:exp(mkOpts('df_esconder',['df_esconder','df_correr_cam','df_voar'],
+         {df_esconder:L('🫣','Para o animal se esconder dos predadores'), df_correr_cam:L('🏃','Para o animal correr bem mais rápido'), df_voar:L('🦅','Para o animal conseguir voar bem alto')}),'exp_camuflagem')},
+      {q:'<b>Todo</b> cogumelo pode ser comido? 🍄',
+       audio:['df_q_cogumelo'], stage:cena('🍄'), colorOpts:true,
+       options:mkOpts('df_toxicos',['df_toxicos','df_todos','df_nenhum'],
+         {df_toxicos:L('⚠️','Não! Alguns são tóxicos'), df_todos:L('😋','Sim, todos podem ser comidos'), df_nenhum:L('🚫','Nenhum cogumelo pode ser comido')})},
+      {q:'De qual árvore vem a <b>azeitona</b>? 🫒',
+       audio:['df_q_oliveira'], stage:cena('🫒'), colorOpts:true,
+       options:mkOpts('df_oliveira',['df_oliveira','df_bananeira','df_cogumelo_op'],
+         {df_oliveira:L('🫒','Da oliveira'), df_bananeira:L('🍌','Da bananeira'), df_cogumelo_op:L('🍄','Do cogumelo')})},
+      {q:'Como podem ser os <b>diferentes ambientes</b> da Terra? 🌡️',
+       audio:['df_q_ambientes'], stage:cena('🏜️🌊'), colorOpts:true,
+       options:mkOpts('df_amb_ok',['df_amb_ok','df_amb_x','df_amb_y'],
+         {df_amb_ok:L('🏜️🌊','Quentes ou frios, secos ou úmidos'), df_amb_x:L('🟰','Todos são exatamente iguaizinhos'), df_amb_y:L('☀️','Só quentes e bem ensolarados')})},
+      {q:'Em que os <b>seres vivos</b> podem ser diferentes uns dos outros? 🔍',
+       audio:['df_q_diferencas'], stage:cena('🐋🐸'), colorOpts:true,
+       options:mkOpts('df_dif_ok',['df_dif_ok','df_dif_x','df_dif_y'],
+         {df_dif_ok:L('🔍','No tamanho, na cor, no tempo de vida e no que comem'), df_dif_x:L('🟰','Todos os seres vivos são exatamente iguais'), df_dif_y:L('🏷️','Só no nome que a gente dá para eles')})},
+    ];
+    return mix(comidas, shuffle(fixas).slice(0,5));
+  },
+
+  /* 7. NATURAL OU ARTIFICIAL? */
+  materiais(){
+    const classif=shuffle(MATERIAIS).slice(0,3).map(m=>({
+      q:'Este material é <b>natural</b> ou <b>artificial</b>? 🤔',
+      audio:[m.k,'ma_q_classifica'], stage:cena(m.e,m.txt), colorOpts:true,
+      options:mkOpts(m.nat?'na_natural':'na_artificial',['na_natural','na_artificial'],NATART_LBL)
+    }));
+    const transf=[
+      {q:'O <b>papel</b> é fabricado a partir de qual material? 📄',
+       audio:['ma_q_papel'], stage:cena('📄'), colorOpts:true,
+       options:mkOpts('ma_madeira',['ma_madeira','ma_areia','ma_algodao'],MAT_LBL)},
+      {q:'O <b>vidro</b> é fabricado com qual material aquecido? 🥛',
+       audio:['ma_q_vidro'], stage:cena('🥛'), colorOpts:true,
+       options:mkOpts('ma_areia',['ma_areia','ma_madeira','ma_ferro'],MAT_LBL)},
+      {q:'O <b>tecido</b> das roupas é feito com qual fibra natural? 👕',
+       audio:['ma_q_tecido'], stage:cena('👕'), colorOpts:true,
+       options:mkOpts('ma_algodao',['ma_algodao','ma_areia','ma_rocha'],MAT_LBL)},
+      {q:'O <b>aço</b> é fabricado a partir de qual material? 🔩',
+       audio:['ma_q_aco'], stage:cena('🔩'), colorOpts:true,
+       options:mkOpts('ma_ferro',['ma_ferro','ma_algodao','ma_madeira'],MAT_LBL)},
+      {q:'De onde é extraído o <b>ferro</b>? ⛏️',
+       audio:['ma_q_ferro'], stage:cena('⛏️'), colorOpts:true,
+       options:mkOpts('ma_rocha',['ma_rocha','ma_algodao','ma_madeira'],MAT_LBL)},
+    ];
+    const conc=[
+      {q:'O que é um material <b>natural</b>? 🌿',
+       audio:['ma_q_oque_nat'], stage:cena('🌿'), colorOpts:true,
+       options:exp(mkOpts('ma_def_nat',['ma_def_nat','ma_def_art2','ma_def_x'],
+         {ma_def_nat:L('🌿','É usado do jeito que vem da natureza'), ma_def_art2:L('🏭','Foi fabricado pelas pessoas numa fábrica'), ma_def_x:L('🎨','É colorido e brilha bastante na luz')}),'exp_natural')},
+      {q:'O que é um material <b>artificial</b>? 🏭',
+       audio:['ma_q_oque_art'], stage:cena('🏭'), colorOpts:true,
+       options:exp(mkOpts('ma_def_art',['ma_def_art','ma_def_nat2','ma_def_y'],
+         {ma_def_art:L('🏭','Foi mudado ou fabricado pelas pessoas'), ma_def_nat2:L('🌿','Já vem prontinho lá da natureza'), ma_def_y:L('💧','É sempre molhado e escorregadio')}),'exp_artificial')},
+    ];
+    const ordem={mode:'seq',
+      q:'Toque na <b>ordem certa</b> e mostre como a madeira vira papel. 🪵➡️📄',
+      audio:['ma_q_ordem'], stage:cena('🌳📄'),
+      itens:[{txt:'🌳 A árvore cresce na floresta', aud:'tr_arvore'},
+             {txt:'🪵 A madeira é retirada do tronco', aud:'tr_madeira'},
+             {txt:'🏭 A fábrica transforma a madeira', aud:'tr_fabrica'},
+             {txt:'📄 O papel fica pronto', aud:'tr_papel'}],
+      expAud:'tr_ok'};
+    return mix(classif, shuffle(transf).slice(0,2), shuffle(conc).slice(0,1), [ordem]);
+  },
+
+  /* 8. ÁGUA, SOLO E SOL */
+  elementos(){
+    const agua=[
+      {q:'Em que lugares a <b>água</b> pode estar? 💧',
+       audio:['ag_q_onde'], stage:cena('🌧️🏞️'), colorOpts:true,
+       options:mkOpts('ag_onde_ok',['ag_onde_ok','ag_onde_x','ag_onde_y'],
+         {ag_onde_ok:L('🌧️🏞️','Nos rios, na chuva, no céu e embaixo da terra'), ag_onde_x:L('🏞️','Só dentro dos rios e de mais nenhum lugar'), ag_onde_y:L('☁️','Só dentro das nuvens lá no alto do céu')})},
+      {q:'Quanta <b>água</b> tem no corpo dos seres vivos? 💧',
+       audio:['ag_q_corpo'], stage:cena('🧒💧'), colorOpts:true,
+       options:mkOpts('ag_corpo_sim',['ag_corpo_sim','ag_corpo_nao','ag_corpo_pouca'],
+         {ag_corpo_sim:L('💧','Mais da metade do corpo'), ag_corpo_nao:L('🚫','Nenhuma gotinha de água'), ag_corpo_pouca:L('🤏','Só uma gotinha bem pequena')})},
+      {q:'O que é o <b>hábitat</b> de um animal? 🏡',
+       audio:['ag_q_habitat'], stage:cena('🐢🏡'), colorOpts:true,
+       options:mkOpts('ag_hab_ok',['ag_hab_ok','ag_hab_x','ag_hab_y'],
+         {ag_hab_ok:L('🏡','É o lugar onde ele vive e cresce'), ag_hab_x:L('🐣','É o nome dos filhotes dele'), ag_hab_y:L('🍽️','É a comida preferida dele')})},
+      {q:'Onde fica guardada a <b>água embaixo da terra</b>? 🚰',
+       audio:['ag_q_lencois'], stage:cena('🚰🌍'), colorOpts:true,
+       options:mkOpts('ag_len_ok',['ag_len_ok','ag_len_x','ag_len_y'],
+         {ag_len_ok:L('💧','Nos lençóis freáticos'), ag_len_x:L('☁️','Nas nuvens lá do céu'), ag_len_y:L('🪨','Dentro das pedras secas')})},
+      {q:'Quem vive <b>dentro da água</b>? 🐢',
+       audio:['ag_q_agua_vive'], stage:cena('🐠🐢'), colorOpts:true,
+       options:mkOpts('ag_agua_vive_ok',['ag_agua_vive_ok','ag_agua_vive_x','ag_agua_vive_y'],
+         {ag_agua_vive_ok:L('🐠🐢','Peixes, plantas, tartarugas e bactérias'), ag_agua_vive_x:L('🚫','Ninguém consegue viver dentro da água'), ag_agua_vive_y:L('🚗','Só os carros e os brinquedos de plástico')})},
+    ];
+    const solo=[
+      {q:'Onde as plantas fixam as <b>raízes</b> e pegam os nutrientes? 🌱',
+       audio:['ag_q_raiz'], stage:cena('🌱'), colorOpts:true,
+       options:mkOpts('ag_solo_op',['ag_solo_op','ag_ar_op','ag_fogo'],
+         {ag_solo_op:L('🟤','No solo'), ag_ar_op:L('💨','No ar'), ag_fogo:L('🔥','No fogo')})},
+      {q:'Qual animal cava <b>túneis no solo</b> e tira dele o alimento? 🪱',
+       audio:['ag_q_minhoca'], stage:cena('🟤'), colorOpts:true,
+       options:mkOpts('sv_minhoca',['sv_minhoca','df_baleia','sv_borboleta'],
+         Object.assign({df_baleia:L('🐋','A baleia-azul')},SER_LBL))},
+      {q:'Em que lugares existe <b>solo</b>? 🟤',
+       audio:['ag_q_solo_onde'], stage:cena('🟤🌍'), colorOpts:true,
+       options:mkOpts('ag_solo_todo',['ag_solo_todo','ag_solo_so_fazenda','ag_solo_so_praia'],
+         {ag_solo_todo:L('🌍','Em todo lugar, até embaixo das ruas'), ag_solo_so_fazenda:L('🚜','Só na fazenda, longe da cidade'), ag_solo_so_praia:L('🏖️','Só na praia, pertinho do mar')})},
+      {q:'O <b>solo</b> é feito de quê? 🟤',
+       audio:['ag_q_solo_tem'], stage:cena('🪨💧🪱'), colorOpts:true,
+       options:mkOpts('ag_solo_tem_ok',['ag_solo_tem_ok','ag_solo_tem_x','ag_solo_tem_y'],
+         {ag_solo_tem_ok:L('🪨💧','De rochinhas, água, ar e seres bem pequenos'), ag_solo_tem_x:L('🏖️','Só de areia branquinha, igualzinha à da praia'), ag_solo_tem_y:L('🧴','De plástico feito na fábrica')})},
+    ];
+    const sol=[
+      {q:'Por que fica <b>dia</b> em um lugar da Terra? ☀️',
+       audio:['ag_q_dia'], stage:cena('🌍☀️'), colorOpts:true,
+       options:mkOpts('ag_dia_ok',['ag_dia_ok','ag_dia_x','ag_dia_y'],
+         {ag_dia_ok:L('☀️','Porque a luz do sol chega naquele lugar'), ag_dia_x:L('💡','Porque alguém acende uma lâmpada'), ag_dia_y:L('🌙','Porque a lua vai embora do céu')})},
+      {q:'E por que fica <b>noite</b> em um lugar da Terra? 🌙',
+       audio:['ag_q_noite'], stage:cena('🌍🌙'), colorOpts:true,
+       options:mkOpts('ag_noite_ok',['ag_noite_ok','ag_noite_x','ag_noite_y'],
+         {ag_noite_ok:L('🌙','Porque a luz do sol não chega naquele lugar'), ag_noite_x:L('🛌','Porque todo mundo do lugar foi dormir'), ag_noite_y:L('🔌','Porque o sol se apaga durante a noite')})},
+      {q:'A luz do sol aquece o planeta e define o quê? 🍂🌸',
+       audio:['ag_q_estacoes'], stage:cena('🍂🌸'), colorOpts:true,
+       options:mkOpts('ag_estacoes',['ag_estacoes','ag_estacoes_x','ag_estacoes_y'],
+         {ag_estacoes:L('🍂🌸','As estações do ano'), ag_estacoes_x:L('🎂','Os aniversários'), ag_estacoes_y:L('🔢','Os números')})},
+      {q:'Para que a <b>planta</b> usa a água e a luz do sol? 🌱',
+       audio:['ag_q_planta'], stage:cena('🌱☀️'), colorOpts:true,
+       options:mkOpts('ag_planta_ok',['ag_planta_ok','ag_planta_x','ag_planta_y'],
+         {ag_planta_ok:L('🌱','Para crescer e fabricar o próprio alimento'), ag_planta_x:L('🎨','Para pintar as folhas de verde'), ag_planta_y:L('🎵','Para fazer música com o vento')})},
+      {q:'Para que as <b>tartarugas</b> precisam da luz do sol? 🐢',
+       audio:['ag_q_tartaruga'], stage:cena('🐢🥚'), colorOpts:true,
+       options:mkOpts('ag_tarta_ok',['ag_tarta_ok','ag_tarta_x','ag_tarta_y'],
+         {ag_tarta_ok:L('🐢🥚','Para se aquecer e chocar os ovos'), ag_tarta_x:L('🎨','Para ficar com o casco colorido'), ag_tarta_y:L('🏊','Para aprender a nadar no mar')})},
+      {q:'O que as <b>placas solares</b> fazem com a luz do sol? 🔌',
+       audio:['ag_q_placas'], stage:cena('☀️🔌'), colorOpts:true,
+       options:mkOpts('ag_placa_ok',['ag_placa_ok','ag_placa_x','ag_placa_y'],
+         {ag_placa_ok:L('🔌','Transformam a luz do sol em energia elétrica'), ag_placa_x:L('💧','Transformam a luz do sol em água da chuva'), ag_placa_y:L('🍎','Transformam a luz do sol em comida quentinha')})},
+    ];
+    const ar=[
+      {q:'O <b>ar</b> ajuda quais animais a se movimentarem? 🕊️',
+       audio:['ag_q_ar_animais'], stage:cena('🕊️🐝'), colorOpts:true,
+       options:mkOpts('ag_ar_aves',['ag_ar_aves','ag_ar_peixes','ag_ar_minhocas'],
+         {ag_ar_aves:L('🕊️🐝','As aves e os insetos'), ag_ar_peixes:L('🐟🐢','Os peixes e as tartarugas'), ag_ar_minhocas:L('🪱🐌','As minhocas e os caracóis')})},
+      {q:'O <b>vento</b> leva o pólen das flores. O que pode se formar depois disso? 🌸',
+       audio:['ag_q_polen'], stage:cena('🌸💨'), colorOpts:true,
+       options:mkOpts('ag_polen_ok',['ag_polen_ok','ag_polen_x','ag_polen_y'],
+         {ag_polen_ok:L('🌰🍎','Sementes e frutos'), ag_polen_x:L('🪨🏖️','Pedras e areia'), ag_polen_y:L('☁️🌧️','Nuvens de chuva')})},
+    ];
+    const tres={q:'Quais são os <b>três elementos</b> que existem em todo lugar e mantêm a vida? 🌍',
+       audio:['ag_q_tres'], stage:cena('💧🟤☀️'), colorOpts:true,
+       options:exp(mkOpts('ag_tres',['ag_tres','ag_tres_x','ag_tres_y'],
+         {ag_tres:L('💧🟤☀️','A água, o solo e a luz do sol'), ag_tres_x:L('🍫🍬','O chocolate, a bala e o pirulito'), ag_tres_y:L('🚗🏠','O carro, a casa e o celular')}),'exp_tres')};
+    return mix([tres], shuffle(agua).slice(0,2), shuffle(solo).slice(0,1),
+               shuffle(sol).slice(0,2), shuffle(ar).slice(0,1));
+  },
+
+  /* 9. RECURSOS NATURAIS */
+  recursos(){
+    const fixas=[
+      {q:'O que são os <b>recursos naturais</b>? 🌍',
+       audio:['rn_q_oque'], stage:cena('🌍🌾'), colorOpts:true,
+       options:exp(mkOpts('rn_def',['rn_def','rn_def_x','rn_def_y'],
+         {rn_def:L('🌍','O que as pessoas tiram da natureza para viver'), rn_def_x:L('🏭','As coisas feitas só dentro das fábricas'), rn_def_y:L('🎁','Os brinquedos comprados nas lojas grandes')}),'exp_recursos')},
+      {q:'Qual destes é um <b>recurso natural</b>? 💧',
+       audio:['rn_q_qual'], stage:cena('🤔'), colorOpts:true,
+       options:mkOpts('rn_agua',['rn_agua','rn_video','rn_boneco'],
+         {rn_agua:L('💧','A água'), rn_video:L('🎮','O videogame'), rn_boneco:L('🧸','O boneco de plástico')})},
+      {q:'Qual recurso natural a pessoa tira da <b>colmeia</b>? 🍯',
+       audio:['rn_q_mel'], stage:cena('🐝🍯'), colorOpts:true,
+       options:mkOpts('rn_mel',['rn_mel','rn_leite','rn_plastico'],
+         {rn_mel:L('🍯','O mel das abelhas'), rn_leite:L('🥛','O leite das vacas'), rn_plastico:L('🧴','O plástico da fábrica')})},
+      {q:'O <b>pescador</b> tira o alimento dele de onde? 🎣',
+       audio:['rn_q_pesca'], stage:cena('🎣🐟'), colorOpts:true,
+       options:mkOpts('rn_rio',['rn_rio','rn_supermercado','rn_ceu'],
+         {rn_rio:L('🎣','Da água do rio ou do mar'), rn_supermercado:L('🛒','Só do supermercado da esquina'), rn_ceu:L('☁️','Do céu, quando chove')})},
+      {q:'O <b>agricultor</b> planta e colhe usando quais recursos da natureza? 🌾',
+       audio:['rn_q_planta'], stage:cena('👨‍🌾🌱'), colorOpts:true,
+       options:mkOpts('rn_solo_agua_sol',['rn_solo_agua_sol','rn_x','rn_y'],
+         {rn_solo_agua_sol:L('🟤💧☀️','O solo, a água e a luz do sol'), rn_x:L('📱','O celular e a televisão'), rn_y:L('🧊','O gelo e a neve do congelador')})},
+      {q:'A <b>madeira</b> que vira papel é um recurso tirado de onde? 🪵',
+       audio:['rn_q_madeira_rec'], stage:cena('🪵'), colorOpts:true,
+       options:mkOpts('rn_mad_arvore',['rn_mad_arvore','rn_mad_fabrica','rn_mad_loja'],
+         {rn_mad_arvore:L('🌳','Da árvore'), rn_mad_fabrica:L('🏭','Da fábrica'), rn_mad_loja:L('🏪','Da loja')})},
+      {q:'Para quais coisas as pessoas usam a <b>água</b> todo dia? 💧',
+       audio:['rn_q_usos'], stage:cena('💧🚰'), colorOpts:true,
+       options:mkOpts('rn_usos_ok',['rn_usos_ok','rn_usos_x','rn_usos_y'],
+         {rn_usos_ok:L('🍽️🚿','Para beber, cozinhar, plantar e tomar banho'), rn_usos_x:L('🛁','Só para encher a piscina do quintal'), rn_usos_y:L('🚗','Só para lavar o carro da família')})},
+      {q:'Como devemos usar a <b>água</b>? 🚿',
+       audio:['rn_q_agua_uso'], stage:cena('🚿💧'), colorOpts:true,
+       options:mkOpts('rn_cuidado',['rn_cuidado','rn_gastar','rn_sujar'],
+         {rn_cuidado:L('🚿','Com cuidado, sem gastar à toa'), rn_gastar:L('💦','Deixando a torneira aberta o tempo todo'), rn_sujar:L('🗑️','Jogando lixo dentro do rio')})},
+      {q:'E se não existisse água, luz do sol nem plantas? O que aconteceria? 🌍',
+       audio:['rn_q_sem'], stage:cena('🌍❓'), colorOpts:true,
+       options:mkOpts('rn_sem_ok',['rn_sem_ok','rn_sem_x','rn_sem_y'],
+         {rn_sem_ok:L('🌍','A vida não seria do jeito que a gente conhece'), rn_sem_x:L('😀','Não mudaria nada na vida do planeta'), rn_sem_y:L('🎉','Tudo ficaria bem melhor para todo mundo')})},
+      {q:'O que a gente pode fazer para <b>cuidar do ambiente</b> onde vive? 💚',
+       audio:['rn_q_cuidar'], stage:cena('💚🌳'), colorOpts:true,
+       options:mkOpts('rn_cuidar_ok',['rn_cuidar_ok','rn_cuidar_x','rn_cuidar_y'],
+         {rn_cuidar_ok:L('💚','Cuidar da água, do solo e das plantas'), rn_cuidar_x:L('🗑️','Jogar o lixo no chão da rua'), rn_cuidar_y:L('🪓','Cortar todas as árvores do lugar')})},
+    ];
+    return shuffle(fixas).slice(0,7);
+  },
+};
+
+/* ===== BOOT ===== */
+function enterApp(){
+  initAudio();
+  document.getElementById('splash').style.display='none';
+  goHome(true);
+  unlockAudio(()=>playKeys(['greet']));
+}
+document.getElementById('startBtn').addEventListener('click',enterApp);
+document.getElementById('splash').addEventListener('click',e=>{ if(e.target.id!=='startBtn'){ enterApp(); } });
+</script>
+</body>
+</html>
