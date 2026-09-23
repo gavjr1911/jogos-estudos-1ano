@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # ============================================================
-#  GERADOR DE ÁUDIOS NEURAIS — Menu principal
+#  GERADOR DE ÁUDIOS NEURAIS — Matemática Divertida do Vitor
 #  Usa edge-tts (vozes neurais da Microsoft, grátis, sem chave).
 #  Lê o dicionário VOICE de dentro do index.html e gera um
 #  arquivo audio/<chave>.mp3 com voz natural em português.

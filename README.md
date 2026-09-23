@@ -1,71 +1,104 @@
-# 🌟 Matemática Divertida do Vitor
+# 🌟 Estudos Divertidos do Vitor
 
-App de jogos educativos para o Vitor (6 anos) estudar para a prova de **Matemática do 1º ano** (conteúdo do livro Bernoulli Sistema de Ensino).
+Jogos educativos do **1º ano** (conteúdo do Bernoulli Sistema de Ensino), feitos para o Vitor (6 anos) estudar brincando.
 
-Feito como **um único arquivo `index.html`** — sem instalação, sem internet depois de aberto. Funciona em celular, tablet e computador.
+**👉 [Abrir o app](https://gavjr1911.github.io/matematica-vitor/)**
 
-## 🎮 Os 8 mini-games
+Tudo começa por uma **página de menu única**. A partir dela se navega para cada matéria — não é mais preciso guardar uma URL por módulo.
 
-| Jogo | O que treina (conteúdo da prova) |
-|------|----------------------------------|
-| 🔢 **Contando** | Números de 0 a 9 — contar e representar quantidades |
-| 🪜 **Sequência** | Número que falta + ordem crescente e decrescente |
-| 🥇 **Posição na Fila** | Números ordinais (1º ao 9º) |
-| 📦 **Sólidos** | Cubo, esfera, cone, cilindro, pirâmide, paralelepípedo |
-| 🔺 **Figuras Planas** | Quadrado, triângulo, círculo, retângulo |
-| 🧭 **Onde Está?** | Localização: dentro, fora, em cima, embaixo, entre |
-| ⚖️ **Mais ou Menos** | Comparar quantidades: mais, menos, igual |
-| 📊 **Gráficos** | Ler gráfico de colunas (maior / menor) |
+## 📚 Módulos
+
+| # | Módulo | Pasta | Conteúdo |
+|---|--------|-------|----------|
+| 1 | 🔢 Matemática | `matematica/` | Números, sólidos e figuras |
+| 2 | 📚 Português | `portugues2/` | Letras, sílabas e palavras |
+| 3 | 🔬 Ciências | `ciencias/` | Seres vivos e natureza |
+| 4 | 🦉 English Fun! | `ingles2/` | Cores, animais e números |
+| 5 | 🏠 Geo e História | `geografia/` | Casa, escola e tempo |
+| 6 | 🎲 Matemática 2 | `matematica2/` | Somar, tirar e comparar |
+| 7 | ✏️ Português 2 | `portugues-setembro/` | Sílabas, rimas e frases |
+| 8 | 🌍 Ciências 2 | `ciencias2/` | Corpo, materiais e ambiente |
+
+## ➕ Como adicionar um módulo novo
+
+1. Crie a pasta com o `index.html` do jogo (copie a estrutura de um módulo existente).
+2. Gere os áudios do jogo: `../.venv/bin/python gerar-audios.py` dentro da pasta nova.
+3. Abra o `index.html` da **raiz** e acrescente **uma linha** no array `MODULOS`:
+
+```js
+{pasta:'nome-da-pasta', ico:'🎯', nome:'Nome Curto', sub:'Descrição pequena', tag:'Módulo 9', cor:'var(--turquesa)'},
+```
+
+4. Acrescente a narração do card no objeto `VOICE` do mesmo arquivo. A chave é
+   `m_` + o nome da pasta, com `-` virando `_`:
+
+```js
+m_nome_da_pasta: "Nome falado da matéria",
+```
+
+5. Gere o áudio do menu e confira tudo:
+
+```bash
+.venv/bin/python gerar-audios.py   # na raiz
+node _qa-menu.js
+```
+
+A `cor` aceita qualquer cor CSS. As prontas: `var(--rosa)`, `--azul`, `--verde`,
+`--laranja`, `--roxo`, `--vermelho`, `--turquesa`, `--magenta`.
+
+## 🧭 Navegação
+
+Um símbolo, um significado — importante para quem ainda não lê:
+
+- **🏠** leva sempre ao **menu de matérias** (em qualquer tela do app).
+- **🔄** troca de jogo **dentro da mesma matéria**.
+- Tocar num card do menu abre a matéria, falando o nome dela em voz alta.
 
 ## 👶 Pensado para quem ainda não lê
 
-- 🔊 **Narração com voz natural** — a pergunta **e todas as respostas** são faladas em voz alta (português), com uma **voz neural natural** (não robótica). O áudio é **pré-gravado em arquivos MP3** (pasta `audio/`), então **funciona em qualquer aparelho, sem depender de voz instalada** no navegador.
-- 🗣️ **Cada opção fala** — quando o Vitor toca numa resposta, o app fala o nome dela (ex.: "cubo!"), ajudando a aprender mesmo errando.
-- ⭐ **Estrelas e pontos** — recompensa a cada acerto, com confete e som de vitória.
-- 🎨 **Visual grande e colorido** — emojis e botões enormes, fáceis de tocar.
-- 🔁 **Repetição infinita** — as perguntas são sorteadas, então sempre tem treino novo.
+- 🔊 **Narração pré-gravada em MP3** (pasta `audio/` de cada módulo) — a pergunta **e todas as respostas** são faladas. Não depende de voz instalada no aparelho e funciona offline.
+- 🗣️ **Cada opção fala** quando tocada, inclusive as erradas — a criança aprende errando.
+- ⭐ **Estrelas e pontos**, com confete e som de vitória.
+- 🎨 **Botões enormes e coloridos**, fáceis de tocar.
 
 ### 🔈 Sobre o áudio
-- O áudio fica em **arquivos `.mp3`** na pasta `audio/` (≈ 2 MB no total) — toca em iPhone, Android, Chrome, Safari, Edge e Firefox, **online ou offline**.
-- **Toque sempre em "▶ COMEÇAR" primeiro** — esse toque libera o som (regra dos navegadores).
-- **iPhone/iPad**: tire do **modo silencioso** (chavinha lateral) e suba o volume.
-- Para **repetir** a leitura, toque no botão amarelo **🔊** ao lado da pergunta.
-- Tem um botão **🔈 Testar som** na tela inicial para conferir.
+- **Toque em "▶ COMEÇAR" primeiro** — esse toque libera o som (regra dos navegadores).
+- **iPhone/iPad**: tire do modo silencioso (chavinha lateral) e suba o volume.
+- Para repetir a leitura, toque no botão amarelo **🔊** ao lado da pergunta.
 
-### 🎙️ Regerar os áudios (opcional)
-Os áudios já estão prontos na pasta `audio/`. Foram gerados com **vozes neurais** (`edge-tts`, grátis, sem chave de API). Para regravar (ex.: trocar a voz):
+### 🎙️ Regerar os áudios
+Os áudios já estão prontos. Foram gerados com vozes neurais (`edge-tts`, grátis, sem chave de API):
+
 ```bash
 python3 -m venv .venv && .venv/bin/pip install edge-tts   # 1ª vez
-.venv/bin/python gerar-audios.py                          # voz Francisca (padrão)
-VOZ=pt-BR-AntonioNeural .venv/bin/python gerar-audios.py  # voz masculina
-RATE=-15% .venv/bin/python gerar-audios.py                # mais devagar
+cd matematica && ../.venv/bin/python gerar-audios.py       # dentro do módulo
+VOZ=pt-BR-AntonioNeural ../.venv/bin/python gerar-audios.py  # voz masculina
+RATE=-15% ../.venv/bin/python gerar-audios.py                # mais devagar
 ```
-O script lê os textos do próprio `index.html` e gera um MP3 por frase. Vozes pt-BR: `pt-BR-FranciscaNeural` (feminina), `pt-BR-AntonioNeural` (masculina), `pt-BR-ThalitaMultilingualNeural` (feminina).
 
-## 🚀 Como publicar no GitHub Pages
+Vozes pt-BR: `pt-BR-FranciscaNeural` (feminina, padrão), `pt-BR-AntonioNeural` (masculina), `pt-BR-ThalitaMultilingualNeural`.
 
-1. Crie um repositório no GitHub (ex.: `matematica-vitor`).
-2. Envie o arquivo `index.html` para o repositório:
-   ```bash
-   git init
-   git add index.html README.md
-   git commit -m "Jogos de matemática do Vitor"
-   git branch -M main
-   git remote add origin https://github.com/SEU_USUARIO/matematica-vitor.git
-   git push -u origin main
-   ```
-3. No GitHub, vá em **Settings → Pages**.
-4. Em **Branch**, escolha `main` e a pasta `/ (root)`. Salve.
-5. Em ~1 minuto o jogo estará no ar em:
-   `https://SEU_USUARIO.github.io/matematica-vitor/`
+## ✅ Qualidade
 
-Abra esse link no celular ou tablet e deixe o Vitor brincar! 🎉
+Dois verificadores automáticos:
 
-## 💡 Dicas para usar com a criança
+```bash
+node _qa-menu.js        # menu ↔ módulos
+node ciencias2/_qa.js   # conteúdo do módulo Ciências 2
+```
 
-- No **iPhone/iPad**, toque uma vez no botão "COMEÇAR" para liberar o som da narração.
-- Se a voz não falar, é só tocar no botão amarelo 🔊 ao lado da pergunta.
-- As estrelas ⭐ ficam guardadas no aparelho — ele acumula a cada partida.
+O **`_qa-menu.js`** confere que todo item do menu aponta para uma pasta existente,
+que nenhuma pasta ficou de fora, que não há cor repetida, que todo módulo tem o
+botão 🏠 de voltar e que toda narração tem seu `.mp3`. **Rode sempre que adicionar
+um módulo.**
+
+O **`ciencias2/_qa.js`** sorteia milhares de rodadas e confere que cada uma tem
+exatamente uma resposta certa, que nenhuma opção se repete, que todo áudio existe
+e que o enunciado não entrega a resposta.
+
+## 🚀 Publicação
+
+GitHub Pages, branch `main`, pasta raiz. Publica sozinho a cada push.
 
 ---
 Feito com 💜 para o Vitor.
