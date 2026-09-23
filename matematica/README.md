@@ -42,24 +42,17 @@ RATE=-15% .venv/bin/python gerar-audios.py                # mais devagar
 ```
 O script lê os textos do próprio `index.html` e gera um MP3 por frase. Vozes pt-BR: `pt-BR-FranciscaNeural` (feminina), `pt-BR-AntonioNeural` (masculina), `pt-BR-ThalitaMultilingualNeural` (feminina).
 
-## 🚀 Como publicar no GitHub Pages
+## 🧭 Onde este módulo vive
 
-1. Crie um repositório no GitHub (ex.: `matematica-vitor`).
-2. Envie o arquivo `index.html` para o repositório:
-   ```bash
-   git init
-   git add index.html README.md
-   git commit -m "Jogos de matemática do Vitor"
-   git branch -M main
-   git remote add origin https://github.com/SEU_USUARIO/matematica-vitor.git
-   git push -u origin main
-   ```
-3. No GitHub, vá em **Settings → Pages**.
-4. Em **Branch**, escolha `main` e a pasta `/ (root)`. Salve.
-5. Em ~1 minuto o jogo estará no ar em:
-   `https://SEU_USUARIO.github.io/matematica-vitor/`
+Este é o **Módulo 1** do site [Estudos Divertidos do Vitor](../README.md).
+Ele fica na pasta `matematica/` e é acessado pelo menu principal — não precisa
+de URL própria.
 
-Abra esse link no celular ou tablet e deixe o Vitor brincar! 🎉
+- No ar: <https://gavjr1911.github.io/matematica-vitor/>
+- Voltar ao menu de matérias: botão 🏠 na barra de cima
+- Trocar de jogo dentro deste módulo: botão 🔄
+
+A publicação é automática a cada push na branch `main`.
 
 ## 💡 Dicas para usar com a criança
 

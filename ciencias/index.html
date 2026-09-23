@@ -361,7 +361,7 @@ loopConf();
 function shell(inner){
   App.innerHTML=`
     <div class="topbar">
-      <div class="nav"><a class="back-btn" href="../" title="Escolher outra matéria" aria-label="Voltar para o menu de matérias">⬅️</a><button class="home-btn" onclick="sndClick();goHome()" title="Início deste módulo" aria-label="Início deste módulo">🏠</button></div>
+      <div class="nav"><a class="back-btn" href="../" title="Voltar ao menu de matérias" aria-label="Voltar ao menu de matérias">🏠</a><button class="home-btn" onclick="sndClick();goHome()" title="Escolher outro jogo desta matéria" aria-label="Escolher outro jogo desta matéria">🔄</button></div>
       <div class="stars">⭐ <span class="num" id="starNum">${stars}</span></div>
     </div>
     ${inner}`;

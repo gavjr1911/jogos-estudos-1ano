@@ -22,20 +22,37 @@ Tudo começa por uma **página de menu única**. A partir dela se navega para ca
 ## ➕ Como adicionar um módulo novo
 
 1. Crie a pasta com o `index.html` do jogo (copie a estrutura de um módulo existente).
-2. Gere os áudios: `.venv/bin/python gerar-audios.py` dentro da pasta nova.
+2. Gere os áudios do jogo: `../.venv/bin/python gerar-audios.py` dentro da pasta nova.
 3. Abra o `index.html` da **raiz** e acrescente **uma linha** no array `MODULOS`:
 
 ```js
-{pasta:'nome-da-pasta', ico:'🎯', nome:'Nome Curto', sub:'Descrição pequena', tag:'Módulo 9', cls:'c1'},
+{pasta:'nome-da-pasta', ico:'🎯', nome:'Nome Curto', sub:'Descrição pequena', tag:'Módulo 9', cor:'var(--turquesa)'},
 ```
 
-Só isso — o menu se monta sozinho a partir desse array. As cores vão de `c1` a `c8`.
+4. Acrescente a narração do card no objeto `VOICE` do mesmo arquivo. A chave é
+   `m_` + o nome da pasta, com `-` virando `_`:
+
+```js
+m_nome_da_pasta: "Nome falado da matéria",
+```
+
+5. Gere o áudio do menu e confira tudo:
+
+```bash
+.venv/bin/python gerar-audios.py   # na raiz
+node _qa-menu.js
+```
+
+A `cor` aceita qualquer cor CSS. As prontas: `var(--rosa)`, `--azul`, `--verde`,
+`--laranja`, `--roxo`, `--vermelho`, `--turquesa`, `--magenta`.
 
 ## 🧭 Navegação
 
-- **Menu → módulo**: toque num card.
-- **Módulo → menu**: botão roxo **⬅️** na barra de cima.
-- **🏠** volta para o início *daquele módulo* (escolher outro jogo da mesma matéria).
+Um símbolo, um significado — importante para quem ainda não lê:
+
+- **🏠** leva sempre ao **menu de matérias** (em qualquer tela do app).
+- **🔄** troca de jogo **dentro da mesma matéria**.
+- Tocar num card do menu abre a matéria, falando o nome dela em voz alta.
 
 ## 👶 Pensado para quem ainda não lê
 
@@ -63,13 +80,21 @@ Vozes pt-BR: `pt-BR-FranciscaNeural` (feminina, padrão), `pt-BR-AntonioNeural` 
 
 ## ✅ Qualidade
 
-O módulo `ciencias2` tem um verificador automático:
+Dois verificadores automáticos:
 
 ```bash
-node ciencias2/_qa.js
+node _qa-menu.js        # menu ↔ módulos
+node ciencias2/_qa.js   # conteúdo do módulo Ciências 2
 ```
 
-Ele sorteia milhares de rodadas e confere que cada uma tem exatamente uma resposta certa, que nenhuma opção se repete, que todo áudio referenciado existe e que o enunciado não entrega a resposta.
+O **`_qa-menu.js`** confere que todo item do menu aponta para uma pasta existente,
+que nenhuma pasta ficou de fora, que não há cor repetida, que todo módulo tem o
+botão 🏠 de voltar e que toda narração tem seu `.mp3`. **Rode sempre que adicionar
+um módulo.**
+
+O **`ciencias2/_qa.js`** sorteia milhares de rodadas e confere que cada uma tem
+exatamente uma resposta certa, que nenhuma opção se repete, que todo áudio existe
+e que o enunciado não entrega a resposta.
 
 ## 🚀 Publicação
 

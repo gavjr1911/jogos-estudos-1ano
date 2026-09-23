@@ -33,7 +33,7 @@
 
   .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
   /* Telas estreitas: uma coluna, para o alvo de toque ficar bem grande */
-  @media (max-width:420px){ .grid{grid-template-columns:1fr;} }
+  @media (max-width:480px){ .grid{grid-template-columns:1fr;} }
 
   .card{
     border:none; border-radius:26px; padding:18px 12px; cursor:pointer;
@@ -48,7 +48,7 @@
   .card .sub{font-size:13px; font-weight:normal; opacity:.92;}
   .card .tag{
     font-size:11px; font-weight:bold; letter-spacing:.5px; text-transform:uppercase;
-    background:rgba(255,255,255,.25); border-radius:10px; padding:2px 8px;
+    background:rgba(255,255,255,.88); color:#3a3a55; border-radius:10px; padding:3px 9px;
   }
 
   .rodape{text-align:center; color:#7a6; margin-top:22px; font-size:14px; padding-bottom:20px;}
@@ -67,6 +67,13 @@
     <p>Escolha o que você quer estudar 👇</p>
   </div>
   <div class="grid" id="grid"></div>
+  <noscript>
+    <div class="hero" style="margin-top:16px;">
+      <p style="color:var(--vermelho);font-weight:bold;">
+        Este app precisa de JavaScript ativado para funcionar.
+      </p>
+    </div>
+  </noscript>
   <p class="rodape">Feito com 💜 para o Vitor</p>
 </div>
 
@@ -82,18 +89,39 @@
      nome  : título do card
      sub   : linha pequena embaixo do título
      tag   : etiqueta (matéria ou número do módulo)
-     cls   : cor do card — c1 a c8, definidas no CSS acima
+     cor   : cor de fundo do card — qualquer cor CSS.
+             As prontas: var(--rosa) --azul --verde --laranja
+             --roxo --vermelho --turquesa --magenta
    ============================================================ */
 const MODULOS = [
-  {pasta:'matematica',         ico:'🔢', nome:'Matemática',      sub:'Números, sólidos e figuras',      tag:'Módulo 1', cls:'c1'},
-  {pasta:'portugues2',         ico:'📚', nome:'Português',       sub:'Letras, sílabas e palavras',      tag:'Módulo 2', cls:'c2'},
-  {pasta:'ciencias',           ico:'🔬', nome:'Ciências',        sub:'Seres vivos e natureza',          tag:'Módulo 3', cls:'c3'},
-  {pasta:'ingles2',            ico:'🦉', nome:'English Fun!',    sub:'Cores, animais e números',        tag:'Módulo 4', cls:'c4'},
-  {pasta:'geografia',          ico:'🏠', nome:'Geo e História',  sub:'Casa, escola e tempo',            tag:'Módulo 5', cls:'c5'},
-  {pasta:'matematica2',        ico:'🎲', nome:'Matemática 2',    sub:'Somar, tirar e comparar',         tag:'Módulo 6', cls:'c6'},
-  {pasta:'portugues-setembro', ico:'✏️', nome:'Português 2',     sub:'Sílabas, rimas e frases',         tag:'Módulo 7', cls:'c7'},
-  {pasta:'ciencias2',          ico:'🌍', nome:'Ciências 2',      sub:'Corpo, materiais e ambiente',     tag:'Módulo 8', cls:'c8'},
+  {pasta:'matematica',         ico:'🔢', nome:'Matemática',      sub:'Números, sólidos e figuras',      tag:'Módulo 1', cor:'var(--rosa)'},
+  {pasta:'portugues2',         ico:'📚', nome:'Português',       sub:'Letras, sílabas e palavras',      tag:'Módulo 2', cor:'var(--azul)'},
+  {pasta:'ciencias',           ico:'🔬', nome:'Ciências',        sub:'Seres vivos e natureza',          tag:'Módulo 3', cor:'var(--verde)'},
+  {pasta:'ingles2',            ico:'🦉', nome:'English Fun!',    sub:'Cores, animais e números',        tag:'Módulo 4', cor:'var(--laranja)'},
+  {pasta:'geografia',          ico:'🗺️', nome:'Geo e História',  sub:'Casa, escola e tempo',            tag:'Módulo 5', cor:'var(--roxo)'},
+  {pasta:'matematica2',        ico:'🎲', nome:'Matemática 2',    sub:'Somar, tirar e comparar',         tag:'Módulo 6', cor:'var(--vermelho)'},
+  {pasta:'portugues-setembro', ico:'✏️', nome:'Português 2',     sub:'Sílabas, rimas e frases',         tag:'Módulo 7', cor:'var(--turquesa)'},
+  {pasta:'ciencias2',          ico:'🌍', nome:'Ciências 2',      sub:'Corpo, materiais e ambiente',     tag:'Módulo 8', cor:'var(--magenta)'},
 ];
+
+
+/* ============================================================
+   NARRAÇÃO
+   Mesmo padrão dos módulos: cada chave vira audio/<chave>.mp3
+   gerado por `gerar-audios.py` (edge-tts). A chave de cada
+   matéria é "m_" + o nome da pasta.
+   ============================================================ */
+const VOICE = {
+  greet: "Oi, Vitor! Escolha o que você quer estudar.",
+  m_matematica: "Matemática",
+  m_portugues2: "Português",
+  m_ciencias: "Ciências",
+  m_ingles2: "Inglês",
+  m_geografia: "Geografia e História",
+  m_matematica2: "Matemática dois",
+  m_portugues_setembro: "Português dois",
+  m_ciencias2: "Ciências dois"
+};
 
 /* ---- som de toque (gerado no navegador, sem arquivo de áudio) ---- */
 let actx=null;
@@ -118,10 +146,31 @@ function tone(freq,start,dur,type='sine',vol=0.2){
 }
 function sndClick(){ initAudio(); tone(440,0,0.08,'triangle',0.15); }
 
+
+/* ---- narração por MP3 (igual aos módulos) ---- */
+const player = new Audio();
+function audioKey(pasta){ return 'm_' + pasta.replace(/-/g,'_'); }
+function say(key){
+  try{
+    player.pause();
+    player.src = 'audio/' + key + '.mp3';
+    return player.play().catch(()=>{});
+  }catch(e){ return Promise.resolve(); }
+}
+/* O primeiro toque libera o áudio (regra dos navegadores) e dispara o greet. */
+let audioLiberado = false;
+function liberarAudio(){
+  if(audioLiberado) return;
+  audioLiberado = true;
+  initAudio();
+  say('greet');
+}
+document.addEventListener('pointerdown', liberarAudio, {once:true});
+
 /* ---- monta o menu ---- */
 const grid = document.getElementById('grid');
 grid.innerHTML = MODULOS.map(m=>`
-  <a class="card ${m.cls}" href="${m.pasta}/" aria-label="${m.nome} — ${m.sub}">
+  <a class="card" style="background:${m.cor}" href="${m.pasta}/" aria-label="${m.nome} — ${m.sub}">
     <span class="ico" aria-hidden="true">${m.ico}</span>
     <span class="tag">${m.tag}</span>
     <span>${m.nome}</span>
@@ -129,8 +178,19 @@ grid.innerHTML = MODULOS.map(m=>`
   </a>
 `).join('');
 
-// O clique navega via href (funciona sem JS). O som é só um extra.
-grid.addEventListener('click', sndClick);
+// Ao tocar: som de clique + nome da matéria falado, e só então navega.
+// Se o áudio falhar por qualquer motivo, o setTimeout garante que navega igual —
+// a criança nunca fica presa esperando um som que não veio.
+grid.addEventListener('click', (ev)=>{
+  const card = ev.target.closest('a.card');
+  if(!card) return;
+  ev.preventDefault();
+  sndClick();
+  const destino = card.getAttribute('href');
+  const pasta = destino.replace(/\/$/,'');
+  say(audioKey(pasta));
+  setTimeout(()=>{ location.href = destino; }, 650);
+});
 </script>
 </body>
 </html>
