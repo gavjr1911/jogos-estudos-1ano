@@ -5,10 +5,10 @@
    - todo módulo tem o botão 🏠 de voltar para o menu
    - toda chave do VOICE virou um .mp3 de verdade (narração do menu)
    - todo módulo do menu tem sua narração correspondente
-   Uso: node _qa-menu.js
+   Uso: node ferramentas/qa-menu.js
 */
 const fs = require('fs'), path = require('path');
-const ROOT = __dirname;
+const ROOT = require('path').dirname(__dirname);
 const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 
 const mm = html.match(/const MODULOS = \[([\s\S]*?)\];/);
@@ -22,6 +22,7 @@ for (const [, k, v] of vm_[1].matchAll(/(\w+)\s*:\s*"([^"]*)"/g)) VOICE[k] = v;
 
 const pastas = fs.readdirSync(ROOT, { withFileTypes: true })
   .filter(d => d.isDirectory() && !d.name.startsWith('.')
+    && !['audio','ferramentas','docs','node_modules'].includes(d.name)
     && fs.existsSync(path.join(ROOT, d.name, 'index.html')))
   .map(d => d.name).sort();
 
@@ -38,7 +39,7 @@ for (const mod of MODULOS) {
   const k = audioKey(mod.pasta);
   if (!VOICE[k]) erros.push(`"${mod.pasta}" sem texto de narração (VOICE.${k})`);
   else if (!fs.existsSync(path.join(ROOT, 'audio', k + '.mp3')))
-    erros.push(`falta audio/${k}.mp3 — rode: .venv/bin/python gerar-audios.py`);
+    erros.push(`falta audio/${k}.mp3 — rode: .venv/bin/python ferramentas/gerar-audios.py`);
 }
 
 const noMenu = MODULOS.map(x => x.pasta);

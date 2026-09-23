@@ -12,3 +12,5 @@ _apptest.html
 
 # screenshots de QA
 _shots/
+__pycache__/
+*.pyc

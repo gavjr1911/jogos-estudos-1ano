@@ -520,7 +520,12 @@ const BUILDERS={
       const stage=arr.map(v=>`<span class="obj" style="font-size:46px">${v}</span>`).join(' ');
       const correctOrder=cresc?[...arr].sort((a,b)=>a-b):[...arr].sort((a,b)=>b-a);
       const wrongOrder=cresc?[...arr].sort((a,b)=>b-a):[...arr].sort((a,b)=>a-b);
-      const shuf=shuffle(arr);
+      // A 3a opcao tem de ser uma ordem DIFERENTE das outras duas: shuffle solto
+      // podia repetir a resposta certa, e a copia contava como erro — a crianca
+      // tocava na fila certa e ouvia "tenta de novo".
+      const usados=new Set([correctOrder.join(','), wrongOrder.join(',')]);
+      let shuf=shuffle(arr);
+      for(let t=0; t<30 && usados.has(shuf.join(',')); t++) shuf=shuffle(arr);
       rounds.push({
         q:cresc?'Coloque em ordem <b>do menor pro maior</b> 🔼':'Coloque em ordem <b>do maior pro menor</b> 🔽',
         audio:[cresc?'q_cresc':'q_decr'], stage,
