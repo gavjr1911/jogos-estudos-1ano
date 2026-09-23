@@ -44,7 +44,7 @@ RATE=-15% ../.venv/bin/python gerar-audios.py                # mais devagar
 
 ## 🌐 Online
 
-`https://gavjr1911.github.io/matematica-vitor/ciencias2/`
+`https://gavjr1911.github.io/jogos-estudos-1ano/ciencias2/`
 
 ---
 Feito com 💚 para estudar pra prova.

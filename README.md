@@ -2,7 +2,7 @@
 
 Jogos educativos do **1º ano** (conteúdo do Bernoulli Sistema de Ensino), feitos para o Vitor (6 anos) estudar brincando.
 
-**👉 [Abrir o app](https://gavjr1911.github.io/matematica-vitor/)**
+**👉 [Abrir o app](https://gavjr1911.github.io/jogos-estudos-1ano/)**
 
 Tudo começa por uma **página de menu única**. A partir dela se navega para cada matéria — não é mais preciso guardar uma URL por módulo.
 

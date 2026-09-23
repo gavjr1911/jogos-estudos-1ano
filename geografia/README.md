@@ -28,7 +28,7 @@ VOZ=pt-BR-AntonioNeural ../.venv/bin/python gerar-audios.py  # voz masculina
 ## 🌐 Online
 
 Depois do push, o jogo fica no ar em:
-`https://gavjr1911.github.io/matematica-vitor/geografia/`
+`https://gavjr1911.github.io/jogos-estudos-1ano/geografia/`
 
 ---
 Feito com 💜 para estudar pra prova.

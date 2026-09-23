@@ -48,7 +48,7 @@ Este é o **Módulo 1** do site [Estudos Divertidos do Vitor](../README.md).
 Ele fica na pasta `matematica/` e é acessado pelo menu principal — não precisa
 de URL própria.
 
-- No ar: <https://gavjr1911.github.io/matematica-vitor/>
+- No ar: <https://gavjr1911.github.io/jogos-estudos-1ano/>
 - Voltar ao menu de matérias: botão 🏠 na barra de cima
 - Trocar de jogo dentro deste módulo: botão 🔄
 

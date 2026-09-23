@@ -36,7 +36,7 @@ RATE=-15% ../.venv/bin/python gerar-audios.py                # mais devagar
 
 ## 🌐 Online
 
-`https://gavjr1911.github.io/matematica-vitor/portugues-setembro/`
+`https://gavjr1911.github.io/jogos-estudos-1ano/portugues-setembro/`
 
 ---
 Feito com 💜 para estudar pra prova.
