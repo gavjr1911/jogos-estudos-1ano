@@ -29,6 +29,13 @@
     font-size:22px; padding:8px 14px; font-weight:bold; cursor:pointer; box-shadow:0 4px 0 #2f6fd0;
   }
   .topbar .home-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #2f6fd0;}
+  .topbar .nav{display:flex; align-items:center; gap:8px;}
+  .topbar .back-btn{
+    background:var(--roxo); color:#fff; border:none; border-radius:16px;
+    font-size:22px; padding:8px 14px; font-weight:bold; cursor:pointer;
+    box-shadow:0 4px 0 #7d49b0; text-decoration:none; display:inline-block; line-height:1;
+  }
+  .topbar .back-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #7d49b0;}
   .stars{font-size:24px; font-weight:bold; color:var(--laranja); display:flex; align-items:center; gap:6px;}
   .stars .num{background:var(--amarelo); border-radius:14px; padding:2px 12px; box-shadow:0 3px 0 #d9a800;}
 
@@ -450,7 +457,7 @@ loopConf();
 function shell(inner){
   App.innerHTML=`
     <div class="topbar">
-      <button class="home-btn" onclick="sndClick();goHome()">🏠</button>
+      <div class="nav"><a class="back-btn" href="../" title="Escolher outra matéria" aria-label="Voltar para o menu de matérias">⬅️</a><button class="home-btn" onclick="sndClick();goHome()" title="Início deste módulo" aria-label="Início deste módulo">🏠</button></div>
       <div class="stars">⭐ <span class="num" id="starNum">${stars}</span></div>
     </div>
     ${inner}`;

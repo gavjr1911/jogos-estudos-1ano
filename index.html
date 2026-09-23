@@ -3,11 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>🌟 Matemática Divertida do Vitor 🌟</title>
+<title>🌟 Estudos Divertidos do Vitor 🌟</title>
+<meta name="description" content="Jogos educativos do 1º ano — matemática, português, ciências, inglês, geografia e história.">
+<meta name="theme-color" content="#a06cd5">
 <style>
   :root{
     --rosa:#ff6b9d; --roxo:#a06cd5; --azul:#4d96ff; --verde:#6bcB77;
     --amarelo:#ffd93d; --laranja:#ff924c; --vermelho:#ff5e5e; --ceu:#b8e3ff;
+    --turquesa:#19c3b1; --magenta:#f76eb0;
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
   html,body{margin:0; padding:0; height:100%;}
@@ -19,19 +22,6 @@
   }
   #app{max-width:760px; margin:0 auto; padding:14px; min-height:100vh;}
 
-  .topbar{
-    display:flex; align-items:center; justify-content:space-between;
-    background:#fff; border-radius:22px; padding:8px 14px; margin-bottom:14px;
-    box-shadow:0 6px 0 rgba(0,0,0,.08);
-  }
-  .topbar .home-btn{
-    background:var(--azul); color:#fff; border:none; border-radius:16px;
-    font-size:22px; padding:8px 14px; font-weight:bold; cursor:pointer; box-shadow:0 4px 0 #2f6fd0;
-  }
-  .topbar .home-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #2f6fd0;}
-  .stars{font-size:24px; font-weight:bold; color:var(--laranja); display:flex; align-items:center; gap:6px;}
-  .stars .num{background:var(--amarelo); border-radius:14px; padding:2px 12px; box-shadow:0 3px 0 #d9a800;}
-
   .hero{
     text-align:center; background:#fff; border-radius:30px; padding:22px 18px;
     box-shadow:0 8px 0 rgba(0,0,0,.08); margin-bottom:18px;
@@ -42,667 +32,105 @@
   @keyframes flutua{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-14px) rotate(3deg);}}
 
   .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+  /* Telas estreitas: uma coluna, para o alvo de toque ficar bem grande */
+  @media (max-width:420px){ .grid{grid-template-columns:1fr;} }
+
   .card{
-    border:none; border-radius:26px; padding:18px 10px; cursor:pointer;
+    border:none; border-radius:26px; padding:18px 12px; cursor:pointer;
     color:#fff; font-size:19px; font-weight:bold; text-align:center;
     box-shadow:0 7px 0 rgba(0,0,0,.18); transition:transform .08s;
     display:flex; flex-direction:column; align-items:center; gap:6px; line-height:1.15;
+    text-decoration:none; min-height:150px; justify-content:center;
   }
   .card:active{transform:translateY(4px); box-shadow:0 3px 0 rgba(0,0,0,.18);}
-  .card .ico{font-size:50px;}
-  .c1{background:var(--rosa);} .c2{background:var(--azul);} .c3{background:var(--verde);}
-  .c4{background:var(--laranja);} .c5{background:var(--roxo);} .c6{background:var(--vermelho);}
-  .c7{background:#19c3b1;} .c8{background:#f76eb0;}
-
-  .game{
-    background:#fff; border-radius:30px; padding:18px; box-shadow:0 8px 0 rgba(0,0,0,.08);
-    text-align:center;
-  }
-  .game-title{font-size:24px; color:var(--roxo); margin:0 0 4px;}
-  .progress{font-size:16px; color:#999; margin-bottom:10px;}
-  .question{
-    font-size:24px; font-weight:bold; color:#3a3a55; margin:6px 0 14px; line-height:1.3;
-    display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;
-  }
-  .speak-btn{
-    background:var(--amarelo); border:none; border-radius:50%; width:54px; height:54px;
-    font-size:28px; cursor:pointer; box-shadow:0 4px 0 #d9a800; flex:0 0 auto;
-  }
-  .speak-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #d9a800;}
-  .speak-btn.playing{animation:pulse .7s infinite;}
-  @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
-
-  .stage{
-    min-height:120px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
-    gap:10px; margin:10px auto 18px; padding:16px;
-    background:linear-gradient(160deg,#fff7da,#ffe9f4); border-radius:22px; border:4px dashed #ffd1e6;
-  }
-  .obj{font-size:50px; animation:pop .35s ease;}
-  @keyframes pop{0%{transform:scale(0);}70%{transform:scale(1.25);}100%{transform:scale(1);}}
-
-  .options{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(120px,1fr));}
-  .opt{
-    border:none; border-radius:22px; padding:14px 8px; font-size:26px; font-weight:bold;
-    cursor:pointer; background:var(--azul); color:#fff; box-shadow:0 6px 0 #2f6fd0;
-    min-height:74px; display:flex; align-items:center; justify-content:center; gap:8px;
-    word-break:break-word; line-height:1.1;
-  }
-  .opt-colors .opt{font-size:20px;}
-  .opt:active{transform:translateY(3px); box-shadow:0 3px 0 #2f6fd0;}
-  .opt.num{font-size:40px;}
-  .opt.ok{background:var(--verde)!important; box-shadow:0 6px 0 #3f9c4f!important; animation:tada .5s;}
-  .opt.no{background:#cfcfe0!important; box-shadow:0 6px 0 #a0a0c0!important; opacity:.7;}
-  @keyframes tada{0%{transform:scale(1);}30%{transform:scale(1.18) rotate(-4deg);}60%{transform:scale(1.1) rotate(4deg);}100%{transform:scale(1);}}
-
-  .opt-colors .opt:nth-child(1){background:var(--rosa); box-shadow:0 6px 0 #d44d7c;}
-  .opt-colors .opt:nth-child(2){background:var(--verde); box-shadow:0 6px 0 #3f9c4f;}
-  .opt-colors .opt:nth-child(3){background:var(--laranja); box-shadow:0 6px 0 #d96d2e;}
-  .opt-colors .opt:nth-child(4){background:var(--roxo); box-shadow:0 6px 0 #7a4db0;}
-
-  .feedback{font-size:26px; font-weight:bold; min-height:40px; margin-top:12px;}
-  .feedback.good{color:var(--verde);} .feedback.bad{color:var(--laranja);}
-
-  .next-btn{
-    margin-top:14px; background:var(--verde); color:#fff; border:none; border-radius:22px;
-    font-size:24px; font-weight:bold; padding:14px 34px; cursor:pointer; box-shadow:0 6px 0 #3f9c4f;
-  }
-  .next-btn:active{transform:translateY(3px); box-shadow:0 3px 0 #3f9c4f;}
-
-  #splash{
-    position:fixed; inset:0; background:linear-gradient(160deg,var(--roxo),var(--azul));
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    color:#fff; text-align:center; z-index:50; cursor:pointer; padding:20px;
-  }
-  #splash h1{font-size:34px; margin:10px;}
-  #splash .big{font-size:100px; animation:flutua 2.5s infinite;}
-  #splash .play{
-    margin-top:24px; background:var(--amarelo); color:#5a4500; border:none; border-radius:30px;
-    font-size:30px; font-weight:bold; padding:18px 44px; box-shadow:0 8px 0 #d9a800; cursor:pointer;
+  .card:focus-visible{outline:4px solid #2b2b40; outline-offset:3px;}
+  .card .ico{font-size:50px; line-height:1;}
+  .card .sub{font-size:13px; font-weight:normal; opacity:.92;}
+  .card .tag{
+    font-size:11px; font-weight:bold; letter-spacing:.5px; text-transform:uppercase;
+    background:rgba(255,255,255,.25); border-radius:10px; padding:2px 8px;
   }
 
-  #confetti{position:fixed; inset:0; pointer-events:none; z-index:40;}
-  .win{text-align:center; padding:20px;}
-  .win .trophy{font-size:90px; animation:tada 1s;}
+  .rodape{text-align:center; color:#7a6; margin-top:22px; font-size:14px; padding-bottom:20px;}
 
-  @media(max-width:480px){
-    .hero h1{font-size:26px;} .question{font-size:21px;} .card{font-size:17px;}
+  @media (prefers-reduced-motion:reduce){
+    .mascote{animation:none;}
+    .card{transition:none;}
   }
 </style>
 </head>
 <body>
-
-<div id="splash">
-  <div class="big">🦊</div>
-  <h1>Matemática Divertida<br>do Vitor!</h1>
-  <p style="font-size:20px;max-width:320px;">Vamos brincar e aprender pra prova! 🎉<br>Toque no botão para começar.</p>
-  <button class="play" id="startBtn">▶ COMEÇAR</button>
+<div id="app">
+  <div class="hero">
+    <div class="mascote">🦊</div>
+    <h1>Oi, Vitor!</h1>
+    <p>Escolha o que você quer estudar 👇</p>
+  </div>
+  <div class="grid" id="grid"></div>
+  <p class="rodape">Feito com 💜 para o Vitor</p>
 </div>
-
-<canvas id="confetti"></canvas>
-<div id="app"></div>
 
 <script>
 /* ============================================================
-   MATEMÁTICA DIVERTIDA DO VITOR — 1º ano (livro Bernoulli)
-   ÁUDIO: narração por arquivos pré-gravados (pasta /audio).
-   Não depende de voz instalada no navegador -> funciona em
-   qualquer aparelho. Os clipes são tocados em sequência para
-   montar as perguntas e as respostas.
+   MÓDULOS DO MENU
+
+   Para adicionar um conteúdo novo, basta acrescentar uma linha
+   aqui embaixo e criar a pasta correspondente. Nada mais.
+
+     pasta : nome da pasta no repositório (vira a URL)
+     ico   : emoji grande do card
+     nome  : título do card
+     sub   : linha pequena embaixo do título
+     tag   : etiqueta (matéria ou número do módulo)
+     cls   : cor do card — c1 a c8, definidas no CSS acima
    ============================================================ */
+const MODULOS = [
+  {pasta:'matematica',         ico:'🔢', nome:'Matemática',      sub:'Números, sólidos e figuras',      tag:'Módulo 1', cls:'c1'},
+  {pasta:'portugues2',         ico:'📚', nome:'Português',       sub:'Letras, sílabas e palavras',      tag:'Módulo 2', cls:'c2'},
+  {pasta:'ciencias',           ico:'🔬', nome:'Ciências',        sub:'Seres vivos e natureza',          tag:'Módulo 3', cls:'c3'},
+  {pasta:'ingles2',            ico:'🦉', nome:'English Fun!',    sub:'Cores, animais e números',        tag:'Módulo 4', cls:'c4'},
+  {pasta:'geografia',          ico:'🏠', nome:'Geo e História',  sub:'Casa, escola e tempo',            tag:'Módulo 5', cls:'c5'},
+  {pasta:'matematica2',        ico:'🎲', nome:'Matemática 2',    sub:'Somar, tirar e comparar',         tag:'Módulo 6', cls:'c6'},
+  {pasta:'portugues-setembro', ico:'✏️', nome:'Português 2',     sub:'Sílabas, rimas e frases',         tag:'Módulo 7', cls:'c7'},
+  {pasta:'ciencias2',          ico:'🌍', nome:'Ciências 2',      sub:'Corpo, materiais e ambiente',     tag:'Módulo 8', cls:'c8'},
+];
 
-const App = document.getElementById('app');
-let stars = parseInt(localStorage.getItem('vitor_stars')||'0',10);
-
-/* ============================================================
-   VOCABULÁRIO DE VOZ (chave -> texto falado).
-   É a "fonte da verdade": o gerador de áudio (gerar-audios.js)
-   cria um arquivo audio/<chave>.m4a para cada item daqui.
-   ============================================================ */
-const VOICE = {
-  /* navegação e feedback */
-  greet:"Oi, Vitor! Escolha uma brincadeira para começar.",
-  test:"Olá, Vitor! Você está me ouvindo? Vamos brincar!",
-  win:"Parabéns, Vitor! Você conseguiu! Que orgulho!",
-  choose:"As respostas são:",
-  ok1:"Muito bem!", ok2:"Isso aí!", ok3:"Você acertou!",
-  ok4:"Boa, Vitor!", ok5:"Mandou bem!", ok6:"Perfeito!",
-  no1:"Quase! Tenta outra.", no2:"Hmm, tenta de novo.", no3:"Não foi essa, tenta outra.",
-
-  /* números 0 a 12 */
-  n0:"zero", n1:"um", n2:"dois", n3:"três", n4:"quatro", n5:"cinco", n6:"seis",
-  n7:"sete", n8:"oito", n9:"nove", n10:"dez", n11:"onze", n12:"doze",
-
-  /* perguntas dos jogos */
-  q_contar:"Quantos você vê? Conte os desenhos.",
-  q_falta:"Qual número está faltando?",
-  q_cresc:"Coloque em ordem, do menor para o maior. Qual fila está certa?",
-  q_decr:"Coloque em ordem, do maior para o menor. Qual fila está certa?",
-  q_solido:"Olhe o objeto. Qual é a forma dele?",
-  q_plana:"Olhe a figura. Que figura é essa?",
-  q_loc_caixa:"Onde está o animal em relação à caixa?",
-  q_loc_mesa:"Onde está o animal em relação à mesa?",
-  q_loc_arvore:"Onde está o animal em relação às árvores?",
-  q_comp_mais:"Qual grupo tem mais? Conte e descubra.",
-  q_comp_menos:"Qual grupo tem menos? Conte e descubra.",
-  q_comp_igual:"Os dois grupos têm a mesma quantidade?",
-  q_graf_maior:"Olhe o gráfico. Qual coluna é a mais alta?",
-  q_graf_menor:"Olhe o gráfico. Qual coluna é a mais baixa?",
-
-  /* perguntas dos ordinais (posição na fila) */
-  q_ord1:"Quem está em primeiro lugar?", q_ord2:"Quem está em segundo lugar?",
-  q_ord3:"Quem está em terceiro lugar?", q_ord4:"Quem está em quarto lugar?",
-  q_ord5:"Quem está em quinto lugar?", q_ord6:"Quem está em sexto lugar?",
-  q_ord7:"Quem está em sétimo lugar?", q_ord8:"Quem está em oitavo lugar?",
-  q_ord9:"Quem está em nono lugar?",
-
-  /* nomes (figurinhas) */
-  w_cachorro:"cachorro", w_gato:"gato", w_coelho:"coelho", w_rato:"rato",
-  w_urso:"urso", w_raposa:"raposa", w_sapo:"sapo", w_pintinho:"pintinho",
-  w_leao:"leão", w_tigre:"tigre", w_vaca:"vaca", w_porco:"porco", w_passarinho:"passarinho",
-  w_maca:"maçã", w_banana:"banana", w_morango:"morango", w_uva:"uva",
-  w_laranja:"laranja", w_pera:"pera", w_melancia:"melancia", w_cereja:"cereja",
-  w_estrela:"estrela", w_balao:"balão", w_borboleta:"borboleta", w_peixe:"peixe",
-  w_flor:"flor", w_bola:"bola", w_carro:"carro", w_presente:"presente",
-  w_dado:"dado", w_lata:"lata", w_sorvete:"sorvete", w_caixa:"caixa",
-  w_cubodegelo:"cubo de gelo", w_planeta:"planeta", w_tambor:"tambor",
-
-  /* sólidos e figuras planas (palavras das opções) */
-  cubo:"cubo", esfera:"esfera", cilindro:"cilindro", cone:"cone",
-  piramide:"pirâmide", paralelepipedo:"paralelepípedo",
-  quadrado:"quadrado", triangulo:"triângulo", circulo:"círculo", retangulo:"retângulo",
-
-  /* localização (opções) */
-  dentro:"dentro", fora:"fora", emcima:"em cima", embaixo:"embaixo",
-  atras:"atrás", entreasarvores:"entre as árvores",
-
-  /* comparar (opções) */
-  grupoa:"grupo A", grupob:"grupo B",
-  simiguais:"sim, são iguais", naodif:"não, são diferentes",
-
-  /* explicações (resposta certa) */
-  exp_dado:"O dado tem forma de cubo!",
-  exp_bola:"A bola tem forma de esfera!",
-  exp_lata:"A lata tem forma de cilindro!",
-  exp_sorvete:"A casquinha de sorvete é um cone!",
-  exp_presente:"O presente é um paralelepípedo!",
-  exp_piramide:"A pirâmide tem ponta em cima!",
-  exp_gelo:"O cubo de gelo é um cubo!",
-  exp_planeta:"O planeta tem forma de esfera!",
-  exp_tambor:"O tambor tem forma de cilindro!",
-  exp_caixa:"A caixa de papelão é um paralelepípedo!",
-  exp_quadrado:"Quadrado tem quatro lados iguais!",
-  exp_triangulo:"Triângulo tem três lados!",
-  exp_circulo:"Círculo é redondinho!",
-  exp_retangulo:"Retângulo é comprido!",
-  exp_a_mais:"O grupo A tem mais!", exp_b_mais:"O grupo B tem mais!",
-  exp_a_menos:"O grupo A tem menos!", exp_b_menos:"O grupo B tem menos!",
-  exp_iguais:"Isso! Os dois têm a mesma quantidade!",
-  exp_cresc:"Do menor para o maior!", exp_decr:"Do maior para o menor!",
-};
-
-/* ============================================================
-   PLAYER DE ÁUDIO (clipes em sequência) — um único elemento
-   <audio> destravado no 1º toque (compatível com iPhone/iPad).
-   ============================================================ */
-const AUDIO_DIR='audio/', AUDIO_EXT='.mp3';
-const player=new Audio();
-player.preload='auto';
-let playToken=0, audioOn=true;
-function stopAudio(){ playToken++; try{player.pause();}catch(e){} setPlayingBadge(false); }
-function playKeys(keys){
-  if(!audioOn) return;
-  stopAudio();
-  const list=[].concat(...keys.map(k=>Array.isArray(k)?k:[k])).filter(Boolean);
-  if(!list.length) return;
-  const my=playToken; let i=0;
-  setPlayingBadge(true);
-  const next=()=>{
-    if(my!==playToken) return;
-    if(i>=list.length){ setPlayingBadge(false); return; }
-    const key=list[i++];
-    player.src=AUDIO_DIR+key+AUDIO_EXT;
-    player.onended=next;
-    player.onerror=()=>{ setTimeout(next,10); }; // se faltar um arquivo, segue
-    const p=player.play();
-    if(p&&p.catch) p.catch(()=>setTimeout(next,10));
-  };
-  next();
-}
-function setPlayingBadge(on){
-  const b=document.getElementById('qspeak'); if(b) b.classList.toggle('playing',on);
-}
-/* destrava o áudio dentro do gesto do usuário */
-function unlockAudio(){
-  try{ player.muted=true; player.src=AUDIO_DIR+'greet'+AUDIO_EXT;
-       const p=player.play();
-       if(p&&p.then) p.then(()=>{player.pause();player.currentTime=0;player.muted=false;})
-                      .catch(()=>{player.muted=false;});
-       else {player.pause();player.muted=false;}
-  }catch(e){ player.muted=false; }
-}
-
-/* ============================================================
-   SONS DE EFEITO (Web Audio) — gerados, não dependem de arquivo
-   ============================================================ */
+/* ---- som de toque (gerado no navegador, sem arquivo de áudio) ---- */
 let actx=null;
-function initAudio(){ try{ actx = actx || new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==='suspended') actx.resume(); }catch(e){} }
+function initAudio(){
+  try{
+    actx = actx || new (window.AudioContext||window.webkitAudioContext)();
+    if(actx.state==='suspended') actx.resume();
+  }catch(e){}
+}
 function tone(freq,start,dur,type='sine',vol=0.2){
   if(!actx) return;
-  const o=actx.createOscillator(), g=actx.createGain();
-  o.type=type; o.frequency.value=freq; o.connect(g); g.connect(actx.destination);
-  const t=actx.currentTime+start;
-  g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+0.02);
-  g.gain.exponentialRampToValueAtTime(0.001,t+dur);
-  o.start(t); o.stop(t+dur);
+  try{
+    const o=actx.createOscillator(), g=actx.createGain();
+    o.type=type; o.frequency.value=freq;
+    o.connect(g); g.connect(actx.destination);
+    const t=actx.currentTime+start;
+    g.gain.setValueAtTime(0,t);
+    g.gain.linearRampToValueAtTime(vol,t+0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    o.start(t); o.stop(t+dur+0.05);
+  }catch(e){}
 }
 function sndClick(){ initAudio(); tone(440,0,0.08,'triangle',0.15); }
-function sndRight(){ initAudio(); [523,659,784,1047].forEach((f,i)=>tone(f,i*0.09,0.25,'triangle',0.18)); }
-function sndWrong(){ initAudio(); tone(300,0,0.18,'sine',0.13); tone(220,0.12,0.25,'sine',0.13); }
-function sndWin(){ initAudio(); [523,659,784,1047,784,1047,1319].forEach((f,i)=>tone(f,i*0.12,0.3,'triangle',0.2)); }
 
-/* ============================================================
-   UTILIDADES
-   ============================================================ */
-function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-function rint(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
-function pick(a){return a[Math.floor(Math.random()*a.length)];}
-function slug(s){return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'');}
-const NUM_WORDS=['zero','um','dois','três','quatro','cinco','seis','sete','oito','nove','dez','onze','doze'];
-const ORD_WORDS=['','primeiro','segundo','terceiro','quarto','quinto','sexto','sétimo','oitavo','nono'];
-const OK_KEYS=['ok1','ok2','ok3','ok4','ok5','ok6'], NO_KEYS=['no1','no2','no3'];
+/* ---- monta o menu ---- */
+const grid = document.getElementById('grid');
+grid.innerHTML = MODULOS.map(m=>`
+  <a class="card ${m.cls}" href="${m.pasta}/" aria-label="${m.nome} — ${m.sub}">
+    <span class="ico" aria-hidden="true">${m.ico}</span>
+    <span class="tag">${m.tag}</span>
+    <span>${m.nome}</span>
+    <span class="sub">${m.sub}</span>
+  </a>
+`).join('');
 
-const EMOJI_NOME={
-  '🐶':'cachorro','🐱':'gato','🐰':'coelho','🐭':'rato','🐻':'urso','🦊':'raposa',
-  '🐸':'sapo','🐥':'pintinho','🦁':'leão','🐯':'tigre','🐮':'vaca','🐷':'porco','🐦':'passarinho',
-  '🍎':'maçã','🍌':'banana','🍓':'morango','🍇':'uva','🍊':'laranja','🍐':'pera','🍉':'melancia','🍒':'cereja',
-  '🌟':'estrela','🎈':'balão','🦋':'borboleta','🐠':'peixe','🌸':'flor','⚽':'bola','🚗':'carro','🎁':'presente',
-  '🎲':'dado','🥫':'lata','🍦':'sorvete','📦':'caixa','🧊':'cubo de gelo','🌍':'planeta','🥁':'tambor','🔺':'triângulo'
-};
-function numKey(v){return 'n'+v;}
-function nameKey(emoji){return 'w_'+slug(EMOJI_NOME[emoji]||'');}
-
-function updateStars(){ const el=document.getElementById('starNum'); if(el) el.textContent=stars; localStorage.setItem('vitor_stars',stars); }
-function addStar(n=1){ stars+=n; updateStars(); }
-
-/* ---------------- CONFETE ---------------- */
-const cv=document.getElementById('confetti'), cx=cv.getContext('2d');
-let confs=[];
-function resizeCv(){cv.width=innerWidth;cv.height=innerHeight;}
-addEventListener('resize',resizeCv); resizeCv();
-function burst(){
-  const cols=['#ff6b9d','#ffd93d','#6bcB77','#4d96ff','#a06cd5','#ff924c'];
-  for(let i=0;i<70;i++){confs.push({x:innerWidth/2,y:innerHeight/3,vx:(Math.random()-0.5)*14,vy:Math.random()*-12-3,c:pick(cols),s:rint(7,14),r:Math.random()*6,vr:(Math.random()-.5)*.4});}
-}
-function loopConf(){
-  cx.clearRect(0,0,cv.width,cv.height);
-  confs.forEach(p=>{p.vy+=0.35;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/2,p.s,p.s);cx.restore();});
-  confs=confs.filter(p=>p.y<cv.height+30);
-  requestAnimationFrame(loopConf);
-}
-loopConf();
-
-/* ============================================================
-   SHELL
-   ============================================================ */
-function shell(inner){
-  App.innerHTML=`
-    <div class="topbar">
-      <button class="home-btn" onclick="sndClick();goHome()">🏠</button>
-      <div class="stars">⭐ <span class="num" id="starNum">${stars}</span></div>
-    </div>
-    ${inner}`;
-}
-
-/* ============================================================
-   MENU
-   ============================================================ */
-const GAMES=[
-  {id:'contar', ico:'🔢', nome:'Contando',        sub:'Números 0 a 9', cls:'c1'},
-  {id:'seq',    ico:'🪜', nome:'Sequência',       sub:'O que falta?',  cls:'c2'},
-  {id:'ordinal',ico:'🥇', nome:'Posição na Fila', sub:'1º, 2º, 3º...', cls:'c3'},
-  {id:'solido', ico:'📦', nome:'Sólidos',         sub:'Cubo, esfera...',cls:'c4'},
-  {id:'plana',  ico:'🔺', nome:'Figuras Planas',  sub:'Quadrado, círculo',cls:'c5'},
-  {id:'local',  ico:'🧭', nome:'Onde Está?',      sub:'Dentro, fora...',cls:'c6'},
-  {id:'comparar',ico:'⚖️',nome:'Mais ou Menos',   sub:'Comparar',      cls:'c7'},
-  {id:'grafico',ico:'📊', nome:'Gráficos',         sub:'Ler colunas',   cls:'c8'},
-];
-function goHome(silent){
-  stopAudio();
-  shell(`
-    <div class="hero">
-      <div class="mascote">🦊</div>
-      <h1>Oi, Vitor!</h1>
-      <p>Escolha uma brincadeira 👇</p>
-      <button onclick="testSound()" style="margin-top:6px;background:var(--amarelo);color:#5a4500;border:none;border-radius:18px;padding:9px 18px;font-size:16px;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #d9a800;">🔈 Testar som</button>
-    </div>
-    <div class="grid">
-      ${GAMES.map(g=>`<button class="card ${g.cls}" onclick="sndClick();startGame('${g.id}')">
-        <span class="ico">${g.ico}</span><span>${g.nome}</span>
-        <span style="font-size:13px;font-weight:normal;opacity:.9">${g.sub}</span>
-      </button>`).join('')}
-    </div>
-    <p style="text-align:center;color:#7a6;margin-top:18px;font-size:14px;">Feito com 💜 para o Vitor estudar pra prova</p>
-  `);
-  if(!silent) setTimeout(()=>playKeys(['greet']),250);
-}
-function testSound(){ initAudio(); sndClick(); playKeys(['test']); }
-
-/* ============================================================
-   MOTOR DE RODADAS
-   ============================================================ */
-let current=null;
-function startGame(id){
-  const rounds=BUILDERS[id]();
-  current={id, title:GAMES.find(g=>g.id===id).nome, rounds, idx:0};
-  renderRound();
-}
-function renderRound(){
-  const c=current, r=c.rounds[c.idx];
-  shell(`
-    <div class="game">
-      <h2 class="game-title">${GAMES.find(g=>g.id===c.id).ico} ${c.title}</h2>
-      <div class="progress">Pergunta ${c.idx+1} de ${c.rounds.length}</div>
-      <div class="question">
-        <button class="speak-btn" id="qspeak" onclick="sndClick();speakRound()">🔊</button>
-        <span>${r.q}</span>
-      </div>
-      <div class="stage">${r.stage||''}</div>
-      <div class="options ${r.colorOpts?'opt-colors':''}" id="opts"></div>
-      <div style="font-size:14px;color:#aaa;margin-top:6px;">👆 Toque numa resposta. Toque no 🔊 para ouvir de novo.</div>
-      <div class="feedback" id="fb"></div>
-    </div>
-  `);
-  const shown=shuffle(r.options);
-  const opts=document.getElementById('opts');
-  shown.forEach(o=>{
-    const b=document.createElement('button');
-    b.className='opt'+(o.num?' num':'');
-    b.innerHTML=o.label;
-    b.onclick=()=>answer(b,o);
-    opts.appendChild(b);
-  });
-  // narração: pergunta -> "as respostas são" -> cada opção na ordem exibida
-  window._roundKeys=[].concat(r.audio||[], ['choose'], shown.map(o=>o.aud));
-  setTimeout(()=>speakRound(),400);
-}
-function speakRound(){ playKeys(window._roundKeys||[]); }
-
-let locked=false;
-function answer(btn,opt){
-  if(locked) return;
-  if(opt.correct){
-    locked=true;
-    btn.classList.add('ok');
-    sndRight(); burst(); addStar(1);
-    const fb=document.getElementById('fb'); fb.className='feedback good';
-    fb.textContent='⭐ Muito bem!';
-    // fala: nome do que acertou + elogio + explicação (se houver)
-    playKeys([opt.aud, pick(OK_KEYS), opt.expAud].filter(Boolean));
-    document.querySelectorAll('.opt').forEach(b=>{if(b!==btn)b.classList.add('no');b.onclick=null;});
-    const nb=document.createElement('button');
-    nb.className='next-btn';
-    const last=current.idx>=current.rounds.length-1;
-    nb.textContent=last?'🏆 Terminar':'Próxima ➡';
-    nb.onclick=()=>{sndClick();locked=false;if(last){winScreen();}else{current.idx++;renderRound();}};
-    document.querySelector('.game').appendChild(nb);
-  }else{
-    btn.classList.add('no'); btn.onclick=null;
-    sndWrong();
-    const fb=document.getElementById('fb'); fb.className='feedback bad';
-    fb.textContent='🤔 Tenta de novo!';
-    playKeys([opt.aud, pick(NO_KEYS)].filter(Boolean)); // fala o que tocou + incentivo
-  }
-}
-function winScreen(){
-  sndWin(); burst(); setTimeout(burst,400); setTimeout(burst,800);
-  const c=current;
-  shell(`
-    <div class="game win">
-      <div class="trophy">🏆</div>
-      <h2 class="game-title">Parabéns, Vitor!</h2>
-      <p style="font-size:22px;">Você ganhou <b>${c.rounds.length}</b> estrelas! ⭐</p>
-      <p style="font-size:18px;color:#888;">Você está ficando craque em <b>${c.title}</b>!</p>
-      <button class="next-btn" onclick="sndClick();startGame('${c.id}')">🔁 Jogar de novo</button>
-      <br>
-      <button class="next-btn" style="background:var(--azul);box-shadow:0 6px 0 #2f6fd0;margin-top:10px;" onclick="sndClick();goHome()">🏠 Escolher outro</button>
-    </div>
-  `);
-  setTimeout(()=>playKeys(['win']),250);
-}
-
-/* ============================================================
-   GERADORES DE CONTEÚDO
-   ============================================================ */
-const ANIMALS=['🐶','🐱','🐰','🐭','🐻','🦊','🐸','🐥','🦁','🐯','🐮','🐷'];
-const FRUITS=['🍎','🍌','🍓','🍇','🍊','🍐','🍉','🍒'];
-const FUN=['🌟','🎈','🦋','🐠','🌸','⚽','🚗','🎁'];
-
-function numOptions(correct,n=4,max=9){
-  const set=new Set([correct]);
-  while(set.size<n){set.add(rint(0,max));}
-  return shuffle([...set]).map(v=>({label:v,num:true,aud:numKey(v),correct:v===correct}));
-}
-
-const BUILDERS={
-  /* ---- 1. CONTAR 0 a 9 ---- */
-  contar(){
-    const rounds=[];
-    for(let i=0;i<8;i++){
-      const n=rint(1,9);
-      const emo=pick([...ANIMALS,...FRUITS,...FUN]);
-      const stage=Array.from({length:n}).map((_,k)=>`<span class="obj" style="animation-delay:${k*0.05}s">${emo}</span>`).join('');
-      rounds.push({ q:`Quantos <b>${emo}</b> você vê?`, audio:['q_contar'], stage, options:numOptions(n) });
-    }
-    return rounds;
-  },
-
-  /* ---- 2. SEQUÊNCIA / O QUE FALTA ---- */
-  seq(){
-    const rounds=[];
-    for(let i=0;i<4;i++){
-      const start=rint(0,5);
-      const seqArr=[start,start+1,start+2,start+3];
-      const hide=rint(1,2);
-      const missing=seqArr[hide];
-      const stage=seqArr.map((v,k)=>`<span class="obj" style="font-size:46px;color:${k===hide?'#ff5e5e':'#4d96ff'}">${k===hide?'❓':v}</span>`).join('<span style="font-size:34px">➜</span>');
-      rounds.push({ q:`Qual número está faltando? 🤔`, audio:['q_falta'], stage, options:numOptions(missing) });
-    }
-    for(let i=0;i<3;i++){
-      const cresc=Math.random()<0.5;
-      const arr=[rint(1,2),rint(4,5),rint(7,9)];
-      const stage=arr.map(v=>`<span class="obj" style="font-size:46px">${v}</span>`).join(' ');
-      const correctOrder=cresc?[...arr].sort((a,b)=>a-b):[...arr].sort((a,b)=>b-a);
-      const wrongOrder=cresc?[...arr].sort((a,b)=>b-a):[...arr].sort((a,b)=>a-b);
-      const shuf=shuffle(arr);
-      rounds.push({
-        q:cresc?'Coloque em ordem <b>do menor pro maior</b> 🔼':'Coloque em ordem <b>do maior pro menor</b> 🔽',
-        audio:[cresc?'q_cresc':'q_decr'], stage,
-        options:[
-          {label:correctOrder.join(' '),aud:correctOrder.map(numKey),correct:true,expAud:cresc?'exp_cresc':'exp_decr'},
-          {label:wrongOrder.join(' '),aud:wrongOrder.map(numKey),correct:false},
-          {label:shuf.join(' '),aud:shuf.map(numKey),correct:false},
-        ],
-      });
-    }
-    return shuffle(rounds);
-  },
-
-  /* ---- 3. ORDINAIS ---- */
-  ordinal(){
-    const rounds=[];
-    for(let i=0;i<7;i++){
-      const len=rint(4,6);
-      const fila=shuffle(ANIMALS).slice(0,len);
-      const askPos=rint(1,len);
-      const stage=fila.map((e,k)=>`<span class="obj" style="font-size:44px;display:inline-flex;flex-direction:column;align-items:center">${e}<small style="font-size:14px;color:#a06cd5;font-weight:bold">${k+1}º</small></span>`).join('<span style="font-size:24px;color:#bbb">→</span>');
-      const correctAnimal=fila[askPos-1];
-      const others=shuffle(fila.filter((_,k)=>k!==askPos-1)).slice(0,3);
-      const opts=shuffle([correctAnimal,...others]).map(e=>({
-        label:`<span style="font-size:40px">${e}</span>`, aud:nameKey(e),
-        correct:e===correctAnimal
-      }));
-      rounds.push({ q:`Quem está em <b>${askPos}º</b> (${ORD_WORDS[askPos]}) lugar? 🥇`, audio:['q_ord'+askPos], stage, options:opts });
-    }
-    return rounds;
-  },
-
-  /* ---- 4. SÓLIDOS ---- */
-  solido(){
-    const items=[
-      {emo:'🎲', nome:'cubo',          exp:'exp_dado'},
-      {emo:'⚽', nome:'esfera',        exp:'exp_bola'},
-      {emo:'🥫', nome:'cilindro',      exp:'exp_lata'},
-      {emo:'🍦', nome:'cone',          exp:'exp_sorvete'},
-      {emo:'🎁', nome:'paralelepipedo',exp:'exp_presente'},
-      {emo:'🔺', nome:'piramide',      exp:'exp_piramide'},
-      {emo:'🧊', nome:'cubo',          exp:'exp_gelo'},
-      {emo:'🌍', nome:'esfera',        exp:'exp_planeta'},
-      {emo:'🥁', nome:'cilindro',      exp:'exp_tambor'},
-      {emo:'📦', nome:'paralelepipedo',exp:'exp_caixa'},
-    ];
-    const all=['cubo','esfera','cilindro','cone','piramide','paralelepipedo'];
-    const LBL={cubo:'CUBO',esfera:'ESFERA',cilindro:'CILINDRO',cone:'CONE',piramide:'PIRÂMIDE',paralelepipedo:'PARALELEPÍPEDO'};
-    return shuffle(items).slice(0,8).map(it=>{
-      const wrong=shuffle(all.filter(n=>n!==it.nome)).slice(0,3);
-      return {
-        q:`Esse objeto tem forma de quê?`, audio:['q_solido'],
-        stage:`<span class="obj" style="font-size:90px">${it.emo}</span>`, colorOpts:true,
-        options:shuffle([it.nome,...wrong]).map(n=>({label:LBL[n],aud:n,correct:n===it.nome,expAud:n===it.nome?it.exp:null})),
-      };
-    });
-  },
-
-  /* ---- 5. FIGURAS PLANAS ---- */
-  plana(){
-    const figs=[
-      {svg:svgSquare(), nome:'quadrado', lbl:'QUADRADO', exp:'exp_quadrado'},
-      {svg:svgTriangle(),nome:'triangulo',lbl:'TRIÂNGULO',exp:'exp_triangulo'},
-      {svg:svgCircle(),  nome:'circulo',  lbl:'CÍRCULO',  exp:'exp_circulo'},
-      {svg:svgRect(),    nome:'retangulo',lbl:'RETÂNGULO',exp:'exp_retangulo'},
-    ];
-    const LBL={quadrado:'QUADRADO',triangulo:'TRIÂNGULO',circulo:'CÍRCULO',retangulo:'RETÂNGULO'};
-    const all=figs.map(f=>f.nome);
-    const rounds=[];
-    for(let i=0;i<8;i++){
-      const f=pick(figs);
-      const wrong=shuffle(all.filter(n=>n!==f.nome)).slice(0,3);
-      rounds.push({
-        q:`Que figura é essa?`, audio:['q_plana'], stage:f.svg, colorOpts:true,
-        options:shuffle([f.nome,...wrong]).map(n=>({label:LBL[n],aud:n,correct:n===f.nome,expAud:n===f.nome?f.exp:null})),
-      });
-    }
-    return rounds;
-  },
-
-  /* ---- 6. LOCALIZAÇÃO ---- */
-  local(){
-    const animal=()=>pick(ANIMALS);
-    const defs=[
-      {key:'dentro',  qaud:'q_loc_caixa', make:a=>`<div style="font-size:80px;position:relative;display:inline-block">📦<span style="position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);font-size:38px">${a}</span></div>`, opts:['dentro','fora','emcima']},
-      {key:'emcima',  qaud:'q_loc_caixa', make:a=>`<div style="font-size:80px;position:relative;display:inline-block;line-height:1"><span style="position:absolute;left:50%;top:-34px;transform:translateX(-50%);font-size:38px">${a}</span>📦</div>`, opts:['emcima','dentro','embaixo']},
-      {key:'embaixo', qaud:'q_loc_mesa',  make:a=>`<div style="font-size:80px;position:relative;display:inline-block;line-height:1">🪑<span style="position:absolute;left:50%;bottom:-30px;transform:translateX(-50%);font-size:38px">${a}</span></div>`, opts:['embaixo','emcima','dentro']},
-      {key:'entreasarvores', qaud:'q_loc_arvore', make:a=>`<div style="font-size:54px">🌳 <span style="font-size:46px">${a}</span> 🌳</div>`, opts:['entreasarvores','atras','emcima']},
-    ];
-    const LBL={dentro:'DENTRO',fora:'FORA',emcima:'EM CIMA',embaixo:'EMBAIXO',atras:'ATRÁS',entreasarvores:'ENTRE'};
-    const rounds=[];
-    for(let i=0;i<7;i++){
-      const d=pick(defs), a=animal();
-      rounds.push({
-        q:'Onde está o animal? 🧭', audio:[d.qaud], stage:d.make(a), colorOpts:true,
-        options:shuffle(d.opts).map(o=>({label:LBL[o],aud:o,correct:o===d.key})),
-      });
-    }
-    return rounds;
-  },
-
-  /* ---- 7. COMPARAR ---- */
-  comparar(){
-    const rounds=[];
-    for(let i=0;i<8;i++){
-      const mode=pick(['mais','menos','igual']);
-      let a=rint(1,7), b=rint(1,7);
-      if(mode==='igual'){b=a;} else { while(a===b){b=rint(1,7);} }
-      const emoA=pick(FRUITS), emoB=pick(ANIMALS);
-      const grpA=Array.from({length:a}).map(()=>`<span class="obj" style="font-size:34px">${emoA}</span>`).join('');
-      const grpB=Array.from({length:b}).map(()=>`<span class="obj" style="font-size:34px">${emoB}</span>`).join('');
-      const stage=`
-        <div style="display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap">
-          <div style="background:#fff;border-radius:16px;padding:10px;min-width:120px;border:3px solid #ffd1e6"><div style="font-size:13px;color:#a06cd5;font-weight:bold">GRUPO A</div>${grpA}</div>
-          <div style="font-size:30px">🆚</div>
-          <div style="background:#fff;border-radius:16px;padding:10px;min-width:120px;border:3px solid #b8e3ff"><div style="font-size:13px;color:#4d96ff;font-weight:bold">GRUPO B</div>${grpB}</div>
-        </div>`;
-      let q,audio,options;
-      if(mode==='igual'){
-        q='Os dois grupos têm a <b>mesma quantidade</b>? 🤔'; audio=['q_comp_igual'];
-        options=[
-          {label:'SIM, são IGUAIS',aud:'simiguais',correct:true,expAud:'exp_iguais'},
-          {label:'NÃO, são diferentes',aud:'naodif',correct:false},
-        ];
-      }else if(mode==='mais'){
-        q='Qual grupo tem <b>MAIS</b>? 👆'; audio=['q_comp_mais'];
-        options=[
-          {label:'GRUPO A',aud:'grupoa',correct:a>b,expAud:a>b?'exp_a_mais':null},
-          {label:'GRUPO B',aud:'grupob',correct:b>a,expAud:b>a?'exp_b_mais':null},
-        ];
-      }else{
-        q='Qual grupo tem <b>MENOS</b>? 👇'; audio=['q_comp_menos'];
-        options=[
-          {label:'GRUPO A',aud:'grupoa',correct:a<b,expAud:a<b?'exp_a_menos':null},
-          {label:'GRUPO B',aud:'grupob',correct:b<a,expAud:b<a?'exp_b_menos':null},
-        ];
-      }
-      rounds.push({q,audio,stage,colorOpts:true,options});
-    }
-    return rounds;
-  },
-
-  /* ---- 8. GRÁFICO DE COLUNAS ---- */
-  grafico(){
-    const rounds=[];
-    for(let i=0;i<7;i++){
-      const cats=shuffle([
-        {emo:'🐶'},{emo:'🐱'},{emo:'🐰'},{emo:'🐦'}
-      ]).slice(0,3);
-      const vals=cats.map(()=>rint(1,6));
-      while(new Set(vals).size<vals.length){for(let k=0;k<vals.length;k++)vals[k]=rint(1,6);}
-      const colors=['#ff6b9d','#4d96ff','#6bcB77','#ff924c'];
-      const bars=cats.map((c,k)=>`
-        <div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:160px">
-          <div style="font-size:14px;font-weight:bold;color:#666">${vals[k]}</div>
-          <div style="width:46px;height:${vals[k]/6*120}px;background:${colors[k]};border-radius:8px 8px 0 0"></div>
-          <div style="font-size:34px;margin-top:4px">${c.emo}</div>
-        </div>`).join('');
-      const stage=`<div style="display:flex;gap:18px;align-items:flex-end;justify-content:center;border-bottom:4px solid #ccc;padding-bottom:4px">${bars}</div>`;
-      const askMax=Math.random()<0.5;
-      const targetIdx=askMax?vals.indexOf(Math.max(...vals)):vals.indexOf(Math.min(...vals));
-      rounds.push({
-        q:askMax?'Qual tem a coluna <b>MAIOR</b>? 📊':'Qual tem a coluna <b>MENOR</b>? 📊',
-        audio:[askMax?'q_graf_maior':'q_graf_menor'], stage, colorOpts:true,
-        options:cats.map((c,k)=>({label:`<span style="font-size:30px">${c.emo}</span>`,aud:nameKey(c.emo),correct:k===targetIdx})),
-      });
-    }
-    return rounds;
-  },
-};
-
-/* ---- SVGs ---- */
-function svgSquare(){return `<svg width="120" height="120"><rect x="15" y="15" width="90" height="90" rx="8" fill="#ff6b9d" stroke="#d44d7c" stroke-width="5"/></svg>`;}
-function svgRect(){return `<svg width="150" height="100"><rect x="10" y="28" width="130" height="55" rx="8" fill="#4d96ff" stroke="#2f6fd0" stroke-width="5"/></svg>`;}
-function svgTriangle(){return `<svg width="130" height="120"><polygon points="65,12 118,108 12,108" fill="#6bcB77" stroke="#3f9c4f" stroke-width="5" stroke-linejoin="round"/></svg>`;}
-function svgCircle(){return `<svg width="120" height="120"><circle cx="60" cy="60" r="48" fill="#ffd93d" stroke="#d9a800" stroke-width="5"/></svg>`;}
-
-/* ============================================================
-   SPLASH -> INÍCIO
-   ============================================================ */
-function enterApp(){
-  initAudio();      // efeitos sonoros
-  unlockAudio();    // destrava o player de narração (dentro do gesto)
-  document.getElementById('splash').style.display='none';
-  goHome(true);
-  setTimeout(()=>playKeys(['greet']),350);
-}
-document.getElementById('startBtn').addEventListener('click',enterApp);
-document.getElementById('splash').addEventListener('click',e=>{ if(e.target.id!=='startBtn'){ enterApp(); } });
+// O clique navega via href (funciona sem JS). O som é só um extra.
+grid.addEventListener('click', sndClick);
 </script>
 </body>
 </html>
