@@ -56,6 +56,11 @@
   }
   .card:active{transform:translateY(4px); box-shadow:0 2px 0 rgba(0,0,0,.18);}
   .card .card-icon{width:64px; height:64px;}
+  .card .card-icon img{width:100%; height:100%; object-fit:cover; border-radius:12px;}
+  .opt .opt-icon img{width:48px; height:48px; object-fit:cover; border-radius:8px;}
+  .title-icon img{width:32px; height:32px; object-fit:cover; border-radius:8px;}
+  .mascote-wrap img{width:100%; height:100%; object-fit:contain;}
+  .trophy-wrap img,.trophy-wrap svg{width:100%; height:100%;}
   .card .sub{font-size:12px; font-weight:normal; opacity:.9;}
   .c1{background:linear-gradient(135deg,#e84393,#fd79a8);} .c2{background:linear-gradient(135deg,#0984e3,#74b9ff);}
   .c3{background:linear-gradient(135deg,#00b894,#55efc4);} .c4{background:linear-gradient(135deg,#2d3436,#636e72);}
@@ -166,466 +171,49 @@ let stars = parseInt(localStorage.getItem('vitor_art_stars')||'0',10);
    DETAILED SVG ILLUSTRATIONS
    Each one uses gradients, shadows, textures for richer visuals
    ============================================================ */
-const SVG={
 
-  /* ===== ART SUPPLIES — detailed, realistic style ===== */
+/* ============================================================
+   IMAGES — DALL-E 3 generated high-quality illustrations
+   ============================================================ */
+const IMG = {
+  // Art supplies
+  brush: 'images/brush.png',
+  paint: 'images/paint.png',
+  canvas: 'images/canvas.png',
+  palette: 'images/palette.png',
+  pencil: 'images/pencil.png',
+  crayon: 'images/crayon.png',
+  scissors: 'images/scissors.png',
+  paper: 'images/paper.png',
+  glue: 'images/glue.png',
+  // Nature
+  star_shape: 'images/star.png',
+  moon_shape: 'images/moon.png',
+  sun_shape: 'images/sun.png',
+  tree_shape: 'images/tree.png',
+  flower_shape: 'images/flower.png',
+  cloud_shape: 'images/cloud.png',
+  mountain_shape: 'images/mountain.png',
+  cypress_shape: 'images/tree.png',
+  wheat_shape: 'images/wheat.png',
+  // Paintings
+  starry_night: 'images/starry-night.png',
+  wheat_field: 'images/wheat-field.png',
+  sunflowers: 'images/sunflowers.png',
+  bedroom: 'images/bedroom.png',
+  self_portrait: 'images/self-portrait.png',
+  // Scenes
+  scene_day: 'images/scene-day.png',
+  scene_night: 'images/scene-night.png',
+  // Artist
+  vangogh_artist: 'images/vangogh-artist.png',
+  // Mascot
+  mascot: 'images/mascot.png',
+};
 
-  brush:()=>`<svg viewBox="0 0 100 120">
-    <defs><linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A0522D"/><stop offset="1" stop-color="#6B3410"/></linearGradient>
-    <linearGradient id="br1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C0C0C0"/><stop offset="1" stop-color="#808080"/></linearGradient></defs>
-    <rect x="44" y="48" width="12" height="55" rx="2" fill="url(#bg1)"/>
-    <rect x="44" y="50" width="12" height="50" rx="1" fill="#8B6914" opacity=".4"/>
-    <line x1="50" y1="52" x2="50" y2="98" stroke="#5a3600" stroke-width=".5" opacity=".3"/>
-    <rect x="42" y="44" width="16" height="8" rx="2" fill="url(#br1)"/>
-    <rect x="42" y="46" width="16" height="2" fill="#999"/>
-    <path d="M44 44 Q43 20 50 8 Q57 20 56 44Z" fill="#e74c3c"/>
-    <path d="M46 42 Q45 22 50 12 Q55 22 54 42Z" fill="#c0392b"/>
-    <path d="M48 40 Q47 26 50 16 Q53 26 52 40Z" fill="#a93226" opacity=".5"/>
-    <ellipse cx="50" cy="8" rx="3" ry="2" fill="#ff6b6b" opacity=".6"/>
-  </svg>`,
-
-  paint:()=>`<svg viewBox="0 0 120 100">
-    <defs><linearGradient id="pt1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5f5f5"/><stop offset="1" stop-color="#d0d0d0"/></linearGradient></defs>
-    <rect x="15" y="25" width="90" height="60" rx="6" fill="url(#pt1)" stroke="#bbb" stroke-width="2"/>
-    <rect x="20" y="20" width="80" height="10" rx="3" fill="#ccc"/>
-    <rect x="20" y="22" width="80" height="4" fill="#bbb" opacity=".4"/>
-    <rect x="24" y="35" width="22" height="18" rx="3" fill="#e74c3c"/><rect x="26" y="37" width="18" height="14" rx="2" fill="#c0392b" opacity=".4"/>
-    <rect x="50" y="35" width="22" height="18" rx="3" fill="#3498db"/><rect x="52" y="37" width="18" height="14" rx="2" fill="#2980b9" opacity=".4"/>
-    <rect x="76" y="35" width="22" height="18" rx="3" fill="#f1c40f"/><rect x="78" y="37" width="18" height="14" rx="2" fill="#d4ac0d" opacity=".4"/>
-    <rect x="24" y="57" width="22" height="18" rx="3" fill="#27ae60"/><rect x="26" y="59" width="18" height="14" rx="2" fill="#1e8449" opacity=".4"/>
-    <rect x="50" y="57" width="22" height="18" rx="3" fill="#9b59b6"/><rect x="52" y="59" width="18" height="14" rx="2" fill="#7d3c98" opacity=".4"/>
-    <rect x="76" y="57" width="22" height="18" rx="3" fill="#e67e22"/><rect x="78" y="59" width="18" height="14" rx="2" fill="#ca6f1e" opacity=".4"/>
-  </svg>`,
-
-  canvas:()=>`<svg viewBox="0 0 100 120">
-    <line x1="50" y1="78" x2="22" y2="115" stroke="#6D4C41" stroke-width="4" stroke-linecap="round"/>
-    <line x1="50" y1="78" x2="78" y2="115" stroke="#6D4C41" stroke-width="4" stroke-linecap="round"/>
-    <line x1="32" y1="100" x2="68" y2="100" stroke="#6D4C41" stroke-width="3" stroke-linecap="round"/>
-    <rect x="18" y="10" width="64" height="54" rx="2" fill="#faf0e6" stroke="#b8860b" stroke-width="2"/>
-    <rect x="22" y="14" width="56" height="46" fill="#fff8ee"/>
-    <line x1="22" y1="40" x2="78" y2="40" stroke="#eee" stroke-width=".5"/>
-    <line x1="50" y1="14" x2="50" y2="60" stroke="#eee" stroke-width=".5"/>
-    <rect x="14" y="64" width="72" height="5" rx="2" fill="#8D6E63"/>
-    <circle cx="32" cy="78" r="2" fill="#8D6E63"/>
-    <circle cx="68" cy="78" r="2" fill="#8D6E63"/>
-  </svg>`,
-
-  palette:()=>`<svg viewBox="0 0 110 100">
-    <defs><radialGradient id="pl1"><stop offset="0" stop-color="#EDE0C8"/><stop offset="1" stop-color="#C4A265"/></radialGradient></defs>
-    <ellipse cx="55" cy="52" rx="48" ry="38" fill="url(#pl1)" stroke="#8B6914" stroke-width="1.5"/>
-    <ellipse cx="55" cy="50" rx="46" ry="36" fill="#DEB887"/>
-    <ellipse cx="42" cy="52" rx="7" ry="5" fill="#C4A265" opacity=".3"/>
-    <circle cx="30" cy="38" r="8" fill="#e74c3c"/><circle cx="31" cy="37" r="3" fill="#ff6b6b" opacity=".5"/>
-    <circle cx="48" cy="30" r="7" fill="#3498db"/><circle cx="49" cy="29" r="2.5" fill="#74b9ff" opacity=".5"/>
-    <circle cx="68" cy="32" r="6" fill="#f1c40f"/><circle cx="69" cy="31" r="2" fill="#ffeaa7" opacity=".5"/>
-    <circle cx="76" cy="46" r="6" fill="#27ae60"/><circle cx="77" cy="45" r="2" fill="#55efc4" opacity=".5"/>
-    <circle cx="72" cy="62" r="5" fill="#9b59b6"/><circle cx="73" cy="61" r="1.8" fill="#c39bd3" opacity=".5"/>
-    <circle cx="56" cy="68" r="5" fill="#e67e22"/><circle cx="57" cy="67" r="1.8" fill="#f0b27a" opacity=".5"/>
-    <circle cx="38" cy="66" r="5" fill="#fff" opacity=".3"/>
-    <ellipse cx="55" cy="50" rx="10" ry="7" fill="none" stroke="#B8860B" stroke-width="1" opacity=".3"/>
-  </svg>`,
-
-  pencil:()=>`<svg viewBox="0 0 100 120">
-    <defs><linearGradient id="pc1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f7dc6f"/><stop offset="1" stop-color="#f0b90b"/></linearGradient></defs>
-    <rect x="38" y="15" width="18" height="70" rx="1.5" fill="url(#pc1)"/>
-    <rect x="40" y="15" width="4" height="70" fill="#d4ac0d" opacity=".2"/>
-    <rect x="50" y="15" width="4" height="70" fill="#f9e44c" opacity=".3"/>
-    <polygon points="47,85 38,85 41,102 47,108 53,102 56,85" fill="#f5cba7"/>
-    <polygon points="44,100 47,112 50,100" fill="#34495e"/>
-    <polygon points="45,101 47,110 49,101" fill="#2c3e50"/>
-    <rect x="38" y="12" width="18" height="10" rx="2" fill="#e74c3c"/>
-    <rect x="38" y="15" width="18" height="4" fill="#c0392b" opacity=".4"/>
-    <rect x="38" y="82" width="18" height="5" rx="1" fill="#B8860B" opacity=".5"/>
-    <text x="47" y="55" text-anchor="middle" fill="#8B6914" font-size="6" font-weight="bold" opacity=".4">No.2</text>
-  </svg>`,
-
-  crayon:()=>`<svg viewBox="0 0 80 120">
-    <defs><linearGradient id="cr1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e74c3c"/><stop offset="1" stop-color="#c0392b"/></linearGradient></defs>
-    <rect x="28" y="28" width="20" height="65" rx="5" fill="url(#cr1)"/>
-    <rect x="30" y="30" width="5" height="61" rx="2" fill="#ff6b6b" opacity=".3"/>
-    <polygon points="38,28 28,28 31,12 38,6 45,12 48,28" fill="#a93226"/>
-    <polygon points="36,24 32,24 34,14 38,10 42,14 44,24" fill="#922b21" opacity=".5"/>
-    <rect x="28" y="86" width="20" height="8" rx="2" fill="#1a1a2e"/>
-    <rect x="30" y="88" width="16" height="4" rx="1" fill="#2c3e50"/>
-    <text x="38" y="62" text-anchor="middle" fill="#fff" font-size="6" font-weight="bold" letter-spacing=".5">RED</text>
-    <text x="38" y="70" text-anchor="middle" fill="#ffd5d5" font-size="4.5">CRAYON</text>
-    <line x1="38" y1="48" x2="38" y2="52" stroke="#fff" stroke-width=".5" opacity=".3"/>
-  </svg>`,
-
-  scissors:()=>`<svg viewBox="0 0 100 110">
-    <defs><linearGradient id="sc1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bdc3c7"/><stop offset="1" stop-color="#7f8c8d"/></linearGradient></defs>
-    <line x1="38" y1="62" x2="56" y2="22" stroke="url(#sc1)" stroke-width="6" stroke-linecap="round"/>
-    <line x1="62" y1="62" x2="44" y2="22" stroke="url(#sc1)" stroke-width="6" stroke-linecap="round"/>
-    <circle cx="50" cy="42" r="4" fill="#95a5a6" stroke="#7f8c8d" stroke-width="1"/>
-    <ellipse cx="34" cy="76" rx="14" ry="16" fill="none" stroke="#555" stroke-width="4"/>
-    <ellipse cx="34" cy="76" rx="8" ry="10" fill="#eee" opacity=".3"/>
-    <ellipse cx="66" cy="76" rx="14" ry="16" fill="none" stroke="#555" stroke-width="4"/>
-    <ellipse cx="66" cy="76" rx="8" ry="10" fill="#eee" opacity=".3"/>
-    <circle cx="34" cy="76" r="3" fill="#666"/>
-    <circle cx="66" cy="76" r="3" fill="#666"/>
-  </svg>`,
-
-  paper:()=>`<svg viewBox="0 0 100 120">
-    <rect x="18" y="10" width="64" height="90" rx="3" fill="#fff" stroke="#ccc" stroke-width="2"/>
-    <polygon points="64,10 82,10 82,28" fill="#e8e8e8"/>
-    <line x1="64" y1="10" x2="64" y2="28" stroke="#ccc" stroke-width="1"/>
-    <line x1="64" y1="28" x2="82" y2="28" stroke="#ccc" stroke-width="1"/>
-    <polygon points="64,10 82,28 64,28" fill="#f0f0f0"/>
-    <g stroke="#d5d5d5" stroke-width="1"><line x1="26" y1="32" x2="74" y2="32"/><line x1="26" y1="42" x2="70" y2="42"/><line x1="26" y1="52" x2="72" y2="52"/><line x1="26" y1="62" x2="60" y2="62"/><line x1="26" y1="72" x2="66" y2="72"/><line x1="26" y1="82" x2="55" y2="82"/></g>
-    <line x1="34" y1="10" x2="34" y2="100" stroke="#ffc0c0" stroke-width=".7" opacity=".5"/>
-  </svg>`,
-
-  glue:()=>`<svg viewBox="0 0 80 120">
-    <defs><linearGradient id="gl1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#f0f0f0"/></linearGradient></defs>
-    <rect x="24" y="38" width="30" height="58" rx="6" fill="url(#gl1)" stroke="#e67e22" stroke-width="2.5"/>
-    <rect x="30" y="24" width="18" height="20" rx="4" fill="#f39c12"/>
-    <rect x="32" y="26" width="14" height="16" rx="3" fill="#e67e22" opacity=".4"/>
-    <ellipse cx="39" cy="20" rx="6" ry="5" fill="#f39c12"/>
-    <ellipse cx="39" cy="18" rx="3" ry="2" fill="#ffd93d" opacity=".5"/>
-    <text x="39" y="62" text-anchor="middle" fill="#e67e22" font-size="8" font-weight="bold">GLUE</text>
-    <text x="39" y="72" text-anchor="middle" fill="#e67e22" font-size="5">STICK</text>
-    <rect x="28" y="85" width="22" height="3" rx="1" fill="#e67e22" opacity=".3"/>
-  </svg>`,
-
-  /* ===== NATURE ELEMENTS — detailed ===== */
-
-  star_shape:()=>`<svg viewBox="0 0 100 100">
-    <defs><radialGradient id="st1"><stop offset="0" stop-color="#fff3b0"/><stop offset=".5" stop-color="#ffd93d"/><stop offset="1" stop-color="#e8a838"/></radialGradient></defs>
-    <polygon points="50,5 61,35 94,35 67,55 78,88 50,68 22,88 33,55 6,35 39,35" fill="url(#st1)" stroke="#d4a017" stroke-width="1.5"/>
-    <polygon points="50,12 58,33 80,33 62,47 70,72 50,58 30,72 38,47 20,33 42,33" fill="#ffeaa7" opacity=".4"/>
-    <circle cx="46" cy="40" r="3" fill="#fff" opacity=".4"/>
-  </svg>`,
-
-  moon_shape:()=>`<svg viewBox="0 0 100 100">
-    <defs><radialGradient id="mn1" cx=".3" cy=".3"><stop offset="0" stop-color="#fff8dc"/><stop offset="1" stop-color="#ffeaa7"/></radialGradient></defs>
-    <circle cx="50" cy="50" r="35" fill="url(#mn1)"/>
-    <circle cx="66" cy="40" r="28" fill="#1a1a4e"/>
-    <circle cx="38" cy="38" r="4" fill="#f0dca0" opacity=".3"/>
-    <circle cx="44" cy="55" r="3" fill="#f0dca0" opacity=".2"/>
-    <circle cx="35" cy="48" r="2" fill="#e8d490" opacity=".25"/>
-  </svg>`,
-
-  sun_shape:()=>`<svg viewBox="0 0 100 100">
-    <defs><radialGradient id="sn1"><stop offset="0" stop-color="#ffeaa7"/><stop offset=".6" stop-color="#f39c12"/><stop offset="1" stop-color="#e67e22"/></radialGradient></defs>
-    <g stroke="#f39c12" stroke-width="3.5" stroke-linecap="round" opacity=".7">
-      <line x1="50" y1="8" x2="50" y2="18"/><line x1="50" y1="82" x2="50" y2="92"/>
-      <line x1="8" y1="50" x2="18" y2="50"/><line x1="82" y1="50" x2="92" y2="50"/>
-      <line x1="20" y1="20" x2="27" y2="27"/><line x1="73" y1="73" x2="80" y2="80"/>
-      <line x1="80" y1="20" x2="73" y2="27"/><line x1="27" y1="73" x2="20" y2="80"/>
-    </g>
-    <circle cx="50" cy="50" r="22" fill="url(#sn1)"/>
-    <circle cx="44" cy="44" r="6" fill="#ffeaa7" opacity=".4"/>
-  </svg>`,
-
-  tree_shape:()=>`<svg viewBox="0 0 100 110">
-    <rect x="44" y="68" width="12" height="32" rx="2" fill="#6D4C41"/>
-    <rect x="46" y="70" width="4" height="28" rx="1" fill="#5D4037" opacity=".3"/>
-    <line x1="42" y1="82" x2="35" y2="90" stroke="#6D4C41" stroke-width="3" stroke-linecap="round"/>
-    <line x1="58" y1="85" x2="64" y2="92" stroke="#6D4C41" stroke-width="2.5" stroke-linecap="round"/>
-    <ellipse cx="50" cy="42" rx="32" ry="34" fill="#27ae60"/>
-    <ellipse cx="36" cy="50" rx="20" ry="24" fill="#2ecc71"/>
-    <ellipse cx="62" cy="48" rx="18" ry="22" fill="#27ae60"/>
-    <ellipse cx="50" cy="32" rx="16" ry="18" fill="#2ecc71"/>
-    <ellipse cx="42" cy="36" rx="8" ry="10" fill="#55efc4" opacity=".3"/>
-    <circle cx="34" cy="52" r="3" fill="#e74c3c" opacity=".7"/>
-    <circle cx="58" cy="38" r="2" fill="#e74c3c" opacity=".5"/>
-  </svg>`,
-
-  flower_shape:()=>`<svg viewBox="0 0 100 110">
-    <line x1="50" y1="58" x2="50" y2="100" stroke="#27ae60" stroke-width="4" stroke-linecap="round"/>
-    <ellipse cx="36" cy="82" rx="14" ry="6" fill="#27ae60" transform="rotate(-30,36,82)" opacity=".7"/>
-    <ellipse cx="62" cy="78" rx="12" ry="5" fill="#27ae60" transform="rotate(25,62,78)" opacity=".6"/>
-    <g><circle cx="50" cy="45" r="11" fill="#f1c40f"/>
-    <circle cx="50" cy="43" r="5" fill="#e67e22" opacity=".4"/></g>
-    <circle cx="50" cy="28" r="12" fill="#e74c3c"/><circle cx="50" cy="26" r="4" fill="#ff6b6b" opacity=".4"/>
-    <circle cx="64" cy="34" r="12" fill="#c0392b"/><circle cx="63" cy="32" r="4" fill="#e74c3c" opacity=".3"/>
-    <circle cx="64" cy="52" r="12" fill="#e74c3c"/>
-    <circle cx="50" cy="60" r="12" fill="#c0392b"/>
-    <circle cx="36" cy="52" r="12" fill="#e74c3c"/>
-    <circle cx="36" cy="34" r="12" fill="#c0392b"/><circle cx="37" cy="32" r="4" fill="#e74c3c" opacity=".3"/>
-  </svg>`,
-
-  cloud_shape:()=>`<svg viewBox="0 0 120 80">
-    <defs><linearGradient id="cl1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#dfe6e9"/></linearGradient></defs>
-    <ellipse cx="60" cy="52" rx="38" ry="18" fill="url(#cl1)"/>
-    <ellipse cx="40" cy="46" rx="24" ry="18" fill="url(#cl1)"/>
-    <ellipse cx="76" cy="44" rx="22" ry="16" fill="url(#cl1)"/>
-    <ellipse cx="56" cy="36" rx="20" ry="15" fill="#fff"/>
-    <ellipse cx="48" cy="40" rx="8" ry="5" fill="#fff" opacity=".6"/>
-  </svg>`,
-
-  mountain_shape:()=>`<svg viewBox="0 0 140 90">
-    <polygon points="5,85 50,15 95,85" fill="#636e72"/>
-    <polygon points="50,15 60,32 40,32" fill="#ecf0f1"/>
-    <polygon points="45,28 50,15 55,28" fill="#fff" opacity=".6"/>
-    <polygon points="40,85 80,25 120,85" fill="#7f8c8d"/>
-    <polygon points="80,25 88,38 72,38" fill="#dfe6e9"/>
-    <polygon points="76,34 80,25 84,34" fill="#fff" opacity=".5"/>
-    <polygon points="100,85 125,45 140,85" fill="#95a5a6" opacity=".7"/>
-  </svg>`,
-
-  cypress_shape:()=>`<svg viewBox="0 0 60 120">
-    <rect x="26" y="80" width="8" height="30" rx="2" fill="#5D4037"/>
-    <rect x="28" y="82" width="3" height="26" rx="1" fill="#4E342E" opacity=".3"/>
-    <ellipse cx="30" cy="48" rx="14" ry="44" fill="#1B5E20"/>
-    <ellipse cx="30" cy="46" rx="11" ry="40" fill="#2E7D32"/>
-    <ellipse cx="30" cy="44" rx="7" ry="34" fill="#388E3C" opacity=".4"/>
-    <ellipse cx="27" cy="30" rx="3" ry="8" fill="#4CAF50" opacity=".3"/>
-  </svg>`,
-
-  wheat_shape:()=>`<svg viewBox="0 0 80 120">
-    <line x1="40" y1="110" x2="40" y2="35" stroke="#8B6914" stroke-width="2.5"/>
-    <line x1="40" y1="70" x2="28" y2="85" stroke="#8B6914" stroke-width="1.5" stroke-linecap="round"/>
-    <line x1="40" y1="60" x2="52" y2="75" stroke="#8B6914" stroke-width="1.5" stroke-linecap="round"/>
-    <g fill="#DAA520"><ellipse cx="40" cy="30" rx="5" ry="12"/><ellipse cx="33" cy="40" rx="4" ry="9" transform="rotate(-18,33,40)"/>
-    <ellipse cx="47" cy="40" rx="4" ry="9" transform="rotate(18,47,40)"/><ellipse cx="30" cy="54" rx="3.5" ry="8" transform="rotate(-22,30,54)"/>
-    <ellipse cx="50" cy="54" rx="3.5" ry="8" transform="rotate(22,50,54)"/></g>
-    <g fill="#B8860B" opacity=".4"><line x1="40" y1="22" x2="40" y2="38" stroke="#B8860B" stroke-width=".5"/></g>
-  </svg>`,
-
-  /* ===== PAINTINGS — highly detailed, recognizable ===== */
-
-  starry_night:()=>`<svg viewBox="0 0 280 200" style="border-radius:14px;border:3px solid #8B7355">
-    <defs>
-      <radialGradient id="sn_sky" cx=".5" cy=".3"><stop offset="0" stop-color="#1a2a6c"/><stop offset="1" stop-color="#0a0a2e"/></radialGradient>
-      <radialGradient id="sn_star"><stop offset="0" stop-color="#ffeaa7"/><stop offset=".7" stop-color="#ffd93d"/><stop offset="1" stop-color="#f39c12" stop-opacity="0"/></radialGradient>
-    </defs>
-    <rect width="280" height="200" fill="url(#sn_sky)"/>
-    <!-- swirling sky -->
-    <g fill="none" stroke-linecap="round" opacity=".7">
-      <path d="M20 50 Q70 30 120 55 Q170 80 220 50 Q250 38 280 48" stroke="#3a7bd5" stroke-width="6"/>
-      <path d="M0 65 Q50 50 100 68 Q150 86 200 65 Q240 50 280 62" stroke="#4a8fe7" stroke-width="5"/>
-      <path d="M10 80 Q60 68 110 82 Q160 96 210 78 Q250 66 280 76" stroke="#2b5ea7" stroke-width="4"/>
-      <path d="M0 40 Q40 28 80 42 Q120 56 160 40 Q200 28 240 38" stroke="#5b9bd5" stroke-width="3" opacity=".5"/>
-    </g>
-    <!-- moon -->
-    <circle cx="225" cy="35" r="20" fill="#ffeaa7"/>
-    <circle cx="236" cy="28" r="16" fill="#1a2a6c"/>
-    <circle cx="222" cy="30" r="2" fill="#f5e6c8" opacity=".3"/>
-    <!-- stars with glow -->
-    <g><circle cx="50" cy="28" r="12" fill="url(#sn_star)"/><circle cx="50" cy="28" r="5" fill="#ffd93d"/>
-    <circle cx="100" cy="20" r="10" fill="url(#sn_star)"/><circle cx="100" cy="20" r="4" fill="#ffd93d"/>
-    <circle cx="155" cy="30" r="11" fill="url(#sn_star)"/><circle cx="155" cy="30" r="4.5" fill="#ffd93d"/>
-    <circle cx="75" cy="50" r="8" fill="url(#sn_star)"/><circle cx="75" cy="50" r="3" fill="#ffd93d"/>
-    <circle cx="190" cy="22" r="7" fill="url(#sn_star)"/><circle cx="190" cy="22" r="2.5" fill="#ffd93d"/>
-    </g>
-    <!-- cypress -->
-    <ellipse cx="35" cy="120" rx="14" ry="55" fill="#0d3b0d"/>
-    <ellipse cx="35" cy="118" rx="11" ry="50" fill="#1a5c1a"/>
-    <ellipse cx="35" cy="115" rx="7" ry="44" fill="#1B5E20" opacity=".5"/>
-    <!-- village -->
-    <polygon points="0,130 60,125 140,132 200,128 280,135 280,200 0,200" fill="#1a3a0a"/>
-    <polygon points="0,140 80,135 160,142 240,138 280,142 280,200 0,200" fill="#2d5016"/>
-    <rect x="80" y="138" width="14" height="22" rx="1" fill="#3e2723"/><polygon points="80,138 87,128 94,138" fill="#5D4037"/>
-    <rect x="100" y="140" width="12" height="18" rx="1" fill="#4E342E"/><polygon points="100,140 106,132 112,140" fill="#6D4C41"/>
-    <rect x="120" y="136" width="16" height="24" rx="1" fill="#3e2723"/><polygon points="120,136 128,124 136,136" fill="#5D4037"/>
-    <rect x="86" y="148" width="4" height="6" rx="1" fill="#ffeaa7" opacity=".5"/>
-    <rect x="124" y="144" width="5" height="7" rx="1" fill="#ffeaa7" opacity=".4"/>
-    <text x="140" y="192" text-anchor="middle" fill="#5a7a3a" font-size="8" font-style="italic" opacity=".5">The Starry Night, 1889</text>
-  </svg>`,
-
-  wheat_field:()=>`<svg viewBox="0 0 280 200" style="border-radius:14px;border:3px solid #8B7355">
-    <defs><linearGradient id="wf_sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5dade2"/><stop offset="1" stop-color="#aed6f1"/></linearGradient></defs>
-    <rect width="280" height="200" fill="url(#wf_sky)"/>
-    <!-- sun -->
-    <circle cx="230" cy="30" r="22" fill="#f9e44c" opacity=".8"/>
-    <circle cx="230" cy="30" r="16" fill="#f39c12"/>
-    <!-- clouds -->
-    <g opacity=".8"><ellipse cx="60" cy="28" rx="30" ry="14" fill="#fff"/><ellipse cx="42" cy="24" rx="20" ry="12" fill="#f5f5f5"/>
-    <ellipse cx="80" cy="22" rx="16" ry="10" fill="#fff"/></g>
-    <g opacity=".6"><ellipse cx="170" cy="40" rx="24" ry="10" fill="#fff"/><ellipse cx="156" cy="36" rx="16" ry="8" fill="#f5f5f5"/></g>
-    <!-- mountains -->
-    <polygon points="0,110 40,70 80,95 120,65 160,90 200,72 240,88 280,80 280,120 0,120" fill="#7aa37a" opacity=".4"/>
-    <!-- cypress -->
-    <ellipse cx="210" cy="95" rx="14" ry="50" fill="#0d3b0d"/>
-    <ellipse cx="210" cy="93" rx="11" ry="46" fill="#1a5c1a"/>
-    <ellipse cx="210" cy="90" rx="7" ry="40" fill="#2E7D32" opacity=".5"/>
-    <rect x="207" y="130" width="6" height="15" rx="1" fill="#5D4037"/>
-    <!-- wheat field -->
-    <polygon points="0,105 50,100 100,108 150,102 200,106 280,110 280,200 0,200" fill="#DAA520"/>
-    <polygon points="0,115 40,110 90,118 140,112 190,116 280,120 280,200 0,200" fill="#C19A1A"/>
-    <polygon points="0,130 60,125 120,132 180,128 280,135 280,200 0,200" fill="#B8860B"/>
-    <!-- wheat stalks -->
-    <g stroke="#8B6914" stroke-width="1" opacity=".4">
-      <line x1="20" y1="108" x2="22" y2="95"/><line x1="45" y1="104" x2="47" y2="92"/>
-      <line x1="70" y1="110" x2="72" y2="98"/><line x1="95" y1="106" x2="97" y2="94"/>
-      <line x1="120" y1="108" x2="122" y2="96"/><line x1="150" y1="105" x2="152" y2="93"/>
-      <line x1="175" y1="108" x2="177" y2="96"/>
-    </g>
-    <g fill="#DAA520" opacity=".5">
-      <ellipse cx="22" cy="93" rx="2.5" ry="6"/><ellipse cx="47" cy="90" rx="2" ry="5"/>
-      <ellipse cx="72" cy="96" rx="2" ry="5"/><ellipse cx="97" cy="92" rx="2.5" ry="6"/>
-    </g>
-    <text x="140" y="192" text-anchor="middle" fill="#6a5010" font-size="8" font-style="italic" opacity=".5">Wheat Field with Cypresses, 1889</text>
-  </svg>`,
-
-  sunflowers:()=>`<svg viewBox="0 0 280 200" style="border-radius:14px;border:3px solid #8B7355">
-    <rect width="280" height="200" fill="#f5e6c8"/>
-    <rect x="0" y="130" width="280" height="70" fill="#e6d5a8"/>
-    <!-- vase -->
-    <path d="M110 95 Q105 130 115 160 Q125 175 140 178 Q155 175 165 160 Q175 130 170 95Z" fill="#c9a96e" stroke="#B8860B" stroke-width="2"/>
-    <path d="M115 100 Q112 130 120 155 Q130 168 140 170" fill="none" stroke="#deb887" stroke-width="2" opacity=".4"/>
-    <rect x="108" y="90" width="64" height="8" rx="3" fill="#B8860B"/>
-    <!-- sunflower 1 (large center) -->
-    <g transform="translate(140,58)">
-      <line x1="0" y1="18" x2="0" y2="35" stroke="#2d8a2d" stroke-width="4"/>
-      <circle r="12" fill="#5D4037"/>
-      <circle r="8" fill="#3e2723"/>
-      <g fill="#f1c40f"><ellipse cx="0" cy="-20" rx="6" ry="10"/><ellipse cx="14" cy="-14" rx="6" ry="10" transform="rotate(45)"/>
-      <ellipse cx="20" cy="0" rx="6" ry="10" transform="rotate(90)"/><ellipse cx="14" cy="14" rx="6" ry="10" transform="rotate(135)"/>
-      <ellipse cx="0" cy="20" rx="6" ry="10" transform="rotate(180)"/><ellipse cx="-14" cy="14" rx="6" ry="10" transform="rotate(225)"/>
-      <ellipse cx="-20" cy="0" rx="6" ry="10" transform="rotate(270)"/><ellipse cx="-14" cy="-14" rx="6" ry="10" transform="rotate(315)"/></g>
-    </g>
-    <!-- sunflower 2 (right, smaller) -->
-    <g transform="translate(172,68)">
-      <line x1="0" y1="12" x2="-4" y2="28" stroke="#2d8a2d" stroke-width="3"/>
-      <circle r="8" fill="#5D4037"/><circle r="5" fill="#3e2723"/>
-      <g fill="#e67e22"><ellipse cx="0" cy="-14" rx="4.5" ry="7.5"/><ellipse cx="10" cy="-10" rx="4.5" ry="7.5" transform="rotate(45)"/>
-      <ellipse cx="14" cy="0" rx="4.5" ry="7.5" transform="rotate(90)"/><ellipse cx="10" cy="10" rx="4.5" ry="7.5" transform="rotate(135)"/>
-      <ellipse cx="0" cy="14" rx="4.5" ry="7.5" transform="rotate(180)"/><ellipse cx="-10" cy="10" rx="4.5" ry="7.5" transform="rotate(225)"/>
-      <ellipse cx="-14" cy="0" rx="4.5" ry="7.5" transform="rotate(270)"/><ellipse cx="-10" cy="-10" rx="4.5" ry="7.5" transform="rotate(315)"/></g>
-    </g>
-    <!-- sunflower 3 (left, drooping) -->
-    <g transform="translate(112,72)">
-      <line x1="0" y1="10" x2="4" y2="24" stroke="#2d8a2d" stroke-width="3"/>
-      <circle r="7" fill="#8B6914"/><circle r="4" fill="#5D4037"/>
-      <g fill="#c9a96e"><ellipse cx="0" cy="-12" rx="4" ry="6.5"/><ellipse cx="8" cy="-8" rx="4" ry="6.5" transform="rotate(45)"/>
-      <ellipse cx="12" cy="0" rx="4" ry="6.5" transform="rotate(90)"/><ellipse cx="8" cy="8" rx="4" ry="6.5" transform="rotate(135)"/>
-      <ellipse cx="0" cy="12" rx="4" ry="6.5" transform="rotate(180)"/><ellipse cx="-8" cy="8" rx="4" ry="6.5" transform="rotate(225)"/>
-      <ellipse cx="-12" cy="0" rx="4" ry="6.5" transform="rotate(270)"/><ellipse cx="-8" cy="-8" rx="4" ry="6.5" transform="rotate(315)"/></g>
-    </g>
-    <!-- leaves -->
-    <ellipse cx="126" cy="100" rx="12" ry="5" fill="#27ae60" transform="rotate(-30,126,100)"/>
-    <ellipse cx="158" cy="98" rx="10" ry="4" fill="#2d8a2d" transform="rotate(25,158,98)"/>
-    <text x="140" y="192" text-anchor="middle" fill="#8a7030" font-size="8" font-style="italic" opacity=".5">Sunflowers, 1888</text>
-  </svg>`,
-
-  bedroom:()=>`<svg viewBox="0 0 280 200" style="border-radius:14px;border:3px solid #8B7355">
-    <defs><linearGradient id="bd_wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#74b9ff"/><stop offset="1" stop-color="#a29bfe"/></linearGradient></defs>
-    <!-- walls and floor -->
-    <rect width="280" height="200" fill="url(#bd_wall)"/>
-    <polygon points="0,80 140,50 280,80 280,200 0,200" fill="#DEB887"/>
-    <polygon points="0,200 0,80 20,85 20,200" fill="#c9a96e" opacity=".3"/>
-    <polygon points="280,200 280,80 260,85 260,200" fill="#c9a96e" opacity=".3"/>
-    <!-- bed -->
-    <rect x="15" y="88" width="110" height="72" rx="4" fill="#e17055"/>
-    <rect x="15" y="86" width="110" height="10" rx="3" fill="#d35400"/>
-    <rect x="18" y="98" width="45" height="22" rx="3" fill="#fff" opacity=".6"/>
-    <rect x="68" y="98" width="45" height="22" rx="3" fill="#fff" opacity=".5"/>
-    <rect x="15" y="120" width="110" height="40" rx="2" fill="#c0392b" opacity=".3"/>
-    <rect x="15" y="155" width="110" height="8" rx="2" fill="#8B4513"/>
-    <!-- table -->
-    <rect x="225" y="100" width="40" height="55" rx="3" fill="#8B4513"/>
-    <rect x="228" y="105" width="12" height="18" rx="1" fill="#c9a96e"/>
-    <rect x="243" y="105" width="12" height="18" rx="1" fill="#b8960b"/>
-    <circle cx="248" cy="98" r="6" fill="#f39c12" opacity=".7"/>
-    <!-- chair 1 -->
-    <rect x="140" y="110" width="28" height="35" rx="3" fill="#f39c12"/>
-    <rect x="142" y="100" width="24" height="14" rx="2" fill="#e67e22"/>
-    <rect x="140" y="145" width="4" height="15" rx="1" fill="#8B4513"/>
-    <rect x="164" y="145" width="4" height="15" rx="1" fill="#8B4513"/>
-    <!-- chair 2 -->
-    <rect x="175" y="115" width="25" height="30" rx="3" fill="#27ae60"/>
-    <rect x="177" y="105" width="21" height="12" rx="2" fill="#1e8449"/>
-    <!-- pictures on wall -->
-    <rect x="140" y="56" width="22" height="18" rx="2" fill="#e8d5a0" stroke="#8B6914" stroke-width="1.5"/>
-    <rect x="170" y="58" width="18" height="14" rx="2" fill="#d5c5a0" stroke="#8B6914" stroke-width="1.5"/>
-    <!-- window -->
-    <rect x="50" y="52" width="30" height="28" rx="2" fill="#87CEEB" stroke="#8B6914" stroke-width="2"/>
-    <line x1="65" y1="52" x2="65" y2="80" stroke="#8B6914" stroke-width="1.5"/>
-    <line x1="50" y1="66" x2="80" y2="66" stroke="#8B6914" stroke-width="1.5"/>
-    <text x="140" y="192" text-anchor="middle" fill="#8a7050" font-size="8" font-style="italic" opacity=".5">The Bedroom, 1888</text>
-  </svg>`,
-
-  self_portrait:()=>`<svg viewBox="0 0 280 200" style="border-radius:14px;border:3px solid #8B7355">
-    <defs><radialGradient id="sp_bg" cx=".5" cy=".4"><stop offset="0" stop-color="#4a8fe7"/><stop offset="1" stop-color="#2c3e50"/></radialGradient></defs>
-    <rect width="280" height="200" fill="url(#sp_bg)"/>
-    <!-- swirl texture in background -->
-    <g fill="none" stroke="#3a7bd5" stroke-width="2" opacity=".3">
-      <path d="M40 30 Q80 20 60 60 Q40 100 80 90"/><path d="M200 20 Q240 30 220 70 Q200 110 240 100"/>
-      <path d="M120 150 Q160 140 140 180"/><path d="M30 160 Q50 150 40 180"/>
-    </g>
-    <!-- coat/jacket -->
-    <rect x="105" y="118" width="70" height="72" rx="8" fill="#2c3e50"/>
-    <rect x="110" y="122" width="60" height="12" rx="3" fill="#34495e"/>
-    <line x1="140" y1="122" x2="140" y2="190" stroke="#1a252f" stroke-width="1"/>
-    <!-- face -->
-    <ellipse cx="140" cy="80" rx="38" ry="44" fill="#fad390"/>
-    <ellipse cx="140" cy="82" rx="35" ry="40" fill="#f8c471" opacity=".4"/>
-    <!-- beard -->
-    <path d="M115 92 Q118 115 140 120 Q162 115 165 92 Q162 105 140 110 Q118 105 115 92Z" fill="#e67e22"/>
-    <path d="M118 95 Q120 110 140 115 Q160 110 162 95" fill="#d35400" opacity=".4"/>
-    <!-- eyes -->
-    <ellipse cx="127" cy="72" rx="6" ry="5" fill="#fff"/><circle cx="128" cy="72" r="3" fill="#2980b9"/><circle cx="129" cy="71" r="1.2" fill="#000"/>
-    <ellipse cx="153" cy="72" rx="6" ry="5" fill="#fff"/><circle cx="154" cy="72" r="3" fill="#2980b9"/><circle cx="155" cy="71" r="1.2" fill="#000"/>
-    <!-- eyebrows -->
-    <path d="M120 66 Q127 62 134 65" fill="none" stroke="#c0392b" stroke-width="2"/>
-    <path d="M146 65 Q153 62 160 66" fill="none" stroke="#c0392b" stroke-width="2"/>
-    <!-- nose -->
-    <path d="M137 78 Q140 86 143 78" fill="none" stroke="#d4a574" stroke-width="1.5"/>
-    <!-- mouth -->
-    <path d="M132 95 Q140 100 148 95" fill="none" stroke="#c0392b" stroke-width="1.8"/>
-    <!-- ear -->
-    <ellipse cx="102" cy="80" rx="6" ry="10" fill="#fad390" stroke="#e8b960" stroke-width="1"/>
-    <ellipse cx="178" cy="80" rx="6" ry="10" fill="#fad390" stroke="#e8b960" stroke-width="1"/>
-    <!-- hat -->
-    <path d="M100 52 Q108 28 140 22 Q172 28 180 52 Q178 48 170 46 L110 46 Q102 48 100 52Z" fill="#2c3e50"/>
-    <path d="M105 50 Q110 46 140 44 Q170 46 175 50 L178 55 L102 55Z" fill="#34495e"/>
-    <rect x="100" y="52" width="80" height="5" rx="2" fill="#1a252f"/>
-    <!-- hair (red/orange) -->
-    <path d="M104 55 Q100 45 105 38 Q108 30 115 36 Q110 44 108 55" fill="#e67e22"/>
-    <path d="M176 55 Q180 45 175 38 Q172 30 165 36 Q170 44 172 55" fill="#e67e22"/>
-    <text x="140" y="192" text-anchor="middle" fill="#5a8ac0" font-size="8" font-style="italic" opacity=".5">Self Portrait, 1889</text>
-  </svg>`,
-
-  /* Scenes */
-  scene_day:()=>`<svg viewBox="0 0 280 160" style="border-radius:14px;border:3px solid #87CEEB">
-    <defs><linearGradient id="sd1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#74b9ff"/><stop offset="1" stop-color="#a0d2ff"/></linearGradient></defs>
-    <rect width="280" height="160" fill="url(#sd1)"/>
-    <circle cx="230" cy="30" r="24" fill="#f9e44c" opacity=".9"/>
-    <circle cx="230" cy="30" r="18" fill="#f39c12"/>
-    <circle cx="226" cy="26" r="5" fill="#ffeaa7" opacity=".4"/>
-    <g stroke="#f39c12" stroke-width="3" stroke-linecap="round" opacity=".5"><line x1="230" y1="2" x2="230" y2="0"/><line x1="258" y1="30" x2="264" y2="30"/>
-    <line x1="252" y1="8" x2="256" y2="4"/><line x1="252" y1="52" x2="256" y2="56"/></g>
-    <g opacity=".8"><ellipse cx="70" cy="30" rx="30" ry="13" fill="#fff"/><ellipse cx="55" cy="26" rx="20" ry="11" fill="#f5f5f5"/><ellipse cx="88" cy="24" rx="18" ry="9" fill="#fff"/></g>
-    <g opacity=".5"><ellipse cx="160" cy="40" rx="22" ry="8" fill="#fff"/><ellipse cx="148" cy="36" rx="14" ry="7" fill="#f5f5f5"/></g>
-    <polygon points="0,90 50,80 120,92 180,85 250,90 280,88 280,160 0,160" fill="#27ae60"/>
-    <polygon points="0,100 70,95 140,102 210,98 280,100 280,160 0,160" fill="#2ecc71"/>
-    <rect x="105" y="68" width="10" height="30" rx="2" fill="#6D4C41"/>
-    <ellipse cx="110" cy="55" rx="20" ry="22" fill="#27ae60"/><ellipse cx="104" cy="58" rx="14" ry="16" fill="#2ecc71"/>
-    <circle cx="100" cy="50" r="3" fill="#e74c3c" opacity=".6"/>
-    <circle cx="118" cy="48" r="2" fill="#e74c3c" opacity=".5"/>
-    <rect x="185" y="72" width="8" height="26" rx="1" fill="#5D4037"/>
-    <ellipse cx="189" cy="60" rx="14" ry="16" fill="#27ae60"/><ellipse cx="186" cy="62" rx="10" ry="12" fill="#2ecc71"/>
-    <g fill="#f1c40f"><circle cx="50" cy="106" r="3"/><circle cx="50" cy="100" r="2.5" fill="#e74c3c"/><circle cx="47" cy="103" r="2.5" fill="#e74c3c"/>
-    <circle cx="53" cy="103" r="2.5" fill="#e74c3c"/><line x1="50" y1="109" x2="50" y2="118" stroke="#27ae60" stroke-width="2"/></g>
-    <g fill="#ff69b4"><circle cx="220" cy="104" r="2.5"/><circle cx="220" cy="99" r="2"/><circle cx="217" cy="101.5" r="2"/>
-    <circle cx="223" cy="101.5" r="2"/><line x1="220" y1="106" x2="220" y2="114" stroke="#27ae60" stroke-width="1.5"/></g>
-  </svg>`,
-
-  scene_night:()=>`<svg viewBox="0 0 280 160" style="border-radius:14px;border:3px solid #1a1a4e">
-    <defs><linearGradient id="sni" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a0a2e"/><stop offset="1" stop-color="#1a2a5c"/></linearGradient></defs>
-    <rect width="280" height="160" fill="url(#sni)"/>
-    <circle cx="220" cy="30" r="16" fill="#ffeaa7"/><circle cx="230" cy="24" r="12" fill="#0a0a2e"/>
-    <circle cx="216" cy="26" r="2" fill="#f0dca0" opacity=".2"/>
-    <g fill="#ffd93d" opacity=".7"><circle cx="30" cy="15" r="2.5"/><circle cx="60" cy="30" r="2"/><circle cx="100" cy="12" r="2.5"/>
-    <circle cx="140" cy="25" r="2"/><circle cx="170" cy="18" r="1.8"/><circle cx="250" cy="20" r="2"/>
-    <circle cx="45" cy="45" r="1.5"/><circle cx="120" cy="40" r="1.5"/><circle cx="190" cy="42" r="1.2"/><circle cx="260" cy="38" r="1.5"/>
-    <circle cx="80" cy="50" r="1"/><circle cx="155" cy="48" r="1"/></g>
-    <polygon points="0,90 50,85 120,92 180,88 250,92 280,90 280,160 0,160" fill="#0d2b0d"/>
-    <polygon points="0,100 70,96 140,102 210,98 280,100 280,160 0,160" fill="#1a3a1a"/>
-    <rect x="90" y="80" width="40" height="38" rx="3" fill="#3e2723"/>
-    <rect x="98" y="86" width="10" height="14" rx="1" fill="#ffeaa7" opacity=".5"/>
-    <rect x="114" y="86" width="10" height="14" rx="1" fill="#ffeaa7" opacity=".4"/>
-    <polygon points="85,80 110,60 135,80" fill="#5D4037"/>
-    <rect x="108" y="64" width="4" height="12" rx="1" fill="#795548"/>
-    <rect x="170" y="85" width="30" height="30" rx="2" fill="#4E342E"/>
-    <rect x="178" y="90" width="8" height="10" rx="1" fill="#ffeaa7" opacity=".3"/>
-    <polygon points="166,85 185,70 204,85" fill="#6D4C41"/>
-  </svg>`,
-
-  /* Icons */
-  trophy:()=>`<svg viewBox="0 0 100 100">
+// Trophy SVG kept inline (small, decorative)
+const SVG = {
+  trophy: () => `<svg viewBox="0 0 100 100">
     <defs><linearGradient id="tr1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f9e44c"/><stop offset="1" stop-color="#e8a838"/></linearGradient></defs>
     <path d="M30 22 H70 L65 58 Q50 72 35 58 Z" fill="url(#tr1)" stroke="#d4a017" stroke-width="2"/>
     <path d="M36 26 H64 L60 54 Q50 64 40 54 Z" fill="#ffeaa7" opacity=".3"/>
@@ -636,12 +224,21 @@ const SVG={
     <path d="M70 22 Q88 26 84 42 Q82 55 65 52" fill="none" stroke="#f1c40f" stroke-width="5"/>
     <text x="50" y="48" text-anchor="middle" fill="#d4a017" font-size="14" font-weight="bold">1</text>
   </svg>`,
-
-  speaker:()=>`<svg viewBox="0 0 24 24" width="24" height="24"><polygon points="3,9 3,15 7,15 13,19 13,5 7,9" fill="#5a4500"/><path d="M16 8.5 Q19 12 16 15.5" fill="none" stroke="#5a4500" stroke-width="1.5" stroke-linecap="round"/><path d="M18 6 Q23 12 18 18" fill="none" stroke="#5a4500" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+  speaker: () => `<svg viewBox="0 0 24 24" width="24" height="24"><polygon points="3,9 3,15 7,15 13,19 13,5 7,9" fill="#5a4500"/><path d="M16 8.5 Q19 12 16 15.5" fill="none" stroke="#5a4500" stroke-width="1.5" stroke-linecap="round"/><path d="M18 6 Q23 12 18 18" fill="none" stroke="#5a4500" stroke-width="1.5" stroke-linecap="round"/></svg>`,
 };
 
-function svgStage(key,w){return `<div class="illust" style="max-width:${w||320}px">${SVG[key]()}</div>`;}
-function svgOpt(key){return `<div class="opt-icon">${SVG[key]()}</div>`;}
+function imgTag(key, w) {
+  const src = IMG[key] || IMG.mascot;
+  return `<img src="${src}" alt="" class="illust" style="max-width:${w||320}px;border-radius:14px;box-shadow:0 4px 16px rgba(0,0,0,.12);" loading="lazy">`;
+}
+function imgOpt(key) {
+  const src = IMG[key] || IMG.mascot;
+  return `<img src="${src}" alt="" class="opt-icon" style="width:48px;height:48px;border-radius:8px;object-fit:cover;" loading="lazy">`;
+}
+
+
+function svgStage(key,w){return imgTag(key,w);}px">${SVG[key]()}</div>`;}
+function svgOpt(key){return imgOpt(key);}</div>`;}
 
 /* ============================================================
    VOICE (Portuguese — for audio generation)
@@ -748,14 +345,14 @@ function goHome(silent){
   stopAudio();
   shell(`
     <div class="hero">
-      <div class="mascote-wrap">${SVG.palette()}</div>
+      <div class="mascote-wrap">${imgTag("mascot",120)}</div>
       <h1>Art Fun!</h1>
       <p>Choose an activity to explore art in English</p>
       <button onclick="testSound()" style="margin-top:8px;background:var(--amarelo);color:#5a4500;border:none;border-radius:18px;padding:9px 18px;font-size:15px;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #d9a800;">Test sound</button>
     </div>
     <div class="grid">
       ${GAMES.map(g=>`<button class="card ${g.cls}" onclick="sndClick();startGame('${g.id}')">
-        <div class="card-icon">${SVG[g.svg]()}</div><span>${g.nome}</span>
+        <div class="card-icon">${imgTag(g.svg,64)}</div><span>${g.nome}</span>
         <span class="sub">${g.sub}</span>
       </button>`).join('')}
     </div>
@@ -776,7 +373,7 @@ function gameFrame(c,r,bodyHtml){
   const g=GAMES.find(g=>g.id===c.id);
   shell(`
     <div class="game">
-      <h2 class="game-title"><div class="title-icon">${SVG[g.svg]()}</div> ${c.title}</h2>
+      <h2 class="game-title"><div class="title-icon">${imgTag(g.svg,64)}</div> ${c.title}</h2>
       <div class="progress">Question ${c.idx+1} of ${c.rounds.length}</div>
       <div class="question">
         <button class="speak-btn" id="qspeak" onclick="sndClick();speakRound()">${SVG.speaker()}</button>
@@ -1081,7 +678,7 @@ BUILDERS.vangogh=()=>{
 };
 
 /* ===== SPLASH ===== */
-document.getElementById('splashIcon').innerHTML=SVG.palette();
+document.getElementById('splashIcon').innerHTML='<img src="images/mascot.png" alt="" style="width:100%;height:100%;object-fit:contain;">';
 document.getElementById('startBtn').onclick=()=>{
   initAudio();unlockAudio();
   document.getElementById('splash').style.display='none';
