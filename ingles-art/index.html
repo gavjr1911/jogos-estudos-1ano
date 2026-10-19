@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Art Fun! — Arte em Inglês</title>
+<title>Art Fun! — Art &amp; English</title>
 <style>
   :root{
     --rosa:#ff6b9d; --roxo:#7c49b0; --azul:#4d96ff; --verde:#6bcB77;
     --amarelo:#ffd93d; --laranja:#ff924c; --vermelho:#ff5e5e; --ceu:#b8e3ff;
-    --deep:#2a1052; --gold:#e8a838; --night:#1a1a4e;
+    --deep:#2a1052; --gold:#e8a838; --night:#0f0f3d;
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
   html,body{margin:0; padding:0; height:100%;}
@@ -20,7 +20,6 @@
   }
   #app{max-width:760px; margin:0 auto; padding:14px; min-height:100vh;}
 
-  /* ===== TOPBAR ===== */
   .topbar{
     display:flex; align-items:center; justify-content:space-between;
     background:#fff; border-radius:22px; padding:8px 14px; margin-bottom:14px;
@@ -38,7 +37,6 @@
   .stars{font-size:20px; font-weight:bold; color:var(--laranja); display:flex; align-items:center; gap:6px;}
   .stars .num{background:var(--amarelo); border-radius:14px; padding:2px 12px; box-shadow:0 3px 0 #d9a800;}
 
-  /* ===== HERO ===== */
   .hero{
     text-align:center; background:#fff; border-radius:30px; padding:22px 18px;
     box-shadow:0 8px 0 rgba(0,0,0,.08); margin-bottom:18px;
@@ -46,11 +44,9 @@
   .hero h1{font-size:30px; margin:6px 0; color:var(--roxo); line-height:1.2;}
   .hero p{font-size:17px; margin:4px 0; color:#666;}
 
-  /* ===== MASCOTE SVG ===== */
   .mascote-wrap{width:120px; height:120px; margin:0 auto 8px; animation:flutua 2.5s ease-in-out infinite;}
   @keyframes flutua{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-12px) rotate(2deg);}}
 
-  /* ===== GRID DE JOGOS ===== */
   .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
   .card{
     border:none; border-radius:22px; padding:14px 10px; cursor:pointer;
@@ -66,7 +62,6 @@
   .c5{background:linear-gradient(135deg,#e17055,#fab1a0);} .c6{background:linear-gradient(135deg,#6c5ce7,#a29bfe);}
   .c7{background:linear-gradient(135deg,#fdcb6e,#f39c12);} .c8{background:linear-gradient(135deg,#00cec9,#81ecec);}
 
-  /* ===== GAME AREA ===== */
   .game{
     background:#fff; border-radius:30px; padding:18px; box-shadow:0 8px 0 rgba(0,0,0,.08);
     text-align:center;
@@ -87,37 +82,35 @@
   .speak-btn.playing{animation:pulse .7s infinite;}
   @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.12);}}
 
-  /* ===== STAGE (ilustração principal) ===== */
   .stage{
     min-height:140px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
     gap:12px; margin:10px auto 18px; padding:16px;
     background:linear-gradient(160deg,#f8f4ff,#fff5f8); border-radius:22px; border:3px solid #e8d5f5;
     flex-direction:column; position:relative; overflow:hidden;
   }
-  .stage .illust{max-width:280px; width:100%; height:auto;}
+  .stage .illust{max-width:320px; width:100%; height:auto;}
   .stage .illust-sm{max-width:160px; width:100%; height:auto;}
   .stage .label-txt{font-size:20px; font-weight:bold; color:var(--roxo); margin-top:6px; line-height:1.3;}
-  .stage .desc-txt{font-size:16px; color:#666; margin-top:4px; line-height:1.4; max-width:400px;}
-  .stage .en-word{font-size:32px; font-weight:900; color:var(--deep); letter-spacing:1px; margin:4px 0;}
-  .stage .row{display:flex; gap:14px; align-items:center; justify-content:center; flex-wrap:wrap;}
+  .stage .desc-txt{font-size:16px; color:#555; margin-top:4px; line-height:1.5; max-width:440px; text-align:left;}
+  .stage .clue-box{background:#fef9e7; border:2px solid #f0d78c; border-radius:14px; padding:14px 16px; margin:8px 0; max-width:440px; text-align:left; font-size:16px; line-height:1.55; color:#5a4000;}
 
-  /* ===== OPTIONS ===== */
-  .options{display:grid; gap:12px; grid-template-columns:repeat(2,1fr);}
+  .options{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(140px,1fr));}
   .opt{
-    border:none; border-radius:20px; padding:14px 10px; font-size:18px; font-weight:bold;
-    cursor:pointer; background:#f0ecff; color:var(--deep); box-shadow:0 5px 0 #d5c8f0;
-    min-height:70px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
-    word-break:break-word; line-height:1.15; transition:transform .08s;
+    border:none; border-radius:22px; padding:14px 10px; font-size:20px; font-weight:bold;
+    cursor:pointer; background:var(--azul); color:#fff; box-shadow:0 6px 0 #2f6fd0;
+    min-height:72px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+    word-break:break-word; line-height:1.15;
   }
-  .opt .opt-icon{width:48px; height:48px;}
-  .opt .opt-label{font-size:15px;}
-  .opt:active{transform:translateY(3px); box-shadow:0 2px 0 #d5c8f0;}
-  .opt.ok{background:#d4edda!important; color:#155724!important; box-shadow:0 5px 0 #a3d9a5!important; animation:tada .5s;}
-  .opt.no{background:#e9e9f0!important; color:#888!important; box-shadow:0 5px 0 #ccc!important; opacity:.6;}
-  @keyframes tada{0%{transform:scale(1);}30%{transform:scale(1.12) rotate(-3deg);}60%{transform:scale(1.08) rotate(3deg);}100%{transform:scale(1);}}\
+  .opt .opt-icon{width:56px; height:56px; margin-bottom:2px;}
+  .opt .opt-label{font-size:15px; font-weight:normal; opacity:.95;}
+  .opt:active{transform:translateY(3px); box-shadow:0 3px 0 #2f6fd0;}
+  .opt.ok{background:var(--verde)!important; box-shadow:0 6px 0 #3f9c4f!important; animation:tada .5s;}
+  .opt.no{background:#cfcfe0!important; box-shadow:0 6px 0 #a0a0c0!important; opacity:.7;}
+  @keyframes tada{0%{transform:scale(1);}30%{transform:scale(1.18) rotate(-4deg);}60%{transform:scale(1.1) rotate(4deg);}100%{transform:scale(1);};}
 
-  .feedback{font-size:22px; font-weight:bold; min-height:36px; margin-top:12px;}
+  .feedback{font-size:24px; font-weight:bold; min-height:36px; margin-top:12px;}
   .feedback.good{color:var(--verde);} .feedback.bad{color:var(--laranja);}
+  .hint{font-size:13px; color:#bbb; margin:6px 0 0;}
 
   .next-btn{
     margin-top:14px; background:var(--verde); color:#fff; border:none; border-radius:22px;
@@ -125,39 +118,35 @@
   }
   .next-btn:active{transform:translateY(3px); box-shadow:0 3px 0 #3f9c4f;}
 
-  .hint{font-size:14px; color:#aaa; margin-top:8px;}
-
-  /* ===== SPLASH ===== */
   #splash{
-    position:fixed; inset:0; background:linear-gradient(160deg,var(--roxo),var(--deep));
+    position:fixed; inset:0; background:linear-gradient(160deg,#6c5ce7,#e84393);
     display:flex; flex-direction:column; align-items:center; justify-content:center;
     color:#fff; text-align:center; z-index:50; cursor:pointer; padding:20px;
   }
-  #splash h1{font-size:32px; margin:14px 0 6px;}
-  #splash p{font-size:18px; max-width:340px; line-height:1.4;}
-  #splash .splash-art{width:140px; height:140px; margin-bottom:10px; animation:flutua 2.5s infinite;}
+  #splash h1{font-size:32px; margin:10px;}
+  #splash .big{width:130px; height:130px; animation:flutua 2.5s infinite;}
   #splash .play{
     margin-top:24px; background:var(--amarelo); color:#5a4500; border:none; border-radius:30px;
-    font-size:28px; font-weight:bold; padding:16px 40px; box-shadow:0 8px 0 #d9a800; cursor:pointer;
+    font-size:28px; font-weight:bold; padding:18px 44px; box-shadow:0 8px 0 #d9a800; cursor:pointer;
   }
 
   #confetti{position:fixed; inset:0; pointer-events:none; z-index:40;}
   .win{text-align:center; padding:20px;}
-  .win .trophy-wrap{width:100px; height:100px; margin:0 auto 12px; animation:tada 1s;}
+  .win .trophy-wrap{width:100px; height:100px; margin:0 auto 10px; animation:tada 1s;}
 
   @media(max-width:480px){
     .hero h1{font-size:24px;} .question{font-size:18px;} .card{font-size:15px;}
-    .stage .en-word{font-size:26px;} .opt{font-size:16px; min-height:60px;}
+    .stage .illust{max-width:280px;} .stage .desc-txt{font-size:15px;}
   }
 </style>
 </head>
 <body>
 
 <div id="splash">
-  <svg class="splash-art" viewBox="0 0 140 140"><rect rx="20" width="140" height="140" fill="#fff2"/><g transform="translate(20,15)"><rect x="15" y="10" width="70" height="90" rx="4" fill="#f5e6c8" stroke="#c9a96e" stroke-width="2"/><rect x="20" y="15" width="60" height="50" rx="2" fill="#1a1a4e"/><circle cx="35" cy="30" r="6" fill="#ffd93d" opacity=".9"/><circle cx="55" cy="25" r="4" fill="#fff" opacity=".7"/><circle cx="65" cy="35" r="3" fill="#fff" opacity=".5"/><path d="M20 55 Q35 40 50 50 Q65 42 80 55 L80 65 L20 65Z" fill="#2d5016"/><circle cx="72" cy="38" r="5" fill="#ffd93d" opacity=".6"/><rect x="75" y="20" width="4" height="80" rx="2" fill="#8B4513"/><circle cx="77" cy="18" r="8" fill="#e17055"/><circle cx="77" cy="12" r="6" fill="#fab1a0"/></g></svg>
-  <h1>Art Fun!<br><span style="font-size:20px;font-weight:normal">Arte em Inglês</span></h1>
-  <p>Explore o mundo de Van Gogh, descubra obras famosas e aprenda vocabulário de arte em inglês!</p>
-  <button class="play" id="startBtn">COMEÇAR</button>
+  <div class="big" id="splashIcon"></div>
+  <h1>Art Fun!<br><span style="font-size:20px;font-weight:normal">Art &amp; English Adventures</span></h1>
+  <p style="font-size:18px;max-width:340px;">Explore famous paintings and learn English through art!</p>
+  <button class="play" id="startBtn">START</button>
 </div>
 
 <canvas id="confetti"></canvas>
@@ -165,193 +154,595 @@
 
 <script>
 /* ============================================================
-   ART FUN! v2 — Inglês + Arte, 1º ano (Bernoulli)
-   Módulo 9. Ilustrações SVG inline (sem emojis).
-   Atividades com raciocínio: dedução, composição, comparação.
+   ART FUN! v2 — Detailed SVG illustrations, English-first,
+   reasoning-based activities about Van Gogh, art supplies,
+   nature, day/night, and famous paintings.
    ============================================================ */
-const App=document.getElementById('app');
-let stars=parseInt(localStorage.getItem('vitor_art2_stars')||'0',10);
+
+const App = document.getElementById('app');
+let stars = parseInt(localStorage.getItem('vitor_art_stars')||'0',10);
 
 /* ============================================================
-   BANCO DE ILUSTRAÇÕES SVG
-   Cada função retorna uma string SVG inline.
+   DETAILED SVG ILLUSTRATIONS
+   Each one uses gradients, shadows, textures for richer visuals
    ============================================================ */
 const SVG={
-  /* Materiais de arte */
-  brush:()=>`<svg viewBox="0 0 100 100"><rect x="42" y="45" width="16" height="48" rx="3" fill="#8B6914"/><path d="M45 10 Q50 5 55 10 L58 45 H42 L45 10Z" fill="#e74c3c"/><path d="M46 12 Q50 8 54 12 L56 40 H44 L46 12Z" fill="#c0392b"/><rect x="40" y="43" width="20" height="6" rx="2" fill="#B8860B"/></svg>`,
-  paint:()=>`<svg viewBox="0 0 100 100"><rect x="20" y="30" width="60" height="50" rx="6" fill="#e0e0e0" stroke="#bbb" stroke-width="2"/><rect x="24" y="25" width="52" height="10" rx="3" fill="#ccc"/><rect x="28" y="38" width="18" height="14" rx="2" fill="#e74c3c"/><rect x="52" y="38" width="18" height="14" rx="2" fill="#3498db"/><rect x="28" y="58" width="18" height="14" rx="2" fill="#f1c40f"/><rect x="52" y="58" width="18" height="14" rx="2" fill="#27ae60"/></svg>`,
-  canvas:()=>`<svg viewBox="0 0 100 100"><rect x="15" y="12" width="70" height="55" rx="2" fill="#f5e6c8" stroke="#c9a96e" stroke-width="2"/><line x1="50" y1="68" x2="30" y2="92" stroke="#8B4513" stroke-width="3" stroke-linecap="round"/><line x1="50" y1="68" x2="70" y2="92" stroke="#8B4513" stroke-width="3" stroke-linecap="round"/><line x1="35" y1="82" x2="65" y2="82" stroke="#8B4513" stroke-width="2.5"/></svg>`,
-  palette:()=>`<svg viewBox="0 0 100 100"><ellipse cx="50" cy="52" rx="38" ry="32" fill="#D2691E"/><ellipse cx="50" cy="50" rx="36" ry="30" fill="#DEB887"/><circle cx="35" cy="40" r="6" fill="#e74c3c"/><circle cx="50" cy="35" r="5" fill="#3498db"/><circle cx="62" cy="42" r="5" fill="#f1c40f"/><circle cx="58" cy="55" r="4" fill="#27ae60"/><circle cx="40" cy="58" r="4" fill="#9b59b6"/><ellipse cx="50" cy="50" rx="8" ry="6" fill="#c9a96e"/></svg>`,
-  pencil:()=>`<svg viewBox="0 0 100 100"><rect x="35" y="15" width="16" height="60" rx="2" fill="#f1c40f"/><polygon points="43,75 35,75 38,90 43,95 48,90 51,75" fill="#f5cba7"/><polygon points="41,90 43,98 45,90" fill="#2c3e50"/><rect x="35" y="15" width="16" height="8" rx="2" fill="#e74c3c"/><line x1="43" y1="23" x2="43" y2="75" stroke="#e67e22" stroke-width="1" opacity=".3"/></svg>`,
-  crayon:()=>`<svg viewBox="0 0 100 100"><rect x="37" y="25" width="14" height="50" rx="4" fill="#e74c3c"/><polygon points="44,25 37,25 40,12 44,8 48,12 51,25" fill="#c0392b"/><rect x="37" y="70" width="14" height="8" rx="2" fill="#2c3e50"/><text x="44" y="55" text-anchor="middle" fill="#fff" font-size="7" font-weight="bold">RED</text></svg>`,
-  scissors:()=>`<svg viewBox="0 0 100 100"><ellipse cx="35" cy="72" rx="10" ry="12" fill="none" stroke="#666" stroke-width="3"/><ellipse cx="65" cy="72" rx="10" ry="12" fill="none" stroke="#666" stroke-width="3"/><line x1="38" y1="62" x2="58" y2="25" stroke="#999" stroke-width="4" stroke-linecap="round"/><line x1="62" y1="62" x2="42" y2="25" stroke="#999" stroke-width="4" stroke-linecap="round"/><circle cx="50" cy="45" r="3" fill="#999"/></svg>`,
-  paper:()=>`<svg viewBox="0 0 100 100"><rect x="22" y="12" width="56" height="72" rx="3" fill="#fff" stroke="#ddd" stroke-width="2"/><line x1="30" y1="28" x2="70" y2="28" stroke="#ccc" stroke-width="1.5"/><line x1="30" y1="38" x2="65" y2="38" stroke="#ccc" stroke-width="1.5"/><line x1="30" y1="48" x2="68" y2="48" stroke="#ccc" stroke-width="1.5"/><line x1="30" y1="58" x2="55" y2="58" stroke="#ccc" stroke-width="1.5"/><polygon points="62,12 78,12 78,28 62,12" fill="#eee" stroke="#ddd" stroke-width="1"/></svg>`,
-  glue:()=>`<svg viewBox="0 0 100 100"><rect x="32" y="35" width="24" height="45" rx="4" fill="#fff" stroke="#f39c12" stroke-width="2"/><rect x="36" y="20" width="16" height="18" rx="3" fill="#f39c12"/><circle cx="44" cy="16" r="4" fill="#f39c12"/><text x="44" y="62" text-anchor="middle" fill="#f39c12" font-size="10" font-weight="bold">GLUE</text></svg>`,
 
-  /* Elementos da natureza */
-  star_shape:()=>`<svg viewBox="0 0 100 100"><polygon points="50,8 61,38 94,38 67,58 78,90 50,70 22,90 33,58 6,38 39,38" fill="#ffd93d" stroke="#e8a838" stroke-width="2"/></svg>`,
-  moon_shape:()=>`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="#ffeaa7"/><circle cx="62" cy="42" r="24" fill="#1a1a4e"/></svg>`,
-  sun_shape:()=>`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="18" fill="#f39c12"/><g stroke="#f39c12" stroke-width="3" stroke-linecap="round"><line x1="50" y1="14" x2="50" y2="24"/><line x1="50" y1="76" x2="50" y2="86"/><line x1="14" y1="50" x2="24" y2="50"/><line x1="76" y1="50" x2="86" y2="50"/><line x1="24" y1="24" x2="31" y2="31"/><line x1="69" y1="69" x2="76" y2="76"/><line x1="76" y1="24" x2="69" y2="31"/><line x1="31" y1="69" x2="24" y2="76"/></g></svg>`,
-  tree_shape:()=>`<svg viewBox="0 0 100 100"><rect x="44" y="60" width="12" height="30" rx="2" fill="#8B4513"/><ellipse cx="50" cy="42" rx="28" ry="30" fill="#27ae60"/><ellipse cx="38" cy="48" rx="18" ry="22" fill="#2ecc71"/><ellipse cx="60" cy="46" rx="16" ry="20" fill="#27ae60"/></svg>`,
-  flower_shape:()=>`<svg viewBox="0 0 100 100"><rect x="47" y="55" width="6" height="35" rx="2" fill="#27ae60"/><ellipse cx="36" cy="64" rx="12" ry="5" fill="#27ae60" transform="rotate(-30,36,64)"/><circle cx="50" cy="42" r="10" fill="#f1c40f"/><circle cx="50" cy="28" r="10" fill="#e74c3c"/><circle cx="62" cy="35" r="10" fill="#e74c3c"/><circle cx="62" cy="49" r="10" fill="#e74c3c"/><circle cx="50" cy="56" r="10" fill="#e74c3c"/><circle cx="38" cy="49" r="10" fill="#e74c3c"/><circle cx="38" cy="35" r="10" fill="#e74c3c"/></svg>`,
-  cloud_shape:()=>`<svg viewBox="0 0 100 100"><ellipse cx="50" cy="55" rx="30" ry="16" fill="#ecf0f1"/><ellipse cx="35" cy="50" rx="20" ry="15" fill="#ecf0f1"/><ellipse cx="62" cy="48" rx="18" ry="14" fill="#ecf0f1"/><ellipse cx="48" cy="42" rx="16" ry="12" fill="#f5f5f5"/></svg>`,
-  mountain_shape:()=>`<svg viewBox="0 0 100 100"><polygon points="10,85 40,25 70,85" fill="#7f8c8d"/><polygon points="40,25 48,40 32,40" fill="#ecf0f1"/><polygon points="35,85 65,35 95,85" fill="#95a5a6"/><polygon points="65,35 72,48 58,48" fill="#ecf0f1"/></svg>`,
-  cypress_shape:()=>`<svg viewBox="0 0 100 100"><rect x="46" y="60" width="8" height="30" rx="2" fill="#5D4037"/><ellipse cx="50" cy="40" rx="12" ry="35" fill="#1B5E20"/><ellipse cx="50" cy="38" rx="9" ry="30" fill="#2E7D32"/></svg>`,
-  wheat_shape:()=>`<svg viewBox="0 0 100 100"><line x1="50" y1="90" x2="50" y2="30" stroke="#8B6914" stroke-width="2"/><ellipse cx="50" cy="28" rx="4" ry="10" fill="#DAA520"/><ellipse cx="44" cy="36" rx="3" ry="8" fill="#DAA520" transform="rotate(-20,44,36)"/><ellipse cx="56" cy="36" rx="3" ry="8" fill="#DAA520" transform="rotate(20,56,36)"/><ellipse cx="42" cy="48" rx="3" ry="7" fill="#DAA520" transform="rotate(-25,42,48)"/><ellipse cx="58" cy="48" rx="3" ry="7" fill="#DAA520" transform="rotate(25,58,48)"/></svg>`,
+  /* ===== ART SUPPLIES — detailed, realistic style ===== */
 
-  /* Pinturas famosas (simplificadas) */
-  starry_night:()=>`<svg viewBox="0 0 200 140" style="border-radius:12px;border:3px solid #c9a96e"><rect width="200" height="140" fill="#1a1a4e"/><circle cx="155" cy="30" r="14" fill="#ffeaa7" opacity=".9"/><circle cx="165" cy="25" r="11" fill="#1a1a4e"/><g fill="#ffd93d" opacity=".8"><circle cx="40" cy="25" r="8"/><circle cx="80" cy="18" r="6"/><circle cx="120" cy="30" r="7"/><circle cx="60" cy="45" r="5"/><circle cx="140" cy="20" r="5"/></g><g fill="none" stroke="#4a90d9" stroke-width="3" opacity=".6"><path d="M10 55 Q50 45 90 58 Q130 70 170 55 Q190 48 200 52"/><path d="M10 70 Q40 62 80 72 Q120 82 160 70 Q185 64 200 68"/></g><ellipse cx="30" cy="100" rx="10" ry="40" fill="#1B5E20"/><polygon points="0,90 60,85 100,95 140,88 200,92 200,140 0,140" fill="#2d5016"/><rect x="55" y="95" width="12" height="20" rx="1" fill="#5D4037"/><rect x="68" y="100" width="10" height="15" rx="1" fill="#4E342E"/><polygon points="55,95 61,85 73,88 78,95" fill="#795548"/></svg>`,
+  brush:()=>`<svg viewBox="0 0 100 120">
+    <defs><linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A0522D"/><stop offset="1" stop-color="#6B3410"/></linearGradient>
+    <linearGradient id="br1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C0C0C0"/><stop offset="1" stop-color="#808080"/></linearGradient></defs>
+    <rect x="44" y="48" width="12" height="55" rx="2" fill="url(#bg1)"/>
+    <rect x="44" y="50" width="12" height="50" rx="1" fill="#8B6914" opacity=".4"/>
+    <line x1="50" y1="52" x2="50" y2="98" stroke="#5a3600" stroke-width=".5" opacity=".3"/>
+    <rect x="42" y="44" width="16" height="8" rx="2" fill="url(#br1)"/>
+    <rect x="42" y="46" width="16" height="2" fill="#999"/>
+    <path d="M44 44 Q43 20 50 8 Q57 20 56 44Z" fill="#e74c3c"/>
+    <path d="M46 42 Q45 22 50 12 Q55 22 54 42Z" fill="#c0392b"/>
+    <path d="M48 40 Q47 26 50 16 Q53 26 52 40Z" fill="#a93226" opacity=".5"/>
+    <ellipse cx="50" cy="8" rx="3" ry="2" fill="#ff6b6b" opacity=".6"/>
+  </svg>`,
 
-  wheat_field:()=>`<svg viewBox="0 0 200 140" style="border-radius:12px;border:3px solid #c9a96e"><rect width="200" height="140" fill="#87CEEB"/><circle cx="160" cy="25" r="16" fill="#f39c12"/><g fill="#ecf0f1" opacity=".7"><ellipse cx="40" cy="20" rx="20" ry="10"/><ellipse cx="30" cy="18" rx="14" ry="8"/></g><ellipse cx="175" cy="70" rx="12" ry="45" fill="#1B5E20"/><ellipse cx="175" cy="68" rx="9" ry="40" fill="#2E7D32"/><polygon points="0,75 40,70 80,78 120,72 160,76 200,80 200,140 0,140" fill="#DAA520"/><polygon points="0,85 30,80 70,88 110,82 150,86 200,90 200,140 0,140" fill="#B8860B"/><g stroke="#8B6914" stroke-width="1" opacity=".5"><line x1="20" y1="75" x2="20" y2="85"/><line x1="40" y1="72" x2="40" y2="82"/><line x1="60" y1="76" x2="60" y2="86"/><line x1="80" y1="74" x2="80" y2="84"/><line x1="100" y1="73" x2="100" y2="83"/><line x1="120" y1="75" x2="120" y2="85"/><line x1="140" y1="78" x2="140" y2="88"/></g><polygon points="70,60 130,55 200,65 200,80 160,76 120,72 80,78 40,70 0,75 0,65" fill="#27ae60" opacity=".3"/></svg>`,
+  paint:()=>`<svg viewBox="0 0 120 100">
+    <defs><linearGradient id="pt1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5f5f5"/><stop offset="1" stop-color="#d0d0d0"/></linearGradient></defs>
+    <rect x="15" y="25" width="90" height="60" rx="6" fill="url(#pt1)" stroke="#bbb" stroke-width="2"/>
+    <rect x="20" y="20" width="80" height="10" rx="3" fill="#ccc"/>
+    <rect x="20" y="22" width="80" height="4" fill="#bbb" opacity=".4"/>
+    <rect x="24" y="35" width="22" height="18" rx="3" fill="#e74c3c"/><rect x="26" y="37" width="18" height="14" rx="2" fill="#c0392b" opacity=".4"/>
+    <rect x="50" y="35" width="22" height="18" rx="3" fill="#3498db"/><rect x="52" y="37" width="18" height="14" rx="2" fill="#2980b9" opacity=".4"/>
+    <rect x="76" y="35" width="22" height="18" rx="3" fill="#f1c40f"/><rect x="78" y="37" width="18" height="14" rx="2" fill="#d4ac0d" opacity=".4"/>
+    <rect x="24" y="57" width="22" height="18" rx="3" fill="#27ae60"/><rect x="26" y="59" width="18" height="14" rx="2" fill="#1e8449" opacity=".4"/>
+    <rect x="50" y="57" width="22" height="18" rx="3" fill="#9b59b6"/><rect x="52" y="59" width="18" height="14" rx="2" fill="#7d3c98" opacity=".4"/>
+    <rect x="76" y="57" width="22" height="18" rx="3" fill="#e67e22"/><rect x="78" y="59" width="18" height="14" rx="2" fill="#ca6f1e" opacity=".4"/>
+  </svg>`,
 
-  sunflowers:()=>`<svg viewBox="0 0 200 140" style="border-radius:12px;border:3px solid #c9a96e"><rect width="200" height="140" fill="#f5e6c8"/><rect x="60" y="50" width="80" height="70" rx="4" fill="#DEB887" stroke="#c9a96e" stroke-width="2"/><g transform="translate(85,80)"><circle r="8" fill="#8B4513"/><g fill="#f1c40f"><ellipse cx="0" cy="-14" rx="4" ry="7"/><ellipse cx="10" cy="-10" rx="4" ry="7" transform="rotate(40)"/><ellipse cx="14" cy="0" rx="4" ry="7" transform="rotate(90)"/><ellipse cx="10" cy="10" rx="4" ry="7" transform="rotate(140)"/><ellipse cx="0" cy="14" rx="4" ry="7" transform="rotate(180)"/><ellipse cx="-10" cy="10" rx="4" ry="7" transform="rotate(220)"/><ellipse cx="-14" cy="0" rx="4" ry="7" transform="rotate(270)"/><ellipse cx="-10" cy="-10" rx="4" ry="7" transform="rotate(320)"/></g></g><g transform="translate(115,85)"><circle r="6" fill="#8B4513"/><g fill="#e67e22"><ellipse cx="0" cy="-11" rx="3" ry="6"/><ellipse cx="8" cy="-8" rx="3" ry="6" transform="rotate(40)"/><ellipse cx="11" cy="0" rx="3" ry="6" transform="rotate(90)"/><ellipse cx="8" cy="8" rx="3" ry="6" transform="rotate(140)"/><ellipse cx="0" cy="11" rx="3" ry="6" transform="rotate(180)"/><ellipse cx="-8" cy="8" rx="3" ry="6" transform="rotate(220)"/><ellipse cx="-11" cy="0" rx="3" ry="6" transform="rotate(270)"/><ellipse cx="-8" cy="-8" rx="3" ry="6" transform="rotate(320)"/></g></g><line x1="85" y1="95" x2="82" y2="120" stroke="#27ae60" stroke-width="3"/><line x1="115" y1="97" x2="118" y2="120" stroke="#27ae60" stroke-width="2.5"/></svg>`,
+  canvas:()=>`<svg viewBox="0 0 100 120">
+    <line x1="50" y1="78" x2="22" y2="115" stroke="#6D4C41" stroke-width="4" stroke-linecap="round"/>
+    <line x1="50" y1="78" x2="78" y2="115" stroke="#6D4C41" stroke-width="4" stroke-linecap="round"/>
+    <line x1="32" y1="100" x2="68" y2="100" stroke="#6D4C41" stroke-width="3" stroke-linecap="round"/>
+    <rect x="18" y="10" width="64" height="54" rx="2" fill="#faf0e6" stroke="#b8860b" stroke-width="2"/>
+    <rect x="22" y="14" width="56" height="46" fill="#fff8ee"/>
+    <line x1="22" y1="40" x2="78" y2="40" stroke="#eee" stroke-width=".5"/>
+    <line x1="50" y1="14" x2="50" y2="60" stroke="#eee" stroke-width=".5"/>
+    <rect x="14" y="64" width="72" height="5" rx="2" fill="#8D6E63"/>
+    <circle cx="32" cy="78" r="2" fill="#8D6E63"/>
+    <circle cx="68" cy="78" r="2" fill="#8D6E63"/>
+  </svg>`,
 
-  bedroom:()=>`<svg viewBox="0 0 200 140" style="border-radius:12px;border:3px solid #c9a96e"><rect width="200" height="140" fill="#a29bfe"/><polygon points="0,50 100,30 200,50 200,140 0,140" fill="#DEB887"/><rect x="10" y="55" width="60" height="50" rx="2" fill="#e17055" stroke="#d35400" stroke-width="2"/><rect x="15" y="60" width="50" height="20" rx="1" fill="#fff" opacity=".5"/><rect x="12" y="55" width="56" height="5" rx="1" fill="#c0392b"/><rect x="80" y="45" width="25" height="35" rx="2" fill="#3498db" stroke="#2980b9" stroke-width="1.5"/><rect x="115" y="45" width="25" height="35" rx="2" fill="#2ecc71" stroke="#27ae60" stroke-width="1.5"/><rect x="155" y="60" width="30" height="40" rx="2" fill="#8B4513" stroke="#5D4037" stroke-width="1.5"/><rect x="159" y="65" width="10" height="30" rx="1" fill="#A0522D"/><rect x="171" y="65" width="10" height="30" rx="1" fill="#A0522D"/><rect x="80" y="90" width="35" height="20" rx="2" fill="#f39c12" stroke="#e67e22" stroke-width="1.5"/></svg>`,
+  palette:()=>`<svg viewBox="0 0 110 100">
+    <defs><radialGradient id="pl1"><stop offset="0" stop-color="#EDE0C8"/><stop offset="1" stop-color="#C4A265"/></radialGradient></defs>
+    <ellipse cx="55" cy="52" rx="48" ry="38" fill="url(#pl1)" stroke="#8B6914" stroke-width="1.5"/>
+    <ellipse cx="55" cy="50" rx="46" ry="36" fill="#DEB887"/>
+    <ellipse cx="42" cy="52" rx="7" ry="5" fill="#C4A265" opacity=".3"/>
+    <circle cx="30" cy="38" r="8" fill="#e74c3c"/><circle cx="31" cy="37" r="3" fill="#ff6b6b" opacity=".5"/>
+    <circle cx="48" cy="30" r="7" fill="#3498db"/><circle cx="49" cy="29" r="2.5" fill="#74b9ff" opacity=".5"/>
+    <circle cx="68" cy="32" r="6" fill="#f1c40f"/><circle cx="69" cy="31" r="2" fill="#ffeaa7" opacity=".5"/>
+    <circle cx="76" cy="46" r="6" fill="#27ae60"/><circle cx="77" cy="45" r="2" fill="#55efc4" opacity=".5"/>
+    <circle cx="72" cy="62" r="5" fill="#9b59b6"/><circle cx="73" cy="61" r="1.8" fill="#c39bd3" opacity=".5"/>
+    <circle cx="56" cy="68" r="5" fill="#e67e22"/><circle cx="57" cy="67" r="1.8" fill="#f0b27a" opacity=".5"/>
+    <circle cx="38" cy="66" r="5" fill="#fff" opacity=".3"/>
+    <ellipse cx="55" cy="50" rx="10" ry="7" fill="none" stroke="#B8860B" stroke-width="1" opacity=".3"/>
+  </svg>`,
 
-  self_portrait:()=>`<svg viewBox="0 0 200 140" style="border-radius:12px;border:3px solid #c9a96e"><rect width="200" height="140" fill="#2c3e50"/><rect x="50" y="10" width="100" height="120" rx="4" fill="#3498db" opacity=".3"/><ellipse cx="100" cy="55" rx="28" ry="32" fill="#fad390"/><rect x="80" y="85" width="40" height="45" rx="4" fill="#2c3e50"/><rect x="82" y="88" width="36" height="10" rx="2" fill="#fff" opacity=".3"/><ellipse cx="90" cy="48" rx="4" ry="3.5" fill="#2c3e50"/><ellipse cx="110" cy="48" rx="4" ry="3.5" fill="#2c3e50"/><path d="M95 60 Q100 65 105 60" fill="none" stroke="#c0392b" stroke-width="1.5"/><path d="M72 30 Q80 18 100 15 Q120 18 128 30 Q130 40 125 45 L75 45 Q70 40 72 30Z" fill="#e67e22"/><rect x="68" y="42" width="14" height="10" rx="2" fill="#fff" opacity=".2"/></svg>`,
+  pencil:()=>`<svg viewBox="0 0 100 120">
+    <defs><linearGradient id="pc1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f7dc6f"/><stop offset="1" stop-color="#f0b90b"/></linearGradient></defs>
+    <rect x="38" y="15" width="18" height="70" rx="1.5" fill="url(#pc1)"/>
+    <rect x="40" y="15" width="4" height="70" fill="#d4ac0d" opacity=".2"/>
+    <rect x="50" y="15" width="4" height="70" fill="#f9e44c" opacity=".3"/>
+    <polygon points="47,85 38,85 41,102 47,108 53,102 56,85" fill="#f5cba7"/>
+    <polygon points="44,100 47,112 50,100" fill="#34495e"/>
+    <polygon points="45,101 47,110 49,101" fill="#2c3e50"/>
+    <rect x="38" y="12" width="18" height="10" rx="2" fill="#e74c3c"/>
+    <rect x="38" y="15" width="18" height="4" fill="#c0392b" opacity=".4"/>
+    <rect x="38" y="82" width="18" height="5" rx="1" fill="#B8860B" opacity=".5"/>
+    <text x="47" y="55" text-anchor="middle" fill="#8B6914" font-size="6" font-weight="bold" opacity=".4">No.2</text>
+  </svg>`,
 
-  /* Dia e Noite */
-  scene_day:()=>`<svg viewBox="0 0 200 120" style="border-radius:12px;border:3px solid #87CEEB"><rect width="200" height="120" fill="#87CEEB"/><circle cx="160" cy="25" r="18" fill="#f39c12"/><g stroke="#f39c12" stroke-width="2" opacity=".6"><line x1="160" y1="3" x2="160" y2="0"/><line x1="185" y1="25" x2="195" y2="25"/><line x1="178" y1="7" x2="185" y2="0"/><line x1="178" y1="43" x2="185" y2="50"/></g><ellipse cx="55" cy="22" rx="22" ry="11" fill="#ecf0f1"/><ellipse cx="45" cy="20" rx="16" ry="9" fill="#f5f5f5"/><polygon points="0,70 50,60 100,72 150,65 200,70 200,120 0,120" fill="#27ae60"/><g fill="#2ecc71"><ellipse cx="30" cy="62" rx="6" ry="3"/><ellipse cx="120" cy="68" rx="5" ry="2.5"/></g><rect x="75" y="52" width="8" height="24" rx="1" fill="#8B4513"/><ellipse cx="79" cy="42" rx="16" ry="16" fill="#27ae60"/></svg>`,
+  crayon:()=>`<svg viewBox="0 0 80 120">
+    <defs><linearGradient id="cr1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e74c3c"/><stop offset="1" stop-color="#c0392b"/></linearGradient></defs>
+    <rect x="28" y="28" width="20" height="65" rx="5" fill="url(#cr1)"/>
+    <rect x="30" y="30" width="5" height="61" rx="2" fill="#ff6b6b" opacity=".3"/>
+    <polygon points="38,28 28,28 31,12 38,6 45,12 48,28" fill="#a93226"/>
+    <polygon points="36,24 32,24 34,14 38,10 42,14 44,24" fill="#922b21" opacity=".5"/>
+    <rect x="28" y="86" width="20" height="8" rx="2" fill="#1a1a2e"/>
+    <rect x="30" y="88" width="16" height="4" rx="1" fill="#2c3e50"/>
+    <text x="38" y="62" text-anchor="middle" fill="#fff" font-size="6" font-weight="bold" letter-spacing=".5">RED</text>
+    <text x="38" y="70" text-anchor="middle" fill="#ffd5d5" font-size="4.5">CRAYON</text>
+    <line x1="38" y1="48" x2="38" y2="52" stroke="#fff" stroke-width=".5" opacity=".3"/>
+  </svg>`,
 
-  scene_night:()=>`<svg viewBox="0 0 200 120" style="border-radius:12px;border:3px solid #1a1a4e"><rect width="200" height="120" fill="#1a1a4e"/><circle cx="155" cy="25" r="12" fill="#ffeaa7"/><circle cx="162" cy="20" r="9" fill="#1a1a4e"/><g fill="#ffd93d" opacity=".7"><circle cx="30" cy="15" r="2"/><circle cx="60" cy="25" r="1.5"/><circle cx="90" cy="10" r="2"/><circle cx="120" cy="20" r="1.5"/><circle cx="45" cy="35" r="1"/><circle cx="100" cy="35" r="1.5"/><circle cx="140" cy="40" r="1"/><circle cx="180" cy="15" r="1.5"/></g><polygon points="0,70 50,65 100,72 150,68 200,72 200,120 0,120" fill="#2d5016"/><rect x="60" y="58" width="30" height="28" rx="2" fill="#5D4037"/><rect x="67" y="62" width="7" height="9" rx="1" fill="#ffeaa7" opacity=".6"/><rect x="78" y="62" width="7" height="9" rx="1" fill="#ffeaa7" opacity=".6"/><polygon points="55,58 75,42 95,58" fill="#795548"/></svg>`,
+  scissors:()=>`<svg viewBox="0 0 100 110">
+    <defs><linearGradient id="sc1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bdc3c7"/><stop offset="1" stop-color="#7f8c8d"/></linearGradient></defs>
+    <line x1="38" y1="62" x2="56" y2="22" stroke="url(#sc1)" stroke-width="6" stroke-linecap="round"/>
+    <line x1="62" y1="62" x2="44" y2="22" stroke="url(#sc1)" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="50" cy="42" r="4" fill="#95a5a6" stroke="#7f8c8d" stroke-width="1"/>
+    <ellipse cx="34" cy="76" rx="14" ry="16" fill="none" stroke="#555" stroke-width="4"/>
+    <ellipse cx="34" cy="76" rx="8" ry="10" fill="#eee" opacity=".3"/>
+    <ellipse cx="66" cy="76" rx="14" ry="16" fill="none" stroke="#555" stroke-width="4"/>
+    <ellipse cx="66" cy="76" rx="8" ry="10" fill="#eee" opacity=".3"/>
+    <circle cx="34" cy="76" r="3" fill="#666"/>
+    <circle cx="66" cy="76" r="3" fill="#666"/>
+  </svg>`,
 
-  /* Ícone de troféu */
-  trophy:()=>`<svg viewBox="0 0 100 100"><path d="M30 25 H70 L65 55 Q50 68 35 55 Z" fill="#f1c40f" stroke="#e8a838" stroke-width="2"/><rect x="42" y="60" width="16" height="12" rx="2" fill="#e8a838"/><rect x="35" y="70" width="30" height="6" rx="2" fill="#e8a838"/><path d="M30 25 Q15 28 18 42 Q20 52 35 50" fill="none" stroke="#f1c40f" stroke-width="4"/><path d="M70 25 Q85 28 82 42 Q80 52 65 50" fill="none" stroke="#f1c40f" stroke-width="4"/></svg>`,
+  paper:()=>`<svg viewBox="0 0 100 120">
+    <rect x="18" y="10" width="64" height="90" rx="3" fill="#fff" stroke="#ccc" stroke-width="2"/>
+    <polygon points="64,10 82,10 82,28" fill="#e8e8e8"/>
+    <line x1="64" y1="10" x2="64" y2="28" stroke="#ccc" stroke-width="1"/>
+    <line x1="64" y1="28" x2="82" y2="28" stroke="#ccc" stroke-width="1"/>
+    <polygon points="64,10 82,28 64,28" fill="#f0f0f0"/>
+    <g stroke="#d5d5d5" stroke-width="1"><line x1="26" y1="32" x2="74" y2="32"/><line x1="26" y1="42" x2="70" y2="42"/><line x1="26" y1="52" x2="72" y2="52"/><line x1="26" y1="62" x2="60" y2="62"/><line x1="26" y1="72" x2="66" y2="72"/><line x1="26" y1="82" x2="55" y2="82"/></g>
+    <line x1="34" y1="10" x2="34" y2="100" stroke="#ffc0c0" stroke-width=".7" opacity=".5"/>
+  </svg>`,
 
-  /* Ícone speaker */
+  glue:()=>`<svg viewBox="0 0 80 120">
+    <defs><linearGradient id="gl1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#f0f0f0"/></linearGradient></defs>
+    <rect x="24" y="38" width="30" height="58" rx="6" fill="url(#gl1)" stroke="#e67e22" stroke-width="2.5"/>
+    <rect x="30" y="24" width="18" height="20" rx="4" fill="#f39c12"/>
+    <rect x="32" y="26" width="14" height="16" rx="3" fill="#e67e22" opacity=".4"/>
+    <ellipse cx="39" cy="20" rx="6" ry="5" fill="#f39c12"/>
+    <ellipse cx="39" cy="18" rx="3" ry="2" fill="#ffd93d" opacity=".5"/>
+    <text x="39" y="62" text-anchor="middle" fill="#e67e22" font-size="8" font-weight="bold">GLUE</text>
+    <text x="39" y="72" text-anchor="middle" fill="#e67e22" font-size="5">STICK</text>
+    <rect x="28" y="85" width="22" height="3" rx="1" fill="#e67e22" opacity=".3"/>
+  </svg>`,
+
+  /* ===== NATURE ELEMENTS — detailed ===== */
+
+  star_shape:()=>`<svg viewBox="0 0 100 100">
+    <defs><radialGradient id="st1"><stop offset="0" stop-color="#fff3b0"/><stop offset=".5" stop-color="#ffd93d"/><stop offset="1" stop-color="#e8a838"/></radialGradient></defs>
+    <polygon points="50,5 61,35 94,35 67,55 78,88 50,68 22,88 33,55 6,35 39,35" fill="url(#st1)" stroke="#d4a017" stroke-width="1.5"/>
+    <polygon points="50,12 58,33 80,33 62,47 70,72 50,58 30,72 38,47 20,33 42,33" fill="#ffeaa7" opacity=".4"/>
+    <circle cx="46" cy="40" r="3" fill="#fff" opacity=".4"/>
+  </svg>`,
+
+  moon_shape:()=>`<svg viewBox="0 0 100 100">
+    <defs><radialGradient id="mn1" cx=".3" cy=".3"><stop offset="0" stop-color="#fff8dc"/><stop offset="1" stop-color="#ffeaa7"/></radialGradient></defs>
+    <circle cx="50" cy="50" r="35" fill="url(#mn1)"/>
+    <circle cx="66" cy="40" r="28" fill="#1a1a4e"/>
+    <circle cx="38" cy="38" r="4" fill="#f0dca0" opacity=".3"/>
+    <circle cx="44" cy="55" r="3" fill="#f0dca0" opacity=".2"/>
+    <circle cx="35" cy="48" r="2" fill="#e8d490" opacity=".25"/>
+  </svg>`,
+
+  sun_shape:()=>`<svg viewBox="0 0 100 100">
+    <defs><radialGradient id="sn1"><stop offset="0" stop-color="#ffeaa7"/><stop offset=".6" stop-color="#f39c12"/><stop offset="1" stop-color="#e67e22"/></radialGradient></defs>
+    <g stroke="#f39c12" stroke-width="3.5" stroke-linecap="round" opacity=".7">
+      <line x1="50" y1="8" x2="50" y2="18"/><line x1="50" y1="82" x2="50" y2="92"/>
+      <line x1="8" y1="50" x2="18" y2="50"/><line x1="82" y1="50" x2="92" y2="50"/>
+      <line x1="20" y1="20" x2="27" y2="27"/><line x1="73" y1="73" x2="80" y2="80"/>
+      <line x1="80" y1="20" x2="73" y2="27"/><line x1="27" y1="73" x2="20" y2="80"/>
+    </g>
+    <circle cx="50" cy="50" r="22" fill="url(#sn1)"/>
+    <circle cx="44" cy="44" r="6" fill="#ffeaa7" opacity=".4"/>
+  </svg>`,
+
+  tree_shape:()=>`<svg viewBox="0 0 100 110">
+    <rect x="44" y="68" width="12" height="32" rx="2" fill="#6D4C41"/>
+    <rect x="46" y="70" width="4" height="28" rx="1" fill="#5D4037" opacity=".3"/>
+    <line x1="42" y1="82" x2="35" y2="90" stroke="#6D4C41" stroke-width="3" stroke-linecap="round"/>
+    <line x1="58" y1="85" x2="64" y2="92" stroke="#6D4C41" stroke-width="2.5" stroke-linecap="round"/>
+    <ellipse cx="50" cy="42" rx="32" ry="34" fill="#27ae60"/>
+    <ellipse cx="36" cy="50" rx="20" ry="24" fill="#2ecc71"/>
+    <ellipse cx="62" cy="48" rx="18" ry="22" fill="#27ae60"/>
+    <ellipse cx="50" cy="32" rx="16" ry="18" fill="#2ecc71"/>
+    <ellipse cx="42" cy="36" rx="8" ry="10" fill="#55efc4" opacity=".3"/>
+    <circle cx="34" cy="52" r="3" fill="#e74c3c" opacity=".7"/>
+    <circle cx="58" cy="38" r="2" fill="#e74c3c" opacity=".5"/>
+  </svg>`,
+
+  flower_shape:()=>`<svg viewBox="0 0 100 110">
+    <line x1="50" y1="58" x2="50" y2="100" stroke="#27ae60" stroke-width="4" stroke-linecap="round"/>
+    <ellipse cx="36" cy="82" rx="14" ry="6" fill="#27ae60" transform="rotate(-30,36,82)" opacity=".7"/>
+    <ellipse cx="62" cy="78" rx="12" ry="5" fill="#27ae60" transform="rotate(25,62,78)" opacity=".6"/>
+    <g><circle cx="50" cy="45" r="11" fill="#f1c40f"/>
+    <circle cx="50" cy="43" r="5" fill="#e67e22" opacity=".4"/></g>
+    <circle cx="50" cy="28" r="12" fill="#e74c3c"/><circle cx="50" cy="26" r="4" fill="#ff6b6b" opacity=".4"/>
+    <circle cx="64" cy="34" r="12" fill="#c0392b"/><circle cx="63" cy="32" r="4" fill="#e74c3c" opacity=".3"/>
+    <circle cx="64" cy="52" r="12" fill="#e74c3c"/>
+    <circle cx="50" cy="60" r="12" fill="#c0392b"/>
+    <circle cx="36" cy="52" r="12" fill="#e74c3c"/>
+    <circle cx="36" cy="34" r="12" fill="#c0392b"/><circle cx="37" cy="32" r="4" fill="#e74c3c" opacity=".3"/>
+  </svg>`,
+
+  cloud_shape:()=>`<svg viewBox="0 0 120 80">
+    <defs><linearGradient id="cl1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#dfe6e9"/></linearGradient></defs>
+    <ellipse cx="60" cy="52" rx="38" ry="18" fill="url(#cl1)"/>
+    <ellipse cx="40" cy="46" rx="24" ry="18" fill="url(#cl1)"/>
+    <ellipse cx="76" cy="44" rx="22" ry="16" fill="url(#cl1)"/>
+    <ellipse cx="56" cy="36" rx="20" ry="15" fill="#fff"/>
+    <ellipse cx="48" cy="40" rx="8" ry="5" fill="#fff" opacity=".6"/>
+  </svg>`,
+
+  mountain_shape:()=>`<svg viewBox="0 0 140 90">
+    <polygon points="5,85 50,15 95,85" fill="#636e72"/>
+    <polygon points="50,15 60,32 40,32" fill="#ecf0f1"/>
+    <polygon points="45,28 50,15 55,28" fill="#fff" opacity=".6"/>
+    <polygon points="40,85 80,25 120,85" fill="#7f8c8d"/>
+    <polygon points="80,25 88,38 72,38" fill="#dfe6e9"/>
+    <polygon points="76,34 80,25 84,34" fill="#fff" opacity=".5"/>
+    <polygon points="100,85 125,45 140,85" fill="#95a5a6" opacity=".7"/>
+  </svg>`,
+
+  cypress_shape:()=>`<svg viewBox="0 0 60 120">
+    <rect x="26" y="80" width="8" height="30" rx="2" fill="#5D4037"/>
+    <rect x="28" y="82" width="3" height="26" rx="1" fill="#4E342E" opacity=".3"/>
+    <ellipse cx="30" cy="48" rx="14" ry="44" fill="#1B5E20"/>
+    <ellipse cx="30" cy="46" rx="11" ry="40" fill="#2E7D32"/>
+    <ellipse cx="30" cy="44" rx="7" ry="34" fill="#388E3C" opacity=".4"/>
+    <ellipse cx="27" cy="30" rx="3" ry="8" fill="#4CAF50" opacity=".3"/>
+  </svg>`,
+
+  wheat_shape:()=>`<svg viewBox="0 0 80 120">
+    <line x1="40" y1="110" x2="40" y2="35" stroke="#8B6914" stroke-width="2.5"/>
+    <line x1="40" y1="70" x2="28" y2="85" stroke="#8B6914" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="40" y1="60" x2="52" y2="75" stroke="#8B6914" stroke-width="1.5" stroke-linecap="round"/>
+    <g fill="#DAA520"><ellipse cx="40" cy="30" rx="5" ry="12"/><ellipse cx="33" cy="40" rx="4" ry="9" transform="rotate(-18,33,40)"/>
+    <ellipse cx="47" cy="40" rx="4" ry="9" transform="rotate(18,47,40)"/><ellipse cx="30" cy="54" rx="3.5" ry="8" transform="rotate(-22,30,54)"/>
+    <ellipse cx="50" cy="54" rx="3.5" ry="8" transform="rotate(22,50,54)"/></g>
+    <g fill="#B8860B" opacity=".4"><line x1="40" y1="22" x2="40" y2="38" stroke="#B8860B" stroke-width=".5"/></g>
+  </svg>`,
+
+  /* ===== PAINTINGS — highly detailed, recognizable ===== */
+
+  starry_night:()=>`<svg viewBox="0 0 280 200" style="border-radius:14px;border:3px solid #8B7355">
+    <defs>
+      <radialGradient id="sn_sky" cx=".5" cy=".3"><stop offset="0" stop-color="#1a2a6c"/><stop offset="1" stop-color="#0a0a2e"/></radialGradient>
+      <radialGradient id="sn_star"><stop offset="0" stop-color="#ffeaa7"/><stop offset=".7" stop-color="#ffd93d"/><stop offset="1" stop-color="#f39c12" stop-opacity="0"/></radialGradient>
+    </defs>
+    <rect width="280" height="200" fill="url(#sn_sky)"/>
+    <!-- swirling sky -->
+    <g fill="none" stroke-linecap="round" opacity=".7">
+      <path d="M20 50 Q70 30 120 55 Q170 80 220 50 Q250 38 280 48" stroke="#3a7bd5" stroke-width="6"/>
+      <path d="M0 65 Q50 50 100 68 Q150 86 200 65 Q240 50 280 62" stroke="#4a8fe7" stroke-width="5"/>
+      <path d="M10 80 Q60 68 110 82 Q160 96 210 78 Q250 66 280 76" stroke="#2b5ea7" stroke-width="4"/>
+      <path d="M0 40 Q40 28 80 42 Q120 56 160 40 Q200 28 240 38" stroke="#5b9bd5" stroke-width="3" opacity=".5"/>
+    </g>
+    <!-- moon -->
+    <circle cx="225" cy="35" r="20" fill="#ffeaa7"/>
+    <circle cx="236" cy="28" r="16" fill="#1a2a6c"/>
+    <circle cx="222" cy="30" r="2" fill="#f5e6c8" opacity=".3"/>
+    <!-- stars with glow -->
+    <g><circle cx="50" cy="28" r="12" fill="url(#sn_star)"/><circle cx="50" cy="28" r="5" fill="#ffd93d"/>
+    <circle cx="100" cy="20" r="10" fill="url(#sn_star)"/><circle cx="100" cy="20" r="4" fill="#ffd93d"/>
+    <circle cx="155" cy="30" r="11" fill="url(#sn_star)"/><circle cx="155" cy="30" r="4.5" fill="#ffd93d"/>
+    <circle cx="75" cy="50" r="8" fill="url(#sn_star)"/><circle cx="75" cy="50" r="3" fill="#ffd93d"/>
+    <circle cx="190" cy="22" r="7" fill="url(#sn_star)"/><circle cx="190" cy="22" r="2.5" fill="#ffd93d"/>
+    </g>
+    <!-- cypress -->
+    <ellipse cx="35" cy="120" rx="14" ry="55" fill="#0d3b0d"/>
+    <ellipse cx="35" cy="118" rx="11" ry="50" fill="#1a5c1a"/>
+    <ellipse cx="35" cy="115" rx="7" ry="44" fill="#1B5E20" opacity=".5"/>
+    <!-- village -->
+    <polygon points="0,130 60,125 140,132 200,128 280,135 280,200 0,200" fill="#1a3a0a"/>
+    <polygon points="0,140 80,135 160,142 240,138 280,142 280,200 0,200" fill="#2d5016"/>
+    <rect x="80" y="138" width="14" height="22" rx="1" fill="#3e2723"/><polygon points="80,138 87,128 94,138" fill="#5D4037"/>
+    <rect x="100" y="140" width="12" height="18" rx="1" fill="#4E342E"/><polygon points="100,140 106,132 112,140" fill="#6D4C41"/>
+    <rect x="120" y="136" width="16" height="24" rx="1" fill="#3e2723"/><polygon points="120,136 128,124 136,136" fill="#5D4037"/>
+    <rect x="86" y="148" width="4" height="6" rx="1" fill="#ffeaa7" opacity=".5"/>
+    <rect x="124" y="144" width="5" height="7" rx="1" fill="#ffeaa7" opacity=".4"/>
+    <text x="140" y="192" text-anchor="middle" fill="#5a7a3a" font-size="8" font-style="italic" opacity=".5">The Starry Night, 1889</text>
+  </svg>`,
+
+  wheat_field:()=>`<svg viewBox="0 0 280 200" style="border-radius:14px;border:3px solid #8B7355">
+    <defs><linearGradient id="wf_sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5dade2"/><stop offset="1" stop-color="#aed6f1"/></linearGradient></defs>
+    <rect width="280" height="200" fill="url(#wf_sky)"/>
+    <!-- sun -->
+    <circle cx="230" cy="30" r="22" fill="#f9e44c" opacity=".8"/>
+    <circle cx="230" cy="30" r="16" fill="#f39c12"/>
+    <!-- clouds -->
+    <g opacity=".8"><ellipse cx="60" cy="28" rx="30" ry="14" fill="#fff"/><ellipse cx="42" cy="24" rx="20" ry="12" fill="#f5f5f5"/>
+    <ellipse cx="80" cy="22" rx="16" ry="10" fill="#fff"/></g>
+    <g opacity=".6"><ellipse cx="170" cy="40" rx="24" ry="10" fill="#fff"/><ellipse cx="156" cy="36" rx="16" ry="8" fill="#f5f5f5"/></g>
+    <!-- mountains -->
+    <polygon points="0,110 40,70 80,95 120,65 160,90 200,72 240,88 280,80 280,120 0,120" fill="#7aa37a" opacity=".4"/>
+    <!-- cypress -->
+    <ellipse cx="210" cy="95" rx="14" ry="50" fill="#0d3b0d"/>
+    <ellipse cx="210" cy="93" rx="11" ry="46" fill="#1a5c1a"/>
+    <ellipse cx="210" cy="90" rx="7" ry="40" fill="#2E7D32" opacity=".5"/>
+    <rect x="207" y="130" width="6" height="15" rx="1" fill="#5D4037"/>
+    <!-- wheat field -->
+    <polygon points="0,105 50,100 100,108 150,102 200,106 280,110 280,200 0,200" fill="#DAA520"/>
+    <polygon points="0,115 40,110 90,118 140,112 190,116 280,120 280,200 0,200" fill="#C19A1A"/>
+    <polygon points="0,130 60,125 120,132 180,128 280,135 280,200 0,200" fill="#B8860B"/>
+    <!-- wheat stalks -->
+    <g stroke="#8B6914" stroke-width="1" opacity=".4">
+      <line x1="20" y1="108" x2="22" y2="95"/><line x1="45" y1="104" x2="47" y2="92"/>
+      <line x1="70" y1="110" x2="72" y2="98"/><line x1="95" y1="106" x2="97" y2="94"/>
+      <line x1="120" y1="108" x2="122" y2="96"/><line x1="150" y1="105" x2="152" y2="93"/>
+      <line x1="175" y1="108" x2="177" y2="96"/>
+    </g>
+    <g fill="#DAA520" opacity=".5">
+      <ellipse cx="22" cy="93" rx="2.5" ry="6"/><ellipse cx="47" cy="90" rx="2" ry="5"/>
+      <ellipse cx="72" cy="96" rx="2" ry="5"/><ellipse cx="97" cy="92" rx="2.5" ry="6"/>
+    </g>
+    <text x="140" y="192" text-anchor="middle" fill="#6a5010" font-size="8" font-style="italic" opacity=".5">Wheat Field with Cypresses, 1889</text>
+  </svg>`,
+
+  sunflowers:()=>`<svg viewBox="0 0 280 200" style="border-radius:14px;border:3px solid #8B7355">
+    <rect width="280" height="200" fill="#f5e6c8"/>
+    <rect x="0" y="130" width="280" height="70" fill="#e6d5a8"/>
+    <!-- vase -->
+    <path d="M110 95 Q105 130 115 160 Q125 175 140 178 Q155 175 165 160 Q175 130 170 95Z" fill="#c9a96e" stroke="#B8860B" stroke-width="2"/>
+    <path d="M115 100 Q112 130 120 155 Q130 168 140 170" fill="none" stroke="#deb887" stroke-width="2" opacity=".4"/>
+    <rect x="108" y="90" width="64" height="8" rx="3" fill="#B8860B"/>
+    <!-- sunflower 1 (large center) -->
+    <g transform="translate(140,58)">
+      <line x1="0" y1="18" x2="0" y2="35" stroke="#2d8a2d" stroke-width="4"/>
+      <circle r="12" fill="#5D4037"/>
+      <circle r="8" fill="#3e2723"/>
+      <g fill="#f1c40f"><ellipse cx="0" cy="-20" rx="6" ry="10"/><ellipse cx="14" cy="-14" rx="6" ry="10" transform="rotate(45)"/>
+      <ellipse cx="20" cy="0" rx="6" ry="10" transform="rotate(90)"/><ellipse cx="14" cy="14" rx="6" ry="10" transform="rotate(135)"/>
+      <ellipse cx="0" cy="20" rx="6" ry="10" transform="rotate(180)"/><ellipse cx="-14" cy="14" rx="6" ry="10" transform="rotate(225)"/>
+      <ellipse cx="-20" cy="0" rx="6" ry="10" transform="rotate(270)"/><ellipse cx="-14" cy="-14" rx="6" ry="10" transform="rotate(315)"/></g>
+    </g>
+    <!-- sunflower 2 (right, smaller) -->
+    <g transform="translate(172,68)">
+      <line x1="0" y1="12" x2="-4" y2="28" stroke="#2d8a2d" stroke-width="3"/>
+      <circle r="8" fill="#5D4037"/><circle r="5" fill="#3e2723"/>
+      <g fill="#e67e22"><ellipse cx="0" cy="-14" rx="4.5" ry="7.5"/><ellipse cx="10" cy="-10" rx="4.5" ry="7.5" transform="rotate(45)"/>
+      <ellipse cx="14" cy="0" rx="4.5" ry="7.5" transform="rotate(90)"/><ellipse cx="10" cy="10" rx="4.5" ry="7.5" transform="rotate(135)"/>
+      <ellipse cx="0" cy="14" rx="4.5" ry="7.5" transform="rotate(180)"/><ellipse cx="-10" cy="10" rx="4.5" ry="7.5" transform="rotate(225)"/>
+      <ellipse cx="-14" cy="0" rx="4.5" ry="7.5" transform="rotate(270)"/><ellipse cx="-10" cy="-10" rx="4.5" ry="7.5" transform="rotate(315)"/></g>
+    </g>
+    <!-- sunflower 3 (left, drooping) -->
+    <g transform="translate(112,72)">
+      <line x1="0" y1="10" x2="4" y2="24" stroke="#2d8a2d" stroke-width="3"/>
+      <circle r="7" fill="#8B6914"/><circle r="4" fill="#5D4037"/>
+      <g fill="#c9a96e"><ellipse cx="0" cy="-12" rx="4" ry="6.5"/><ellipse cx="8" cy="-8" rx="4" ry="6.5" transform="rotate(45)"/>
+      <ellipse cx="12" cy="0" rx="4" ry="6.5" transform="rotate(90)"/><ellipse cx="8" cy="8" rx="4" ry="6.5" transform="rotate(135)"/>
+      <ellipse cx="0" cy="12" rx="4" ry="6.5" transform="rotate(180)"/><ellipse cx="-8" cy="8" rx="4" ry="6.5" transform="rotate(225)"/>
+      <ellipse cx="-12" cy="0" rx="4" ry="6.5" transform="rotate(270)"/><ellipse cx="-8" cy="-8" rx="4" ry="6.5" transform="rotate(315)"/></g>
+    </g>
+    <!-- leaves -->
+    <ellipse cx="126" cy="100" rx="12" ry="5" fill="#27ae60" transform="rotate(-30,126,100)"/>
+    <ellipse cx="158" cy="98" rx="10" ry="4" fill="#2d8a2d" transform="rotate(25,158,98)"/>
+    <text x="140" y="192" text-anchor="middle" fill="#8a7030" font-size="8" font-style="italic" opacity=".5">Sunflowers, 1888</text>
+  </svg>`,
+
+  bedroom:()=>`<svg viewBox="0 0 280 200" style="border-radius:14px;border:3px solid #8B7355">
+    <defs><linearGradient id="bd_wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#74b9ff"/><stop offset="1" stop-color="#a29bfe"/></linearGradient></defs>
+    <!-- walls and floor -->
+    <rect width="280" height="200" fill="url(#bd_wall)"/>
+    <polygon points="0,80 140,50 280,80 280,200 0,200" fill="#DEB887"/>
+    <polygon points="0,200 0,80 20,85 20,200" fill="#c9a96e" opacity=".3"/>
+    <polygon points="280,200 280,80 260,85 260,200" fill="#c9a96e" opacity=".3"/>
+    <!-- bed -->
+    <rect x="15" y="88" width="110" height="72" rx="4" fill="#e17055"/>
+    <rect x="15" y="86" width="110" height="10" rx="3" fill="#d35400"/>
+    <rect x="18" y="98" width="45" height="22" rx="3" fill="#fff" opacity=".6"/>
+    <rect x="68" y="98" width="45" height="22" rx="3" fill="#fff" opacity=".5"/>
+    <rect x="15" y="120" width="110" height="40" rx="2" fill="#c0392b" opacity=".3"/>
+    <rect x="15" y="155" width="110" height="8" rx="2" fill="#8B4513"/>
+    <!-- table -->
+    <rect x="225" y="100" width="40" height="55" rx="3" fill="#8B4513"/>
+    <rect x="228" y="105" width="12" height="18" rx="1" fill="#c9a96e"/>
+    <rect x="243" y="105" width="12" height="18" rx="1" fill="#b8960b"/>
+    <circle cx="248" cy="98" r="6" fill="#f39c12" opacity=".7"/>
+    <!-- chair 1 -->
+    <rect x="140" y="110" width="28" height="35" rx="3" fill="#f39c12"/>
+    <rect x="142" y="100" width="24" height="14" rx="2" fill="#e67e22"/>
+    <rect x="140" y="145" width="4" height="15" rx="1" fill="#8B4513"/>
+    <rect x="164" y="145" width="4" height="15" rx="1" fill="#8B4513"/>
+    <!-- chair 2 -->
+    <rect x="175" y="115" width="25" height="30" rx="3" fill="#27ae60"/>
+    <rect x="177" y="105" width="21" height="12" rx="2" fill="#1e8449"/>
+    <!-- pictures on wall -->
+    <rect x="140" y="56" width="22" height="18" rx="2" fill="#e8d5a0" stroke="#8B6914" stroke-width="1.5"/>
+    <rect x="170" y="58" width="18" height="14" rx="2" fill="#d5c5a0" stroke="#8B6914" stroke-width="1.5"/>
+    <!-- window -->
+    <rect x="50" y="52" width="30" height="28" rx="2" fill="#87CEEB" stroke="#8B6914" stroke-width="2"/>
+    <line x1="65" y1="52" x2="65" y2="80" stroke="#8B6914" stroke-width="1.5"/>
+    <line x1="50" y1="66" x2="80" y2="66" stroke="#8B6914" stroke-width="1.5"/>
+    <text x="140" y="192" text-anchor="middle" fill="#8a7050" font-size="8" font-style="italic" opacity=".5">The Bedroom, 1888</text>
+  </svg>`,
+
+  self_portrait:()=>`<svg viewBox="0 0 280 200" style="border-radius:14px;border:3px solid #8B7355">
+    <defs><radialGradient id="sp_bg" cx=".5" cy=".4"><stop offset="0" stop-color="#4a8fe7"/><stop offset="1" stop-color="#2c3e50"/></radialGradient></defs>
+    <rect width="280" height="200" fill="url(#sp_bg)"/>
+    <!-- swirl texture in background -->
+    <g fill="none" stroke="#3a7bd5" stroke-width="2" opacity=".3">
+      <path d="M40 30 Q80 20 60 60 Q40 100 80 90"/><path d="M200 20 Q240 30 220 70 Q200 110 240 100"/>
+      <path d="M120 150 Q160 140 140 180"/><path d="M30 160 Q50 150 40 180"/>
+    </g>
+    <!-- coat/jacket -->
+    <rect x="105" y="118" width="70" height="72" rx="8" fill="#2c3e50"/>
+    <rect x="110" y="122" width="60" height="12" rx="3" fill="#34495e"/>
+    <line x1="140" y1="122" x2="140" y2="190" stroke="#1a252f" stroke-width="1"/>
+    <!-- face -->
+    <ellipse cx="140" cy="80" rx="38" ry="44" fill="#fad390"/>
+    <ellipse cx="140" cy="82" rx="35" ry="40" fill="#f8c471" opacity=".4"/>
+    <!-- beard -->
+    <path d="M115 92 Q118 115 140 120 Q162 115 165 92 Q162 105 140 110 Q118 105 115 92Z" fill="#e67e22"/>
+    <path d="M118 95 Q120 110 140 115 Q160 110 162 95" fill="#d35400" opacity=".4"/>
+    <!-- eyes -->
+    <ellipse cx="127" cy="72" rx="6" ry="5" fill="#fff"/><circle cx="128" cy="72" r="3" fill="#2980b9"/><circle cx="129" cy="71" r="1.2" fill="#000"/>
+    <ellipse cx="153" cy="72" rx="6" ry="5" fill="#fff"/><circle cx="154" cy="72" r="3" fill="#2980b9"/><circle cx="155" cy="71" r="1.2" fill="#000"/>
+    <!-- eyebrows -->
+    <path d="M120 66 Q127 62 134 65" fill="none" stroke="#c0392b" stroke-width="2"/>
+    <path d="M146 65 Q153 62 160 66" fill="none" stroke="#c0392b" stroke-width="2"/>
+    <!-- nose -->
+    <path d="M137 78 Q140 86 143 78" fill="none" stroke="#d4a574" stroke-width="1.5"/>
+    <!-- mouth -->
+    <path d="M132 95 Q140 100 148 95" fill="none" stroke="#c0392b" stroke-width="1.8"/>
+    <!-- ear -->
+    <ellipse cx="102" cy="80" rx="6" ry="10" fill="#fad390" stroke="#e8b960" stroke-width="1"/>
+    <ellipse cx="178" cy="80" rx="6" ry="10" fill="#fad390" stroke="#e8b960" stroke-width="1"/>
+    <!-- hat -->
+    <path d="M100 52 Q108 28 140 22 Q172 28 180 52 Q178 48 170 46 L110 46 Q102 48 100 52Z" fill="#2c3e50"/>
+    <path d="M105 50 Q110 46 140 44 Q170 46 175 50 L178 55 L102 55Z" fill="#34495e"/>
+    <rect x="100" y="52" width="80" height="5" rx="2" fill="#1a252f"/>
+    <!-- hair (red/orange) -->
+    <path d="M104 55 Q100 45 105 38 Q108 30 115 36 Q110 44 108 55" fill="#e67e22"/>
+    <path d="M176 55 Q180 45 175 38 Q172 30 165 36 Q170 44 172 55" fill="#e67e22"/>
+    <text x="140" y="192" text-anchor="middle" fill="#5a8ac0" font-size="8" font-style="italic" opacity=".5">Self Portrait, 1889</text>
+  </svg>`,
+
+  /* Scenes */
+  scene_day:()=>`<svg viewBox="0 0 280 160" style="border-radius:14px;border:3px solid #87CEEB">
+    <defs><linearGradient id="sd1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#74b9ff"/><stop offset="1" stop-color="#a0d2ff"/></linearGradient></defs>
+    <rect width="280" height="160" fill="url(#sd1)"/>
+    <circle cx="230" cy="30" r="24" fill="#f9e44c" opacity=".9"/>
+    <circle cx="230" cy="30" r="18" fill="#f39c12"/>
+    <circle cx="226" cy="26" r="5" fill="#ffeaa7" opacity=".4"/>
+    <g stroke="#f39c12" stroke-width="3" stroke-linecap="round" opacity=".5"><line x1="230" y1="2" x2="230" y2="0"/><line x1="258" y1="30" x2="264" y2="30"/>
+    <line x1="252" y1="8" x2="256" y2="4"/><line x1="252" y1="52" x2="256" y2="56"/></g>
+    <g opacity=".8"><ellipse cx="70" cy="30" rx="30" ry="13" fill="#fff"/><ellipse cx="55" cy="26" rx="20" ry="11" fill="#f5f5f5"/><ellipse cx="88" cy="24" rx="18" ry="9" fill="#fff"/></g>
+    <g opacity=".5"><ellipse cx="160" cy="40" rx="22" ry="8" fill="#fff"/><ellipse cx="148" cy="36" rx="14" ry="7" fill="#f5f5f5"/></g>
+    <polygon points="0,90 50,80 120,92 180,85 250,90 280,88 280,160 0,160" fill="#27ae60"/>
+    <polygon points="0,100 70,95 140,102 210,98 280,100 280,160 0,160" fill="#2ecc71"/>
+    <rect x="105" y="68" width="10" height="30" rx="2" fill="#6D4C41"/>
+    <ellipse cx="110" cy="55" rx="20" ry="22" fill="#27ae60"/><ellipse cx="104" cy="58" rx="14" ry="16" fill="#2ecc71"/>
+    <circle cx="100" cy="50" r="3" fill="#e74c3c" opacity=".6"/>
+    <circle cx="118" cy="48" r="2" fill="#e74c3c" opacity=".5"/>
+    <rect x="185" y="72" width="8" height="26" rx="1" fill="#5D4037"/>
+    <ellipse cx="189" cy="60" rx="14" ry="16" fill="#27ae60"/><ellipse cx="186" cy="62" rx="10" ry="12" fill="#2ecc71"/>
+    <g fill="#f1c40f"><circle cx="50" cy="106" r="3"/><circle cx="50" cy="100" r="2.5" fill="#e74c3c"/><circle cx="47" cy="103" r="2.5" fill="#e74c3c"/>
+    <circle cx="53" cy="103" r="2.5" fill="#e74c3c"/><line x1="50" y1="109" x2="50" y2="118" stroke="#27ae60" stroke-width="2"/></g>
+    <g fill="#ff69b4"><circle cx="220" cy="104" r="2.5"/><circle cx="220" cy="99" r="2"/><circle cx="217" cy="101.5" r="2"/>
+    <circle cx="223" cy="101.5" r="2"/><line x1="220" y1="106" x2="220" y2="114" stroke="#27ae60" stroke-width="1.5"/></g>
+  </svg>`,
+
+  scene_night:()=>`<svg viewBox="0 0 280 160" style="border-radius:14px;border:3px solid #1a1a4e">
+    <defs><linearGradient id="sni" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a0a2e"/><stop offset="1" stop-color="#1a2a5c"/></linearGradient></defs>
+    <rect width="280" height="160" fill="url(#sni)"/>
+    <circle cx="220" cy="30" r="16" fill="#ffeaa7"/><circle cx="230" cy="24" r="12" fill="#0a0a2e"/>
+    <circle cx="216" cy="26" r="2" fill="#f0dca0" opacity=".2"/>
+    <g fill="#ffd93d" opacity=".7"><circle cx="30" cy="15" r="2.5"/><circle cx="60" cy="30" r="2"/><circle cx="100" cy="12" r="2.5"/>
+    <circle cx="140" cy="25" r="2"/><circle cx="170" cy="18" r="1.8"/><circle cx="250" cy="20" r="2"/>
+    <circle cx="45" cy="45" r="1.5"/><circle cx="120" cy="40" r="1.5"/><circle cx="190" cy="42" r="1.2"/><circle cx="260" cy="38" r="1.5"/>
+    <circle cx="80" cy="50" r="1"/><circle cx="155" cy="48" r="1"/></g>
+    <polygon points="0,90 50,85 120,92 180,88 250,92 280,90 280,160 0,160" fill="#0d2b0d"/>
+    <polygon points="0,100 70,96 140,102 210,98 280,100 280,160 0,160" fill="#1a3a1a"/>
+    <rect x="90" y="80" width="40" height="38" rx="3" fill="#3e2723"/>
+    <rect x="98" y="86" width="10" height="14" rx="1" fill="#ffeaa7" opacity=".5"/>
+    <rect x="114" y="86" width="10" height="14" rx="1" fill="#ffeaa7" opacity=".4"/>
+    <polygon points="85,80 110,60 135,80" fill="#5D4037"/>
+    <rect x="108" y="64" width="4" height="12" rx="1" fill="#795548"/>
+    <rect x="170" y="85" width="30" height="30" rx="2" fill="#4E342E"/>
+    <rect x="178" y="90" width="8" height="10" rx="1" fill="#ffeaa7" opacity=".3"/>
+    <polygon points="166,85 185,70 204,85" fill="#6D4C41"/>
+  </svg>`,
+
+  /* Icons */
+  trophy:()=>`<svg viewBox="0 0 100 100">
+    <defs><linearGradient id="tr1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f9e44c"/><stop offset="1" stop-color="#e8a838"/></linearGradient></defs>
+    <path d="M30 22 H70 L65 58 Q50 72 35 58 Z" fill="url(#tr1)" stroke="#d4a017" stroke-width="2"/>
+    <path d="M36 26 H64 L60 54 Q50 64 40 54 Z" fill="#ffeaa7" opacity=".3"/>
+    <rect x="42" y="64" width="16" height="12" rx="2" fill="#d4a017"/>
+    <rect x="34" y="74" width="32" height="7" rx="3" fill="#d4a017"/>
+    <rect x="30" y="79" width="40" height="5" rx="2" fill="#c9960c"/>
+    <path d="M30 22 Q12 26 16 42 Q18 55 35 52" fill="none" stroke="#f1c40f" stroke-width="5"/>
+    <path d="M70 22 Q88 26 84 42 Q82 55 65 52" fill="none" stroke="#f1c40f" stroke-width="5"/>
+    <text x="50" y="48" text-anchor="middle" fill="#d4a017" font-size="14" font-weight="bold">1</text>
+  </svg>`,
+
   speaker:()=>`<svg viewBox="0 0 24 24" width="24" height="24"><polygon points="3,9 3,15 7,15 13,19 13,5 7,9" fill="#5a4500"/><path d="M16 8.5 Q19 12 16 15.5" fill="none" stroke="#5a4500" stroke-width="1.5" stroke-linecap="round"/><path d="M18 6 Q23 12 18 18" fill="none" stroke="#5a4500" stroke-width="1.5" stroke-linecap="round"/></svg>`,
 };
 
-/* Helpers para montar SVGs no stage e opções */
-function svgStage(key,w){return `<div class="illust" style="max-width:${w||280}px">${SVG[key]()}</div>`;}
+function svgStage(key,w){return `<div class="illust" style="max-width:${w||320}px">${SVG[key]()}</div>`;}
 function svgOpt(key){return `<div class="opt-icon">${SVG[key]()}</div>`;}
 
 /* ============================================================
-   VOZ PT-BR
+   VOICE (Portuguese — for audio generation)
    ============================================================ */
 const VOICE={
-  greet:"Olá! Bem-vindo ao Art Fun! Vamos explorar o mundo da arte em inglês!",
-  test:"Olá! Você está me ouvindo? Vamos descobrir o mundo da arte!",
-  win:"Parabéns! Você é um verdadeiro artista! Que orgulho!",
-  choose:"As respostas são:",
-  ok1:"Muito bem!", ok2:"Isso aí!", ok3:"Você acertou!",
-  ok4:"Boa demais!", ok5:"Mandou bem!", ok6:"Perfeito!",
-  no1:"Quase! Tenta outra.", no2:"Hmm, tenta de novo.", no3:"Não foi essa, tenta outra.",
-
-  q_supply_name:"Olhe a ilustração. Qual é o nome em inglês deste material de arte?",
-  q_supply_use:"O artista precisa fazer algo. Qual material ele deve usar?",
-  q_painting_id:"Olhe bem esta pintura. Qual é o nome dela em inglês?",
-  q_painting_artist:"Quem pintou este quadro famoso?",
-  q_painting_describe:"Leia a descrição e descubra qual pintura é esta.",
-  q_daynight:"Olhe a cena com atenção. É dia ou noite?",
-  q_nature_word:"Olhe a ilustração. Como se chama este elemento da natureza em inglês?",
-  q_starry_detail:"O que a gente pode ver no quadro The Starry Night?",
-  q_vangogh_fact:"O que é verdade sobre Vincent Van Gogh?",
-  q_color_mix:"Se misturar estas duas cores, qual cor a gente consegue?",
-  q_whats_in:"O que tem nesta obra de arte?",
-  q_complete:"Complete a frase sobre a obra.",
-
-  use_draw:"Quero fazer um desenho no papel.",
-  use_paint:"Quero pintar um quadro com cores.",
-  use_cut:"Preciso recortar o papel.",
-  use_glue:"Quero colar pedaços de papel juntos.",
-  use_mix:"Preciso misturar as tintas.",
+  greet:"Welcome! Choose an activity to explore art in English!",
+  test:"Hello! Can you hear me? Let's learn about art!",
+  win:"Congratulations! You did it! Amazing work!",
+  choose:"The answers are:",
+  ok1:"Very good!", ok2:"That's right!", ok3:"You got it!",
+  ok4:"Great job!", ok5:"Well done!", ok6:"Perfect!",
+  no1:"Almost! Try again.", no2:"Hmm, try another.", no3:"Not that one, try again.",
+  q_supply_name:"Look at the illustration. What is the name of this art supply in English?",
+  q_supply_use:"Think: which art supply do you need for this task?",
+  q_nature_word:"Look at the illustration. What is this element of nature called in English?",
+  q_daynight:"Is this a day scene or a night scene?",
+  q_painting_id:"Look at this painting carefully. What is its name?",
+  q_painting_describe:"Read the clues carefully and figure out which painting it is!",
+  q_starry_detail:"Look at The Starry Night and answer the question.",
+  q_vangogh_fact:"Answer the question about Van Gogh.",
+  use_draw:"The artist wants to draw on paper. Which supply does he need?",
+  use_paint:"The artist wants to paint on canvas with colors. What does he need?",
+  use_cut:"The artist needs to cut paper shapes. What does he use?",
+  use_glue:"The artist wants to glue pieces of paper in a collage. What does he need?",
+  use_mix:"The artist will mix different paint colors. Where does he do that?",
+  use_color:"The artist wants to color a drawing with bright colors. Which supply?",
 };
 
 const VOICE_EN={
-  en_brush:"Brush.", en_paint:"Paint.", en_canvas:"Canvas.", en_palette:"Palette.",
-  en_pencil:"Pencil.", en_crayon:"Crayon.", en_paper:"Paper.", en_scissors:"Scissors.",
-  en_glue:"Glue.",
-  en_draw:"Draw.", en_paint_v:"Paint.", en_cut:"Cut.", en_glue_v:"Glue.",
-  en_color_v:"Color.", en_create:"Create.", en_mix:"Mix.",
-  en_star:"Star.", en_stars:"Stars.", en_moon:"Moon.", en_sky:"Sky.", en_sun:"Sun.",
-  en_cloud:"Cloud.", en_tree:"Tree.", en_flower:"Flower.", en_field:"Field.",
-  en_mountain:"Mountain.", en_cypress:"Cypress.", en_wheat:"Wheat.",
-  en_blue:"Blue.", en_yellow:"Yellow.", en_green:"Green.", en_orange:"Orange.",
-  en_red:"Red.", en_white:"White.", en_purple:"Purple.",
-  en_day:"Day.", en_night:"Night.", en_daytime:"Daytime.", en_nighttime:"Nighttime.",
-  en_painting:"Painting.", en_artist:"Artist.",
-  en_vangogh:"Vincent Van Gogh.",
-  en_starry_night:"The Starry Night.",
-  en_sunflowers:"Sunflowers.",
-  en_wheat_field:"Wheat Field with Cypresses.",
-  en_bedroom:"The Bedroom.",
-  en_self_portrait:"Self Portrait.",
-  en_netherlands:"The Netherlands.", en_france:"France.",
+  en_brush:"Brush", en_paint:"Paint", en_canvas:"Canvas", en_palette:"Palette",
+  en_pencil:"Pencil", en_crayon:"Crayon", en_scissors:"Scissors", en_paper:"Paper", en_glue:"Glue",
+  en_star:"Star", en_moon:"Moon", en_sun:"Sun", en_tree:"Tree", en_flower:"Flower",
+  en_cloud:"Cloud", en_mountain:"Mountain", en_cypress:"Cypress", en_wheat:"Wheat",
+  en_day:"Day", en_night:"Night", en_daytime:"Daytime", en_nighttime:"Nighttime",
+  en_starry_night:"The Starry Night", en_wheat_field:"Wheat Field with Cypresses",
+  en_sunflowers:"Sunflowers", en_bedroom:"The Bedroom", en_self_portrait:"Self Portrait",
+  en_stars:"Stars", en_village:"Village", en_painting:"Painting", en_artist:"Artist",
+  en_netherlands:"The Netherlands", en_france:"France", en_vangogh:"Vincent Van Gogh",
+  en_field:"Field",
 };
 
 /* ============================================================
-   PLAYER DE ÁUDIO
+   AUDIO ENGINE (same pattern as other modules)
    ============================================================ */
-const AUDIO_DIR='audio/', AUDIO_EXT='.mp3';
-const player=new Audio(); player.preload='auto';
-let playToken=0,audioOn=true;
-function stopAudio(){playToken++;try{player.pause();}catch(e){}setPlayingBadge(false);}
+let audioCtx,audioQueue=[],audioPlaying=false;
+function initAudio(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();}
+function unlockAudio(){if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume();}
+function stopAudio(){audioQueue=[];audioPlaying=false;document.querySelectorAll('audio').forEach(a=>{a.pause();a.currentTime=0;});}
 function playKeys(keys){
-  if(!audioOn)return; stopAudio();
-  const list=[].concat(...keys.map(k=>Array.isArray(k)?k:[k])).filter(Boolean);
-  if(!list.length)return;
-  const my=playToken;let i=0;setPlayingBadge(true);
-  const next=()=>{
-    if(my!==playToken)return;
-    if(i>=list.length){setPlayingBadge(false);return;}
-    const key=list[i++];
-    player.src=AUDIO_DIR+key+AUDIO_EXT;
-    player.onended=next;
-    player.onerror=()=>setTimeout(next,10);
-    const p=player.play();if(p&&p.catch)p.catch(()=>setTimeout(next,10));
-  };next();
+  keys=keys.filter(Boolean);if(!keys.length)return;
+  audioQueue.push(...keys);if(!audioPlaying)playNext();
 }
-function setPlayingBadge(on){const b=document.getElementById('qspeak');if(b)b.classList.toggle('playing',on);}
-function unlockAudio(){
-  try{player.muted=true;player.src=AUDIO_DIR+'greet'+AUDIO_EXT;
-  const p=player.play();
-  if(p&&p.then)p.then(()=>{player.pause();player.currentTime=0;player.muted=false;}).catch(()=>{player.muted=false;});
-  else{player.pause();player.muted=false;}}catch(e){player.muted=false;}
+function playNext(){
+  if(!audioQueue.length){audioPlaying=false;return;}
+  audioPlaying=true;const k=audioQueue.shift();
+  const a=new Audio('audio/'+k+'.mp3');
+  a.onended=()=>setTimeout(playNext,150);
+  a.onerror=()=>setTimeout(playNext,50);
+  a.play().catch(()=>setTimeout(playNext,50));
 }
+function sndClick(){try{const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.frequency.value=880;g.gain.value=.08;o.start();o.stop(audioCtx.currentTime+.06);}catch(e){}}
+function sndRight(){try{const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.type='triangle';o.frequency.value=660;g.gain.value=.1;o.start();o.stop(audioCtx.currentTime+.15);}catch(e){}}
+function sndWrong(){try{const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.type='sawtooth';o.frequency.value=180;g.gain.value=.07;o.start();o.stop(audioCtx.currentTime+.2);}catch(e){}}
+function sndWin(){try{[523,659,784,1047].forEach((f,i)=>{const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.type='triangle';o.frequency.value=f;g.gain.value=.08;o.start(audioCtx.currentTime+i*.12);o.stop(audioCtx.currentTime+i*.12+.2);});}catch(e){}}
 
-/* ===== SONS ===== */
-let actx=null;
-function initAudio(){try{actx=actx||new(window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume();}catch(e){}}
-function tone(f,s,d,t='sine',v=.2){if(!actx)return;const o=actx.createOscillator(),g=actx.createGain();o.type=t;o.frequency.value=f;o.connect(g);g.connect(actx.destination);const tt=actx.currentTime+s;g.gain.setValueAtTime(0,tt);g.gain.linearRampToValueAtTime(v,tt+.02);g.gain.exponentialRampToValueAtTime(.001,tt+d);o.start(tt);o.stop(tt+d);}
-function sndClick(){initAudio();tone(540,0,.07,'triangle',.14);}
-function sndRight(){initAudio();[523,659,784,1047].forEach((f,i)=>tone(f,i*.09,.25,'triangle',.18));}
-function sndWrong(){initAudio();tone(300,0,.18,'sine',.13);tone(220,.12,.25,'sine',.13);}
-function sndWin(){initAudio();[523,659,784,1047,784,1047,1319].forEach((f,i)=>tone(f,i*.12,.3,'triangle',.2));}
-
-/* ===== UTILS ===== */
-function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+/* ===== HELPERS ===== */
+const OK_KEYS=['ok1','ok2','ok3','ok4','ok5','ok6'];
+const NO_KEYS=['no1','no2','no3'];
 function pick(a){return a[Math.floor(Math.random()*a.length)];}
-function pickN(a,n,ex){return shuffle(a.filter(x=>!ex||ex.indexOf(x)<0)).slice(0,n);}
-const OK_KEYS=['ok1','ok2','ok3','ok4','ok5','ok6'],NO_KEYS=['no1','no2','no3'];
-function updateStars(){const el=document.getElementById('starNum');if(el)el.textContent=stars;localStorage.setItem('vitor_art2_stars',stars);}
-function addStar(n=1){stars+=n;updateStars();}
-
-/* ===== CONFETE ===== */
-const cv=document.getElementById('confetti'),cx=cv.getContext('2d');let confs=[];
-function resizeCv(){cv.width=innerWidth;cv.height=innerHeight;}addEventListener('resize',resizeCv);resizeCv();
-function burst(){const cols=['#ff6b9d','#ffd93d','#6bcB77','#4d96ff','#a06cd5','#ff924c'];for(let i=0;i<70;i++){confs.push({x:innerWidth/2,y:innerHeight/3,vx:(Math.random()-.5)*14,vy:Math.random()*-12-3,c:pick(cols),s:Math.floor(Math.random()*8)+7,r:Math.random()*6,vr:(Math.random()-.5)*.4});}}
-function loopConf(){cx.clearRect(0,0,cv.width,cv.height);confs.forEach(p=>{p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/2,p.s,p.s);cx.restore();});confs=confs.filter(p=>p.y<cv.height+30);requestAnimationFrame(loopConf);}loopConf();
-
-/* ===== SHELL ===== */
-function shell(inner){
-  App.innerHTML=`
-    <div class="topbar">
-      <div class="nav"><a class="back-btn" href="../">Voltar</a><button class="home-btn" onclick="sndClick();goHome()">Menu</button></div>
-      <div class="stars">Estrelas: <span class="num" id="starNum">${stars}</span></div>
-    </div>${inner}`;
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+function pickN(a,n){return shuffle(a).slice(0,n);}
+function shell(h){App.innerHTML=`
+  <div class="topbar">
+    <div class="nav">
+      <a href="../" class="home-btn">Home</a>
+      <button class="back-btn" onclick="sndClick();goHome()">Menu</button>
+    </div>
+    <div class="stars"><span class="num">${stars}</span></div>
+  </div>`+h;
+  window.scrollTo({top:0,behavior:'smooth'});
 }
+function addStar(n){stars+=n;localStorage.setItem('vitor_art_stars',stars);document.querySelectorAll('.num').forEach(e=>e.textContent=stars);}
 
-/* ===== MENU ===== */
+/* confetti */
+const CC=document.getElementById('confetti'),cx=CC.getContext('2d');
+function resizeCC(){CC.width=window.innerWidth;CC.height=window.innerHeight;}
+window.addEventListener('resize',resizeCC);resizeCC();
+function burst(){const ps=[];for(let i=0;i<40;i++)ps.push({x:CC.width/2,y:CC.height/2,vx:(Math.random()-.5)*14,vy:Math.random()*-12-4,r:Math.random()*6+3,c:`hsl(${Math.random()*360},90%,60%)`,life:1});(function ani(){cx.clearRect(0,0,CC.width,CC.height);let alive=false;ps.forEach(p=>{if(p.life<=0)return;alive=true;p.x+=p.vx;p.y+=p.vy;p.vy+=.3;p.life-=.015;cx.globalAlpha=p.life;cx.fillStyle=p.c;cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fill();});cx.globalAlpha=1;if(alive)requestAnimationFrame(ani);else cx.clearRect(0,0,CC.width,CC.height);})();}
+
+/* ============================================================
+   GAMES
+   ============================================================ */
 const GAMES=[
-  {id:'supplies',  svg:'palette',  nome:'Art Supplies',    sub:'Materiais de arte',       cls:'c1'},
-  {id:'studio',    svg:'brush',    nome:'Art Studio',       sub:'O que usar para criar?',  cls:'c2'},
-  {id:'nature',    svg:'tree_shape',nome:'Nature Words',    sub:'Natureza na paisagem',    cls:'c3'},
-  {id:'daynight',  svg:'moon_shape',nome:'Day or Night',    sub:'Observe a cena',          cls:'c4'},
-  {id:'paintings', svg:'canvas',   nome:'Famous Art',       sub:'Descubra a pintura',      cls:'c5'},
-  {id:'detective', svg:'palette',  nome:'Art Detective',    sub:'Leia as pistas',          cls:'c6'},
-  {id:'starry',    svg:'star_shape',nome:'Starry Night',    sub:'Explore a obra',          cls:'c7'},
-  {id:'vangogh',   svg:'self_portrait',nome:'Van Gogh',     sub:'A vida do artista',       cls:'c8'},
+  {id:'supplies',  svg:'palette',  nome:'Art Supplies',    sub:'Name the art materials',       cls:'c1'},
+  {id:'studio',    svg:'brush',    nome:'Art Studio',       sub:'Which supply do you need?',  cls:'c2'},
+  {id:'nature',    svg:'tree_shape',nome:'Nature Words',    sub:'Nature in the landscape',    cls:'c3'},
+  {id:'daynight',  svg:'moon_shape',nome:'Day or Night',    sub:'Observe the scene',          cls:'c4'},
+  {id:'paintings', svg:'canvas',   nome:'Famous Art',       sub:'Identify the painting',      cls:'c5'},
+  {id:'detective', svg:'palette',  nome:'Art Detective',    sub:'Read the clues',          cls:'c6'},
+  {id:'starry',    svg:'star_shape',nome:'Starry Night',    sub:'Explore the masterpiece',          cls:'c7'},
+  {id:'vangogh',   svg:'self_portrait',nome:'Van Gogh',     sub:'The artist\'s life',       cls:'c8'},
 ];
 function goHome(silent){
   stopAudio();
@@ -359,8 +750,8 @@ function goHome(silent){
     <div class="hero">
       <div class="mascote-wrap">${SVG.palette()}</div>
       <h1>Art Fun!</h1>
-      <p>Escolha uma atividade para explorar a arte em inglês</p>
-      <button onclick="testSound()" style="margin-top:8px;background:var(--amarelo);color:#5a4500;border:none;border-radius:18px;padding:9px 18px;font-size:15px;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #d9a800;">Testar som</button>
+      <p>Choose an activity to explore art in English</p>
+      <button onclick="testSound()" style="margin-top:8px;background:var(--amarelo);color:#5a4500;border:none;border-radius:18px;padding:9px 18px;font-size:15px;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #d9a800;">Test sound</button>
     </div>
     <div class="grid">
       ${GAMES.map(g=>`<button class="card ${g.cls}" onclick="sndClick();startGame('${g.id}')">
@@ -368,13 +759,13 @@ function goHome(silent){
         <span class="sub">${g.sub}</span>
       </button>`).join('')}
     </div>
-    <p style="text-align:center;color:#aaa;margin-top:18px;font-size:13px;">Feito com carinho para o Vitor</p>
+    <p style="text-align:center;color:#aaa;margin-top:18px;font-size:13px;">Made with love for Vitor</p>
   `);
   if(!silent)setTimeout(()=>playKeys(['greet']),250);
 }
 function testSound(){initAudio();sndClick();playKeys(['test']);}
 
-/* ===== MOTOR ===== */
+/* ===== GAME ENGINE ===== */
 let current=null,locked=false;
 function startGame(id){
   const rounds=BUILDERS[id]();
@@ -386,14 +777,14 @@ function gameFrame(c,r,bodyHtml){
   shell(`
     <div class="game">
       <h2 class="game-title"><div class="title-icon">${SVG[g.svg]()}</div> ${c.title}</h2>
-      <div class="progress">Pergunta ${c.idx+1} de ${c.rounds.length}</div>
+      <div class="progress">Question ${c.idx+1} of ${c.rounds.length}</div>
       <div class="question">
         <button class="speak-btn" id="qspeak" onclick="sndClick();speakRound()">${SVG.speaker()}</button>
         <span>${r.q}</span>
       </div>
       <div class="stage">${r.stage||''}</div>
       ${bodyHtml}
-      <p class="hint">Toque para responder. Toque no alto-falante para ouvir de novo.</p>
+      <p class="hint">Tap to answer. Tap the speaker to hear again.</p>
       <div class="feedback" id="fb"></div>
     </div>
   `);
@@ -420,13 +811,13 @@ function showNextButton(){
   document.querySelectorAll('.opt').forEach(b=>b.onclick=null);
   const nb=document.createElement('button');nb.className='next-btn';
   const last=current.idx>=current.rounds.length-1;
-  nb.textContent=last?'Terminar!':'Próxima';
+  nb.textContent=last?'Finish!':'Next';
   nb.onclick=()=>{sndClick();locked=false;if(last)winScreen();else{current.idx++;renderRound();}};
   document.querySelector('.game').appendChild(nb);
 }
 function correctFlow(ea){
   locked=true;sndRight();burst();addStar(1);
-  const fb=document.getElementById('fb');if(fb){fb.className='feedback good';fb.textContent='Muito bem! Great!';}
+  const fb=document.getElementById('fb');if(fb){fb.className='feedback good';fb.textContent='Great job!';}
   playKeys(ea.filter(Boolean));showNextButton();
 }
 function answer(btn,opt){
@@ -437,7 +828,7 @@ function answer(btn,opt){
     correctFlow([opt.aud,pick(OK_KEYS),opt.expAud]);
   }else{
     btn.classList.add('no');btn.onclick=null;sndWrong();
-    const fb=document.getElementById('fb');fb.className='feedback bad';fb.textContent='Tenta de novo!';
+    const fb=document.getElementById('fb');fb.className='feedback bad';fb.textContent='Try again!';
     playKeys([opt.aud,pick(NO_KEYS)].filter(Boolean));
   }
 }
@@ -446,69 +837,69 @@ function winScreen(){
   shell(`
     <div class="game win">
       <div class="trophy-wrap">${SVG.trophy()}</div>
-      <h2 class="game-title">Parabéns! Congratulations!</h2>
-      <p style="font-size:20px;">Você ganhou <b>${current.rounds.length}</b> estrelas!</p>
-      <p style="font-size:16px;color:#888;">Você está ficando craque em <b>${current.title}</b>!</p>
-      <button class="next-btn" onclick="sndClick();startGame('${current.id}')">Jogar de novo</button>
+      <h2 class="game-title">Congratulations!</h2>
+      <p style="font-size:20px;">You earned <b>${current.rounds.length}</b> stars!</p>
+      <p style="font-size:16px;color:#888;">You are becoming an expert in <b>${current.title}</b>!</p>
+      <button class="next-btn" onclick="sndClick();startGame('${current.id}')">Play again</button>
       <br>
-      <button class="next-btn" style="background:var(--roxo);box-shadow:0 6px 0 #5c2e90;margin-top:10px;" onclick="sndClick();goHome()">Escolher outro</button>
+      <button class="next-btn" style="background:var(--roxo);box-shadow:0 6px 0 #5c2e90;margin-top:10px;" onclick="sndClick();goHome()">Choose another</button>
     </div>
   `);
   setTimeout(()=>playKeys(['win']),250);
 }
 
 /* ============================================================
-   VOCABULÁRIO
+   VOCABULARY
    ============================================================ */
 const SUPPLIES=[
-  {k:'brush',svg:'brush',en:'BRUSH',cap:'pincel',aud:'en_brush'},
-  {k:'paint',svg:'paint',en:'PAINT',cap:'tinta',aud:'en_paint'},
-  {k:'canvas',svg:'canvas',en:'CANVAS',cap:'tela de pintura',aud:'en_canvas'},
-  {k:'palette',svg:'palette',en:'PALETTE',cap:'paleta de cores',aud:'en_palette'},
-  {k:'pencil',svg:'pencil',en:'PENCIL',cap:'lápis',aud:'en_pencil'},
-  {k:'crayon',svg:'crayon',en:'CRAYON',cap:'giz de cera',aud:'en_crayon'},
-  {k:'scissors',svg:'scissors',en:'SCISSORS',cap:'tesoura',aud:'en_scissors'},
-  {k:'paper',svg:'paper',en:'PAPER',cap:'papel',aud:'en_paper'},
-  {k:'glue',svg:'glue',en:'GLUE',cap:'cola',aud:'en_glue'},
+  {k:'brush',svg:'brush',en:'BRUSH',cap:'paintbrush',aud:'en_brush'},
+  {k:'paint',svg:'paint',en:'PAINT',cap:'paint set',aud:'en_paint'},
+  {k:'canvas',svg:'canvas',en:'CANVAS',cap:'painting surface',aud:'en_canvas'},
+  {k:'palette',svg:'palette',en:'PALETTE',cap:'color mixing board',aud:'en_palette'},
+  {k:'pencil',svg:'pencil',en:'PENCIL',cap:'drawing tool',aud:'en_pencil'},
+  {k:'crayon',svg:'crayon',en:'CRAYON',cap:'wax crayon',aud:'en_crayon'},
+  {k:'scissors',svg:'scissors',en:'SCISSORS',cap:'cutting tool',aud:'en_scissors'},
+  {k:'paper',svg:'paper',en:'PAPER',cap:'drawing sheet',aud:'en_paper'},
+  {k:'glue',svg:'glue',en:'GLUE',cap:'glue stick',aud:'en_glue'},
 ];
 const NATURE=[
-  {k:'star',svg:'star_shape',en:'STAR',cap:'estrela',aud:'en_star'},
-  {k:'moon',svg:'moon_shape',en:'MOON',cap:'lua',aud:'en_moon'},
-  {k:'sun',svg:'sun_shape',en:'SUN',cap:'sol',aud:'en_sun'},
-  {k:'tree',svg:'tree_shape',en:'TREE',cap:'árvore',aud:'en_tree'},
-  {k:'flower',svg:'flower_shape',en:'FLOWER',cap:'flor',aud:'en_flower'},
-  {k:'cloud',svg:'cloud_shape',en:'CLOUD',cap:'nuvem',aud:'en_cloud'},
-  {k:'mountain',svg:'mountain_shape',en:'MOUNTAIN',cap:'montanha',aud:'en_mountain'},
-  {k:'cypress',svg:'cypress_shape',en:'CYPRESS',cap:'cipreste',aud:'en_cypress'},
-  {k:'wheat',svg:'wheat_shape',en:'WHEAT',cap:'trigo',aud:'en_wheat'},
+  {k:'star',svg:'star_shape',en:'STAR',cap:'a bright point in the sky',aud:'en_star'},
+  {k:'moon',svg:'moon_shape',en:'MOON',cap:'lights up the night',aud:'en_moon'},
+  {k:'sun',svg:'sun_shape',en:'SUN',cap:'lights up the day',aud:'en_sun'},
+  {k:'tree',svg:'tree_shape',en:'TREE',cap:'tall plant with branches',aud:'en_tree'},
+  {k:'flower',svg:'flower_shape',en:'FLOWER',cap:'colorful plant',aud:'en_flower'},
+  {k:'cloud',svg:'cloud_shape',en:'CLOUD',cap:'white shape in the sky',aud:'en_cloud'},
+  {k:'mountain',svg:'mountain_shape',en:'MOUNTAIN',cap:'very tall land',aud:'en_mountain'},
+  {k:'cypress',svg:'cypress_shape',en:'CYPRESS',cap:'tall dark tree',aud:'en_cypress'},
+  {k:'wheat',svg:'wheat_shape',en:'WHEAT',cap:'golden grain crop',aud:'en_wheat'},
 ];
 const PAINTINGS=[
-  {k:'starry_night',svg:'starry_night',en:'THE STARRY NIGHT',cap:'A Noite Estrelada',aud:'en_starry_night',artist:'Van Gogh',
-   desc:'Céu noturno cheio de estrelas brilhantes girando, com uma lua crescente, um vilarejo pequeno e um cipreste alto e escuro.'},
-  {k:'wheat_field',svg:'wheat_field',en:'WHEAT FIELD WITH CYPRESSES',cap:'Campo de Trigo com Ciprestes',aud:'en_wheat_field',artist:'Van Gogh',
-   desc:'Um campo dourado de trigo com um cipreste verde escuro alto, céu azul com nuvens brancas, e montanhas ao fundo.'},
-  {k:'sunflowers',svg:'sunflowers',en:'SUNFLOWERS',cap:'Girassóis',aud:'en_sunflowers',artist:'Van Gogh',
-   desc:'Um vaso com vários girassóis amarelos e laranjas. Fundo claro e simples. As flores estão em diferentes fases.'},
-  {k:'bedroom',svg:'bedroom',en:'THE BEDROOM',cap:'O Quarto',aud:'en_bedroom',artist:'Van Gogh',
-   desc:'O quarto de Van Gogh em Arles, na França. Tem uma cama, cadeiras, quadros na parede e uma mesa. Cores fortes e paredes azuis.'},
-  {k:'self_portrait',svg:'self_portrait',en:'SELF PORTRAIT',cap:'Autorretrato',aud:'en_self_portrait',artist:'Van Gogh',
-   desc:'Van Gogh pintou o próprio rosto. Ele tinha barba ruiva, olhos claros e usava chapéu ou terno. Pintou mais de 30 autorretratos.'},
+  {k:'starry_night',svg:'starry_night',en:'THE STARRY NIGHT',cap:'A Noite Estrelada',aud:'en_starry_night',artist:'Van Gogh',year:'1889',
+   desc:'A dark night sky filled with swirling bright stars and a glowing crescent moon. A tall dark cypress tree stands on the left. Below, a small quiet village sleeps under the magical sky.'},
+  {k:'wheat_field',svg:'wheat_field',en:'WHEAT FIELD WITH CYPRESSES',cap:'Campo de Trigo com Ciprestes',aud:'en_wheat_field',artist:'Van Gogh',year:'1889',
+   desc:'A golden wheat field stretches across the painting. A tall, dark green cypress tree rises on the right side. The sky is bright blue with fluffy white clouds. Mountains appear in the distance.'},
+  {k:'sunflowers',svg:'sunflowers',en:'SUNFLOWERS',cap:'Girassois',aud:'en_sunflowers',artist:'Van Gogh',year:'1888',
+   desc:'A simple clay vase holds several large sunflowers. Some flowers are bright yellow, others are orange or brown. Some petals are starting to droop. The background is a warm, light color.'},
+  {k:'bedroom',svg:'bedroom',en:'THE BEDROOM',cap:'O Quarto',aud:'en_bedroom',artist:'Van Gogh',year:'1888',
+   desc:'Van Gogh\'s bedroom in the city of Arles, France. A red bed with white pillows, two wooden chairs, a small table, and pictures hanging on bright blue walls. A window lets in some light.'},
+  {k:'self_portrait',svg:'self_portrait',en:'SELF PORTRAIT',cap:'Autorretrato',aud:'en_self_portrait',artist:'Van Gogh',year:'1889',
+   desc:'Van Gogh painted his own face. He has a red-orange beard, blue eyes, and wears a dark coat with a hat. The background shows swirling blue patterns. He painted more than 30 self portraits.'},
 ];
 
 /* ============================================================
-   BUILDERS — Atividades com raciocínio
+   BUILDERS — Activities with reasoning
    ============================================================ */
 const BUILDERS={};
 
-/* 1. ART SUPPLIES — Identifique o material pela ilustração */
+/* 1. ART SUPPLIES — Identify the supply by its detailed illustration */
 BUILDERS.supplies=()=>{
   const items=shuffle(SUPPLIES).slice(0,6);
   return items.map(it=>{
     const wrongs=pickN(SUPPLIES.filter(x=>x.k!==it.k),3);
     return {
-      q:'Olhe a ilustração. Qual é o nome deste material de arte em inglês?',
+      q:'Look at this art supply. What is it called in English?',
       audio:['q_supply_name'],
-      stage:svgStage(it.svg,180)+`<div class="label-txt">${it.cap}</div>`,
+      stage:svgStage(it.svg,160)+`<div class="label-txt">${it.cap}</div>`,
       options:[
         {label:`<b>${it.en}</b>`,aud:it.aud,correct:true},
         ...wrongs.map(w=>({label:`<b>${w.en}</b>`,aud:w.aud}))
@@ -517,22 +908,22 @@ BUILDERS.supplies=()=>{
   });
 };
 
-/* 2. ART STUDIO — Que material usar? (requer raciocínio) */
+/* 2. ART STUDIO — Think about which supply you need (reasoning!) */
 BUILDERS.studio=()=>{
   const tasks=[
-    {q:'O artista quer fazer um desenho no papel. Qual material ele precisa?',audio:['use_draw'],correct:'pencil',wrongs:['scissors','glue','paint']},
-    {q:'O artista quer pintar um quadro com cores numa tela. O que ele precisa?',audio:['use_paint'],correct:'brush',wrongs:['scissors','pencil','paper']},
-    {q:'O artista precisa recortar figuras de papel. O que ele usa?',audio:['use_cut'],correct:'scissors',wrongs:['brush','crayon','palette']},
-    {q:'O artista quer colar pedaços de papel numa colagem. O que ele precisa?',audio:['use_glue'],correct:'glue',wrongs:['pencil','scissors','canvas']},
-    {q:'O artista vai misturar várias cores de tinta. Onde ele faz isso?',audio:['use_mix'],correct:'palette',wrongs:['paper','glue','scissors']},
-    {q:'O artista quer colorir o desenho com cores vivas. Qual material usar?',audio:['q_supply_use'],correct:'crayon',wrongs:['scissors','glue','canvas']},
+    {q:'The artist wants to <b>draw a picture</b> on paper. Which supply does he need?',audio:['use_draw'],correct:'pencil',wrongs:['scissors','glue','paint']},
+    {q:'The artist wants to <b>paint a picture</b> with colors on a canvas. What does she need?',audio:['use_paint'],correct:'brush',wrongs:['scissors','pencil','paper']},
+    {q:'The artist needs to <b>cut out shapes</b> from paper. What tool does he use?',audio:['use_cut'],correct:'scissors',wrongs:['brush','crayon','palette']},
+    {q:'The artist wants to <b>stick pieces of paper</b> together for a collage. What does she need?',audio:['use_glue'],correct:'glue',wrongs:['pencil','scissors','canvas']},
+    {q:'The artist will <b>mix different colors</b> of paint together. Where does he do that?',audio:['use_mix'],correct:'palette',wrongs:['paper','glue','scissors']},
+    {q:'The artist wants to <b>color a drawing</b> with bright, waxy colors. Which supply?',audio:['use_color'],correct:'crayon',wrongs:['scissors','glue','canvas']},
   ];
   return shuffle(tasks).slice(0,6).map(t=>{
     const c=SUPPLIES.find(s=>s.k===t.correct);
     const ws=t.wrongs.map(w=>SUPPLIES.find(s=>s.k===w));
     return {
       q:t.q,audio:t.audio,
-      stage:`<div class="desc-txt" style="font-size:18px;color:var(--deep);">Pense: qual material de arte resolve isso?</div>`,
+      stage:`<div class="clue-box">Think carefully: which art supply solves this problem?</div>`,
       options:[
         {label:`<b>${c.en}</b><br><span class="opt-label">${c.cap}</span>`,svg:c.svg,aud:c.aud,correct:true},
         ...ws.map(w=>({label:`<b>${w.en}</b><br><span class="opt-label">${w.cap}</span>`,svg:w.svg,aud:w.aud}))
@@ -541,13 +932,13 @@ BUILDERS.studio=()=>{
   });
 };
 
-/* 3. NATURE WORDS — Elementos da natureza nas paisagens */
+/* 3. NATURE WORDS — identify nature elements */
 BUILDERS.nature=()=>{
   const items=shuffle(NATURE).slice(0,6);
   return items.map(it=>{
     const wrongs=pickN(NATURE.filter(x=>x.k!==it.k),3);
     return {
-      q:'Olhe a ilustração. Como se chama este elemento da natureza em inglês?',
+      q:'Look at this element of nature. What is it called in English?',
       audio:['q_nature_word'],
       stage:svgStage(it.svg,140)+`<div class="label-txt">${it.cap}</div>`,
       options:[
@@ -558,20 +949,20 @@ BUILDERS.nature=()=>{
   });
 };
 
-/* 4. DAY OR NIGHT — Cenas com raciocínio (elementos visuais) */
+/* 4. DAY OR NIGHT — observe visual clues and reason */
 BUILDERS.daynight=()=>{
   const rounds=[
-    {q:'Olhe esta cena. O sol está brilhando no céu. É dia ou noite?',
-     stage:svgStage('scene_day',260),correct:'DAY',wrong:'NIGHT',caud:'en_day',waud:'en_night'},
-    {q:'Olhe esta cena. Tem estrelas e lua no céu. É dia ou noite?',
-     stage:svgStage('scene_night',260),correct:'NIGHT',wrong:'DAY',caud:'en_night',waud:'en_day'},
-    {q:'Na pintura The Starry Night, Van Gogh pintou estrelas girando no céu. É uma cena de dia ou de noite?',
-     stage:svgStage('starry_night',260),correct:'NIGHT',wrong:'DAY',caud:'en_night',waud:'en_day'},
-    {q:'Na pintura Wheat Field, o céu está azul claro com nuvens brancas e sol. É dia ou noite?',
-     stage:svgStage('wheat_field',260),correct:'DAY',wrong:'NIGHT',caud:'en_day',waud:'en_night'},
-    {q:'Se você vê a lua e as estrelas no céu, em inglês dizemos que é...',
+    {q:'Look at this scene. The sun is shining brightly in a blue sky with clouds. Is it day or night?',
+     stage:svgStage('scene_day',280),correct:'DAY',wrong:'NIGHT',caud:'en_day',waud:'en_night'},
+    {q:'Look at this scene. Stars are twinkling and a crescent moon glows. The houses have lit windows. Is it day or night?',
+     stage:svgStage('scene_night',280),correct:'NIGHT',wrong:'DAY',caud:'en_night',waud:'en_day'},
+    {q:'In <i>The Starry Night</i>, Van Gogh painted swirling stars in a dark sky. Is this painting showing day or night?',
+     stage:svgStage('starry_night',280),correct:'NIGHT',wrong:'DAY',caud:'en_night',waud:'en_day'},
+    {q:'In <i>Wheat Field with Cypresses</i>, the sky is bright blue with white clouds and sunshine. Is it day or night?',
+     stage:svgStage('wheat_field',280),correct:'DAY',wrong:'NIGHT',caud:'en_day',waud:'en_night'},
+    {q:'When you see the moon and stars in the sky, in English we say it is...',
      stage:svgStage('moon_shape',120),correct:'NIGHTTIME',wrong:'DAYTIME',caud:'en_nighttime',waud:'en_daytime'},
-    {q:'Se o sol está alto e o céu está claro, em inglês dizemos que é...',
+    {q:'When the sun is high and the sky is bright and clear, in English we say it is...',
      stage:svgStage('sun_shape',120),correct:'DAYTIME',wrong:'NIGHTTIME',caud:'en_daytime',waud:'en_nighttime'},
   ];
   return shuffle(rounds).slice(0,6).map(r=>({
@@ -583,113 +974,114 @@ BUILDERS.daynight=()=>{
   }));
 };
 
-/* 5. FAMOUS ART — Identificar pinturas pela ilustração */
+/* 5. FAMOUS ART — read the description, identify the painting */
 BUILDERS.paintings=()=>{
   const items=shuffle(PAINTINGS).slice(0,5);
   return items.map(it=>{
     const wrongs=pickN(PAINTINGS.filter(x=>x.k!==it.k),3);
     return {
-      q:'Olhe bem esta pintura. Qual é o nome dela em inglês?',
+      q:'Look at this painting carefully. Read the description. What is its name?',
       audio:['q_painting_id'],
-      stage:svgStage(it.svg,280)+`<div class="desc-txt">${it.desc}</div>`,
+      stage:svgStage(it.svg,300)+`<div class="desc-txt">${it.desc}</div>`,
       options:[
-        {label:`<b>${it.en}</b><br><span class="opt-label">${it.cap}</span>`,aud:it.aud,correct:true},
-        ...wrongs.map(w=>({label:`<b>${w.en}</b><br><span class="opt-label">${w.cap}</span>`,aud:w.aud}))
+        {label:`<b>${it.en}</b>`,aud:it.aud,correct:true},
+        ...wrongs.map(w=>({label:`<b>${w.en}</b>`,aud:w.aud}))
       ]
     };
   });
 };
 
-/* 6. ART DETECTIVE — Leia as pistas e descubra (raciocínio!) */
+/* 6. ART DETECTIVE — read clues WITHOUT seeing the image, then deduce */
 BUILDERS.detective=()=>{
   const clues=[
-    {q:'Pista: Esta pintura mostra um céu escuro cheio de estrelas que parecem girar. Tem um cipreste alto no canto e um vilarejo pequeno embaixo. Qual é a obra?',
+    {q:`This painting shows a <b>dark sky full of stars</b> that seem to be swirling and moving. There is a <b>tall, dark cypress tree</b> on the left side, and a <b>small sleeping village</b> at the bottom. A <b>bright crescent moon</b> shines in the corner. Which painting is this?`,
      correct:'starry_night',wrongs:['wheat_field','sunflowers','bedroom']},
-    {q:'Pista: Nesta pintura, vemos um campo amarelo dourado de trigo. À direita tem uma árvore escura e alta chamada cipreste. O céu é azul com nuvens. Qual é a obra?',
+    {q:`In this painting, you see a <b>golden wheat field</b> stretching across the bottom. On the right side stands a <b>tall, dark green tree</b> called a cypress. The sky above is <b>bright blue with fluffy white clouds</b>. Mountains can be seen far away. Which painting is this?`,
      correct:'wheat_field',wrongs:['starry_night','sunflowers','self_portrait']},
-    {q:'Pista: Um vaso com flores amarelas grandes, cada uma com um centro escuro. Algumas flores estão murchas. É uma pintura simples mas muito famosa. Qual é?',
+    {q:`A simple <b>clay vase</b> sits on a table. Inside the vase are several <b>big yellow flowers</b> with dark brown centers. Some flowers look fresh, but others are starting to <b>droop and turn brown</b>. The background is a warm, plain color. Which painting is this?`,
      correct:'sunflowers',wrongs:['starry_night','bedroom','wheat_field']},
-    {q:'Pista: Esta pintura mostra um quarto com cama, cadeiras e quadros na parede. As paredes são azuis. É o lugar onde o artista dormia. Qual é?',
+    {q:`This painting shows a <b>small room</b> with a <b>red bed</b> and white pillows. There are <b>two wooden chairs</b>, a little table, and pictures on the wall. The <b>walls are blue</b>. It is the room where the artist <b>slept</b> when he lived in Arles, France. Which painting is this?`,
      correct:'bedroom',wrongs:['self_portrait','sunflowers','starry_night']},
-    {q:'Pista: O artista pintou o próprio rosto! Ele tem barba ruiva e olhos claros. Pintou mais de 30 quadros assim. Qual é?',
+    {q:`The artist painted <b>his own face</b>! He has a <b>red-orange beard</b> and <b>blue eyes</b>. He wears a dark coat and a hat. The background has <b>swirling blue patterns</b>. He painted more than 30 pictures like this. Which painting is this?`,
      correct:'self_portrait',wrongs:['bedroom','sunflowers','wheat_field']},
   ];
   return shuffle(clues).slice(0,5).map(c=>{
     const right=PAINTINGS.find(p=>p.k===c.correct);
     const ws=c.wrongs.map(w=>PAINTINGS.find(p=>p.k===w));
     return {
-      q:'Leia as pistas com atenção e descubra qual pintura é esta!',
+      q:'Read the clues carefully. Which painting is being described?',
       audio:['q_painting_describe'],
-      stage:`<div class="desc-txt" style="font-size:17px;line-height:1.5;">${c.q}</div>`,
+      stage:`<div class="clue-box">${c.q}</div>`,
       options:[
-        {label:`<b>${right.en}</b><br><span class="opt-label">${right.cap}</span>`,aud:right.aud,correct:true},
-        ...ws.map(w=>({label:`<b>${w.en}</b><br><span class="opt-label">${w.cap}</span>`,aud:w.aud}))
+        {label:`<b>${right.en}</b>`,aud:right.aud,correct:true},
+        ...ws.map(w=>({label:`<b>${w.en}</b>`,aud:w.aud}))
       ]
     };
   });
 };
 
-/* 7. STARRY NIGHT — Explore os detalhes da obra */
+/* 7. STARRY NIGHT — deep exploration of the painting */
 BUILDERS.starry=()=>{
   const qs=[
-    {q:'No quadro The Starry Night, o que brilha no céu?',
-     correct:{label:'<b>STARS</b><br>Estrelas',aud:'en_stars'},
-     wrongs:[{label:'<b>SUN</b><br>Sol',aud:'en_sun'},{label:'<b>CLOUDS</b><br>Nuvens',aud:'en_cloud'},{label:'<b>FLOWERS</b><br>Flores',aud:'en_flower'}]},
-    {q:'The Starry Night mostra uma árvore alta e escura no canto. Que árvore é essa em inglês?',
-     correct:{label:'<b>CYPRESS</b><br>Cipreste',aud:'en_cypress'},
-     wrongs:[{label:'<b>WHEAT</b><br>Trigo',aud:'en_wheat'},{label:'<b>FLOWER</b><br>Flor',aud:'en_flower'},{label:'<b>MOUNTAIN</b><br>Montanha',aud:'en_mountain'}]},
-    {q:'No canto do quadro The Starry Night, além das estrelas, tem um astro crescente. Qual é ele em inglês?',
-     correct:{label:'<b>MOON</b><br>Lua',aud:'en_moon'},
-     wrongs:[{label:'<b>SUN</b><br>Sol',aud:'en_sun'},{label:'<b>STAR</b><br>Estrela',aud:'en_star'},{label:'<b>CLOUD</b><br>Nuvem',aud:'en_cloud'}]},
-    {q:'Embaixo das estrelas, tem um grupo de casinhas na paisagem. Em inglês isso é um...',
-     correct:{label:'<b>VILLAGE</b><br>Vilarejo',aud:'en_star'},
-     wrongs:[{label:'<b>FIELD</b><br>Campo',aud:'en_field'},{label:'<b>MOUNTAIN</b><br>Montanha',aud:'en_mountain'},{label:'<b>TREE</b><br>Árvore',aud:'en_tree'}]},
-    {q:'The Starry Night é uma pintura. Como dizemos "pintura" em inglês?',
-     correct:{label:'<b>PAINTING</b><br>Pintura',aud:'en_painting'},
-     wrongs:[{label:'<b>PAPER</b><br>Papel',aud:'en_paper'},{label:'<b>PENCIL</b><br>Lápis',aud:'en_pencil'},{label:'<b>BRUSH</b><br>Pincel',aud:'en_brush'}]},
-    {q:'Quem é o artista que pintou The Starry Night?',
+    {q:'In <i>The Starry Night</i>, what shines brightly in the dark sky?',
+     correct:{label:'<b>STARS</b><br>bright points of light',aud:'en_stars'},
+     wrongs:[{label:'<b>SUN</b><br>gives us daylight',aud:'en_sun'},{label:'<b>CLOUDS</b><br>white shapes in sky',aud:'en_cloud'},{label:'<b>FLOWERS</b><br>colorful plants',aud:'en_flower'}]},
+    {q:'There is a tall, dark tree on the left side of <i>The Starry Night</i>. What kind of tree is it?',
+     correct:{label:'<b>CYPRESS</b><br>tall evergreen tree',aud:'en_cypress'},
+     wrongs:[{label:'<b>WHEAT</b><br>golden grain',aud:'en_wheat'},{label:'<b>FLOWER</b><br>colorful plant',aud:'en_flower'},{label:'<b>MOUNTAIN</b><br>very tall land',aud:'en_mountain'}]},
+    {q:'Besides the stars, there is a glowing <b>crescent shape</b> in the sky. What is it?',
+     correct:{label:'<b>MOON</b><br>lights up the night',aud:'en_moon'},
+     wrongs:[{label:'<b>SUN</b><br>lights up the day',aud:'en_sun'},{label:'<b>STAR</b><br>twinkles at night',aud:'en_star'},{label:'<b>CLOUD</b><br>white and fluffy',aud:'en_cloud'}]},
+    {q:'Below the swirling sky, there is a group of small houses. In English, a small group of houses is called a...',
+     correct:{label:'<b>VILLAGE</b><br>small group of houses',aud:'en_village'},
+     wrongs:[{label:'<b>FIELD</b><br>open area of land',aud:'en_field'},{label:'<b>MOUNTAIN</b><br>very tall land',aud:'en_mountain'},{label:'<b>TREE</b><br>tall plant',aud:'en_tree'}]},
+    {q:'<i>The Starry Night</i> is a famous painting. What do we call a picture made with paint?',
+     correct:{label:'<b>PAINTING</b><br>art made with paint',aud:'en_painting'},
+     wrongs:[{label:'<b>PAPER</b><br>writing surface',aud:'en_paper'},{label:'<b>PENCIL</b><br>drawing tool',aud:'en_pencil'},{label:'<b>BRUSH</b><br>painting tool',aud:'en_brush'}]},
+    {q:'Who is the famous artist who painted <i>The Starry Night</i> in 1889?',
      correct:{label:'<b>VINCENT VAN GOGH</b>',aud:'en_vangogh'},
      wrongs:[{label:'<b>PABLO PICASSO</b>',aud:null},{label:'<b>LEONARDO DA VINCI</b>',aud:null},{label:'<b>CLAUDE MONET</b>',aud:null}]},
   ];
   return shuffle(qs).slice(0,6).map(q=>({
     q:q.q,audio:['q_starry_detail'],
-    stage:svgStage('starry_night',260),
+    stage:svgStage('starry_night',300),
     options:[{...q.correct,correct:true},...q.wrongs]
   }));
 };
 
-/* 8. VAN GOGH — Fatos sobre o artista (raciocínio + leitura) */
+/* 8. VAN GOGH — facts about the artist that require reading and thinking */
 BUILDERS.vangogh=()=>{
   const facts=[
-    {q:'Vincent Van Gogh nasceu na Holanda. Como dizemos "Holanda" em inglês?',
-     correct:{label:'<b>THE NETHERLANDS</b><br>Holanda',aud:'en_netherlands'},
-     wrongs:[{label:'<b>FRANCE</b><br>França',aud:'en_france'},{label:'<b>BRAZIL</b><br>Brasil',aud:null},{label:'<b>ENGLAND</b><br>Inglaterra',aud:null}]},
-    {q:'Van Gogh viveu na cidade de Arles. Em qual país fica Arles?',
-     correct:{label:'<b>FRANCE</b><br>França',aud:'en_france'},
-     wrongs:[{label:'<b>THE NETHERLANDS</b><br>Holanda',aud:'en_netherlands'},{label:'<b>BRAZIL</b><br>Brasil',aud:null},{label:'<b>ITALY</b><br>Itália',aud:null}]},
-    {q:'Van Gogh pintou muitos quadros do próprio rosto. Em inglês isso é chamado de...',
-     correct:{label:'<b>SELF PORTRAIT</b><br>Autorretrato',aud:'en_self_portrait'},
-     wrongs:[{label:'<b>LANDSCAPE</b><br>Paisagem',aud:null},{label:'<b>SUNFLOWERS</b><br>Girassóis',aud:'en_sunflowers'},{label:'<b>THE BEDROOM</b><br>O Quarto',aud:'en_bedroom'}]},
-    {q:'Van Gogh adorava pintar girassóis. Como se diz "girassóis" em inglês?',
-     stage:svgStage('sunflowers',240),
+    {q:'Vincent Van Gogh was born in a country in Europe. In English, that country is called...',
+     correct:{label:'<b>THE NETHERLANDS</b><br>Holland',aud:'en_netherlands'},
+     wrongs:[{label:'<b>FRANCE</b>',aud:'en_france'},{label:'<b>BRAZIL</b>',aud:null},{label:'<b>ENGLAND</b>',aud:null}]},
+    {q:'Van Gogh moved to the city of Arles to paint. Arles is in which country?',
+     correct:{label:'<b>FRANCE</b>',aud:'en_france'},
+     wrongs:[{label:'<b>THE NETHERLANDS</b>',aud:'en_netherlands'},{label:'<b>BRAZIL</b>',aud:null},{label:'<b>ITALY</b>',aud:null}]},
+    {q:'Van Gogh painted pictures of <b>his own face</b> many times. In English, a painting of your own face is called a...',
+     correct:{label:'<b>SELF PORTRAIT</b>',aud:'en_self_portrait'},
+     wrongs:[{label:'<b>LANDSCAPE</b><br>painting of nature',aud:null},{label:'<b>SUNFLOWERS</b>',aud:'en_sunflowers'},{label:'<b>THE BEDROOM</b>',aud:'en_bedroom'}]},
+    {q:'Van Gogh loved painting these big, bright, yellow flowers. What are they called in English?',
+     stage:svgStage('sunflowers',260),
      correct:{label:'<b>SUNFLOWERS</b>',aud:'en_sunflowers'},
-     wrongs:[{label:'<b>ROSES</b><br>Rosas',aud:null},{label:'<b>STARS</b><br>Estrelas',aud:'en_stars'},{label:'<b>TREES</b><br>Árvores',aud:'en_tree'}]},
-    {q:'Van Gogh usava cores muito fortes e vivas nos seus quadros. Como se diz "artista" em inglês?',
-     correct:{label:'<b>ARTIST</b><br>Artista',aud:'en_artist'},
-     wrongs:[{label:'<b>PAINTING</b><br>Pintura',aud:'en_painting'},{label:'<b>BRUSH</b><br>Pincel',aud:'en_brush'},{label:'<b>CANVAS</b><br>Tela',aud:'en_canvas'}]},
-    {q:'Van Gogh pintou o quarto onde ele dormia em Arles. Qual é o nome dessa obra?',
-     stage:svgStage('bedroom',240),
-     correct:{label:'<b>THE BEDROOM</b><br>O Quarto',aud:'en_bedroom'},
-     wrongs:[{label:'<b>THE STARRY NIGHT</b><br>Noite Estrelada',aud:'en_starry_night'},{label:'<b>SUNFLOWERS</b><br>Girassóis',aud:'en_sunflowers'},{label:'<b>SELF PORTRAIT</b><br>Autorretrato',aud:'en_self_portrait'}]},
+     wrongs:[{label:'<b>ROSES</b>',aud:null},{label:'<b>STARS</b>',aud:'en_stars'},{label:'<b>TREES</b>',aud:'en_tree'}]},
+    {q:'Van Gogh used very bold, bright colors in his paintings. A person who creates art is called an...',
+     correct:{label:'<b>ARTIST</b>',aud:'en_artist'},
+     wrongs:[{label:'<b>PAINTING</b>',aud:'en_painting'},{label:'<b>BRUSH</b>',aud:'en_brush'},{label:'<b>CANVAS</b>',aud:'en_canvas'}]},
+    {q:'Van Gogh painted the room where he slept in Arles. What is the name of this famous painting?',
+     stage:svgStage('bedroom',260),
+     correct:{label:'<b>THE BEDROOM</b>',aud:'en_bedroom'},
+     wrongs:[{label:'<b>THE STARRY NIGHT</b>',aud:'en_starry_night'},{label:'<b>SUNFLOWERS</b>',aud:'en_sunflowers'},{label:'<b>SELF PORTRAIT</b>',aud:'en_self_portrait'}]},
   ];
   return shuffle(facts).slice(0,6).map(f=>({
     q:f.q,audio:['q_vangogh_fact'],
-    stage:f.stage||svgStage('self_portrait',200),
+    stage:f.stage||svgStage('self_portrait',220),
     options:[{...f.correct,correct:true},...f.wrongs]
   }));
 };
 
 /* ===== SPLASH ===== */
+document.getElementById('splashIcon').innerHTML=SVG.palette();
 document.getElementById('startBtn').onclick=()=>{
   initAudio();unlockAudio();
   document.getElementById('splash').style.display='none';
