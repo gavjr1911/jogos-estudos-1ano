@@ -3,153 +3,161 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>🎨 Art Fun! — Arte em Inglês 🎨</title>
+<title>Art Fun! — Arte em Inglês</title>
 <style>
   :root{
-    --rosa:#ff6b9d; --roxo:#a06cd5; --azul:#4d96ff; --verde:#6bcB77;
+    --rosa:#ff6b9d; --roxo:#7c49b0; --azul:#4d96ff; --verde:#6bcB77;
     --amarelo:#ffd93d; --laranja:#ff924c; --vermelho:#ff5e5e; --ceu:#b8e3ff;
+    --deep:#2a1052; --gold:#e8a838; --night:#1a1a4e;
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
   html,body{margin:0; padding:0; height:100%;}
   body{
-    font-family:'Comic Sans MS','Baloo',"Trebuchet MS",sans-serif;
+    font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;
     background:linear-gradient(160deg,#e8d5f5 0%,#fce4ec 50%,#fff3e0 100%);
     color:#3a3a55; overflow-x:hidden; user-select:none;
     min-height:100%; touch-action:manipulation;
   }
   #app{max-width:760px; margin:0 auto; padding:14px; min-height:100vh;}
 
+  /* ===== TOPBAR ===== */
   .topbar{
     display:flex; align-items:center; justify-content:space-between;
     background:#fff; border-radius:22px; padding:8px 14px; margin-bottom:14px;
     box-shadow:0 6px 0 rgba(0,0,0,.08);
   }
-  .topbar .home-btn{
-    background:var(--azul); color:#fff; border:none; border-radius:16px;
-    font-size:22px; padding:8px 14px; font-weight:bold; cursor:pointer; box-shadow:0 4px 0 #2f6fd0;
-  }
-  .topbar .home-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #2f6fd0;}
   .topbar .nav{display:flex; align-items:center; gap:8px;}
-  .topbar .back-btn{
-    background:var(--roxo); color:#fff; border:none; border-radius:16px;
-    font-size:22px; padding:8px 14px; font-weight:bold; cursor:pointer;
-    box-shadow:0 4px 0 #7d49b0; text-decoration:none; display:inline-block; line-height:1;
+  .topbar .back-btn,.topbar .home-btn{
+    color:#fff; border:none; border-radius:16px;
+    font-size:18px; padding:8px 14px; font-weight:bold; cursor:pointer;
+    text-decoration:none; display:inline-flex; align-items:center; gap:4px;
   }
-  .topbar .back-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #7d49b0;}
-  .stars{font-size:24px; font-weight:bold; color:var(--laranja); display:flex; align-items:center; gap:6px;}
+  .topbar .back-btn{background:var(--roxo); box-shadow:0 4px 0 #5c2e90;}
+  .topbar .home-btn{background:var(--azul); box-shadow:0 4px 0 #2f6fd0;}
+  .topbar .back-btn:active,.topbar .home-btn:active{transform:translateY(3px); box-shadow:none;}
+  .stars{font-size:20px; font-weight:bold; color:var(--laranja); display:flex; align-items:center; gap:6px;}
   .stars .num{background:var(--amarelo); border-radius:14px; padding:2px 12px; box-shadow:0 3px 0 #d9a800;}
 
+  /* ===== HERO ===== */
   .hero{
     text-align:center; background:#fff; border-radius:30px; padding:22px 18px;
     box-shadow:0 8px 0 rgba(0,0,0,.08); margin-bottom:18px;
   }
-  .hero h1{font-size:32px; margin:6px 0; color:var(--roxo); line-height:1.2;}
-  .hero p{font-size:18px; margin:4px 0; color:#666;}
-  .mascote{font-size:78px; display:inline-block; animation:flutua 2.5s ease-in-out infinite;}
-  @keyframes flutua{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-14px) rotate(3deg);}}
+  .hero h1{font-size:30px; margin:6px 0; color:var(--roxo); line-height:1.2;}
+  .hero p{font-size:17px; margin:4px 0; color:#666;}
 
+  /* ===== MASCOTE SVG ===== */
+  .mascote-wrap{width:120px; height:120px; margin:0 auto 8px; animation:flutua 2.5s ease-in-out infinite;}
+  @keyframes flutua{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-12px) rotate(2deg);}}
+
+  /* ===== GRID DE JOGOS ===== */
   .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
   .card{
-    border:none; border-radius:26px; padding:16px 10px; cursor:pointer;
-    color:#fff; font-size:19px; font-weight:bold; text-align:center;
-    box-shadow:0 7px 0 rgba(0,0,0,.18); transition:transform .08s;
-    display:flex; flex-direction:column; align-items:center; gap:6px; line-height:1.15;
+    border:none; border-radius:22px; padding:14px 10px; cursor:pointer;
+    color:#fff; font-size:17px; font-weight:bold; text-align:center;
+    box-shadow:0 6px 0 rgba(0,0,0,.18); transition:transform .08s;
+    display:flex; flex-direction:column; align-items:center; gap:8px; line-height:1.15;
   }
-  .card:active{transform:translateY(4px); box-shadow:0 3px 0 rgba(0,0,0,.18);}
-  .card .ico{font-size:46px;}
-  .c1{background:var(--rosa);} .c2{background:var(--azul);} .c3{background:var(--verde);}
-  .c4{background:var(--laranja);} .c5{background:var(--roxo);} .c6{background:var(--vermelho);}
-  .c7{background:#19c3b1;} .c8{background:#f76eb0;} .c9{background:#7c83ff;}
+  .card:active{transform:translateY(4px); box-shadow:0 2px 0 rgba(0,0,0,.18);}
+  .card .card-icon{width:64px; height:64px;}
+  .card .sub{font-size:12px; font-weight:normal; opacity:.9;}
+  .c1{background:linear-gradient(135deg,#e84393,#fd79a8);} .c2{background:linear-gradient(135deg,#0984e3,#74b9ff);}
+  .c3{background:linear-gradient(135deg,#00b894,#55efc4);} .c4{background:linear-gradient(135deg,#2d3436,#636e72);}
+  .c5{background:linear-gradient(135deg,#e17055,#fab1a0);} .c6{background:linear-gradient(135deg,#6c5ce7,#a29bfe);}
+  .c7{background:linear-gradient(135deg,#fdcb6e,#f39c12);} .c8{background:linear-gradient(135deg,#00cec9,#81ecec);}
 
+  /* ===== GAME AREA ===== */
   .game{
     background:#fff; border-radius:30px; padding:18px; box-shadow:0 8px 0 rgba(0,0,0,.08);
     text-align:center;
   }
-  .game-title{font-size:24px; color:var(--roxo); margin:0 0 4px;}
-  .progress{font-size:16px; color:#999; margin-bottom:10px;}
+  .game-title{font-size:22px; color:var(--roxo); margin:0 0 4px; display:flex; align-items:center; justify-content:center; gap:8px;}
+  .game-title .title-icon{width:32px; height:32px;}
+  .progress{font-size:15px; color:#999; margin-bottom:10px;}
   .question{
-    font-size:23px; font-weight:bold; color:#3a3a55; margin:6px 0 14px; line-height:1.3;
+    font-size:20px; font-weight:bold; color:#3a3a55; margin:6px 0 14px; line-height:1.35;
     display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;
   }
   .speak-btn{
-    background:var(--amarelo); border:none; border-radius:50%; width:54px; height:54px;
-    font-size:28px; cursor:pointer; box-shadow:0 4px 0 #d9a800; flex:0 0 auto;
+    background:var(--amarelo); border:none; border-radius:50%; width:48px; height:48px;
+    font-size:24px; cursor:pointer; box-shadow:0 4px 0 #d9a800; flex:0 0 auto;
+    display:flex; align-items:center; justify-content:center;
   }
   .speak-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #d9a800;}
   .speak-btn.playing{animation:pulse .7s infinite;}
-  @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
+  @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.12);}}
 
+  /* ===== STAGE (ilustração principal) ===== */
   .stage{
-    min-height:120px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
-    gap:10px; margin:10px auto 18px; padding:16px;
-    background:linear-gradient(160deg,#f3eaff,#fff0f6); border-radius:22px; border:4px dashed #d9c0ff;
-    flex-direction:column;
+    min-height:140px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+    gap:12px; margin:10px auto 18px; padding:16px;
+    background:linear-gradient(160deg,#f8f4ff,#fff5f8); border-radius:22px; border:3px solid #e8d5f5;
+    flex-direction:column; position:relative; overflow:hidden;
   }
-  .obj{font-size:80px; animation:pop .35s ease; line-height:1;}
-  @keyframes pop{0%{transform:scale(0);}70%{transform:scale(1.25);}100%{transform:scale(1);}}
-  .stage .cardtxt{font-size:22px; font-weight:bold; color:#7c49b0; margin-top:4px; line-height:1.3;}
-  .stage .quote{font-size:30px; font-weight:bold; color:#a06cd5; letter-spacing:.5px; max-width:460px; line-height:1.2;}
-  .stage .row{display:flex; gap:10px; align-items:center; justify-content:center; flex-wrap:wrap; flex-direction:row;}
+  .stage .illust{max-width:280px; width:100%; height:auto;}
+  .stage .illust-sm{max-width:160px; width:100%; height:auto;}
+  .stage .label-txt{font-size:20px; font-weight:bold; color:var(--roxo); margin-top:6px; line-height:1.3;}
+  .stage .desc-txt{font-size:16px; color:#666; margin-top:4px; line-height:1.4; max-width:400px;}
+  .stage .en-word{font-size:32px; font-weight:900; color:var(--deep); letter-spacing:1px; margin:4px 0;}
+  .stage .row{display:flex; gap:14px; align-items:center; justify-content:center; flex-wrap:wrap;}
 
-  .options{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(140px,1fr));}
+  /* ===== OPTIONS ===== */
+  .options{display:grid; gap:12px; grid-template-columns:repeat(2,1fr);}
   .opt{
-    border:none; border-radius:22px; padding:16px 10px; font-size:23px; font-weight:bold;
-    cursor:pointer; background:var(--roxo); color:#fff; box-shadow:0 6px 0 #7c49b0;
-    min-height:84px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
-    word-break:break-word; line-height:1.12;
+    border:none; border-radius:20px; padding:14px 10px; font-size:18px; font-weight:bold;
+    cursor:pointer; background:#f0ecff; color:var(--deep); box-shadow:0 5px 0 #d5c8f0;
+    min-height:70px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    word-break:break-word; line-height:1.15; transition:transform .08s;
   }
-  .opt b{font-size:24px;}
-  .opt .cap{font-size:16px; font-weight:normal; opacity:.95;}
-  .opt-colors .opt{font-size:22px;}
-  .opt:active{transform:translateY(3px); box-shadow:0 3px 0 #7c49b0;}
-  .opt.big{font-size:44px;}
-  .opt.ok{background:var(--verde)!important; box-shadow:0 6px 0 #3f9c4f!important; animation:tada .5s;}
-  .opt.no{background:#cfcfe0!important; box-shadow:0 6px 0 #a0a0c0!important; opacity:.7;}
-  @keyframes tada{0%{transform:scale(1);}30%{transform:scale(1.18) rotate(-4deg);}60%{transform:scale(1.1) rotate(4deg);}100%{transform:scale(1);}}
+  .opt .opt-icon{width:48px; height:48px;}
+  .opt .opt-label{font-size:15px;}
+  .opt:active{transform:translateY(3px); box-shadow:0 2px 0 #d5c8f0;}
+  .opt.ok{background:#d4edda!important; color:#155724!important; box-shadow:0 5px 0 #a3d9a5!important; animation:tada .5s;}
+  .opt.no{background:#e9e9f0!important; color:#888!important; box-shadow:0 5px 0 #ccc!important; opacity:.6;}
+  @keyframes tada{0%{transform:scale(1);}30%{transform:scale(1.12) rotate(-3deg);}60%{transform:scale(1.08) rotate(3deg);}100%{transform:scale(1);}}\
 
-  .opt-colors .opt:nth-child(1){background:var(--rosa); box-shadow:0 6px 0 #d44d7c;}
-  .opt-colors .opt:nth-child(2){background:var(--verde); box-shadow:0 6px 0 #3f9c4f;}
-  .opt-colors .opt:nth-child(3){background:var(--laranja); box-shadow:0 6px 0 #d96d2e;}
-  .opt-colors .opt:nth-child(4){background:var(--roxo); box-shadow:0 6px 0 #7a4db0;}
-
-  .feedback{font-size:26px; font-weight:bold; min-height:40px; margin-top:12px;}
+  .feedback{font-size:22px; font-weight:bold; min-height:36px; margin-top:12px;}
   .feedback.good{color:var(--verde);} .feedback.bad{color:var(--laranja);}
 
   .next-btn{
     margin-top:14px; background:var(--verde); color:#fff; border:none; border-radius:22px;
-    font-size:24px; font-weight:bold; padding:14px 34px; cursor:pointer; box-shadow:0 6px 0 #3f9c4f;
+    font-size:22px; font-weight:bold; padding:14px 34px; cursor:pointer; box-shadow:0 6px 0 #3f9c4f;
   }
   .next-btn:active{transform:translateY(3px); box-shadow:0 3px 0 #3f9c4f;}
 
+  .hint{font-size:14px; color:#aaa; margin-top:8px;}
+
+  /* ===== SPLASH ===== */
   #splash{
-    position:fixed; inset:0; background:linear-gradient(160deg,#7c49b0,#2a1052);
+    position:fixed; inset:0; background:linear-gradient(160deg,var(--roxo),var(--deep));
     display:flex; flex-direction:column; align-items:center; justify-content:center;
     color:#fff; text-align:center; z-index:50; cursor:pointer; padding:20px;
   }
-  #splash h1{font-size:34px; margin:10px;}
-  #splash .big{font-size:100px; animation:flutua 2.5s infinite;}
+  #splash h1{font-size:32px; margin:14px 0 6px;}
+  #splash p{font-size:18px; max-width:340px; line-height:1.4;}
+  #splash .splash-art{width:140px; height:140px; margin-bottom:10px; animation:flutua 2.5s infinite;}
   #splash .play{
     margin-top:24px; background:var(--amarelo); color:#5a4500; border:none; border-radius:30px;
-    font-size:30px; font-weight:bold; padding:18px 44px; box-shadow:0 8px 0 #d9a800; cursor:pointer;
+    font-size:28px; font-weight:bold; padding:16px 40px; box-shadow:0 8px 0 #d9a800; cursor:pointer;
   }
 
   #confetti{position:fixed; inset:0; pointer-events:none; z-index:40;}
   .win{text-align:center; padding:20px;}
-  .win .trophy{font-size:90px; animation:tada 1s;}
+  .win .trophy-wrap{width:100px; height:100px; margin:0 auto 12px; animation:tada 1s;}
 
   @media(max-width:480px){
-    .hero h1{font-size:26px;} .question{font-size:20px;} .card{font-size:17px;}
-    .obj{font-size:66px;} .stage .quote{font-size:24px;}
+    .hero h1{font-size:24px;} .question{font-size:18px;} .card{font-size:15px;}
+    .stage .en-word{font-size:26px;} .opt{font-size:16px; min-height:60px;}
   }
 </style>
 </head>
 <body>
 
 <div id="splash">
-  <div class="big">🎨</div>
-  <h1>Art Fun!<br><span style="font-size:22px;font-weight:normal">Arte em Inglês</span></h1>
-  <p style="font-size:20px;max-width:340px;">Vamos aprender sobre arte em inglês! 🖼️🌟<br>Van Gogh, cores, noite estrelada...</p>
-  <button class="play" id="startBtn">▶ START / COMEÇAR</button>
+  <svg class="splash-art" viewBox="0 0 140 140"><rect rx="20" width="140" height="140" fill="#fff2"/><g transform="translate(20,15)"><rect x="15" y="10" width="70" height="90" rx="4" fill="#f5e6c8" stroke="#c9a96e" stroke-width="2"/><rect x="20" y="15" width="60" height="50" rx="2" fill="#1a1a4e"/><circle cx="35" cy="30" r="6" fill="#ffd93d" opacity=".9"/><circle cx="55" cy="25" r="4" fill="#fff" opacity=".7"/><circle cx="65" cy="35" r="3" fill="#fff" opacity=".5"/><path d="M20 55 Q35 40 50 50 Q65 42 80 55 L80 65 L20 65Z" fill="#2d5016"/><circle cx="72" cy="38" r="5" fill="#ffd93d" opacity=".6"/><rect x="75" y="20" width="4" height="80" rx="2" fill="#8B4513"/><circle cx="77" cy="18" r="8" fill="#e17055"/><circle cx="77" cy="12" r="6" fill="#fab1a0"/></g></svg>
+  <h1>Art Fun!<br><span style="font-size:20px;font-weight:normal">Arte em Inglês</span></h1>
+  <p>Explore o mundo de Van Gogh, descubra obras famosas e aprenda vocabulário de arte em inglês!</p>
+  <button class="play" id="startBtn">COMEÇAR</button>
 </div>
 
 <canvas id="confetti"></canvas>
@@ -157,22 +165,72 @@
 
 <script>
 /* ============================================================
-   ART FUN! — Inglês + Arte, 1º ano (Bernoulli)
-   Módulo 9 do projeto. Mesmo motor dos outros módulos.
-   Conteúdo: Van Gogh, The Starry Night, Wheat Field with
-   Cypresses, vocabulário de arte (brush, paint, canvas…),
-   elementos da natureza em paisagens, cores na arte, dia/noite.
+   ART FUN! v2 — Inglês + Arte, 1º ano (Bernoulli)
+   Módulo 9. Ilustrações SVG inline (sem emojis).
+   Atividades com raciocínio: dedução, composição, comparação.
    ============================================================ */
-
-const App = document.getElementById('app');
-let stars = parseInt(localStorage.getItem('vitor_art_stars')||'0',10);
+const App=document.getElementById('app');
+let stars=parseInt(localStorage.getItem('vitor_art2_stars')||'0',10);
 
 /* ============================================================
-   VOZ EM PORTUGUÊS (chave -> texto falado com voz pt-BR).
+   BANCO DE ILUSTRAÇÕES SVG
+   Cada função retorna uma string SVG inline.
    ============================================================ */
-const VOICE = {
-  /* navegação e feedback */
-  greet:"Olá! Bem-vindo ao Art Fun! Vamos aprender sobre arte em inglês!",
+const SVG={
+  /* Materiais de arte */
+  brush:()=>`<svg viewBox="0 0 100 100"><rect x="42" y="45" width="16" height="48" rx="3" fill="#8B6914"/><path d="M45 10 Q50 5 55 10 L58 45 H42 L45 10Z" fill="#e74c3c"/><path d="M46 12 Q50 8 54 12 L56 40 H44 L46 12Z" fill="#c0392b"/><rect x="40" y="43" width="20" height="6" rx="2" fill="#B8860B"/></svg>`,
+  paint:()=>`<svg viewBox="0 0 100 100"><rect x="20" y="30" width="60" height="50" rx="6" fill="#e0e0e0" stroke="#bbb" stroke-width="2"/><rect x="24" y="25" width="52" height="10" rx="3" fill="#ccc"/><rect x="28" y="38" width="18" height="14" rx="2" fill="#e74c3c"/><rect x="52" y="38" width="18" height="14" rx="2" fill="#3498db"/><rect x="28" y="58" width="18" height="14" rx="2" fill="#f1c40f"/><rect x="52" y="58" width="18" height="14" rx="2" fill="#27ae60"/></svg>`,
+  canvas:()=>`<svg viewBox="0 0 100 100"><rect x="15" y="12" width="70" height="55" rx="2" fill="#f5e6c8" stroke="#c9a96e" stroke-width="2"/><line x1="50" y1="68" x2="30" y2="92" stroke="#8B4513" stroke-width="3" stroke-linecap="round"/><line x1="50" y1="68" x2="70" y2="92" stroke="#8B4513" stroke-width="3" stroke-linecap="round"/><line x1="35" y1="82" x2="65" y2="82" stroke="#8B4513" stroke-width="2.5"/></svg>`,
+  palette:()=>`<svg viewBox="0 0 100 100"><ellipse cx="50" cy="52" rx="38" ry="32" fill="#D2691E"/><ellipse cx="50" cy="50" rx="36" ry="30" fill="#DEB887"/><circle cx="35" cy="40" r="6" fill="#e74c3c"/><circle cx="50" cy="35" r="5" fill="#3498db"/><circle cx="62" cy="42" r="5" fill="#f1c40f"/><circle cx="58" cy="55" r="4" fill="#27ae60"/><circle cx="40" cy="58" r="4" fill="#9b59b6"/><ellipse cx="50" cy="50" rx="8" ry="6" fill="#c9a96e"/></svg>`,
+  pencil:()=>`<svg viewBox="0 0 100 100"><rect x="35" y="15" width="16" height="60" rx="2" fill="#f1c40f"/><polygon points="43,75 35,75 38,90 43,95 48,90 51,75" fill="#f5cba7"/><polygon points="41,90 43,98 45,90" fill="#2c3e50"/><rect x="35" y="15" width="16" height="8" rx="2" fill="#e74c3c"/><line x1="43" y1="23" x2="43" y2="75" stroke="#e67e22" stroke-width="1" opacity=".3"/></svg>`,
+  crayon:()=>`<svg viewBox="0 0 100 100"><rect x="37" y="25" width="14" height="50" rx="4" fill="#e74c3c"/><polygon points="44,25 37,25 40,12 44,8 48,12 51,25" fill="#c0392b"/><rect x="37" y="70" width="14" height="8" rx="2" fill="#2c3e50"/><text x="44" y="55" text-anchor="middle" fill="#fff" font-size="7" font-weight="bold">RED</text></svg>`,
+  scissors:()=>`<svg viewBox="0 0 100 100"><ellipse cx="35" cy="72" rx="10" ry="12" fill="none" stroke="#666" stroke-width="3"/><ellipse cx="65" cy="72" rx="10" ry="12" fill="none" stroke="#666" stroke-width="3"/><line x1="38" y1="62" x2="58" y2="25" stroke="#999" stroke-width="4" stroke-linecap="round"/><line x1="62" y1="62" x2="42" y2="25" stroke="#999" stroke-width="4" stroke-linecap="round"/><circle cx="50" cy="45" r="3" fill="#999"/></svg>`,
+  paper:()=>`<svg viewBox="0 0 100 100"><rect x="22" y="12" width="56" height="72" rx="3" fill="#fff" stroke="#ddd" stroke-width="2"/><line x1="30" y1="28" x2="70" y2="28" stroke="#ccc" stroke-width="1.5"/><line x1="30" y1="38" x2="65" y2="38" stroke="#ccc" stroke-width="1.5"/><line x1="30" y1="48" x2="68" y2="48" stroke="#ccc" stroke-width="1.5"/><line x1="30" y1="58" x2="55" y2="58" stroke="#ccc" stroke-width="1.5"/><polygon points="62,12 78,12 78,28 62,12" fill="#eee" stroke="#ddd" stroke-width="1"/></svg>`,
+  glue:()=>`<svg viewBox="0 0 100 100"><rect x="32" y="35" width="24" height="45" rx="4" fill="#fff" stroke="#f39c12" stroke-width="2"/><rect x="36" y="20" width="16" height="18" rx="3" fill="#f39c12"/><circle cx="44" cy="16" r="4" fill="#f39c12"/><text x="44" y="62" text-anchor="middle" fill="#f39c12" font-size="10" font-weight="bold">GLUE</text></svg>`,
+
+  /* Elementos da natureza */
+  star_shape:()=>`<svg viewBox="0 0 100 100"><polygon points="50,8 61,38 94,38 67,58 78,90 50,70 22,90 33,58 6,38 39,38" fill="#ffd93d" stroke="#e8a838" stroke-width="2"/></svg>`,
+  moon_shape:()=>`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="#ffeaa7"/><circle cx="62" cy="42" r="24" fill="#1a1a4e"/></svg>`,
+  sun_shape:()=>`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="18" fill="#f39c12"/><g stroke="#f39c12" stroke-width="3" stroke-linecap="round"><line x1="50" y1="14" x2="50" y2="24"/><line x1="50" y1="76" x2="50" y2="86"/><line x1="14" y1="50" x2="24" y2="50"/><line x1="76" y1="50" x2="86" y2="50"/><line x1="24" y1="24" x2="31" y2="31"/><line x1="69" y1="69" x2="76" y2="76"/><line x1="76" y1="24" x2="69" y2="31"/><line x1="31" y1="69" x2="24" y2="76"/></g></svg>`,
+  tree_shape:()=>`<svg viewBox="0 0 100 100"><rect x="44" y="60" width="12" height="30" rx="2" fill="#8B4513"/><ellipse cx="50" cy="42" rx="28" ry="30" fill="#27ae60"/><ellipse cx="38" cy="48" rx="18" ry="22" fill="#2ecc71"/><ellipse cx="60" cy="46" rx="16" ry="20" fill="#27ae60"/></svg>`,
+  flower_shape:()=>`<svg viewBox="0 0 100 100"><rect x="47" y="55" width="6" height="35" rx="2" fill="#27ae60"/><ellipse cx="36" cy="64" rx="12" ry="5" fill="#27ae60" transform="rotate(-30,36,64)"/><circle cx="50" cy="42" r="10" fill="#f1c40f"/><circle cx="50" cy="28" r="10" fill="#e74c3c"/><circle cx="62" cy="35" r="10" fill="#e74c3c"/><circle cx="62" cy="49" r="10" fill="#e74c3c"/><circle cx="50" cy="56" r="10" fill="#e74c3c"/><circle cx="38" cy="49" r="10" fill="#e74c3c"/><circle cx="38" cy="35" r="10" fill="#e74c3c"/></svg>`,
+  cloud_shape:()=>`<svg viewBox="0 0 100 100"><ellipse cx="50" cy="55" rx="30" ry="16" fill="#ecf0f1"/><ellipse cx="35" cy="50" rx="20" ry="15" fill="#ecf0f1"/><ellipse cx="62" cy="48" rx="18" ry="14" fill="#ecf0f1"/><ellipse cx="48" cy="42" rx="16" ry="12" fill="#f5f5f5"/></svg>`,
+  mountain_shape:()=>`<svg viewBox="0 0 100 100"><polygon points="10,85 40,25 70,85" fill="#7f8c8d"/><polygon points="40,25 48,40 32,40" fill="#ecf0f1"/><polygon points="35,85 65,35 95,85" fill="#95a5a6"/><polygon points="65,35 72,48 58,48" fill="#ecf0f1"/></svg>`,
+  cypress_shape:()=>`<svg viewBox="0 0 100 100"><rect x="46" y="60" width="8" height="30" rx="2" fill="#5D4037"/><ellipse cx="50" cy="40" rx="12" ry="35" fill="#1B5E20"/><ellipse cx="50" cy="38" rx="9" ry="30" fill="#2E7D32"/></svg>`,
+  wheat_shape:()=>`<svg viewBox="0 0 100 100"><line x1="50" y1="90" x2="50" y2="30" stroke="#8B6914" stroke-width="2"/><ellipse cx="50" cy="28" rx="4" ry="10" fill="#DAA520"/><ellipse cx="44" cy="36" rx="3" ry="8" fill="#DAA520" transform="rotate(-20,44,36)"/><ellipse cx="56" cy="36" rx="3" ry="8" fill="#DAA520" transform="rotate(20,56,36)"/><ellipse cx="42" cy="48" rx="3" ry="7" fill="#DAA520" transform="rotate(-25,42,48)"/><ellipse cx="58" cy="48" rx="3" ry="7" fill="#DAA520" transform="rotate(25,58,48)"/></svg>`,
+
+  /* Pinturas famosas (simplificadas) */
+  starry_night:()=>`<svg viewBox="0 0 200 140" style="border-radius:12px;border:3px solid #c9a96e"><rect width="200" height="140" fill="#1a1a4e"/><circle cx="155" cy="30" r="14" fill="#ffeaa7" opacity=".9"/><circle cx="165" cy="25" r="11" fill="#1a1a4e"/><g fill="#ffd93d" opacity=".8"><circle cx="40" cy="25" r="8"/><circle cx="80" cy="18" r="6"/><circle cx="120" cy="30" r="7"/><circle cx="60" cy="45" r="5"/><circle cx="140" cy="20" r="5"/></g><g fill="none" stroke="#4a90d9" stroke-width="3" opacity=".6"><path d="M10 55 Q50 45 90 58 Q130 70 170 55 Q190 48 200 52"/><path d="M10 70 Q40 62 80 72 Q120 82 160 70 Q185 64 200 68"/></g><ellipse cx="30" cy="100" rx="10" ry="40" fill="#1B5E20"/><polygon points="0,90 60,85 100,95 140,88 200,92 200,140 0,140" fill="#2d5016"/><rect x="55" y="95" width="12" height="20" rx="1" fill="#5D4037"/><rect x="68" y="100" width="10" height="15" rx="1" fill="#4E342E"/><polygon points="55,95 61,85 73,88 78,95" fill="#795548"/></svg>`,
+
+  wheat_field:()=>`<svg viewBox="0 0 200 140" style="border-radius:12px;border:3px solid #c9a96e"><rect width="200" height="140" fill="#87CEEB"/><circle cx="160" cy="25" r="16" fill="#f39c12"/><g fill="#ecf0f1" opacity=".7"><ellipse cx="40" cy="20" rx="20" ry="10"/><ellipse cx="30" cy="18" rx="14" ry="8"/></g><ellipse cx="175" cy="70" rx="12" ry="45" fill="#1B5E20"/><ellipse cx="175" cy="68" rx="9" ry="40" fill="#2E7D32"/><polygon points="0,75 40,70 80,78 120,72 160,76 200,80 200,140 0,140" fill="#DAA520"/><polygon points="0,85 30,80 70,88 110,82 150,86 200,90 200,140 0,140" fill="#B8860B"/><g stroke="#8B6914" stroke-width="1" opacity=".5"><line x1="20" y1="75" x2="20" y2="85"/><line x1="40" y1="72" x2="40" y2="82"/><line x1="60" y1="76" x2="60" y2="86"/><line x1="80" y1="74" x2="80" y2="84"/><line x1="100" y1="73" x2="100" y2="83"/><line x1="120" y1="75" x2="120" y2="85"/><line x1="140" y1="78" x2="140" y2="88"/></g><polygon points="70,60 130,55 200,65 200,80 160,76 120,72 80,78 40,70 0,75 0,65" fill="#27ae60" opacity=".3"/></svg>`,
+
+  sunflowers:()=>`<svg viewBox="0 0 200 140" style="border-radius:12px;border:3px solid #c9a96e"><rect width="200" height="140" fill="#f5e6c8"/><rect x="60" y="50" width="80" height="70" rx="4" fill="#DEB887" stroke="#c9a96e" stroke-width="2"/><g transform="translate(85,80)"><circle r="8" fill="#8B4513"/><g fill="#f1c40f"><ellipse cx="0" cy="-14" rx="4" ry="7"/><ellipse cx="10" cy="-10" rx="4" ry="7" transform="rotate(40)"/><ellipse cx="14" cy="0" rx="4" ry="7" transform="rotate(90)"/><ellipse cx="10" cy="10" rx="4" ry="7" transform="rotate(140)"/><ellipse cx="0" cy="14" rx="4" ry="7" transform="rotate(180)"/><ellipse cx="-10" cy="10" rx="4" ry="7" transform="rotate(220)"/><ellipse cx="-14" cy="0" rx="4" ry="7" transform="rotate(270)"/><ellipse cx="-10" cy="-10" rx="4" ry="7" transform="rotate(320)"/></g></g><g transform="translate(115,85)"><circle r="6" fill="#8B4513"/><g fill="#e67e22"><ellipse cx="0" cy="-11" rx="3" ry="6"/><ellipse cx="8" cy="-8" rx="3" ry="6" transform="rotate(40)"/><ellipse cx="11" cy="0" rx="3" ry="6" transform="rotate(90)"/><ellipse cx="8" cy="8" rx="3" ry="6" transform="rotate(140)"/><ellipse cx="0" cy="11" rx="3" ry="6" transform="rotate(180)"/><ellipse cx="-8" cy="8" rx="3" ry="6" transform="rotate(220)"/><ellipse cx="-11" cy="0" rx="3" ry="6" transform="rotate(270)"/><ellipse cx="-8" cy="-8" rx="3" ry="6" transform="rotate(320)"/></g></g><line x1="85" y1="95" x2="82" y2="120" stroke="#27ae60" stroke-width="3"/><line x1="115" y1="97" x2="118" y2="120" stroke="#27ae60" stroke-width="2.5"/></svg>`,
+
+  bedroom:()=>`<svg viewBox="0 0 200 140" style="border-radius:12px;border:3px solid #c9a96e"><rect width="200" height="140" fill="#a29bfe"/><polygon points="0,50 100,30 200,50 200,140 0,140" fill="#DEB887"/><rect x="10" y="55" width="60" height="50" rx="2" fill="#e17055" stroke="#d35400" stroke-width="2"/><rect x="15" y="60" width="50" height="20" rx="1" fill="#fff" opacity=".5"/><rect x="12" y="55" width="56" height="5" rx="1" fill="#c0392b"/><rect x="80" y="45" width="25" height="35" rx="2" fill="#3498db" stroke="#2980b9" stroke-width="1.5"/><rect x="115" y="45" width="25" height="35" rx="2" fill="#2ecc71" stroke="#27ae60" stroke-width="1.5"/><rect x="155" y="60" width="30" height="40" rx="2" fill="#8B4513" stroke="#5D4037" stroke-width="1.5"/><rect x="159" y="65" width="10" height="30" rx="1" fill="#A0522D"/><rect x="171" y="65" width="10" height="30" rx="1" fill="#A0522D"/><rect x="80" y="90" width="35" height="20" rx="2" fill="#f39c12" stroke="#e67e22" stroke-width="1.5"/></svg>`,
+
+  self_portrait:()=>`<svg viewBox="0 0 200 140" style="border-radius:12px;border:3px solid #c9a96e"><rect width="200" height="140" fill="#2c3e50"/><rect x="50" y="10" width="100" height="120" rx="4" fill="#3498db" opacity=".3"/><ellipse cx="100" cy="55" rx="28" ry="32" fill="#fad390"/><rect x="80" y="85" width="40" height="45" rx="4" fill="#2c3e50"/><rect x="82" y="88" width="36" height="10" rx="2" fill="#fff" opacity=".3"/><ellipse cx="90" cy="48" rx="4" ry="3.5" fill="#2c3e50"/><ellipse cx="110" cy="48" rx="4" ry="3.5" fill="#2c3e50"/><path d="M95 60 Q100 65 105 60" fill="none" stroke="#c0392b" stroke-width="1.5"/><path d="M72 30 Q80 18 100 15 Q120 18 128 30 Q130 40 125 45 L75 45 Q70 40 72 30Z" fill="#e67e22"/><rect x="68" y="42" width="14" height="10" rx="2" fill="#fff" opacity=".2"/></svg>`,
+
+  /* Dia e Noite */
+  scene_day:()=>`<svg viewBox="0 0 200 120" style="border-radius:12px;border:3px solid #87CEEB"><rect width="200" height="120" fill="#87CEEB"/><circle cx="160" cy="25" r="18" fill="#f39c12"/><g stroke="#f39c12" stroke-width="2" opacity=".6"><line x1="160" y1="3" x2="160" y2="0"/><line x1="185" y1="25" x2="195" y2="25"/><line x1="178" y1="7" x2="185" y2="0"/><line x1="178" y1="43" x2="185" y2="50"/></g><ellipse cx="55" cy="22" rx="22" ry="11" fill="#ecf0f1"/><ellipse cx="45" cy="20" rx="16" ry="9" fill="#f5f5f5"/><polygon points="0,70 50,60 100,72 150,65 200,70 200,120 0,120" fill="#27ae60"/><g fill="#2ecc71"><ellipse cx="30" cy="62" rx="6" ry="3"/><ellipse cx="120" cy="68" rx="5" ry="2.5"/></g><rect x="75" y="52" width="8" height="24" rx="1" fill="#8B4513"/><ellipse cx="79" cy="42" rx="16" ry="16" fill="#27ae60"/></svg>`,
+
+  scene_night:()=>`<svg viewBox="0 0 200 120" style="border-radius:12px;border:3px solid #1a1a4e"><rect width="200" height="120" fill="#1a1a4e"/><circle cx="155" cy="25" r="12" fill="#ffeaa7"/><circle cx="162" cy="20" r="9" fill="#1a1a4e"/><g fill="#ffd93d" opacity=".7"><circle cx="30" cy="15" r="2"/><circle cx="60" cy="25" r="1.5"/><circle cx="90" cy="10" r="2"/><circle cx="120" cy="20" r="1.5"/><circle cx="45" cy="35" r="1"/><circle cx="100" cy="35" r="1.5"/><circle cx="140" cy="40" r="1"/><circle cx="180" cy="15" r="1.5"/></g><polygon points="0,70 50,65 100,72 150,68 200,72 200,120 0,120" fill="#2d5016"/><rect x="60" y="58" width="30" height="28" rx="2" fill="#5D4037"/><rect x="67" y="62" width="7" height="9" rx="1" fill="#ffeaa7" opacity=".6"/><rect x="78" y="62" width="7" height="9" rx="1" fill="#ffeaa7" opacity=".6"/><polygon points="55,58 75,42 95,58" fill="#795548"/></svg>`,
+
+  /* Ícone de troféu */
+  trophy:()=>`<svg viewBox="0 0 100 100"><path d="M30 25 H70 L65 55 Q50 68 35 55 Z" fill="#f1c40f" stroke="#e8a838" stroke-width="2"/><rect x="42" y="60" width="16" height="12" rx="2" fill="#e8a838"/><rect x="35" y="70" width="30" height="6" rx="2" fill="#e8a838"/><path d="M30 25 Q15 28 18 42 Q20 52 35 50" fill="none" stroke="#f1c40f" stroke-width="4"/><path d="M70 25 Q85 28 82 42 Q80 52 65 50" fill="none" stroke="#f1c40f" stroke-width="4"/></svg>`,
+
+  /* Ícone speaker */
+  speaker:()=>`<svg viewBox="0 0 24 24" width="24" height="24"><polygon points="3,9 3,15 7,15 13,19 13,5 7,9" fill="#5a4500"/><path d="M16 8.5 Q19 12 16 15.5" fill="none" stroke="#5a4500" stroke-width="1.5" stroke-linecap="round"/><path d="M18 6 Q23 12 18 18" fill="none" stroke="#5a4500" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+};
+
+/* Helpers para montar SVGs no stage e opções */
+function svgStage(key,w){return `<div class="illust" style="max-width:${w||280}px">${SVG[key]()}</div>`;}
+function svgOpt(key){return `<div class="opt-icon">${SVG[key]()}</div>`;}
+
+/* ============================================================
+   VOZ PT-BR
+   ============================================================ */
+const VOICE={
+  greet:"Olá! Bem-vindo ao Art Fun! Vamos explorar o mundo da arte em inglês!",
   test:"Olá! Você está me ouvindo? Vamos descobrir o mundo da arte!",
   win:"Parabéns! Você é um verdadeiro artista! Que orgulho!",
   choose:"As respostas são:",
@@ -180,272 +238,220 @@ const VOICE = {
   ok4:"Boa demais!", ok5:"Mandou bem!", ok6:"Perfeito!",
   no1:"Quase! Tenta outra.", no2:"Hmm, tenta de novo.", no3:"Não foi essa, tenta outra.",
 
-  /* perguntas dos jogos */
-  q_art_en:"Como se diz isto em inglês?",
-  q_art_what:"O que é isto em inglês?",
-  q_painting_name:"Qual é o nome deste quadro famoso?",
-  q_painting_artist:"Quem pintou este quadro?",
-  q_daynight:"Isto é do dia ou da noite?",
-  q_color_art:"Qual cor aparece bastante nesta obra?",
-  q_nature_en:"Como se chama este elemento da natureza em inglês?",
-  q_supply_en:"Qual material de arte é este?",
-  q_action_art:"O que o artista está fazendo?",
-  q_vangogh:"O que é verdade sobre Van Gogh?",
-  q_starry:"O que a gente vê no quadro Noite Estrelada?",
-  q_element:"O que tem nesta paisagem?",
+  q_supply_name:"Olhe a ilustração. Qual é o nome em inglês deste material de arte?",
+  q_supply_use:"O artista precisa fazer algo. Qual material ele deve usar?",
+  q_painting_id:"Olhe bem esta pintura. Qual é o nome dela em inglês?",
+  q_painting_artist:"Quem pintou este quadro famoso?",
+  q_painting_describe:"Leia a descrição e descubra qual pintura é esta.",
+  q_daynight:"Olhe a cena com atenção. É dia ou noite?",
+  q_nature_word:"Olhe a ilustração. Como se chama este elemento da natureza em inglês?",
+  q_starry_detail:"O que a gente pode ver no quadro The Starry Night?",
+  q_vangogh_fact:"O que é verdade sobre Vincent Van Gogh?",
+  q_color_mix:"Se misturar estas duas cores, qual cor a gente consegue?",
+  q_whats_in:"O que tem nesta obra de arte?",
+  q_complete:"Complete a frase sobre a obra.",
+
+  use_draw:"Quero fazer um desenho no papel.",
+  use_paint:"Quero pintar um quadro com cores.",
+  use_cut:"Preciso recortar o papel.",
+  use_glue:"Quero colar pedaços de papel juntos.",
+  use_mix:"Preciso misturar as tintas.",
 };
 
-/* ============================================================
-   VOZ EM INGLÊS (chave -> texto falado com voz en-US).
-   ============================================================ */
-const VOICE_EN = {
-  /* materiais de arte */
+const VOICE_EN={
   en_brush:"Brush.", en_paint:"Paint.", en_canvas:"Canvas.", en_palette:"Palette.",
   en_pencil:"Pencil.", en_crayon:"Crayon.", en_paper:"Paper.", en_scissors:"Scissors.",
-  en_glue:"Glue.", en_easel:"Easel.",
-
-  /* ações de arte */
+  en_glue:"Glue.",
   en_draw:"Draw.", en_paint_v:"Paint.", en_cut:"Cut.", en_glue_v:"Glue.",
   en_color_v:"Color.", en_create:"Create.", en_mix:"Mix.",
-
-  /* elementos da natureza */
   en_star:"Star.", en_stars:"Stars.", en_moon:"Moon.", en_sky:"Sky.", en_sun:"Sun.",
   en_cloud:"Cloud.", en_tree:"Tree.", en_flower:"Flower.", en_field:"Field.",
-  en_mountain:"Mountain.", en_river:"River.", en_hill:"Hill.", en_village:"Village.",
-  en_cypress:"Cypress.", en_wheat:"Wheat.",
-
-  /* cores */
+  en_mountain:"Mountain.", en_cypress:"Cypress.", en_wheat:"Wheat.",
   en_blue:"Blue.", en_yellow:"Yellow.", en_green:"Green.", en_orange:"Orange.",
-  en_red:"Red.", en_white:"White.", en_black:"Black.", en_purple:"Purple.",
-  en_brown:"Brown.",
-
-  /* dia e noite */
+  en_red:"Red.", en_white:"White.", en_purple:"Purple.",
   en_day:"Day.", en_night:"Night.", en_daytime:"Daytime.", en_nighttime:"Nighttime.",
-
-  /* arte e artista */
-  en_painting:"Painting.", en_artist:"Artist.", en_art:"Art.", en_landscape:"Landscape.",
-  en_portrait:"Portrait.", en_museum:"Museum.",
-
-  /* Van Gogh / obras */
+  en_painting:"Painting.", en_artist:"Artist.",
   en_vangogh:"Vincent Van Gogh.",
   en_starry_night:"The Starry Night.",
   en_sunflowers:"Sunflowers.",
   en_wheat_field:"Wheat Field with Cypresses.",
   en_bedroom:"The Bedroom.",
   en_self_portrait:"Self Portrait.",
-
-  /* países */
-  en_netherlands:"The Netherlands.", en_france:"France.", en_brazil:"Brazil.",
+  en_netherlands:"The Netherlands.", en_france:"France.",
 };
 
 /* ============================================================
    PLAYER DE ÁUDIO
    ============================================================ */
 const AUDIO_DIR='audio/', AUDIO_EXT='.mp3';
-const player=new Audio();
-player.preload='auto';
-let playToken=0, audioOn=true;
-function stopAudio(){ playToken++; try{player.pause();}catch(e){} setPlayingBadge(false); }
+const player=new Audio(); player.preload='auto';
+let playToken=0,audioOn=true;
+function stopAudio(){playToken++;try{player.pause();}catch(e){}setPlayingBadge(false);}
 function playKeys(keys){
-  if(!audioOn) return;
-  stopAudio();
+  if(!audioOn)return; stopAudio();
   const list=[].concat(...keys.map(k=>Array.isArray(k)?k:[k])).filter(Boolean);
-  if(!list.length) return;
-  const my=playToken; let i=0;
-  setPlayingBadge(true);
+  if(!list.length)return;
+  const my=playToken;let i=0;setPlayingBadge(true);
   const next=()=>{
-    if(my!==playToken) return;
-    if(i>=list.length){ setPlayingBadge(false); return; }
+    if(my!==playToken)return;
+    if(i>=list.length){setPlayingBadge(false);return;}
     const key=list[i++];
     player.src=AUDIO_DIR+key+AUDIO_EXT;
     player.onended=next;
-    player.onerror=()=>{ setTimeout(next,10); };
-    const p=player.play();
-    if(p&&p.catch) p.catch(()=>setTimeout(next,10));
-  };
-  next();
+    player.onerror=()=>setTimeout(next,10);
+    const p=player.play();if(p&&p.catch)p.catch(()=>setTimeout(next,10));
+  };next();
 }
-function setPlayingBadge(on){
-  const b=document.getElementById('qspeak'); if(b) b.classList.toggle('playing',on);
-}
+function setPlayingBadge(on){const b=document.getElementById('qspeak');if(b)b.classList.toggle('playing',on);}
 function unlockAudio(){
-  try{ player.muted=true; player.src=AUDIO_DIR+'greet'+AUDIO_EXT;
-       const p=player.play();
-       if(p&&p.then) p.then(()=>{player.pause();player.currentTime=0;player.muted=false;})
-                      .catch(()=>{player.muted=false;});
-       else {player.pause();player.muted=false;}
-  }catch(e){ player.muted=false; }
+  try{player.muted=true;player.src=AUDIO_DIR+'greet'+AUDIO_EXT;
+  const p=player.play();
+  if(p&&p.then)p.then(()=>{player.pause();player.currentTime=0;player.muted=false;}).catch(()=>{player.muted=false;});
+  else{player.pause();player.muted=false;}}catch(e){player.muted=false;}
 }
 
-/* ===== SONS DE EFEITO ===== */
+/* ===== SONS ===== */
 let actx=null;
-function initAudio(){ try{ actx = actx || new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==='suspended') actx.resume(); }catch(e){} }
-function tone(freq,start,dur,type='sine',vol=0.2){
-  if(!actx) return;
-  const o=actx.createOscillator(), g=actx.createGain();
-  o.type=type; o.frequency.value=freq; o.connect(g); g.connect(actx.destination);
-  const t=actx.currentTime+start;
-  g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+0.02);
-  g.gain.exponentialRampToValueAtTime(0.001,t+dur);
-  o.start(t); o.stop(t+dur);
-}
-function sndClick(){ initAudio(); tone(540,0,0.07,'triangle',0.14); }
-function sndRight(){ initAudio(); [523,659,784,1047].forEach((f,i)=>tone(f,i*0.09,0.25,'triangle',0.18)); }
-function sndWrong(){ initAudio(); tone(300,0,0.18,'sine',0.13); tone(220,0.12,0.25,'sine',0.13); }
-function sndWin(){ initAudio(); [523,659,784,1047,784,1047,1319].forEach((f,i)=>tone(f,i*0.12,0.3,'triangle',0.2)); }
+function initAudio(){try{actx=actx||new(window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume();}catch(e){}}
+function tone(f,s,d,t='sine',v=.2){if(!actx)return;const o=actx.createOscillator(),g=actx.createGain();o.type=t;o.frequency.value=f;o.connect(g);g.connect(actx.destination);const tt=actx.currentTime+s;g.gain.setValueAtTime(0,tt);g.gain.linearRampToValueAtTime(v,tt+.02);g.gain.exponentialRampToValueAtTime(.001,tt+d);o.start(tt);o.stop(tt+d);}
+function sndClick(){initAudio();tone(540,0,.07,'triangle',.14);}
+function sndRight(){initAudio();[523,659,784,1047].forEach((f,i)=>tone(f,i*.09,.25,'triangle',.18));}
+function sndWrong(){initAudio();tone(300,0,.18,'sine',.13);tone(220,.12,.25,'sine',.13);}
+function sndWin(){initAudio();[523,659,784,1047,784,1047,1319].forEach((f,i)=>tone(f,i*.12,.3,'triangle',.2));}
 
-/* ===== UTILIDADES ===== */
+/* ===== UTILS ===== */
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-function rint(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
 function pick(a){return a[Math.floor(Math.random()*a.length)];}
-function pickN(arr,n,exclude){ return shuffle(arr.filter(x=>!exclude||exclude.indexOf(x)<0)).slice(0,n); }
-const OK_KEYS=['ok1','ok2','ok3','ok4','ok5','ok6'], NO_KEYS=['no1','no2','no3'];
-function emo(e,size){ return '<span class="obj" style="font-size:'+(size||80)+'px">'+e+'</span>'; }
-
-function updateStars(){ const el=document.getElementById('starNum'); if(el) el.textContent=stars; localStorage.setItem('vitor_art_stars',stars); }
-function addStar(n=1){ stars+=n; updateStars(); }
+function pickN(a,n,ex){return shuffle(a.filter(x=>!ex||ex.indexOf(x)<0)).slice(0,n);}
+const OK_KEYS=['ok1','ok2','ok3','ok4','ok5','ok6'],NO_KEYS=['no1','no2','no3'];
+function updateStars(){const el=document.getElementById('starNum');if(el)el.textContent=stars;localStorage.setItem('vitor_art2_stars',stars);}
+function addStar(n=1){stars+=n;updateStars();}
 
 /* ===== CONFETE ===== */
-const cv=document.getElementById('confetti'), cx=cv.getContext('2d');
-let confs=[];
-function resizeCv(){cv.width=innerWidth;cv.height=innerHeight;}
-addEventListener('resize',resizeCv); resizeCv();
-function burst(){
-  const cols=['#ff6b9d','#ffd93d','#6bcB77','#4d96ff','#a06cd5','#ff924c'];
-  for(let i=0;i<70;i++){confs.push({x:innerWidth/2,y:innerHeight/3,vx:(Math.random()-0.5)*14,vy:Math.random()*-12-3,c:pick(cols),s:rint(7,14),r:Math.random()*6,vr:(Math.random()-.5)*.4});}
-}
-function loopConf(){
-  cx.clearRect(0,0,cv.width,cv.height);
-  confs.forEach(p=>{p.vy+=0.35;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/2,p.s,p.s);cx.restore();});
-  confs=confs.filter(p=>p.y<cv.height+30);
-  requestAnimationFrame(loopConf);
-}
-loopConf();
+const cv=document.getElementById('confetti'),cx=cv.getContext('2d');let confs=[];
+function resizeCv(){cv.width=innerWidth;cv.height=innerHeight;}addEventListener('resize',resizeCv);resizeCv();
+function burst(){const cols=['#ff6b9d','#ffd93d','#6bcB77','#4d96ff','#a06cd5','#ff924c'];for(let i=0;i<70;i++){confs.push({x:innerWidth/2,y:innerHeight/3,vx:(Math.random()-.5)*14,vy:Math.random()*-12-3,c:pick(cols),s:Math.floor(Math.random()*8)+7,r:Math.random()*6,vr:(Math.random()-.5)*.4});}}
+function loopConf(){cx.clearRect(0,0,cv.width,cv.height);confs.forEach(p=>{p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/2,p.s,p.s);cx.restore();});confs=confs.filter(p=>p.y<cv.height+30);requestAnimationFrame(loopConf);}loopConf();
 
 /* ===== SHELL ===== */
 function shell(inner){
   App.innerHTML=`
     <div class="topbar">
-      <div class="nav"><a class="back-btn" href="../" title="Voltar ao menu de matérias" aria-label="Voltar ao menu de matérias">🏠</a><button class="home-btn" onclick="sndClick();goHome()" title="Escolher outro jogo desta matéria" aria-label="Escolher outro jogo desta matéria">🔄</button></div>
-      <div class="stars">⭐ <span class="num" id="starNum">${stars}</span></div>
-    </div>
-    ${inner}`;
+      <div class="nav"><a class="back-btn" href="../">Voltar</a><button class="home-btn" onclick="sndClick();goHome()">Menu</button></div>
+      <div class="stars">Estrelas: <span class="num" id="starNum">${stars}</span></div>
+    </div>${inner}`;
 }
 
 /* ===== MENU ===== */
 const GAMES=[
-  {id:'supplies',  ico:'🖌️', nome:'Art Supplies',    sub:'Materiais de arte',     cls:'c1'},
-  {id:'actions',   ico:'✏️', nome:'Art Actions',     sub:'O que o artista faz',   cls:'c2'},
-  {id:'nature',    ico:'🌳', nome:'Nature Words',    sub:'Natureza na paisagem',  cls:'c3'},
-  {id:'daynight',  ico:'🌙', nome:'Day or Night',    sub:'Dia ou noite?',         cls:'c4'},
-  {id:'colors',    ico:'🌈', nome:'Art Colors',      sub:'Cores nas obras',       cls:'c5'},
-  {id:'paintings', ico:'🖼️', nome:'Famous Art',      sub:'Quadros famosos',       cls:'c6'},
-  {id:'starry',    ico:'⭐', nome:'Starry Night',    sub:'A Noite Estrelada',     cls:'c7'},
-  {id:'vangogh',   ico:'👨‍🎨', nome:'Van Gogh',       sub:'O artista holandês',    cls:'c8'},
+  {id:'supplies',  svg:'palette',  nome:'Art Supplies',    sub:'Materiais de arte',       cls:'c1'},
+  {id:'studio',    svg:'brush',    nome:'Art Studio',       sub:'O que usar para criar?',  cls:'c2'},
+  {id:'nature',    svg:'tree_shape',nome:'Nature Words',    sub:'Natureza na paisagem',    cls:'c3'},
+  {id:'daynight',  svg:'moon_shape',nome:'Day or Night',    sub:'Observe a cena',          cls:'c4'},
+  {id:'paintings', svg:'canvas',   nome:'Famous Art',       sub:'Descubra a pintura',      cls:'c5'},
+  {id:'detective', svg:'palette',  nome:'Art Detective',    sub:'Leia as pistas',          cls:'c6'},
+  {id:'starry',    svg:'star_shape',nome:'Starry Night',    sub:'Explore a obra',          cls:'c7'},
+  {id:'vangogh',   svg:'self_portrait',nome:'Van Gogh',     sub:'A vida do artista',       cls:'c8'},
 ];
 function goHome(silent){
   stopAudio();
   shell(`
     <div class="hero">
-      <div class="mascote">🎨</div>
+      <div class="mascote-wrap">${SVG.palette()}</div>
       <h1>Art Fun!</h1>
-      <p>Escolha uma brincadeira 👇</p>
-      <button onclick="testSound()" style="margin-top:6px;background:var(--amarelo);color:#5a4500;border:none;border-radius:18px;padding:9px 18px;font-size:16px;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #d9a800;">🔈 Testar som</button>
+      <p>Escolha uma atividade para explorar a arte em inglês</p>
+      <button onclick="testSound()" style="margin-top:8px;background:var(--amarelo);color:#5a4500;border:none;border-radius:18px;padding:9px 18px;font-size:15px;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #d9a800;">Testar som</button>
     </div>
     <div class="grid">
       ${GAMES.map(g=>`<button class="card ${g.cls}" onclick="sndClick();startGame('${g.id}')">
-        <span class="ico">${g.ico}</span><span>${g.nome}</span>
-        <span style="font-size:13px;font-weight:normal;opacity:.9">${g.sub}</span>
+        <div class="card-icon">${SVG[g.svg]()}</div><span>${g.nome}</span>
+        <span class="sub">${g.sub}</span>
       </button>`).join('')}
     </div>
-    <p style="text-align:center;color:#7a8;margin-top:18px;font-size:14px;">Feito com 💜 para o Vitor</p>
+    <p style="text-align:center;color:#aaa;margin-top:18px;font-size:13px;">Feito com carinho para o Vitor</p>
   `);
-  if(!silent) setTimeout(()=>playKeys(['greet']),250);
+  if(!silent)setTimeout(()=>playKeys(['greet']),250);
 }
-function testSound(){ initAudio(); sndClick(); playKeys(['test']); }
+function testSound(){initAudio();sndClick();playKeys(['test']);}
 
-/* ===== MOTOR DE RODADAS ===== */
-let current=null, locked=false;
+/* ===== MOTOR ===== */
+let current=null,locked=false;
 function startGame(id){
   const rounds=BUILDERS[id]();
-  current={id, title:GAMES.find(g=>g.id===id).nome, rounds, idx:0};
+  current={id,title:GAMES.find(g=>g.id===id).nome,rounds,idx:0};
   renderRound();
 }
 function gameFrame(c,r,bodyHtml){
+  const g=GAMES.find(g=>g.id===c.id);
   shell(`
     <div class="game">
-      <h2 class="game-title">${GAMES.find(g=>g.id===c.id).ico} ${c.title}</h2>
+      <h2 class="game-title"><div class="title-icon">${SVG[g.svg]()}</div> ${c.title}</h2>
       <div class="progress">Pergunta ${c.idx+1} de ${c.rounds.length}</div>
       <div class="question">
-        <button class="speak-btn" id="qspeak" onclick="sndClick();speakRound()">🔊</button>
+        <button class="speak-btn" id="qspeak" onclick="sndClick();speakRound()">${SVG.speaker()}</button>
         <span>${r.q}</span>
       </div>
       <div class="stage">${r.stage||''}</div>
       ${bodyHtml}
-      <div style="font-size:14px;color:#aaa;margin-top:6px;">👆 Toque para responder. Toque no 🔊 para ouvir de novo.</div>
+      <p class="hint">Toque para responder. Toque no alto-falante para ouvir de novo.</p>
       <div class="feedback" id="fb"></div>
     </div>
   `);
 }
 function renderRound(){
   locked=false;
-  const c=current, r=c.rounds[c.idx];
-  gameFrame(c,r,`<div class="options ${r.colorOpts?'opt-colors':''}" id="opts"></div>`);
+  const c=current,r=c.rounds[c.idx];
+  gameFrame(c,r,`<div class="options" id="opts"></div>`);
   const shown=shuffle(r.options);
   const opts=document.getElementById('opts');
   shown.forEach(o=>{
     const b=document.createElement('button');
-    b.className='opt'+(o.big?' big':'');
-    b.innerHTML=o.label;
+    b.className='opt';
+    b.innerHTML=(o.svg?svgOpt(o.svg):'')+`<span class="opt-label">${o.label}</span>`;
     b.onclick=()=>answer(b,o);
     opts.appendChild(b);
   });
-  window._roundKeys=[].concat(r.audio||[], ['choose'], shown.map(o=>o.aud));
+  window._roundKeys=[].concat(r.audio||[],['choose'],shown.map(o=>o.aud).filter(Boolean));
   setTimeout(()=>speakRound(),400);
 }
-function speakRound(){ playKeys(window._roundKeys||[]); }
+function speakRound(){playKeys(window._roundKeys||[]);}
 
 function showNextButton(){
   document.querySelectorAll('.opt').forEach(b=>b.onclick=null);
-  const nb=document.createElement('button');
-  nb.className='next-btn';
+  const nb=document.createElement('button');nb.className='next-btn';
   const last=current.idx>=current.rounds.length-1;
-  nb.textContent=last?'🏆 Terminar':'Próxima ➡';
-  nb.onclick=()=>{sndClick();locked=false;if(last){winScreen();}else{current.idx++;renderRound();}};
+  nb.textContent=last?'Terminar!':'Próxima';
+  nb.onclick=()=>{sndClick();locked=false;if(last)winScreen();else{current.idx++;renderRound();}};
   document.querySelector('.game').appendChild(nb);
 }
-function correctFlow(extraAudio){
-  locked=true; sndRight(); burst(); addStar(1);
-  const fb=document.getElementById('fb'); if(fb){fb.className='feedback good'; fb.textContent='⭐ Muito bem! Great!';}
-  playKeys(extraAudio.filter(Boolean));
-  showNextButton();
+function correctFlow(ea){
+  locked=true;sndRight();burst();addStar(1);
+  const fb=document.getElementById('fb');if(fb){fb.className='feedback good';fb.textContent='Muito bem! Great!';}
+  playKeys(ea.filter(Boolean));showNextButton();
 }
 function answer(btn,opt){
-  if(locked) return;
+  if(locked)return;
   if(opt.correct){
     btn.classList.add('ok');
     document.querySelectorAll('.opt').forEach(b=>{if(b!==btn)b.classList.add('no');});
-    correctFlow([opt.aud, pick(OK_KEYS), opt.expAud]);
+    correctFlow([opt.aud,pick(OK_KEYS),opt.expAud]);
   }else{
-    btn.classList.add('no'); btn.onclick=null;
-    sndWrong();
-    const fb=document.getElementById('fb'); fb.className='feedback bad'; fb.textContent='🤔 Tenta de novo!';
-    playKeys([opt.aud, pick(NO_KEYS)].filter(Boolean));
+    btn.classList.add('no');btn.onclick=null;sndWrong();
+    const fb=document.getElementById('fb');fb.className='feedback bad';fb.textContent='Tenta de novo!';
+    playKeys([opt.aud,pick(NO_KEYS)].filter(Boolean));
   }
 }
-
 function winScreen(){
-  sndWin(); burst(); setTimeout(burst,400); setTimeout(burst,800);
-  const c=current;
+  sndWin();burst();setTimeout(burst,400);setTimeout(burst,800);
   shell(`
     <div class="game win">
-      <div class="trophy">🏆</div>
+      <div class="trophy-wrap">${SVG.trophy()}</div>
       <h2 class="game-title">Parabéns! Congratulations!</h2>
-      <p style="font-size:22px;">Você ganhou <b>${c.rounds.length}</b> estrelas! ⭐</p>
-      <p style="font-size:18px;color:#888;">Você está ficando craque em <b>${c.title}</b>!</p>
-      <button class="next-btn" onclick="sndClick();startGame('${c.id}')">🔁 Jogar de novo</button>
+      <p style="font-size:20px;">Você ganhou <b>${current.rounds.length}</b> estrelas!</p>
+      <p style="font-size:16px;color:#888;">Você está ficando craque em <b>${current.title}</b>!</p>
+      <button class="next-btn" onclick="sndClick();startGame('${current.id}')">Jogar de novo</button>
       <br>
-      <button class="next-btn" style="background:var(--roxo);box-shadow:0 6px 0 #7c49b0;margin-top:10px;" onclick="sndClick();goHome()">🏠 Escolher outro</button>
+      <button class="next-btn" style="background:var(--roxo);box-shadow:0 6px 0 #5c2e90;margin-top:10px;" onclick="sndClick();goHome()">Escolher outro</button>
     </div>
   `);
   setTimeout(()=>playKeys(['win']),250);
@@ -454,266 +460,242 @@ function winScreen(){
 /* ============================================================
    VOCABULÁRIO
    ============================================================ */
-const WORDS={
-  /* materiais de arte */
-  brush:{e:'🖌️', en:'BRUSH', cap:'pincel'},
-  paint:{e:'🎨', en:'PAINT', cap:'tinta'},
-  canvas:{e:'🖼️', en:'CANVAS', cap:'tela'},
-  palette:{e:'🎨', en:'PALETTE', cap:'paleta'},
-  pencil:{e:'✏️', en:'PENCIL', cap:'lápis'},
-  crayon:{e:'🖍️', en:'CRAYON', cap:'giz de cera'},
-  paper:{e:'📄', en:'PAPER', cap:'papel'},
-  scissors:{e:'✂️', en:'SCISSORS', cap:'tesoura'},
-  glue:{e:'🧴', en:'GLUE', cap:'cola'},
-  easel:{e:'🎨', en:'EASEL', cap:'cavalete'},
-
-  /* ações */
-  draw:{e:'✏️', en:'DRAW', cap:'desenhar'},
-  paint_v:{e:'🖌️', en:'PAINT', cap:'pintar'},
-  cut:{e:'✂️', en:'CUT', cap:'cortar'},
-  glue_v:{e:'🧴', en:'GLUE', cap:'colar'},
-  color_v:{e:'🖍️', en:'COLOR', cap:'colorir'},
-  create:{e:'💡', en:'CREATE', cap:'criar'},
-  mix:{e:'🔄', en:'MIX', cap:'misturar'},
-
-  /* elementos da natureza */
-  star:{e:'⭐', en:'STAR', cap:'estrela'},
-  stars:{e:'🌟', en:'STARS', cap:'estrelas'},
-  moon:{e:'🌙', en:'MOON', cap:'lua'},
-  sky:{e:'🌌', en:'SKY', cap:'céu'},
-  sun:{e:'☀️', en:'SUN', cap:'sol'},
-  cloud:{e:'☁️', en:'CLOUD', cap:'nuvem'},
-  tree:{e:'🌳', en:'TREE', cap:'árvore'},
-  flower:{e:'🌻', en:'FLOWER', cap:'flor'},
-  field:{e:'🌾', en:'FIELD', cap:'campo'},
-  mountain:{e:'🏔️', en:'MOUNTAIN', cap:'montanha'},
-  river:{e:'🏞️', en:'RIVER', cap:'rio'},
-  hill:{e:'⛰️', en:'HILL', cap:'morro'},
-  village:{e:'🏘️', en:'VILLAGE', cap:'vilarejo'},
-  cypress:{e:'🌲', en:'CYPRESS', cap:'cipreste'},
-  wheat:{e:'🌾', en:'WHEAT', cap:'trigo'},
-
-  /* cores */
-  blue:{e:'🔵', en:'BLUE', cap:'azul'},
-  yellow:{e:'🟡', en:'YELLOW', cap:'amarelo'},
-  green:{e:'🟢', en:'GREEN', cap:'verde'},
-  orange:{e:'🟠', en:'ORANGE', cap:'laranja'},
-  red:{e:'🔴', en:'RED', cap:'vermelho'},
-  white:{e:'⚪', en:'WHITE', cap:'branco'},
-  black:{e:'⚫', en:'BLACK', cap:'preto'},
-  purple:{e:'🟣', en:'PURPLE', cap:'roxo'},
-  brown:{e:'🟤', en:'BROWN', cap:'marrom'},
-
-  /* dia e noite */
-  day:{e:'☀️', en:'DAY', cap:'dia'},
-  night:{e:'🌙', en:'NIGHT', cap:'noite'},
-
-  /* arte */
-  painting:{e:'🖼️', en:'PAINTING', cap:'quadro'},
-  artist:{e:'👨‍🎨', en:'ARTIST', cap:'artista'},
-  art:{e:'🎨', en:'ART', cap:'arte'},
-  landscape:{e:'🏞️', en:'LANDSCAPE', cap:'paisagem'},
-  portrait:{e:'🧑', en:'PORTRAIT', cap:'retrato'},
-  museum:{e:'🏛️', en:'MUSEUM', cap:'museu'},
-
-  /* obras */
-  starry_night:{e:'🌌', en:'THE STARRY NIGHT', cap:'A Noite Estrelada'},
-  sunflowers:{e:'🌻', en:'SUNFLOWERS', cap:'Girassóis'},
-  wheat_field:{e:'🌾', en:'WHEAT FIELD WITH CYPRESSES', cap:'Campo de Trigo'},
-  bedroom:{e:'🛏️', en:'THE BEDROOM', cap:'O Quarto'},
-  self_portrait:{e:'🧑', en:'SELF PORTRAIT', cap:'Autorretrato'},
-
-  /* países */
-  netherlands:{e:'🇳🇱', en:'THE NETHERLANDS', cap:'Holanda'},
-  france:{e:'🇫🇷', en:'FRANCE', cap:'França'},
-  brazil:{e:'🇧🇷', en:'BRAZIL', cap:'Brasil'},
-};
-
-function enOpt(key, correct){
-  const w=WORDS[key];
-  return {label:'<b>'+w.en+'</b>', aud:['en_'+key], correct:!!correct};
-}
-function stageEmo(key,size){ const w=WORDS[key]; return emo(w.e,size||90)+'<div class="cardtxt">'+w.en+'</div>'; }
-
-/* ============================================================
-   LISTAS DE CONTEÚDO
-   ============================================================ */
-const SUPPLY_KEYS=['brush','paint','canvas','palette','pencil','crayon','paper','scissors','glue','easel'];
-const ACTION_KEYS=['draw','paint_v','cut','glue_v','color_v','create','mix'];
-const NATURE_KEYS=['star','moon','sky','sun','cloud','tree','flower','field','mountain','river','hill','village','cypress','wheat'];
-const COLOR_KEYS=['blue','yellow','green','orange','red','white','black','purple','brown'];
-const PAINTING_KEYS=['starry_night','sunflowers','wheat_field','bedroom','self_portrait'];
-
-/* cenas de dia/noite (emoji + classificação) */
-const DAYNIGHT=[
-  {e:'☀️🌳🦋', era:'day'}, {e:'🌙⭐🌌', era:'night'},
-  {e:'🌅🏖️🐚', era:'day'}, {e:'🌃🏙️💡', era:'night'},
-  {e:'☀️🌻🐝', era:'day'}, {e:'🦉🌙🌠', era:'night'},
-  {e:'🌤️🌈🦜', era:'day'}, {e:'🌑⭐🦇', era:'night'},
-  {e:'☀️🏫📚', era:'day'}, {e:'🌙🛏️💤', era:'night'},
+const SUPPLIES=[
+  {k:'brush',svg:'brush',en:'BRUSH',cap:'pincel',aud:'en_brush'},
+  {k:'paint',svg:'paint',en:'PAINT',cap:'tinta',aud:'en_paint'},
+  {k:'canvas',svg:'canvas',en:'CANVAS',cap:'tela de pintura',aud:'en_canvas'},
+  {k:'palette',svg:'palette',en:'PALETTE',cap:'paleta de cores',aud:'en_palette'},
+  {k:'pencil',svg:'pencil',en:'PENCIL',cap:'lápis',aud:'en_pencil'},
+  {k:'crayon',svg:'crayon',en:'CRAYON',cap:'giz de cera',aud:'en_crayon'},
+  {k:'scissors',svg:'scissors',en:'SCISSORS',cap:'tesoura',aud:'en_scissors'},
+  {k:'paper',svg:'paper',en:'PAPER',cap:'papel',aud:'en_paper'},
+  {k:'glue',svg:'glue',en:'GLUE',cap:'cola',aud:'en_glue'},
 ];
-
-/* elementos do Starry Night (quiz) */
-const STARRY_HAS=['stars','moon','sky','village','cypress','hill'];
-const STARRY_NOT=['sun','flower','river','mountain'];
-
-/* cores predominantes em obras de Van Gogh */
-const COLOR_PAINTINGS=[
-  {painting:'starry_night', e:'🌌', color:'blue', distr:['red','green']},
-  {painting:'sunflowers', e:'🌻', color:'yellow', distr:['purple','black']},
-  {painting:'wheat_field', e:'🌾', color:'green', distr:['red','purple']},
-  {painting:'bedroom', e:'🛏️', color:'blue', distr:['brown','green']},
+const NATURE=[
+  {k:'star',svg:'star_shape',en:'STAR',cap:'estrela',aud:'en_star'},
+  {k:'moon',svg:'moon_shape',en:'MOON',cap:'lua',aud:'en_moon'},
+  {k:'sun',svg:'sun_shape',en:'SUN',cap:'sol',aud:'en_sun'},
+  {k:'tree',svg:'tree_shape',en:'TREE',cap:'árvore',aud:'en_tree'},
+  {k:'flower',svg:'flower_shape',en:'FLOWER',cap:'flor',aud:'en_flower'},
+  {k:'cloud',svg:'cloud_shape',en:'CLOUD',cap:'nuvem',aud:'en_cloud'},
+  {k:'mountain',svg:'mountain_shape',en:'MOUNTAIN',cap:'montanha',aud:'en_mountain'},
+  {k:'cypress',svg:'cypress_shape',en:'CYPRESS',cap:'cipreste',aud:'en_cypress'},
+  {k:'wheat',svg:'wheat_shape',en:'WHEAT',cap:'trigo',aud:'en_wheat'},
+];
+const PAINTINGS=[
+  {k:'starry_night',svg:'starry_night',en:'THE STARRY NIGHT',cap:'A Noite Estrelada',aud:'en_starry_night',artist:'Van Gogh',
+   desc:'Céu noturno cheio de estrelas brilhantes girando, com uma lua crescente, um vilarejo pequeno e um cipreste alto e escuro.'},
+  {k:'wheat_field',svg:'wheat_field',en:'WHEAT FIELD WITH CYPRESSES',cap:'Campo de Trigo com Ciprestes',aud:'en_wheat_field',artist:'Van Gogh',
+   desc:'Um campo dourado de trigo com um cipreste verde escuro alto, céu azul com nuvens brancas, e montanhas ao fundo.'},
+  {k:'sunflowers',svg:'sunflowers',en:'SUNFLOWERS',cap:'Girassóis',aud:'en_sunflowers',artist:'Van Gogh',
+   desc:'Um vaso com vários girassóis amarelos e laranjas. Fundo claro e simples. As flores estão em diferentes fases.'},
+  {k:'bedroom',svg:'bedroom',en:'THE BEDROOM',cap:'O Quarto',aud:'en_bedroom',artist:'Van Gogh',
+   desc:'O quarto de Van Gogh em Arles, na França. Tem uma cama, cadeiras, quadros na parede e uma mesa. Cores fortes e paredes azuis.'},
+  {k:'self_portrait',svg:'self_portrait',en:'SELF PORTRAIT',cap:'Autorretrato',aud:'en_self_portrait',artist:'Van Gogh',
+   desc:'Van Gogh pintou o próprio rosto. Ele tinha barba ruiva, olhos claros e usava chapéu ou terno. Pintou mais de 30 autorretratos.'},
 ];
 
 /* ============================================================
-   GERADORES (8 jogos)
+   BUILDERS — Atividades com raciocínio
    ============================================================ */
-const BUILDERS={
+const BUILDERS={};
 
-  /* 1. ART SUPPLIES — nome do material em inglês */
-  supplies(){
-    return shuffle(SUPPLY_KEYS).slice(0,7).map(key=>{
-      const distr=pickN(SUPPLY_KEYS,2,[key]);
-      return { q:'Qual é este material de arte em <b>inglês</b>? 🖌️',
-        audio:['q_supply_en'], stage:emo(WORDS[key].e,130), colorOpts:false,
-        options:shuffle([enOpt(key,true),enOpt(distr[0]),enOpt(distr[1])]) };
-    });
-  },
-
-  /* 2. ART ACTIONS — o que o artista faz */
-  actions(){
-    return shuffle(ACTION_KEYS).slice(0,6).map(key=>{
-      const distr=pickN(ACTION_KEYS,2,[key]);
-      return { q:'O que o artista está fazendo? Em <b>inglês</b>! ✏️',
-        audio:['q_action_art'], stage:emo(WORDS[key].e,130), colorOpts:false,
-        options:shuffle([enOpt(key,true),enOpt(distr[0]),enOpt(distr[1])]) };
-    });
-  },
-
-  /* 3. NATURE WORDS — elementos na paisagem */
-  nature(){
-    return shuffle(NATURE_KEYS).slice(0,7).map(key=>{
-      const distr=pickN(NATURE_KEYS,2,[key]);
-      return { q:'Como se chama em <b>inglês</b>? 🌳',
-        audio:['q_nature_en'], stage:emo(WORDS[key].e,130), colorOpts:false,
-        options:shuffle([enOpt(key,true),enOpt(distr[0]),enOpt(distr[1])]) };
-    });
-  },
-
-  /* 4. DAY OR NIGHT — classificar cenas */
-  daynight(){
-    return shuffle(DAYNIGHT).slice(0,7).map(it=>({
-      q:'Esta cena é do <b>dia</b> ou da <b>noite</b>? 🌙',
-      audio:['q_daynight'], stage:emo(it.e,110), colorOpts:true,
-      options:[enOpt('day',it.era==='day'),enOpt('night',it.era==='night')]
-    }));
-  },
-
-  /* 5. ART COLORS — qual cor predomina na obra */
-  colors(){
-    const rounds=COLOR_PAINTINGS.map(cp=>{
-      return { q:'Qual <b>cor</b> aparece mais nesta obra? 🌈',
-        audio:['q_color_art'], stage:emo(cp.e,110)+'<div class="cardtxt">'+WORDS[cp.painting].en+'</div>',
-        colorOpts:false,
-        options:shuffle([enOpt(cp.color,true),enOpt(cp.distr[0]),enOpt(cp.distr[1])]) };
-    });
-    /* + perguntas diretas de cor */
-    const extras=shuffle(COLOR_KEYS).slice(0,3).map(key=>{
-      const distr=pickN(COLOR_KEYS,2,[key]);
-      return { q:'Qual é esta <b>cor</b> em inglês? 🎨',
-        audio:['q_art_en'], stage:emo(WORDS[key].e,130), colorOpts:false,
-        options:shuffle([enOpt(key,true),enOpt(distr[0]),enOpt(distr[1])]) };
-    });
-    return shuffle([...rounds,...extras]).slice(0,7);
-  },
-
-  /* 6. FAMOUS PAINTINGS — nome do quadro + quem pintou */
-  paintings(){
-    const nameRounds=shuffle(PAINTING_KEYS).slice(0,3).map(key=>{
-      const distr=pickN(PAINTING_KEYS,2,[key]);
-      return { q:'Qual é o <b>nome</b> deste quadro famoso? 🖼️',
-        audio:['q_painting_name'], stage:emo(WORDS[key].e,130), colorOpts:false,
-        options:shuffle([enOpt(key,true),enOpt(distr[0]),enOpt(distr[1])]) };
-    });
-    /* quem pintou? sempre Van Gogh no contexto deste módulo */
-    const artistRounds=shuffle(PAINTING_KEYS).slice(0,2).map(key=>{
-      return { q:'Quem <b>pintou</b> este quadro? 👨‍🎨',
-        audio:['q_painting_artist'], stage:emo(WORDS[key].e,110)+'<div class="cardtxt">'+WORDS[key].en+'</div>',
-        colorOpts:true,
-        options:shuffle([
-          {label:'<b>VAN GOGH</b>',aud:['en_vangogh'],correct:true},
-          {label:'<b>PICASSO</b>',aud:['en_vangogh']},
-          {label:'<b>DA VINCI</b>',aud:['en_vangogh']},
-        ]) };
-    });
-    return shuffle([...nameRounds,...artistRounds]);
-  },
-
-  /* 7. STARRY NIGHT — o que tem no quadro */
-  starry(){
-    const has=shuffle(STARRY_HAS).slice(0,4).map(key=>({
-      q:'O que a gente vê no quadro <b>The Starry Night</b>? ⭐',
-      audio:['q_starry'], stage:emo('🌌',130)+'<div class="cardtxt">THE STARRY NIGHT</div>',
-      colorOpts:true,
-      options:shuffle([enOpt(key,true),...pickN(STARRY_NOT,1).map(k=>enOpt(k))])
-    }));
-    /* qual NÃO tem */
-    const not=shuffle(STARRY_NOT).slice(0,2).map(key=>{
-      const right=pick(STARRY_HAS);
-      return { q:'Qual destes <b>aparece</b> no quadro <b>The Starry Night</b>?',
-        audio:['q_starry'], stage:emo('🌌',130)+'<div class="cardtxt">THE STARRY NIGHT</div>',
-        colorOpts:false,
-        options:shuffle([enOpt(right,true),enOpt(key),...pickN(STARRY_NOT,1,[key]).map(k=>enOpt(k))]) };
-    });
-    return shuffle([...has,...not]).slice(0,7);
-  },
-
-  /* 8. VAN GOGH — fatos sobre o artista */
-  vangogh(){
-    const rounds=[
-      { q:'De qual <b>país</b> era Van Gogh? 🌍',
-        audio:['q_vangogh'], stage:emo('👨‍🎨',130)+'<div class="cardtxt">VINCENT VAN GOGH</div>',
-        colorOpts:true,
-        options:shuffle([enOpt('netherlands',true),enOpt('france'),enOpt('brazil')]) },
-      { q:'Em qual <b>país</b> Van Gogh pintou muitos quadros? 🇫🇷',
-        audio:['q_vangogh'], stage:emo('🖌️',110)+'<div class="cardtxt">Where did he paint?</div>',
-        colorOpts:true,
-        options:shuffle([enOpt('france',true),enOpt('brazil'),enOpt('netherlands')]) },
-      { q:'Como se diz <b>ARTISTA</b> em inglês? 👨‍🎨',
-        audio:['q_art_en'], stage:emo('👨‍🎨',130),
-        colorOpts:false,
-        options:shuffle([enOpt('artist',true),enOpt('painting'),enOpt('museum')]) },
-      { q:'Como se diz <b>QUADRO</b> em inglês? 🖼️',
-        audio:['q_art_en'], stage:emo('🖼️',130),
-        colorOpts:false,
-        options:shuffle([enOpt('painting',true),enOpt('artist'),enOpt('landscape')]) },
-      { q:'Como se diz <b>MUSEU</b> em inglês? 🏛️',
-        audio:['q_art_en'], stage:emo('🏛️',130),
-        colorOpts:false,
-        options:shuffle([enOpt('museum',true),enOpt('painting'),enOpt('art')]) },
-      { q:'Como se diz <b>PAISAGEM</b> em inglês? 🏞️',
-        audio:['q_art_en'], stage:emo('🏞️',130),
-        colorOpts:false,
-        options:shuffle([enOpt('landscape',true),enOpt('portrait'),enOpt('museum')]) },
-      { q:'Qual é o <b>quadro mais famoso</b> de Van Gogh?',
-        audio:['q_painting_name'], stage:emo('👨‍🎨',110)+'<div class="cardtxt">Most famous painting?</div>',
-        colorOpts:false,
-        options:shuffle([enOpt('starry_night',true),enOpt('bedroom'),enOpt('self_portrait')]) },
-    ];
-    return shuffle(rounds).slice(0,7);
-  },
+/* 1. ART SUPPLIES — Identifique o material pela ilustração */
+BUILDERS.supplies=()=>{
+  const items=shuffle(SUPPLIES).slice(0,6);
+  return items.map(it=>{
+    const wrongs=pickN(SUPPLIES.filter(x=>x.k!==it.k),3);
+    return {
+      q:'Olhe a ilustração. Qual é o nome deste material de arte em inglês?',
+      audio:['q_supply_name'],
+      stage:svgStage(it.svg,180)+`<div class="label-txt">${it.cap}</div>`,
+      options:[
+        {label:`<b>${it.en}</b>`,aud:it.aud,correct:true},
+        ...wrongs.map(w=>({label:`<b>${w.en}</b>`,aud:w.aud}))
+      ]
+    };
+  });
 };
 
-/* ===== SPLASH -> INÍCIO ===== */
-function enterApp(){
-  initAudio();
-  unlockAudio();
+/* 2. ART STUDIO — Que material usar? (requer raciocínio) */
+BUILDERS.studio=()=>{
+  const tasks=[
+    {q:'O artista quer fazer um desenho no papel. Qual material ele precisa?',audio:['use_draw'],correct:'pencil',wrongs:['scissors','glue','paint']},
+    {q:'O artista quer pintar um quadro com cores numa tela. O que ele precisa?',audio:['use_paint'],correct:'brush',wrongs:['scissors','pencil','paper']},
+    {q:'O artista precisa recortar figuras de papel. O que ele usa?',audio:['use_cut'],correct:'scissors',wrongs:['brush','crayon','palette']},
+    {q:'O artista quer colar pedaços de papel numa colagem. O que ele precisa?',audio:['use_glue'],correct:'glue',wrongs:['pencil','scissors','canvas']},
+    {q:'O artista vai misturar várias cores de tinta. Onde ele faz isso?',audio:['use_mix'],correct:'palette',wrongs:['paper','glue','scissors']},
+    {q:'O artista quer colorir o desenho com cores vivas. Qual material usar?',audio:['q_supply_use'],correct:'crayon',wrongs:['scissors','glue','canvas']},
+  ];
+  return shuffle(tasks).slice(0,6).map(t=>{
+    const c=SUPPLIES.find(s=>s.k===t.correct);
+    const ws=t.wrongs.map(w=>SUPPLIES.find(s=>s.k===w));
+    return {
+      q:t.q,audio:t.audio,
+      stage:`<div class="desc-txt" style="font-size:18px;color:var(--deep);">Pense: qual material de arte resolve isso?</div>`,
+      options:[
+        {label:`<b>${c.en}</b><br><span class="opt-label">${c.cap}</span>`,svg:c.svg,aud:c.aud,correct:true},
+        ...ws.map(w=>({label:`<b>${w.en}</b><br><span class="opt-label">${w.cap}</span>`,svg:w.svg,aud:w.aud}))
+      ]
+    };
+  });
+};
+
+/* 3. NATURE WORDS — Elementos da natureza nas paisagens */
+BUILDERS.nature=()=>{
+  const items=shuffle(NATURE).slice(0,6);
+  return items.map(it=>{
+    const wrongs=pickN(NATURE.filter(x=>x.k!==it.k),3);
+    return {
+      q:'Olhe a ilustração. Como se chama este elemento da natureza em inglês?',
+      audio:['q_nature_word'],
+      stage:svgStage(it.svg,140)+`<div class="label-txt">${it.cap}</div>`,
+      options:[
+        {label:`<b>${it.en}</b>`,aud:it.aud,correct:true},
+        ...wrongs.map(w=>({label:`<b>${w.en}</b>`,aud:w.aud}))
+      ]
+    };
+  });
+};
+
+/* 4. DAY OR NIGHT — Cenas com raciocínio (elementos visuais) */
+BUILDERS.daynight=()=>{
+  const rounds=[
+    {q:'Olhe esta cena. O sol está brilhando no céu. É dia ou noite?',
+     stage:svgStage('scene_day',260),correct:'DAY',wrong:'NIGHT',caud:'en_day',waud:'en_night'},
+    {q:'Olhe esta cena. Tem estrelas e lua no céu. É dia ou noite?',
+     stage:svgStage('scene_night',260),correct:'NIGHT',wrong:'DAY',caud:'en_night',waud:'en_day'},
+    {q:'Na pintura The Starry Night, Van Gogh pintou estrelas girando no céu. É uma cena de dia ou de noite?',
+     stage:svgStage('starry_night',260),correct:'NIGHT',wrong:'DAY',caud:'en_night',waud:'en_day'},
+    {q:'Na pintura Wheat Field, o céu está azul claro com nuvens brancas e sol. É dia ou noite?',
+     stage:svgStage('wheat_field',260),correct:'DAY',wrong:'NIGHT',caud:'en_day',waud:'en_night'},
+    {q:'Se você vê a lua e as estrelas no céu, em inglês dizemos que é...',
+     stage:svgStage('moon_shape',120),correct:'NIGHTTIME',wrong:'DAYTIME',caud:'en_nighttime',waud:'en_daytime'},
+    {q:'Se o sol está alto e o céu está claro, em inglês dizemos que é...',
+     stage:svgStage('sun_shape',120),correct:'DAYTIME',wrong:'NIGHTTIME',caud:'en_daytime',waud:'en_nighttime'},
+  ];
+  return shuffle(rounds).slice(0,6).map(r=>({
+    q:r.q,audio:['q_daynight'],stage:r.stage,
+    options:[
+      {label:`<b>${r.correct}</b>`,aud:r.caud,correct:true},
+      {label:`<b>${r.wrong}</b>`,aud:r.waud},
+    ]
+  }));
+};
+
+/* 5. FAMOUS ART — Identificar pinturas pela ilustração */
+BUILDERS.paintings=()=>{
+  const items=shuffle(PAINTINGS).slice(0,5);
+  return items.map(it=>{
+    const wrongs=pickN(PAINTINGS.filter(x=>x.k!==it.k),3);
+    return {
+      q:'Olhe bem esta pintura. Qual é o nome dela em inglês?',
+      audio:['q_painting_id'],
+      stage:svgStage(it.svg,280)+`<div class="desc-txt">${it.desc}</div>`,
+      options:[
+        {label:`<b>${it.en}</b><br><span class="opt-label">${it.cap}</span>`,aud:it.aud,correct:true},
+        ...wrongs.map(w=>({label:`<b>${w.en}</b><br><span class="opt-label">${w.cap}</span>`,aud:w.aud}))
+      ]
+    };
+  });
+};
+
+/* 6. ART DETECTIVE — Leia as pistas e descubra (raciocínio!) */
+BUILDERS.detective=()=>{
+  const clues=[
+    {q:'Pista: Esta pintura mostra um céu escuro cheio de estrelas que parecem girar. Tem um cipreste alto no canto e um vilarejo pequeno embaixo. Qual é a obra?',
+     correct:'starry_night',wrongs:['wheat_field','sunflowers','bedroom']},
+    {q:'Pista: Nesta pintura, vemos um campo amarelo dourado de trigo. À direita tem uma árvore escura e alta chamada cipreste. O céu é azul com nuvens. Qual é a obra?',
+     correct:'wheat_field',wrongs:['starry_night','sunflowers','self_portrait']},
+    {q:'Pista: Um vaso com flores amarelas grandes, cada uma com um centro escuro. Algumas flores estão murchas. É uma pintura simples mas muito famosa. Qual é?',
+     correct:'sunflowers',wrongs:['starry_night','bedroom','wheat_field']},
+    {q:'Pista: Esta pintura mostra um quarto com cama, cadeiras e quadros na parede. As paredes são azuis. É o lugar onde o artista dormia. Qual é?',
+     correct:'bedroom',wrongs:['self_portrait','sunflowers','starry_night']},
+    {q:'Pista: O artista pintou o próprio rosto! Ele tem barba ruiva e olhos claros. Pintou mais de 30 quadros assim. Qual é?',
+     correct:'self_portrait',wrongs:['bedroom','sunflowers','wheat_field']},
+  ];
+  return shuffle(clues).slice(0,5).map(c=>{
+    const right=PAINTINGS.find(p=>p.k===c.correct);
+    const ws=c.wrongs.map(w=>PAINTINGS.find(p=>p.k===w));
+    return {
+      q:'Leia as pistas com atenção e descubra qual pintura é esta!',
+      audio:['q_painting_describe'],
+      stage:`<div class="desc-txt" style="font-size:17px;line-height:1.5;">${c.q}</div>`,
+      options:[
+        {label:`<b>${right.en}</b><br><span class="opt-label">${right.cap}</span>`,aud:right.aud,correct:true},
+        ...ws.map(w=>({label:`<b>${w.en}</b><br><span class="opt-label">${w.cap}</span>`,aud:w.aud}))
+      ]
+    };
+  });
+};
+
+/* 7. STARRY NIGHT — Explore os detalhes da obra */
+BUILDERS.starry=()=>{
+  const qs=[
+    {q:'No quadro The Starry Night, o que brilha no céu?',
+     correct:{label:'<b>STARS</b><br>Estrelas',aud:'en_stars'},
+     wrongs:[{label:'<b>SUN</b><br>Sol',aud:'en_sun'},{label:'<b>CLOUDS</b><br>Nuvens',aud:'en_cloud'},{label:'<b>FLOWERS</b><br>Flores',aud:'en_flower'}]},
+    {q:'The Starry Night mostra uma árvore alta e escura no canto. Que árvore é essa em inglês?',
+     correct:{label:'<b>CYPRESS</b><br>Cipreste',aud:'en_cypress'},
+     wrongs:[{label:'<b>WHEAT</b><br>Trigo',aud:'en_wheat'},{label:'<b>FLOWER</b><br>Flor',aud:'en_flower'},{label:'<b>MOUNTAIN</b><br>Montanha',aud:'en_mountain'}]},
+    {q:'No canto do quadro The Starry Night, além das estrelas, tem um astro crescente. Qual é ele em inglês?',
+     correct:{label:'<b>MOON</b><br>Lua',aud:'en_moon'},
+     wrongs:[{label:'<b>SUN</b><br>Sol',aud:'en_sun'},{label:'<b>STAR</b><br>Estrela',aud:'en_star'},{label:'<b>CLOUD</b><br>Nuvem',aud:'en_cloud'}]},
+    {q:'Embaixo das estrelas, tem um grupo de casinhas na paisagem. Em inglês isso é um...',
+     correct:{label:'<b>VILLAGE</b><br>Vilarejo',aud:'en_star'},
+     wrongs:[{label:'<b>FIELD</b><br>Campo',aud:'en_field'},{label:'<b>MOUNTAIN</b><br>Montanha',aud:'en_mountain'},{label:'<b>TREE</b><br>Árvore',aud:'en_tree'}]},
+    {q:'The Starry Night é uma pintura. Como dizemos "pintura" em inglês?',
+     correct:{label:'<b>PAINTING</b><br>Pintura',aud:'en_painting'},
+     wrongs:[{label:'<b>PAPER</b><br>Papel',aud:'en_paper'},{label:'<b>PENCIL</b><br>Lápis',aud:'en_pencil'},{label:'<b>BRUSH</b><br>Pincel',aud:'en_brush'}]},
+    {q:'Quem é o artista que pintou The Starry Night?',
+     correct:{label:'<b>VINCENT VAN GOGH</b>',aud:'en_vangogh'},
+     wrongs:[{label:'<b>PABLO PICASSO</b>',aud:null},{label:'<b>LEONARDO DA VINCI</b>',aud:null},{label:'<b>CLAUDE MONET</b>',aud:null}]},
+  ];
+  return shuffle(qs).slice(0,6).map(q=>({
+    q:q.q,audio:['q_starry_detail'],
+    stage:svgStage('starry_night',260),
+    options:[{...q.correct,correct:true},...q.wrongs]
+  }));
+};
+
+/* 8. VAN GOGH — Fatos sobre o artista (raciocínio + leitura) */
+BUILDERS.vangogh=()=>{
+  const facts=[
+    {q:'Vincent Van Gogh nasceu na Holanda. Como dizemos "Holanda" em inglês?',
+     correct:{label:'<b>THE NETHERLANDS</b><br>Holanda',aud:'en_netherlands'},
+     wrongs:[{label:'<b>FRANCE</b><br>França',aud:'en_france'},{label:'<b>BRAZIL</b><br>Brasil',aud:null},{label:'<b>ENGLAND</b><br>Inglaterra',aud:null}]},
+    {q:'Van Gogh viveu na cidade de Arles. Em qual país fica Arles?',
+     correct:{label:'<b>FRANCE</b><br>França',aud:'en_france'},
+     wrongs:[{label:'<b>THE NETHERLANDS</b><br>Holanda',aud:'en_netherlands'},{label:'<b>BRAZIL</b><br>Brasil',aud:null},{label:'<b>ITALY</b><br>Itália',aud:null}]},
+    {q:'Van Gogh pintou muitos quadros do próprio rosto. Em inglês isso é chamado de...',
+     correct:{label:'<b>SELF PORTRAIT</b><br>Autorretrato',aud:'en_self_portrait'},
+     wrongs:[{label:'<b>LANDSCAPE</b><br>Paisagem',aud:null},{label:'<b>SUNFLOWERS</b><br>Girassóis',aud:'en_sunflowers'},{label:'<b>THE BEDROOM</b><br>O Quarto',aud:'en_bedroom'}]},
+    {q:'Van Gogh adorava pintar girassóis. Como se diz "girassóis" em inglês?',
+     stage:svgStage('sunflowers',240),
+     correct:{label:'<b>SUNFLOWERS</b>',aud:'en_sunflowers'},
+     wrongs:[{label:'<b>ROSES</b><br>Rosas',aud:null},{label:'<b>STARS</b><br>Estrelas',aud:'en_stars'},{label:'<b>TREES</b><br>Árvores',aud:'en_tree'}]},
+    {q:'Van Gogh usava cores muito fortes e vivas nos seus quadros. Como se diz "artista" em inglês?',
+     correct:{label:'<b>ARTIST</b><br>Artista',aud:'en_artist'},
+     wrongs:[{label:'<b>PAINTING</b><br>Pintura',aud:'en_painting'},{label:'<b>BRUSH</b><br>Pincel',aud:'en_brush'},{label:'<b>CANVAS</b><br>Tela',aud:'en_canvas'}]},
+    {q:'Van Gogh pintou o quarto onde ele dormia em Arles. Qual é o nome dessa obra?',
+     stage:svgStage('bedroom',240),
+     correct:{label:'<b>THE BEDROOM</b><br>O Quarto',aud:'en_bedroom'},
+     wrongs:[{label:'<b>THE STARRY NIGHT</b><br>Noite Estrelada',aud:'en_starry_night'},{label:'<b>SUNFLOWERS</b><br>Girassóis',aud:'en_sunflowers'},{label:'<b>SELF PORTRAIT</b><br>Autorretrato',aud:'en_self_portrait'}]},
+  ];
+  return shuffle(facts).slice(0,6).map(f=>({
+    q:f.q,audio:['q_vangogh_fact'],
+    stage:f.stage||svgStage('self_portrait',200),
+    options:[{...f.correct,correct:true},...f.wrongs]
+  }));
+};
+
+/* ===== SPLASH ===== */
+document.getElementById('startBtn').onclick=()=>{
+  initAudio();unlockAudio();
   document.getElementById('splash').style.display='none';
-  goHome(true);
-  setTimeout(()=>playKeys(['greet']),350);
-}
-document.getElementById('startBtn').addEventListener('click',enterApp);
-document.getElementById('splash').addEventListener('click',e=>{ if(e.target.id!=='startBtn'){ enterApp(); } });
+  goHome();
+};
+
 </script>
 </body>
 </html>
