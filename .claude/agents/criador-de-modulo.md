@@ -72,6 +72,33 @@ Regras que o QA vai cobrar:
 .venv/bin/python ferramentas/gerar-audios.py <pasta-do-modulo>
 ```
 
+### 4b. Ilustrações (opcional, quando emoji não bastar)
+
+Emoji resolve a maior parte dos casos e não custa nada. Use imagem quando o
+conteúdo pedir algo que emoji não representa — uma obra de arte, um instrumento
+específico, uma cena. Declare no `index.html`, ao lado do `VOICE`:
+
+```js
+const IMAGENS = {
+  brush: "A paintbrush with wooden handle loaded with blue paint. Side view.",
+  "starry-night": "Van Gogh's Starry Night painting, simplified.",
+};
+```
+
+A chave é exatamente o nome do arquivo gerado; descreva **em inglês** e só o que
+a imagem mostra — o estilo comum já vem do gerador. Depois:
+
+```bash
+node ferramentas/gerar-imagens.mjs <pasta-do-modulo>
+```
+
+Gera `images/<chave>.webp` a ~40 KB e **US$ 0,006** cada, em qualidade `low` —
+suficiente para ilustração chapada de jogo infantil. Imagem que já existe não é
+regerada (em qualquer extensão), então rodar duas vezes não cobra de novo.
+
+**Não use qualidade acima de `low` sem o dono pedir:** `medium` custa 9x e
+`high` 36x, sem ganho perceptível neste tipo de desenho.
+
 ### 5. Rodar o QA — obrigatório
 ```bash
 node ferramentas/qa-modulo.js <pasta-do-modulo>

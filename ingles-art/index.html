@@ -158,6 +158,42 @@
 <div id="app"></div>
 
 <script>
+
+/* ============================================================
+   IMAGENS
+   Cada chave vira images/<chave>.webp, gerado por
+   `node ferramentas/gerar-imagens.mjs ingles-art`.
+   O estilo comum fica no gerador — aqui só o que a imagem mostra.
+   ============================================================ */
+const IMAGENS = {
+  brush: "A paintbrush with wooden handle and soft bristles loaded with blue paint, paint dripping slightly. Side view.",
+  paint: "An open paint pot with bright red paint inside, a small splash of paint on the side. Front view.",
+  canvas: "A blank white painting canvas on a small wooden easel, ready to be painted. Front view.",
+  palette: "A wooden artist palette with colorful paint blobs (red, blue, yellow, green, white) and a thumb hole. Top view.",
+  pencil: "A yellow number 2 pencil with pink eraser, sharpened tip with graphite visible. Slight angle view.",
+  crayon: "A set of 6 wax crayons in a small box: red, orange, yellow, green, blue, purple. Pointed tips. Front view.",
+  scissors: "Childrens safety scissors with rounded tips, green plastic handles, slightly open blades. Front view.",
+  paper: "A white sheet of paper, slightly curled at one corner, with a few colorful pencil marks. Front view.",
+  glue: "A bottle of white school glue with orange cap. Front view.",
+  star: "A glowing golden five-pointed star radiating soft yellow light against dark blue sky. Dreamy and magical.",
+  moon: "A crescent moon with warm yellow glow in a dark blue starry night sky. Peaceful and dreamy.",
+  sun: "A bright warm sun with orange-yellow rays extending outward against light blue sky. Friendly.",
+  tree: "A green cypress tree, tall and narrow like Van Gogh painted, with dark green swirling foliage on a grassy hill.",
+  flower: "A bright yellow sunflower with brown center and green stem, inspired by Van Gogh sunflowers. Front view.",
+  cloud: "A fluffy white cumulus cloud with soft gray shadows, in a bright blue sky. Side view.",
+  mountain: "A green rolling mountain with wildflowers, blue sky with white clouds above. Landscape view.",
+  wheat: "A golden wheat field with tall wheat stalks swaying in wind, warm golden tones. Landscape view.",
+  "starry-night": "A child-friendly recreation of Van Gogh The Starry Night: swirling deep blue night sky with large glowing yellow stars and spirals, bright crescent moon, dark flame-shaped cypress tree on left, small charming village with church steeple below, rolling hills. Post-impressionist visible brushstroke style.",
+  "wheat-field": "A child-friendly recreation of Van Gogh Wheat Field with Cypresses: golden wheat field in foreground swaying in wind, dark green flame-shaped cypress trees in middle, brilliant blue sky with large swirling white clouds. Post-impressionist visible brushstroke style.",
+  sunflowers: "A child-friendly recreation of Van Gogh Sunflowers painting: a round yellow ceramic vase filled with bright sunflowers in various stages of bloom against warm yellow background. Post-impressionist visible brushstroke style.",
+  bedroom: "A child-friendly recreation of Van Gogh The Bedroom at Arles: cozy small bedroom with blue walls, wooden bed with red blanket, two chairs, small table, paintings on wall, wooden floor, window on right. Post-impressionist visible brushstroke style.",
+  "self-portrait": "A child-friendly recreation of Van Gogh self-portrait: a kind-looking man with red-orange beard and bright blue eyes wearing a blue coat, swirling blue-green background pattern. Post-impressionist visible brushstroke style. Friendly warm expression.",
+  "scene-day": "A cheerful bright daytime countryside scene: vivid blue sky with puffy white clouds, lush green rolling hills, warm yellow sun shining, colorful wildflowers in a meadow, a butterfly and a bird flying. Warm, vibrant, joyful.",
+  "scene-night": "A peaceful magical nighttime scene: deep dark blue starry sky with crescent moon, a small cozy village with warmly lit windows, gentle fireflies glowing, a friendly owl sitting on a tree branch. Calm and dreamy.",
+  "vangogh-artist": "A friendly warm cartoon illustration of Vincent Van Gogh as a painter: distinctive red-orange beard, wearing a straw hat, blue work clothes, holding a painters palette and paintbrush, standing in front of an easel outdoors in a sunny wheat field. Approachable and kind.",
+  mascot: "A cute cartoon owl wearing a purple French beret and holding a thin paintbrush with paint on it. The owl is colorful with big round expressive friendly eyes, small wings, sitting on a branch. Artistic and cheerful."
+};
+
 /* ============================================================
    ART FUN! v2 — Detailed SVG illustrations, English-first,
    reasoning-based activities about Van Gogh, art supplies,

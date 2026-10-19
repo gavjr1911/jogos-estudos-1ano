@@ -1,0 +1,13 @@
+{
+  "name": "jogos-estudos-1ano",
+  "private": true,
+  "type": "module",
+  "description": "Ferramentas de build dos módulos: geração de imagens e QA. O site em si é HTML estático, sem dependência.",
+  "scripts": {
+    "qa": "node ferramentas/qa-menu.js && node ferramentas/qa-modulo.js --todos",
+    "imagens": "node ferramentas/gerar-imagens.mjs"
+  },
+  "dependencies": {
+    "openai": "^6.32.0"
+  }
+}

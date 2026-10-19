@@ -92,6 +92,30 @@ A regra 6 é a mais fácil de violar sem perceber: se a alternativa certa é sem
 
 A regra 4 tem exceção para alfabetização: o card mostra `r` e a narração fala `"erre"` — rótulos de até 3 caracteres não são comparados.
 
+## Ilustrações (opcional)
+
+Emoji cobre a maioria dos casos. Para o que ele não representa, declare um
+dicionário `IMAGENS` no `index.html` — mesma ideia do `VOICE`, mas a chave é o
+nome do arquivo:
+
+```js
+const IMAGENS = {
+  brush: "A paintbrush with wooden handle loaded with blue paint. Side view.",
+  "starry-night": "Van Gogh's Starry Night painting, simplified.",
+};
+```
+
+```bash
+node ferramentas/gerar-imagens.mjs <pasta>            # só o que falta
+QUALIDADE=medium node ferramentas/gerar-imagens.mjs <pasta> --forcar
+```
+
+Usa `gpt-image-2` em qualidade `low`: ~40 KB e US$ 0,006 por imagem. O DALL-E 3
+que os scripts antigos usavam foi **removido pela OpenAI** e hoje retorna 400.
+
+Imagem existente não é regerada, em qualquer extensão — módulo publicado não
+muda de cara por acidente.
+
 ## Fluxo completo
 
 ```bash
