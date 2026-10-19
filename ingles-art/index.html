@@ -213,38 +213,38 @@ let stars = parseInt(localStorage.getItem('vitor_art_stars')||'0',10);
    ============================================================ */
 const IMG = {
   // Art supplies
-  brush: 'images/brush.jpg',
-  paint: 'images/paint.jpg',
-  canvas: 'images/canvas.jpg',
-  palette: 'images/palette.jpg',
-  pencil: 'images/pencil.jpg',
-  crayon: 'images/crayon.jpg',
-  scissors: 'images/scissors.jpg',
-  paper: 'images/paper.jpg',
-  glue: 'images/glue.jpg',
+  brush: 'images/brush.png',
+  paint: 'images/paint.png',
+  canvas: 'images/canvas.png',
+  palette: 'images/palette.png',
+  pencil: 'images/pencil.png',
+  crayon: 'images/crayon.png',
+  scissors: 'images/scissors.png',
+  paper: 'images/paper.png',
+  glue: 'images/glue.png',
   // Nature
-  star_shape: 'images/star.jpg',
-  moon_shape: 'images/moon.jpg',
-  sun_shape: 'images/sun.jpg',
-  tree_shape: 'images/tree.jpg',
-  flower_shape: 'images/flower.jpg',
-  cloud_shape: 'images/cloud.jpg',
-  mountain_shape: 'images/mountain.jpg',
-  cypress_shape: 'images/tree.jpg',
-  wheat_shape: 'images/wheat.jpg',
+  star_shape: 'images/star.png',
+  moon_shape: 'images/moon.png',
+  sun_shape: 'images/sun.png',
+  tree_shape: 'images/tree.png',
+  flower_shape: 'images/flower.png',
+  cloud_shape: 'images/cloud.png',
+  mountain_shape: 'images/mountain.png',
+  cypress_shape: 'images/tree.png',
+  wheat_shape: 'images/wheat.png',
   // Paintings
-  starry_night: 'images/starry-night.jpg',
-  wheat_field: 'images/wheat-field.jpg',
-  sunflowers: 'images/sunflowers.jpg',
-  bedroom: 'images/bedroom.jpg',
-  self_portrait: 'images/self-portrait.jpg',
+  starry_night: 'images/starry-night.png',
+  wheat_field: 'images/wheat-field.png',
+  sunflowers: 'images/sunflowers.png',
+  bedroom: 'images/bedroom.png',
+  self_portrait: 'images/self-portrait.png',
   // Scenes
-  scene_day: 'images/scene-day.jpg',
-  scene_night: 'images/scene-night.jpg',
+  scene_day: 'images/scene-day.png',
+  scene_night: 'images/scene-night.png',
   // Artist
-  vangogh_artist: 'images/vangogh-artist.jpg',
+  vangogh_artist: 'images/vangogh-artist.png',
   // Mascot
-  mascot: 'images/mascot.jpg',
+  mascot: 'images/mascot.png',
 };
 
 // Trophy SVG kept inline (small, decorative)
@@ -711,7 +711,7 @@ BUILDERS.vangogh=()=>{
 };
 
 /* ===== SPLASH ===== */
-document.getElementById('splashIcon').innerHTML='<img src="images/mascot.jpg" alt="" style="width:100%;height:100%;object-fit:contain;">';
+document.getElementById('splashIcon').innerHTML='<img src="images/mascot.png" alt="" style="width:100%;height:100%;object-fit:contain;">';
 document.getElementById('startBtn').onclick=()=>{
   initAudio();unlockAudio();
   document.getElementById('splash').style.display='none';
