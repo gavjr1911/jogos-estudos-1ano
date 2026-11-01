@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🏘️ Ciências Novembro 🏘️</title>
+<style>
+  :root{
+    --rosa:#ff6b9d; --roxo:#a06cd5; --azul:#4d96ff; --verde:#6bcB77;
+    --amarelo:#ffd93d; --laranja:#ff924c; --vermelho:#ff5e5e; --ceu:#b8e3ff;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0; height:100%;}
+  body{
+    font-family:'Comic Sans MS','Baloo',"Trebuchet MS",sans-serif;
+    background:linear-gradient(160deg,#e8fbe9 0%,#dff3ff 50%,#f3ecff 100%);
+    color:#3a3a55; overflow-x:hidden; user-select:none;
+    min-height:100%; touch-action:manipulation;
+  }
+  #app{max-width:760px; margin:0 auto; padding:14px; min-height:100vh;}
+
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    background:#fff; border-radius:22px; padding:8px 14px; margin-bottom:14px;
+    box-shadow:0 6px 0 rgba(0,0,0,.08);
+  }
+  .topbar .home-btn{
+    background:var(--azul); color:#fff; border:none; border-radius:16px;
+    font-size:22px; padding:8px 14px; font-weight:bold; cursor:pointer; box-shadow:0 4px 0 #2f6fd0;
+  }
+  .topbar .home-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #2f6fd0;}
+  .topbar .nav{display:flex; align-items:center; gap:8px;}
+  .topbar .back-btn{
+    background:var(--roxo); color:#fff; border:none; border-radius:16px;
+    font-size:22px; padding:8px 14px; font-weight:bold; cursor:pointer;
+    box-shadow:0 4px 0 #7d49b0; text-decoration:none; display:inline-block; line-height:1;
+  }
+  .topbar .back-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #7d49b0;}
+  .stars{font-size:24px; font-weight:bold; color:var(--laranja); display:flex; align-items:center; gap:6px;}
+  .stars .num{background:var(--amarelo); border-radius:14px; padding:2px 12px; box-shadow:0 3px 0 #d9a800;}
+
+  .hero{
+    text-align:center; background:#fff; border-radius:30px; padding:22px 18px;
+    box-shadow:0 8px 0 rgba(0,0,0,.08); margin-bottom:18px;
+  }
+  .hero h1{font-size:32px; margin:6px 0; color:var(--verde); line-height:1.2;}
+  .hero p{font-size:18px; margin:4px 0; color:#666;}
+  .mascote{font-size:78px; display:inline-block; animation:flutua 2.5s ease-in-out infinite;}
+  @keyframes flutua{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-14px) rotate(3deg);}}
+
+  .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+  .card{
+    border:none; border-radius:26px; padding:16px 10px; cursor:pointer;
+    color:#fff; font-size:19px; font-weight:bold; text-align:center;
+    box-shadow:0 7px 0 rgba(0,0,0,.18); transition:transform .08s;
+    display:flex; flex-direction:column; align-items:center; gap:6px; line-height:1.15;
+  }
+  .card:active{transform:translateY(4px); box-shadow:0 3px 0 rgba(0,0,0,.18);}
+  .card .ico{font-size:44px;}
+  .c1{background:var(--laranja);} .c2{background:var(--azul);} .c3{background:var(--roxo);}
+  .c4{background:var(--rosa);} .c5{background:var(--verde);} .c6{background:#19c3b1;}
+  .c7{background:#b07d4b;} .c8{background:#3aa7e8;}
+
+  .game{
+    background:#fff; border-radius:30px; padding:18px; box-shadow:0 8px 0 rgba(0,0,0,.08);
+    text-align:center;
+  }
+  .game-title{font-size:24px; color:var(--verde); margin:0 0 4px;}
+  .progress{font-size:16px; color:#999; margin-bottom:10px;}
+  .question{
+    font-size:22px; font-weight:bold; color:#3a3a55; margin:6px 0 14px; line-height:1.35;
+    display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;
+  }
+  .speak-btn{
+    background:var(--amarelo); border:none; border-radius:50%; width:54px; height:54px;
+    font-size:28px; cursor:pointer; box-shadow:0 4px 0 #d9a800; flex:0 0 auto;
+  }
+  .speak-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #d9a800;}
+  .speak-btn.playing{animation:pulse .7s infinite;}
+  @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
+
+  .stage{
+    min-height:120px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+    gap:10px; margin:10px auto 18px; padding:16px;
+    background:linear-gradient(160deg,#f3fff5,#eef7ff); border-radius:22px; border:4px dashed #bfe6c6;
+    flex-direction:column;
+  }
+  .obj{font-size:74px; animation:pop .35s ease; line-height:1;}
+  @keyframes pop{0%{transform:scale(0);}70%{transform:scale(1.25);}100%{transform:scale(1);}}
+  .cardtxt{font-size:19px; font-weight:bold; color:#5a7a5f; margin-top:4px; line-height:1.3; max-width:430px;}
+
+  .seqslots{display:flex; flex-direction:column; gap:8px; align-items:stretch; max-width:520px; margin:0 auto;}
+  .seqslot{
+    min-height:52px; border:4px dashed #bfe0c6; border-radius:16px; background:#f7fff9;
+    display:flex; align-items:center; gap:10px; padding:8px 12px; font-size:16px; font-weight:bold; color:#8aa593;
+  }
+  .seqslot .nn{background:var(--verde); color:#fff; border-radius:50%; width:32px; height:32px; flex:0 0 auto;
+               display:flex; align-items:center; justify-content:center; font-size:18px;}
+  .seqslot.filled{border-style:solid; border-color:var(--verde); background:#eefaf0; color:#2c5c38;}
+  .fichas{display:flex; flex-direction:column; gap:10px; margin-top:14px;}
+  .ficha{
+    border:none; border-radius:18px; padding:13px 14px; font-size:17px; font-weight:bold; text-align:left;
+    background:var(--azul); color:#fff; box-shadow:0 5px 0 #2f6fd0; cursor:pointer; line-height:1.25;
+  }
+  .ficha:active{transform:translateY(3px); box-shadow:0 2px 0 #2f6fd0;}
+  .ficha.used{background:#cfcfe0; box-shadow:0 5px 0 #a0a0c0; opacity:.55; cursor:default;}
+  .ficha.shake{animation:shake .4s;}
+  @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-8px);}75%{transform:translateX(8px);}}
+
+  .options{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));}
+  .opt{
+    border:none; border-radius:22px; padding:16px 10px; font-size:23px; font-weight:bold;
+    cursor:pointer; background:var(--azul); color:#fff; box-shadow:0 6px 0 #2f6fd0;
+    min-height:80px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    overflow-wrap:break-word; line-height:1.15;
+  }
+  .opt .cap{font-size:17px; font-weight:bold;}
+  .opt:active{transform:translateY(3px); box-shadow:0 3px 0 #2f6fd0;}
+  .opt.big{font-size:40px;}
+  .opt.ok{background:var(--verde)!important; box-shadow:0 6px 0 #3f9c4f!important; animation:tada .5s;}
+  .opt.no{background:#cfcfe0!important; box-shadow:0 6px 0 #a0a0c0!important; opacity:.7;}
+  @keyframes tada{0%{transform:scale(1);}30%{transform:scale(1.18) rotate(-4deg);}60%{transform:scale(1.1) rotate(4deg);}100%{transform:scale(1);}}
+
+  .opt-colors .opt{font-size:19px;}
+  .opt-colors .opt:nth-child(1){background:var(--rosa); box-shadow:0 6px 0 #d44d7c;}
+  .opt-colors .opt:nth-child(2){background:var(--azul); box-shadow:0 6px 0 #2f6fd0;}
+  .opt-colors .opt:nth-child(3){background:var(--laranja); box-shadow:0 6px 0 #d96d2e;}
+  .opt-colors .opt:nth-child(4){background:var(--roxo); box-shadow:0 6px 0 #7a4db0;}
+
+  .feedback{font-size:25px; font-weight:bold; min-height:40px; margin-top:12px;}
+  .feedback.good{color:var(--verde);} .feedback.bad{color:var(--laranja);}
+
+  .next-btn{
+    margin-top:14px; background:var(--verde); color:#fff; border:none; border-radius:22px;
+    font-size:24px; font-weight:bold; padding:14px 34px; cursor:pointer; box-shadow:0 6px 0 #3f9c4f;
+  }
+  .next-btn:active{transform:translateY(3px); box-shadow:0 3px 0 #3f9c4f;}
+
+  #splash{
+    position:fixed; inset:0; background:linear-gradient(160deg,#4fb477,#3aa7e8);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    color:#fff; text-align:center; z-index:50; cursor:pointer; padding:20px;
+  }
+  #splash h1{font-size:34px; margin:10px;}
+  #splash .big{font-size:100px; animation:flutua 2.5s infinite;}
+  #splash .play{
+    margin-top:24px; background:var(--amarelo); color:#5a4500; border:none; border-radius:30px;
+    font-size:30px; font-weight:bold; padding:18px 44px; box-shadow:0 8px 0 #d9a800; cursor:pointer;
+  }
+
+  #confetti{position:fixed; inset:0; pointer-events:none; z-index:40;}
+  .win{text-align:center; padding:20px;}
+  .win .trophy{font-size:90px; animation:tada 1s;}
+
+  @media(max-width:480px){
+    .hero h1{font-size:26px;} .question{font-size:19px;} .card{font-size:16px;}
+    .obj{font-size:60px;} .cardtxt{font-size:17px;}
+    .opt{font-size:20px;} .opt .cap{font-size:15px;} .ficha{font-size:15px;}
+  }
+</style>
+</head>
+<body>
+
+<div id="splash">
+  <div class="big">🏘️</div>
+  <h1>Ciências Novembro!</h1>
+  <p style="font-size:20px;max-width:380px;">Vamos aprender sobre ruas, escola e transporte! 🚌<br>Toque no botão para começar.</p>
+  <button class="play" id="startBtn">▶ COMEÇAR</button>
+</div>
+
+<canvas id="confetti"></canvas>
+<div id="app"></div>
+
+<script>
+/* ============================================================
+   CIÊNCIAS NOVEMBRO — 1º ano (Bernoulli, Capítulo 5)
+   Módulo 10 do projeto.
+   Conteúdos: DA SUA CASA ATÉ A ESCOLA — ruas antigamente e hoje,
+   espaços públicos e privados, meios de transporte, funções das ruas,
+   fontes históricas, profissionais da escola, materiais escolares
+   antigos e modernos, importância da escola.
+   ============================================================ */
+
+const App = document.getElementById('app');
+let stars = parseInt(localStorage.getItem('vitor_ci3_stars')||'0',10);
+
+/* ============================================================
+   VOCABULÁRIO DE VOZ (chave -> texto falado).
+   ============================================================ */
+const VOICE = {
+  /* navegação e feedback */
+  greet:"Olá! Bem-vindo aos jogos de Ciências Novembro! Escolha uma brincadeira para começar.",
+  test:"Olá! Você está me ouvindo? Vamos aprender sobre ruas, escola e transporte!",
+  win:"Parabéns! Você conseguiu! Que orgulho de você!",
+  choose:"As respostas são:",
+  ok1:"Muito bem!", ok2:"Isso aí!", ok3:"Você acertou!",
+  ok4:"Boa demais!", ok5:"Mandou bem!", ok6:"Perfeito!",
+  no1:"Quase! Tenta outra.", no2:"Hmm, tenta de novo.", no3:"Não foi essa, tenta outra.",
+
+  /* ============ 1. RUAS: ANTES E HOJE ============ */
+  ru_q_antes:"Como eram as ruas antigamente?",
+  ru_terra:"Eram de terra ou pedras",
+  ru_asfalto:"Eram cobertas de asfalto liso",
+  ru_plastico:"Eram feitas de plástico colorido",
+  ru_q_hoje:"Como são as ruas de hoje?",
+  ru_asfaltadas:"São asfaltadas e iluminadas",
+  ru_barro:"São de barro e sem luz nenhuma",
+  ru_madeira:"São feitas de tábuas de madeira",
+  ru_q_mudou:"O que mudou nas ruas ao longo do tempo?",
+  ru_tudo:"O chão, a luz e os veículos",
+  ru_nada:"Nada mudou, são todas iguais",
+  ru_cor:"Só a cor das casas mudou",
+  ru_q_patrimonio:"O que é patrimônio cultural de uma cidade?",
+  ru_bens:"Bens importantes da cultura do lugar",
+  ru_lixo:"O lixo jogado nas calçadas da rua",
+  ru_brinquedos:"Os brinquedos das crianças da escola",
+  ru_q_preservar:"Por que algumas ruas preservam características do passado?",
+  ru_historia:"Porque contam a história do lugar",
+  ru_velhas:"Porque ninguém quis arrumar elas",
+  ru_feias:"Porque ficam mais bonitas assim",
+  ru_q_conhecer:"O que podemos fazer para conhecer as ruas da cidade?",
+  ru_passear:"Passear por elas e observar",
+  ru_esconder:"Se esconder dentro de casa",
+  ru_dormir:"Dormir o dia inteiro",
+  ru_q_historica:"Por que uma rua pode ser considerada histórica?",
+  ru_preserva:"Por preservar traços do passado",
+  ru_nova:"Por ser a mais nova da cidade",
+  ru_larga:"Por ser a mais larga de todas",
+
+  /* ============ 2. PÚBLICO OU PRIVADO? ============ */
+  ep_q_publico:"O que é um espaço público?",
+  ep_todos:"Um lugar aberto para todas as pessoas",
+  ep_dono:"Um lugar que só o dono pode usar",
+  ep_fechado:"Um lugar trancado com um cadeado",
+  ep_q_privado:"O que é um espaço privado?",
+  ep_pertence:"Um lugar que pertence a alguém",
+  ep_rua:"Um lugar aberto a todas as pessoas",
+  ep_ninguem:"Um lugar que não pertence a ninguém",
+  ep_q_praca:"Que tipo de espaço é a praça?",
+  ep_pub:"É um espaço público",
+  ep_pri:"É um espaço privado",
+  ep_nem:"Não é nenhum dos dois",
+  ep_q_shopping:"Que tipo de espaço é o shopping?",
+  ep_q_mercado:"Que tipo de espaço é o mercado municipal?",
+  ep_q_cinema:"Que tipo de espaço é o cinema?",
+  ep_q_parque:"Que tipo de espaço é o parquinho da cidade?",
+  ep_q_regra:"Nos lugares abertos a todos, precisamos seguir o quê?",
+  ep_regras:"Regras de boa convivência",
+  ep_nenhuma:"Não precisamos seguir nada",
+  ep_fugir:"Precisamos sair correndo de lá",
+  ep_q_exemplo:"Qual destes é um lugar aberto para todas as pessoas?",
+  ep_a_praca:"A praça da cidade",
+  ep_a_quarto:"O quarto de alguém",
+  ep_a_escritorio:"O escritório do chefe",
+
+  /* ============ 3. COMO VAMOS À ESCOLA? ============ */
+  tr_q_meios:"Quais são meios de transporte para ir à escola?",
+  tr_carro:"Carro, ônibus e bicicleta",
+  tr_foguete:"Foguete, avião e helicóptero",
+  tr_patins:"Patins, skate e submarino",
+  tr_q_onibus:"O ônibus escolar serve para quê?",
+  tr_levar:"Levar as crianças até a escola",
+  tr_passeio:"Passear pela cidade à noite",
+  tr_carregar:"Carregar caixas do mercado",
+  tr_q_barco:"Em alguns lugares, as crianças vão à escola de quê?",
+  tr_barco:"De barco",
+  tr_aviao:"De avião",
+  tr_trem:"De trem-bala",
+  tr_q_poluicao:"Muitos carros nas ruas podem causar o quê?",
+  tr_polui:"Poluição do ar",
+  tr_chuva:"Chuva de doces",
+  tr_flores:"Mais flores na rua",
+  tr_q_ape:"Ir a pé para a escola é bom por quê?",
+  tr_npolui:"Não polui e faz bem ao corpo",
+  tr_rapido:"É o jeito mais rápido de todos",
+  tr_barulho:"Faz barulho demais na rua toda",
+  tr_q_bike:"A bicicleta é um meio de transporte que polui?",
+  tr_naopolui:"Não, a bicicleta não polui",
+  tr_sim_polui:"Sim, ela polui bastante",
+  tr_talvez:"Só polui quando está chovendo",
+  tr_q_diferente:"Por que crianças de lugares diferentes usam transportes diferentes?",
+  tr_realidade:"Porque cada lugar tem uma realidade",
+  tr_igual:"Todas usam o mesmo transporte",
+  tr_nenhum:"Porque nenhuma criança vai à escola",
+
+  /* ============ 4. PARA QUE SERVE A RUA? ============ */
+  fn_q_servem:"Para que servem as ruas?",
+  fn_ligar:"Para ligar os lugares da cidade",
+  fn_enfeite:"Só para enfeitar a cidade toda",
+  fn_guardar:"Para guardar os carros velhos lá",
+  fn_q_comercial:"Uma rua com muitas lojas tem função de quê?",
+  fn_comercial:"Função comercial",
+  fn_residencial:"Função residencial",
+  fn_cultural:"Função cultural",
+  fn_q_residencial:"Uma rua onde as pessoas moram tem função de quê?",
+  fn_q_cultural:"Uma rua com museus e teatros tem função de quê?",
+  fn_q_nomes:"Os nomes das ruas podem contar o quê?",
+  fn_historia_lugar:"A história do lugar",
+  fn_receita:"Uma receita de bolo gostoso",
+  fn_piada:"Uma piada muito engraçada",
+  fn_q_minhocao:"O Minhocão em São Paulo é um elevado que nos fins de semana vira o quê?",
+  fn_lazer:"Espaço de lazer para pedestres",
+  fn_estacionamento:"Estacionamento grande de caminhões",
+  fn_piscina:"Uma piscina gigante com tobogã",
+  fn_q_diferenca:"As ruas de uma cidade são todas iguais?",
+  fn_nao:"Não, cada rua tem algo diferente",
+  fn_sim:"Sim, são todas iguais mesmo",
+  fn_quase:"Quase todas são bem iguais",
+
+  /* ============ 5. DESCOBRIR A HISTÓRIA ============ */
+  fh_q_fonte:"O que são fontes históricas?",
+  fh_ajudam:"Coisas que ajudam a conhecer o passado",
+  fh_inventadas:"Histórias inventadas só para brincar",
+  fh_futuro:"Coisas que mostram apenas o futuro",
+  fh_q_foto:"Fotografias antigas ajudam a conhecer o quê?",
+  fh_passado:"Como era o lugar no passado",
+  fh_clima:"O clima que fará amanhã cedo",
+  fh_receita:"Receitas de comida gostosa",
+  fh_q_morador:"Conversar com moradores antigos é importante por quê?",
+  fh_relatos:"Porque eles contam o que viveram",
+  fh_cantar:"Porque eles cantam músicas do rádio",
+  fh_correr:"Porque eles correm mais que todos",
+  fh_q_mapa:"Os mapas ajudam a entender o quê?",
+  fh_como_era:"Como era o lugar antes",
+  fh_comida:"O que comer lá no almoço",
+  fh_roupa:"Que roupa vestir no dia",
+  fh_q_texto:"Os textos históricos servem para quê?",
+  fh_registro:"Registrar o que aconteceu no passado",
+  fh_brincar:"Fazer brincadeiras divertidas na escola",
+  fh_pintar:"Pintar as paredes coloridas de casa",
+  fh_q_mudancas:"Ao comparar fotos antigas e atuais, o que podemos ver?",
+  fh_mudaram:"As mudanças que aconteceram",
+  fh_nada_mudou:"Que nada mudou por ali",
+  fh_cores_so:"Só as cores das fotos velhas",
+  fh_q_pesquisa:"Como podemos conhecer a história da nossa rua?",
+  fh_pesquisar:"Pesquisando em fotos, livros e relatos",
+  fh_adivinhando:"Adivinhando sem perguntar nada a ninguém",
+  fh_esquecendo:"Esquecendo tudo sobre o lugar que vivemos",
+
+  /* ============ 6. QUEM TRABALHA NA ESCOLA? ============ */
+  pe_q_diretora:"Quem organiza e cuida de toda a escola?",
+  pe_diretora:"A diretora",
+  pe_carteiro:"O carteiro",
+  pe_bombeiro:"O bombeiro",
+  pe_q_limpeza:"Quem cuida da limpeza da escola?",
+  pe_auxiliar:"O auxiliar de limpeza",
+  pe_piloto:"O piloto de avião",
+  pe_pintor:"O pintor de quadros",
+  pe_q_porteiro:"Quem cuida da entrada da escola?",
+  pe_porteiro:"O porteiro",
+  pe_padeiro:"O padeiro",
+  pe_dentista:"O dentista",
+  pe_q_cozinheira:"Quem prepara a comida na escola?",
+  pe_cozinheira:"A cozinheira",
+  pe_motorista:"O motorista de táxi",
+  pe_jardineiro:"O jardineiro do parque",
+  pe_q_professor:"Quem ensina as matérias na sala de aula?",
+  pe_professor:"O professor",
+  pe_cozinheira2:"A cozinheira da escola",
+  pe_porteiro2:"O porteiro da escola",
+  pe_q_comunidade:"Todas essas pessoas juntas formam o quê?",
+  pe_comunidade:"A comunidade escolar",
+  pe_time:"Um time de futebol",
+  pe_banda:"Uma banda de música",
+  pe_q_importancia:"Por que cada profissional da escola é importante?",
+  pe_funciona:"Cada um faz a escola funcionar bem",
+  pe_so_professor:"Só o professor faz alguma coisa",
+  pe_nenhum:"Nenhum deles faz diferença na escola",
+
+  /* ============ 7. MATERIAL DE ESTUDAR ============ */
+  me_q_antigamente:"O que as crianças usavam para estudar antigamente?",
+  me_lousa:"Lousa, cartilha e goma árabe",
+  me_tablet:"Tablet e computador",
+  me_celular:"Celular e fone de ouvido",
+  me_q_cartilha:"A cartilha escolar antiga servia para quê?",
+  me_ler:"Ensinar as crianças a ler",
+  me_correr:"Ensinar a correr rápido",
+  me_cozinhar:"Ensinar a cozinhar",
+  me_q_goma:"A goma árabe era usada como o quê?",
+  me_cola:"Era usada como cola",
+  me_tinta:"Era usada como tinta",
+  me_comida:"Era usada como comida",
+  me_q_lousa:"A lousa escolar antiga servia para quê?",
+  me_escrever:"Para escrever e aprender",
+  me_dormir2:"Para dormir em cima dela",
+  me_brincar2:"Para jogar bola na escola",
+  me_q_bolsa:"As bolsas escolares antigas eram feitas de quê?",
+  me_couro:"De couro",
+  me_papel:"De papel fino",
+  me_folhas:"De folhas de árvore",
+  me_q_mudou:"Os materiais escolares mudaram com o tempo?",
+  me_sim:"Sim, hoje são bem diferentes",
+  me_nao:"Não, são todos iguais",
+  me_talvez:"Só mudou a cor dos lápis",
+  me_q_hoje:"Quais materiais você usa hoje na escola?",
+  me_caderno:"Caderno, lápis e estojo",
+  me_lousa2:"Lousa de pedra e goma árabe",
+  me_martelo:"Martelo e parafuso",
+
+  /* ============ 8. ESCOLA PARA QUÊ? ============ */
+  es_q_serve:"Para que serve a escola?",
+  es_aprender:"Para aprender e fazer amigos novos",
+  es_brincar:"Só para brincar o dia todo inteiro",
+  es_dormir:"Para dormir e descansar na sala",
+  es_q_amigos:"Na escola, além de estudar, o que podemos fazer?",
+  es_amizades:"Fazer amizades e brincar",
+  es_esconder:"Se esconder e ficar sozinho lá",
+  es_nada:"Não podemos fazer nada de bom",
+  es_q_aprendiam:"Antes de existir escola, como as crianças aprendiam?",
+  es_observando:"Observando os mais velhos",
+  es_sozinhas:"Ficavam sozinhas sem aprender nada",
+  es_maquina:"Aprendiam dentro de uma máquina grande",
+  es_q_velhos:"Os mais velhos ensinavam o quê às crianças?",
+  es_oficio:"A cuidar de animais e consertar",
+  es_nada2:"Não ensinavam nada para ninguém",
+  es_voar:"A voar bem alto como os pássaros",
+  es_q_historias:"Contar histórias é uma forma de quê?",
+  es_ensinar:"Ensinar e passar conhecimento",
+  es_esquecer:"Esquecer tudo que aconteceu",
+  es_barulho:"Fazer barulho dentro da sala",
+  es_q_futuro:"A escola ajuda a gente a pensar no quê?",
+  es_sonhos:"Nos sonhos para o futuro",
+  es_passado:"Só no que já aconteceu",
+  es_almoco:"Só na hora do almoço",
+  es_q_atividades:"Quais atividades a escola oferece?",
+  es_varias:"Estudar, brincar e fazer esportes",
+  es_so_ler:"Só ler livros o dia inteiro na sala",
+  es_so_correr:"Só correr no pátio sem parar",
+
+  /* ---- frases de reforço ---- */
+  exp_ruas:"As ruas mudaram muito ao longo do tempo. Antes eram de terra, hoje são asfaltadas.",
+  exp_espacos:"Espaços públicos são para todos. Espaços privados pertencem a alguém.",
+  exp_transporte:"Existem muitos meios de transporte para ir à escola, como carro, ônibus, bicicleta e barco.",
+  exp_funcoes:"As ruas podem ter função comercial, residencial ou cultural.",
+  exp_fontes:"Fotografias, mapas, textos e relatos de moradores são fontes históricas.",
+  exp_profissionais:"Na escola trabalham muitas pessoas, como a diretora, o porteiro, a cozinheira e os professores.",
+  exp_materiais:"Os materiais escolares mudaram muito. Antes usavam lousa de pedra e cartilha, hoje usamos caderno e lápis.",
+  exp_escola:"A escola é o lugar onde aprendemos, fazemos amigos e sonhamos com o futuro.",
+};
+
+/* ============================================================
+   PLAYER DE ÁUDIO (clipes em sequência)
+   ============================================================ */
+const AUDIO_DIR='audio/', AUDIO_EXT='.mp3';
+const player=new Audio();
+player.preload='auto';
+let playToken=0, audioOn=true;
+function stopAudio(){ playToken++; try{player.pause();}catch(e){} setPlayingBadge(false); }
+function playKeys(keys){
+  if(!audioOn) return;
+  stopAudio();
+  const list=[].concat(...keys.map(k=>Array.isArray(k)?k:[k])).filter(Boolean);
+  if(!list.length) return;
+  const my=playToken; let i=0;
+  setPlayingBadge(true);
+  const next=()=>{
+    if(my!==playToken) return;
+    if(i>=list.length){ setPlayingBadge(false); return; }
+    const key=list[i++];
+    player.src=AUDIO_DIR+key+AUDIO_EXT;
+    player.onended=next;
+    player.onerror=()=>{ setTimeout(next,10); };
+    const p=player.play();
+    if(p&&p.catch) p.catch(()=>setTimeout(next,10));
+  };
+  next();
+}
+function setPlayingBadge(on){
+  const b=document.getElementById('qspeak'); if(b) b.classList.toggle('playing',on);
+}
+function unlockAudio(depois){
+  const pronto=()=>{ player.muted=false; if(depois){ const f=depois; depois=null; f(); } };
+  try{ player.muted=true; player.src=AUDIO_DIR+'greet'+AUDIO_EXT;
+       const p=player.play();
+       if(p&&p.then) p.then(()=>{player.pause();player.currentTime=0;pronto();}).catch(pronto);
+       else { player.pause(); pronto(); }
+       setTimeout(pronto,1200);
+  }catch(e){ pronto(); }
+}
+
+/* ===== SONS DE EFEITO (Web Audio) ===== */
+let actx=null;
+function initAudio(){ try{ actx = actx || new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==='suspended') actx.resume(); }catch(e){} }
+function tone(freq,start,dur,type='sine',vol=0.2){
+  if(!actx) return;
+  const o=actx.createOscillator(), g=actx.createGain();
+  o.type=type; o.frequency.value=freq; o.connect(g); g.connect(actx.destination);
+  const t=actx.currentTime+start;
+  g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+0.02);
+  g.gain.exponentialRampToValueAtTime(0.001,t+dur);
+  o.start(t); o.stop(t+dur);
+}
+function sndClick(){ initAudio(); tone(540,0,0.07,'triangle',0.14); }
+function sndRight(){ initAudio(); [523,659,784,1047].forEach((f,i)=>tone(f,i*0.09,0.25,'triangle',0.18)); }
+function sndWrong(){ initAudio(); tone(300,0,0.18,'sine',0.13); tone(220,0.12,0.25,'sine',0.13); }
+function sndWin(){ initAudio(); [523,659,784,1047,784,1047,1319].forEach((f,i)=>tone(f,i*0.12,0.3,'triangle',0.2)); }
+
+/* ===== UTILIDADES ===== */
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function rint(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+function mix(){ return shuffle([].concat(...arguments)); }
+const OK_KEYS=['ok1','ok2','ok3','ok4','ok5','ok6'], NO_KEYS=['no1','no2','no3'];
+function emo(e,size){ return '<span class="obj" style="font-size:'+(size||74)+'px">'+e+'</span>'; }
+function cena(e,txt,size){ return emo(e,size||88)+(txt?'<div class="cardtxt">'+txt+'</div>':''); }
+
+function updateStars(){ const el=document.getElementById('starNum'); if(el) el.textContent=stars; localStorage.setItem('vitor_ci3_stars',stars); }
+function addStar(n=1){ stars+=n; updateStars(); }
+
+/* ---------------- CONFETE ---------------- */
+const cv=document.getElementById('confetti'), cx=cv.getContext('2d');
+let confs=[];
+function resizeCv(){cv.width=innerWidth;cv.height=innerHeight;}
+addEventListener('resize',resizeCv); resizeCv();
+function burst(){
+  const cols=['#ff6b9d','#ffd93d','#6bcB77','#4d96ff','#a06cd5','#ff924c'];
+  for(let i=0;i<70;i++){confs.push({x:innerWidth/2,y:innerHeight/3,vx:(Math.random()-0.5)*14,vy:Math.random()*-12-3,c:pick(cols),s:rint(7,14),r:Math.random()*6,vr:(Math.random()-.5)*.4});}
+}
+function loopConf(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  confs.forEach(p=>{p.vy+=0.35;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/2,p.s,p.s);cx.restore();});
+  confs=confs.filter(p=>p.y<cv.height+30);
+  requestAnimationFrame(loopConf);
+}
+loopConf();
+
+/* ===== SHELL ===== */
+function shell(inner){
+  App.innerHTML=`
+    <div class="topbar">
+      <div class="nav"><a class="back-btn" href="../" title="Voltar ao menu de matérias" aria-label="Voltar ao menu de matérias">🏠</a><button class="home-btn" onclick="sndClick();goHome()" title="Escolher outro jogo desta matéria" aria-label="Escolher outro jogo desta matéria">🔄</button></div>
+      <div class="stars">⭐ <span class="num" id="starNum">${stars}</span></div>
+    </div>
+    ${inner}`;
+}
+
+/* ===== MENU ===== */
+const GAMES=[
+  {id:'ruas',        ico:'🏘️', nome:'Ruas: Antes e Hoje',     sub:'Terra, pedras e asfalto',     cls:'c1'},
+  {id:'espacos',     ico:'🏛️', nome:'Público ou Privado?',    sub:'Praça, shopping, parque',      cls:'c2'},
+  {id:'transporte',  ico:'🚌', nome:'Como Vamos à Escola?',   sub:'Carro, ônibus e bicicleta',    cls:'c3'},
+  {id:'funcoes',     ico:'🛣️', nome:'Para Que Serve a Rua?',  sub:'Comercial, residencial',       cls:'c4'},
+  {id:'fontes',      ico:'📸', nome:'Descobrir a História',    sub:'Fotos, mapas e relatos',        cls:'c5'},
+  {id:'profissionais',ico:'👩‍🏫', nome:'Quem Trabalha na Escola?',sub:'Diretora, porteiro e mais', cls:'c6'},
+  {id:'materiais',   ico:'📚', nome:'Material de Estudar',     sub:'Lousa, cartilha e caderno',     cls:'c7'},
+  {id:'escola',      ico:'🏫', nome:'Escola Para Quê?',        sub:'Aprender e fazer amigos',       cls:'c8'},
+];
+function goHome(silent){
+  stopAudio();
+  shell(`
+    <div class="hero">
+      <div class="mascote">🏘️</div>
+      <h1>Olá!</h1>
+      <p>Escolha uma brincadeira 👇</p>
+      <button onclick="testSound()" style="margin-top:6px;background:var(--amarelo);color:#5a4500;border:none;border-radius:18px;padding:9px 18px;font-size:16px;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #d9a800;">🔈 Testar som</button>
+    </div>
+    <div class="grid">
+      ${GAMES.map(g=>`<button class="card ${g.cls}" onclick="sndClick();startGame('${g.id}')">
+        <span class="ico">${g.ico}</span><span>${g.nome}</span>
+        <span style="font-size:13px;font-weight:normal;opacity:.9">${g.sub}</span>
+      </button>`).join('')}
+    </div>
+    <p style="text-align:center;color:#8aa593;margin-top:18px;font-size:14px;">Feito com 💚 para estudar pra prova</p>
+  `);
+  if(!silent) setTimeout(()=>playKeys(['greet']),250);
+}
+function testSound(){ initAudio(); sndClick(); playKeys(['test']); }
+
+/* ===== MOTOR DE RODADAS ===== */
+let current=null, locked=false, seqPos=0;
+function startGame(id){
+  const rounds=BUILDERS[id]();
+  current={id, title:GAMES.find(g=>g.id===id).nome, rounds, idx:0};
+  renderRound();
+}
+function gameFrame(c,r,bodyHtml){
+  shell(`
+    <div class="game">
+      <h2 class="game-title">${GAMES.find(g=>g.id===c.id).ico} ${c.title}</h2>
+      <div class="progress">Pergunta ${c.idx+1} de ${c.rounds.length}</div>
+      <div class="question">
+        <button class="speak-btn" id="qspeak" onclick="sndClick();speakRound()">🔊</button>
+        <span>${r.q}</span>
+      </div>
+      <div class="stage">${r.stage||''}</div>
+      ${bodyHtml}
+      <div style="font-size:14px;color:#aaa;margin-top:6px;">👆 Toque para responder. Toque no 🔊 para ouvir de novo.</div>
+      <div class="feedback" id="fb"></div>
+    </div>
+  `);
+}
+function renderRound(){
+  locked=false;
+  const c=current, r=c.rounds[c.idx];
+  if(r.mode==='seq'){ return renderSeq(c,r); }
+  gameFrame(c,r,`<div class="options ${r.colorOpts?'opt-colors':''}" id="opts"></div>`);
+  const shown=shuffle(r.options);
+  const opts=document.getElementById('opts');
+  shown.forEach(o=>{
+    const b=document.createElement('button');
+    b.className='opt'+(o.big?' big':'');
+    b.innerHTML=o.label;
+    b.onclick=()=>answer(b,o);
+    opts.appendChild(b);
+  });
+  window._roundKeys=[].concat(r.audio||[], ['choose'], shown.map(o=>o.aud));
+  setTimeout(()=>speakRound(),400);
+}
+function speakRound(){ playKeys(window._roundKeys||[]); }
+
+function showNextButton(){
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=null);
+  document.querySelectorAll('.ficha').forEach(b=>b.onclick=null);
+  const nb=document.createElement('button');
+  nb.className='next-btn';
+  const last=current.idx>=current.rounds.length-1;
+  nb.textContent=last?'🏆 Terminar':'Próxima ➡';
+  nb.onclick=()=>{
+    nb.onclick=null;
+    sndClick();
+    if(last){ winScreen(); return; }
+    current.idx++; renderRound();
+    locked=true; setTimeout(()=>{locked=false;},350);
+  };
+  document.querySelector('.game').appendChild(nb);
+}
+function correctFlow(extraAudio){
+  locked=true; sndRight(); burst(); addStar(1);
+  const fb=document.getElementById('fb'); if(fb){fb.className='feedback good'; fb.textContent='⭐ Muito bem!';}
+  playKeys(extraAudio.filter(Boolean));
+  showNextButton();
+}
+function answer(btn,opt){
+  if(locked) return;
+  if(opt.correct){
+    btn.classList.add('ok');
+    document.querySelectorAll('.opt').forEach(b=>{if(b!==btn)b.classList.add('no');});
+    correctFlow([opt.aud, pick(OK_KEYS), opt.expAud]);
+  }else{
+    btn.classList.add('no'); btn.onclick=null;
+    sndWrong();
+    const fb=document.getElementById('fb'); fb.className='feedback bad'; fb.textContent='🤔 Tenta de novo!';
+    playKeys([opt.aud, pick(NO_KEYS)].filter(Boolean));
+  }
+}
+
+/* ---- modo MONTAR A ORDEM ---- */
+function renderSeq(c,r){
+  seqPos=0;
+  const slots=r.itens.map((_,i)=>`<div class="seqslot" id="sl${i}"><span class="nn">${i+1}</span><span class="tx">...</span></div>`).join('');
+  gameFrame(c,r,`
+    <div class="seqslots">${slots}</div>
+    <div class="fichas" id="fichas"></div>
+  `);
+  const box=document.getElementById('fichas');
+  shuffle(r.itens.map((it,i)=>({it,i}))).forEach(t=>{
+    const b=document.createElement('button');
+    b.className='ficha'; b.textContent=t.it.txt;
+    b.onclick=()=>tapFicha(b,t.i,r);
+    box.appendChild(b);
+  });
+  window._roundKeys=[].concat(r.audio||[]);
+  setTimeout(()=>speakRound(),400);
+}
+function tapFicha(btn,idx,r){
+  if(locked) return;
+  if(idx===seqPos){
+    const sl=document.getElementById('sl'+seqPos);
+    sl.querySelector('.tx').textContent=r.itens[idx].txt;
+    sl.classList.add('filled');
+    btn.classList.add('used'); btn.onclick=null;
+    sndClick(); playKeys([r.itens[idx].aud]);
+    seqPos++;
+    if(seqPos>=r.itens.length){
+      setTimeout(()=>correctFlow([pick(OK_KEYS), r.expAud]),600);
+    }
+  }else{
+    sndWrong();
+    btn.classList.add('shake'); setTimeout(()=>btn.classList.remove('shake'),420);
+    const fb=document.getElementById('fb'); fb.className='feedback bad'; fb.textContent='🤔 Esse não é o próximo!';
+    playKeys([r.itens[idx].aud, pick(NO_KEYS)]);
+  }
+}
+
+function winScreen(){
+  sndWin(); burst(); setTimeout(burst,400); setTimeout(burst,800);
+  const c=current;
+  shell(`
+    <div class="game win">
+      <div class="trophy">🏆</div>
+      <h2 class="game-title">Parabéns!</h2>
+      <p style="font-size:22px;">Você ganhou <b>${c.rounds.length}</b> estrelas! ⭐</p>
+      <p style="font-size:18px;color:#888;">Você está ficando craque em <b>${c.title}</b>!</p>
+      <button class="next-btn" onclick="sndClick();startGame('${c.id}')">🔁 Jogar de novo</button>
+      <br>
+      <button class="next-btn" style="background:var(--azul);box-shadow:0 6px 0 #2f6fd0;margin-top:10px;" onclick="sndClick();goHome()">🏠 Escolher outro</button>
+    </div>
+  `);
+  setTimeout(()=>playKeys(['win']),250);
+}
+
+/* opções a partir de um mapa de rótulos */
+function mkOpts(correct, all, lblMap, extra){
+  return shuffle(all).map(k=>{
+    const o={label:lblMap[k], aud:k, correct:k===correct};
+    if(extra) Object.assign(o, extra(k));
+    return o;
+  });
+}
+function exp(options, expAud){ options.forEach(o=>{ if(o.correct) o.expAud=expAud; }); return options; }
+function L(e,txt){ return e+'<span class="cap">'+txt+'</span>'; }
+
+/* ============================================================
+   CONSTRUTORES DE RODADAS
+   ============================================================ */
+const BUILDERS={
+
+  /* 1. RUAS: ANTES E HOJE */
+  ruas(){
+    const fixas=[
+      {q:'Como eram as <b>ruas antigamente</b>? 🏚️',
+       audio:['ru_q_antes'], stage:cena('🏚️'), colorOpts:true,
+       options:exp(mkOpts('ru_terra',['ru_terra','ru_asfalto','ru_plastico'],
+         {ru_terra:L('🪨','Eram de terra ou pedras'), ru_asfalto:L('🛣️','Eram cobertas de asfalto liso'), ru_plastico:L('🧴','Eram feitas de plástico colorido')}),'exp_ruas')},
+      {q:'Como são as <b>ruas de hoje</b>? 🛣️',
+       audio:['ru_q_hoje'], stage:cena('🛣️'), colorOpts:true,
+       options:mkOpts('ru_asfaltadas',['ru_asfaltadas','ru_barro','ru_madeira'],
+         {ru_asfaltadas:L('🛣️','São asfaltadas e iluminadas'), ru_barro:L('🏚️','São de barro e sem luz nenhuma'), ru_madeira:L('🪵','São feitas de tábuas de madeira')})},
+      {q:'O que <b>mudou</b> nas ruas ao longo do tempo? 🔄',
+       audio:['ru_q_mudou'], stage:cena('🔄'), colorOpts:true,
+       options:mkOpts('ru_tudo',['ru_tudo','ru_nada','ru_cor'],
+         {ru_tudo:L('🔄','O chão, a luz e os veículos'), ru_nada:L('🟰','Nada mudou, são todas iguais'), ru_cor:L('🎨','Só a cor das casas mudou')})},
+      {q:'O que é <b>patrimônio cultural</b> de uma cidade? 🏛️',
+       audio:['ru_q_patrimonio'], stage:cena('🏛️'), colorOpts:true,
+       options:mkOpts('ru_bens',['ru_bens','ru_lixo','ru_brinquedos'],
+         {ru_bens:L('🏛️','Bens importantes da cultura do lugar'), ru_lixo:L('🗑️','O lixo jogado nas calçadas da rua'), ru_brinquedos:L('🧸','Os brinquedos das crianças da escola')})},
+      {q:'Por que algumas ruas <b>preservam</b> o passado? 🕰️',
+       audio:['ru_q_preservar'], stage:cena('🕰️'), colorOpts:true,
+       options:mkOpts('ru_historia',['ru_historia','ru_velhas','ru_feias'],
+         {ru_historia:L('📜','Porque contam a história do lugar'), ru_velhas:L('😕','Porque ninguém quis arrumar elas'), ru_feias:L('🤷','Porque ficam mais bonitas assim')})},
+      {q:'O que podemos fazer para <b>conhecer</b> as ruas da cidade? 👀',
+       audio:['ru_q_conhecer'], stage:cena('👀🏘️'), colorOpts:true,
+       options:mkOpts('ru_passear',['ru_passear','ru_esconder','ru_dormir'],
+         {ru_passear:L('🚶','Passear por elas e observar'), ru_esconder:L('🏠','Se esconder dentro de casa'), ru_dormir:L('😴','Dormir o dia inteiro')})},
+      {q:'Por que uma rua pode ser considerada <b>histórica</b>? 📜',
+       audio:['ru_q_historica'], stage:cena('📜'), colorOpts:true,
+       options:mkOpts('ru_preserva',['ru_preserva','ru_nova','ru_larga'],
+         {ru_preserva:L('🏛️','Por preservar traços do passado'), ru_nova:L('🆕','Por ser a mais nova da cidade'), ru_larga:L('↔️','Por ser a mais larga de todas')})},
+    ];
+    return shuffle(fixas);
+  },
+
+  /* 2. PÚBLICO OU PRIVADO? */
+  espacos(){
+    const ESPACOS=[
+      {nome:'A praça',     e:'🏞️', aud:'ep_q_praca',    pub:true},
+      {nome:'O shopping',  e:'🏬', aud:'ep_q_shopping', pub:false},
+      {nome:'O mercado municipal', e:'🏪', aud:'ep_q_mercado', pub:true},
+      {nome:'O cinema',    e:'🎬', aud:'ep_q_cinema',   pub:false},
+      {nome:'O parquinho', e:'🛝', aud:'ep_q_parque',   pub:true},
+    ];
+    const classif=shuffle(ESPACOS).slice(0,3).map(e=>({
+      q:'Que <b>tipo de espaço</b> é este? 🤔',
+      audio:[e.aud], stage:cena(e.e, e.nome), colorOpts:true,
+      options:mkOpts(e.pub?'ep_pub':'ep_pri',['ep_pub','ep_pri','ep_nem'],
+        {ep_pub:L('🏛️','É um espaço público'), ep_pri:L('🔒','É um espaço privado'), ep_nem:L('🤷','Não é nenhum dos dois')})
+    }));
+    const fixas=[
+      {q:'O que é um <b>espaço público</b>? 🏛️',
+       audio:['ep_q_publico'], stage:cena('🏛️'), colorOpts:true,
+       options:exp(mkOpts('ep_todos',['ep_todos','ep_dono','ep_fechado'],
+         {ep_todos:L('🏛️','Aberto para todas as pessoas'), ep_dono:L('🔒','Só o dono pode usar'), ep_fechado:L('🔐','Trancado com um cadeado')}),'exp_espacos')},
+      {q:'O que é um <b>espaço privado</b>? 🔒',
+       audio:['ep_q_privado'], stage:cena('🔒'), colorOpts:true,
+       options:mkOpts('ep_pertence',['ep_pertence','ep_rua','ep_ninguem'],
+         {ep_pertence:L('🔒','Um lugar que pertence a alguém'), ep_rua:L('🛣️','Um lugar aberto a todas as pessoas'), ep_ninguem:L('🤷','Um lugar que não pertence a ninguém')})},
+      {q:'Nos lugares abertos a todos, precisamos seguir o quê? 📋',
+       audio:['ep_q_regra'], stage:cena('📋'), colorOpts:true,
+       options:mkOpts('ep_regras',['ep_regras','ep_nenhuma','ep_fugir'],
+         {ep_regras:L('📋','Regras de boa convivência'), ep_nenhuma:L('🚫','Não precisamos seguir nada'), ep_fugir:L('🏃','Precisamos sair correndo de lá')})},
+      {q:'Qual destes é um lugar aberto para <b>todas as pessoas</b>? 🏞️',
+       audio:['ep_q_exemplo'], stage:cena('🏞️'), colorOpts:true,
+       options:mkOpts('ep_a_praca',['ep_a_praca','ep_a_quarto','ep_a_escritorio'],
+         {ep_a_praca:L('🏞️','A praça da cidade'), ep_a_quarto:L('🛏️','O quarto de alguém'), ep_a_escritorio:L('💼','O escritório do chefe')})},
+    ];
+    return mix(classif, fixas);
+  },
+
+  /* 3. COMO VAMOS À ESCOLA? */
+  transporte(){
+    const fixas=[
+      {q:'Quais são <b>meios de transporte</b> para ir à escola? 🚌',
+       audio:['tr_q_meios'], stage:cena('🚌🚗🚲'), colorOpts:true,
+       options:exp(mkOpts('tr_carro',['tr_carro','tr_foguete','tr_patins'],
+         {tr_carro:L('🚗','Carro, ônibus e bicicleta'), tr_foguete:L('🚀','Foguete, avião e helicóptero'), tr_patins:L('🛹','Patins, skate e submarino')}),'exp_transporte')},
+      {q:'O <b>ônibus escolar</b> serve para quê? 🚌',
+       audio:['tr_q_onibus'], stage:cena('🚌'), colorOpts:true,
+       options:mkOpts('tr_levar',['tr_levar','tr_passeio','tr_carregar'],
+         {tr_levar:L('🚌','Levar as crianças até a escola'), tr_passeio:L('🌙','Passear pela cidade à noite'), tr_carregar:L('📦','Carregar caixas do mercado')})},
+      {q:'Em alguns lugares, as crianças vão à escola de quê? ⛵',
+       audio:['tr_q_barco'], stage:cena('⛵'), colorOpts:true,
+       options:mkOpts('tr_barco',['tr_barco','tr_aviao','tr_trem'],
+         {tr_barco:L('⛵','De barco'), tr_aviao:L('✈️','De avião'), tr_trem:L('🚄','De trem-bala')})},
+      {q:'Muitos carros nas ruas podem causar o quê? 🚗💨',
+       audio:['tr_q_poluicao'], stage:cena('🚗💨'), colorOpts:true,
+       options:mkOpts('tr_polui',['tr_polui','tr_chuva','tr_flores'],
+         {tr_polui:L('💨','Poluição do ar'), tr_chuva:L('🍬','Chuva de doces'), tr_flores:L('🌸','Mais flores na rua')})},
+      {q:'Ir <b>a pé</b> para a escola é bom por quê? 🚶',
+       audio:['tr_q_ape'], stage:cena('🚶'), colorOpts:true,
+       options:mkOpts('tr_npolui',['tr_npolui','tr_rapido','tr_barulho'],
+         {tr_npolui:L('🌱','Não polui e faz bem ao corpo'), tr_rapido:L('⚡','É o jeito mais rápido de todos'), tr_barulho:L('🔊','Faz barulho demais na rua toda')})},
+      {q:'A <b>bicicleta</b> é um meio de transporte que polui? 🚲',
+       audio:['tr_q_bike'], stage:cena('🚲'), colorOpts:true,
+       options:mkOpts('tr_naopolui',['tr_naopolui','tr_sim_polui','tr_talvez'],
+         {tr_naopolui:L('🌱','Não, a bicicleta não polui'), tr_sim_polui:L('💨','Sim, ela polui bastante'), tr_talvez:L('🌧️','Só polui quando está chovendo')})},
+      {q:'Por que crianças de lugares diferentes usam <b>transportes diferentes</b>? 🌍',
+       audio:['tr_q_diferente'], stage:cena('🌍'), colorOpts:true,
+       options:mkOpts('tr_realidade',['tr_realidade','tr_igual','tr_nenhum'],
+         {tr_realidade:L('🌍','Porque cada lugar tem uma realidade'), tr_igual:L('🟰','Todas usam o mesmo transporte'), tr_nenhum:L('🚫','Porque nenhuma criança vai à escola')})},
+    ];
+    return shuffle(fixas);
+  },
+
+  /* 4. PARA QUE SERVE A RUA? */
+  funcoes(){
+    const FUNC_LBL={fn_comercial:L('🏪','Função comercial'), fn_residencial:L('🏠','Função residencial'), fn_cultural:L('🎭','Função cultural')};
+    const fixas=[
+      {q:'Para que servem as <b>ruas</b>? 🛣️',
+       audio:['fn_q_servem'], stage:cena('🛣️'), colorOpts:true,
+       options:exp(mkOpts('fn_ligar',['fn_ligar','fn_enfeite','fn_guardar'],
+         {fn_ligar:L('🛣️','Para ligar os lugares da cidade'), fn_enfeite:L('🎀','Só para enfeitar a cidade toda'), fn_guardar:L('🚗','Para guardar os carros velhos lá')}),'exp_funcoes')},
+      {q:'Uma rua com muitas <b>lojas</b> tem função de quê? 🏪',
+       audio:['fn_q_comercial'], stage:cena('🏪🛍️'), colorOpts:true,
+       options:mkOpts('fn_comercial',['fn_comercial','fn_residencial','fn_cultural'],FUNC_LBL)},
+      {q:'Uma rua onde as <b>pessoas moram</b> tem função de quê? 🏠',
+       audio:['fn_q_residencial'], stage:cena('🏠🏡'), colorOpts:true,
+       options:mkOpts('fn_residencial',['fn_comercial','fn_residencial','fn_cultural'],FUNC_LBL)},
+      {q:'Uma rua com <b>museus e teatros</b> tem função de quê? 🎭',
+       audio:['fn_q_cultural'], stage:cena('🎭🏛️'), colorOpts:true,
+       options:mkOpts('fn_cultural',['fn_comercial','fn_residencial','fn_cultural'],FUNC_LBL)},
+      {q:'Os <b>nomes das ruas</b> podem contar o quê? 🪧',
+       audio:['fn_q_nomes'], stage:cena('🪧'), colorOpts:true,
+       options:mkOpts('fn_historia_lugar',['fn_historia_lugar','fn_receita','fn_piada'],
+         {fn_historia_lugar:L('📜','A história do lugar'), fn_receita:L('🍰','Uma receita de bolo gostoso'), fn_piada:L('😂','Uma piada muito engraçada')})},
+      {q:'O <b>Minhocão</b> em São Paulo é um elevado que nos fins de semana vira o quê? 🚶',
+       audio:['fn_q_minhocao'], stage:cena('🚶🛣️'), colorOpts:true,
+       options:mkOpts('fn_lazer',['fn_lazer','fn_estacionamento','fn_piscina'],
+         {fn_lazer:L('🚶','Espaço de lazer para pedestres'), fn_estacionamento:L('🚛','Estacionamento grande de caminhões'), fn_piscina:L('🏊','Uma piscina gigante com tobogã')})},
+      {q:'As ruas de uma cidade são <b>todas iguais</b>? 🤔',
+       audio:['fn_q_diferenca'], stage:cena('🤔'), colorOpts:true,
+       options:mkOpts('fn_nao',['fn_nao','fn_sim','fn_quase'],
+         {fn_nao:L('🔀','Não, cada rua tem algo diferente'), fn_sim:L('🟰','Sim, são todas iguais mesmo'), fn_quase:L('➡️','Quase todas são bem iguais')})},
+    ];
+    return shuffle(fixas);
+  },
+
+  /* 5. DESCOBRIR A HISTÓRIA */
+  fontes(){
+    const fixas=[
+      {q:'O que são <b>fontes históricas</b>? 📜',
+       audio:['fh_q_fonte'], stage:cena('📜🔍'), colorOpts:true,
+       options:exp(mkOpts('fh_ajudam',['fh_ajudam','fh_inventadas','fh_futuro'],
+         {fh_ajudam:L('📜','Coisas que ajudam a conhecer o passado'), fh_inventadas:L('🧸','Histórias inventadas só para brincar'), fh_futuro:L('🔮','Coisas que mostram apenas o futuro')}),'exp_fontes')},
+      {q:'<b>Fotografias</b> antigas ajudam a conhecer o quê? 📷',
+       audio:['fh_q_foto'], stage:cena('📷'), colorOpts:true,
+       options:mkOpts('fh_passado',['fh_passado','fh_clima','fh_receita'],
+         {fh_passado:L('📷','Como era o lugar no passado'), fh_clima:L('🌤️','O clima que fará amanhã cedo'), fh_receita:L('🍰','Receitas de comida gostosa')})},
+      {q:'Conversar com <b>moradores antigos</b> é importante por quê? 👴',
+       audio:['fh_q_morador'], stage:cena('👴👵'), colorOpts:true,
+       options:mkOpts('fh_relatos',['fh_relatos','fh_cantar','fh_correr'],
+         {fh_relatos:L('🗣️','Porque eles contam o que viveram'), fh_cantar:L('🎤','Porque eles cantam músicas do rádio'), fh_correr:L('🏃','Porque eles correm mais que todos')})},
+      {q:'Os <b>mapas</b> ajudam a entender o quê? 🗺️',
+       audio:['fh_q_mapa'], stage:cena('🗺️'), colorOpts:true,
+       options:mkOpts('fh_como_era',['fh_como_era','fh_comida','fh_roupa'],
+         {fh_como_era:L('🗺️','Como era o lugar antes'), fh_comida:L('🍽️','O que comer lá no almoço'), fh_roupa:L('👕','Que roupa vestir no dia')})},
+      {q:'Os <b>textos históricos</b> servem para quê? 📖',
+       audio:['fh_q_texto'], stage:cena('📖'), colorOpts:true,
+       options:mkOpts('fh_registro',['fh_registro','fh_brincar','fh_pintar'],
+         {fh_registro:L('📖','Registrar o que aconteceu no passado'), fh_brincar:L('🧸','Fazer brincadeiras divertidas na escola'), fh_pintar:L('🎨','Pintar as paredes coloridas de casa')})},
+      {q:'Ao comparar <b>fotos antigas e atuais</b>, o que podemos ver? 🔍',
+       audio:['fh_q_mudancas'], stage:cena('🔍📷'), colorOpts:true,
+       options:mkOpts('fh_mudaram',['fh_mudaram','fh_nada_mudou','fh_cores_so'],
+         {fh_mudaram:L('🔄','As mudanças que aconteceram'), fh_nada_mudou:L('🟰','Que nada mudou por ali'), fh_cores_so:L('🎨','Só as cores das fotos velhas')})},
+      {q:'Como podemos conhecer a <b>história da nossa rua</b>? 🏘️',
+       audio:['fh_q_pesquisa'], stage:cena('🏘️📚'), colorOpts:true,
+       options:mkOpts('fh_pesquisar',['fh_pesquisar','fh_adivinhando','fh_esquecendo'],
+         {fh_pesquisar:L('📚','Pesquisando em fotos, livros e relatos'), fh_adivinhando:L('🔮','Adivinhando sem perguntar nada a ninguém'), fh_esquecendo:L('🤷','Esquecendo tudo sobre o lugar que vivemos')})},
+    ];
+    return shuffle(fixas);
+  },
+
+  /* 6. QUEM TRABALHA NA ESCOLA? */
+  profissionais(){
+    const fixas=[
+      {q:'Quem organiza e cuida de <b>toda a escola</b>? 🏫',
+       audio:['pe_q_diretora'], stage:cena('🏫'), colorOpts:true,
+       options:exp(mkOpts('pe_diretora',['pe_diretora','pe_carteiro','pe_bombeiro'],
+         {pe_diretora:L('👩‍💼','A diretora'), pe_carteiro:L('📬','O carteiro'), pe_bombeiro:L('🚒','O bombeiro')}),'exp_profissionais')},
+      {q:'Quem cuida da <b>limpeza</b> da escola? 🧹',
+       audio:['pe_q_limpeza'], stage:cena('🧹'), colorOpts:true,
+       options:mkOpts('pe_auxiliar',['pe_auxiliar','pe_piloto','pe_pintor'],
+         {pe_auxiliar:L('🧹','O auxiliar de limpeza'), pe_piloto:L('✈️','O piloto de avião'), pe_pintor:L('🖌️','O pintor de quadros')})},
+      {q:'Quem cuida da <b>entrada</b> da escola? 🚪',
+       audio:['pe_q_porteiro'], stage:cena('🚪'), colorOpts:true,
+       options:mkOpts('pe_porteiro',['pe_porteiro','pe_padeiro','pe_dentista'],
+         {pe_porteiro:L('🚪','O porteiro'), pe_padeiro:L('🍞','O padeiro'), pe_dentista:L('🦷','O dentista')})},
+      {q:'Quem prepara a <b>comida</b> na escola? 🍽️',
+       audio:['pe_q_cozinheira'], stage:cena('🍽️🧑‍🍳'), colorOpts:true,
+       options:mkOpts('pe_cozinheira',['pe_cozinheira','pe_motorista','pe_jardineiro'],
+         {pe_cozinheira:L('🧑‍🍳','A cozinheira'), pe_motorista:L('🚕','O motorista de táxi'), pe_jardineiro:L('🌳','O jardineiro do parque')})},
+      {q:'Quem ensina as <b>matérias</b> na sala de aula? 📝',
+       audio:['pe_q_professor'], stage:cena('📝👩‍🏫'), colorOpts:true,
+       options:mkOpts('pe_professor',['pe_professor','pe_cozinheira2','pe_porteiro2'],
+         {pe_professor:L('👩‍🏫','O professor'), pe_cozinheira2:L('🧑‍🍳','A cozinheira da escola'), pe_porteiro2:L('🚪','O porteiro da escola')})},
+      {q:'Todas essas pessoas juntas formam o quê? 👥',
+       audio:['pe_q_comunidade'], stage:cena('👥🏫'), colorOpts:true,
+       options:mkOpts('pe_comunidade',['pe_comunidade','pe_time','pe_banda'],
+         {pe_comunidade:L('👥','A comunidade escolar'), pe_time:L('⚽','Um time de futebol'), pe_banda:L('🎸','Uma banda de música')})},
+      {q:'Por que <b>cada profissional</b> da escola é importante? 💚',
+       audio:['pe_q_importancia'], stage:cena('💚'), colorOpts:true,
+       options:mkOpts('pe_funciona',['pe_funciona','pe_so_professor','pe_nenhum'],
+         {pe_funciona:L('💚','Cada um faz a escola funcionar bem'), pe_so_professor:L('1️⃣','Só o professor faz alguma coisa'), pe_nenhum:L('🚫','Nenhum deles faz diferença na escola')})},
+    ];
+    return shuffle(fixas);
+  },
+
+  /* 7. MATERIAL DE ESTUDAR */
+  materiais(){
+    const fixas=[
+      {q:'O que as crianças usavam para estudar <b>antigamente</b>? 🕰️',
+       audio:['me_q_antigamente'], stage:cena('🕰️📜'), colorOpts:true,
+       options:exp(mkOpts('me_lousa',['me_lousa','me_tablet','me_celular'],
+         {me_lousa:L('📜','Lousa, cartilha e goma árabe'), me_tablet:L('📱','Tablet e computador'), me_celular:L('🎧','Celular e fone de ouvido')}),'exp_materiais')},
+      {q:'A <b>cartilha</b> escolar antiga servia para quê? 📖',
+       audio:['me_q_cartilha'], stage:cena('📖'), colorOpts:true,
+       options:mkOpts('me_ler',['me_ler','me_correr','me_cozinhar'],
+         {me_ler:L('📖','Ensinar as crianças a ler'), me_correr:L('🏃','Ensinar a correr rápido'), me_cozinhar:L('🍳','Ensinar a cozinhar')})},
+      {q:'A <b>goma árabe</b> era usada como o quê? 🫙',
+       audio:['me_q_goma'], stage:cena('🫙'), colorOpts:true,
+       options:mkOpts('me_cola',['me_cola','me_tinta','me_comida'],
+         {me_cola:L('🫙','Era usada como cola'), me_tinta:L('🎨','Era usada como tinta'), me_comida:L('🍽️','Era usada como comida')})},
+      {q:'A <b>lousa</b> escolar antiga servia para quê? 📝',
+       audio:['me_q_lousa'], stage:cena('📝'), colorOpts:true,
+       options:mkOpts('me_escrever',['me_escrever','me_dormir2','me_brincar2'],
+         {me_escrever:L('📝','Para escrever e aprender'), me_dormir2:L('😴','Para dormir em cima dela'), me_brincar2:L('⚽','Para jogar bola na escola')})},
+      {q:'As <b>bolsas escolares</b> antigas eram feitas de quê? 🎒',
+       audio:['me_q_bolsa'], stage:cena('🎒'), colorOpts:true,
+       options:mkOpts('me_couro',['me_couro','me_papel','me_folhas'],
+         {me_couro:L('🎒','De couro'), me_papel:L('📄','De papel fino'), me_folhas:L('🍃','De folhas de árvore')})},
+      {q:'Os <b>materiais escolares</b> mudaram com o tempo? 🔄',
+       audio:['me_q_mudou'], stage:cena('🔄'), colorOpts:true,
+       options:mkOpts('me_sim',['me_sim','me_nao','me_talvez'],
+         {me_sim:L('✅','Sim, hoje são bem diferentes'), me_nao:L('🟰','Não, são todos iguais'), me_talvez:L('🖍️','Só mudou a cor dos lápis')})},
+      {q:'Quais materiais <b>você usa hoje</b> na escola? 🎒',
+       audio:['me_q_hoje'], stage:cena('✏️📓'), colorOpts:true,
+       options:mkOpts('me_caderno',['me_caderno','me_lousa2','me_martelo'],
+         {me_caderno:L('📓','Caderno, lápis e estojo'), me_lousa2:L('📜','Lousa de pedra e goma árabe'), me_martelo:L('🔨','Martelo e parafuso')})},
+    ];
+    return shuffle(fixas);
+  },
+
+  /* 8. ESCOLA PARA QUÊ? */
+  escola(){
+    const fixas=[
+      {q:'Para que serve a <b>escola</b>? 🏫',
+       audio:['es_q_serve'], stage:cena('🏫'), colorOpts:true,
+       options:exp(mkOpts('es_aprender',['es_aprender','es_brincar','es_dormir'],
+         {es_aprender:L('📚','Para aprender e fazer amigos novos'), es_brincar:L('🎮','Só para brincar o dia todo inteiro'), es_dormir:L('😴','Para dormir e descansar na sala')}),'exp_escola')},
+      {q:'Na escola, além de estudar, o que podemos fazer? 🤝',
+       audio:['es_q_amigos'], stage:cena('🤝'), colorOpts:true,
+       options:mkOpts('es_amizades',['es_amizades','es_esconder','es_nada'],
+         {es_amizades:L('🤝','Fazer amizades e brincar'), es_esconder:L('🫣','Se esconder e ficar sozinho lá'), es_nada:L('🚫','Não podemos fazer nada de bom')})},
+      {q:'Antes de existir escola, como as crianças <b>aprendiam</b>? 🕰️',
+       audio:['es_q_aprendiam'], stage:cena('👴🧒'), colorOpts:true,
+       options:mkOpts('es_observando',['es_observando','es_sozinhas','es_maquina'],
+         {es_observando:L('👀','Observando os mais velhos'), es_sozinhas:L('😢','Ficavam sozinhas sem aprender nada'), es_maquina:L('🤖','Aprendiam dentro de uma máquina grande')})},
+      {q:'Os mais velhos ensinavam o quê às <b>crianças</b>? 👴',
+       audio:['es_q_velhos'], stage:cena('👴'), colorOpts:true,
+       options:mkOpts('es_oficio',['es_oficio','es_nada2','es_voar'],
+         {es_oficio:L('🐄','A cuidar de animais e consertar'), es_nada2:L('🚫','Não ensinavam nada para ninguém'), es_voar:L('🦅','A voar bem alto como os pássaros')})},
+      {q:'Contar <b>histórias</b> é uma forma de quê? 📖',
+       audio:['es_q_historias'], stage:cena('📖'), colorOpts:true,
+       options:mkOpts('es_ensinar',['es_ensinar','es_esquecer','es_barulho'],
+         {es_ensinar:L('📖','Ensinar e passar conhecimento'), es_esquecer:L('🤷','Esquecer tudo que aconteceu'), es_barulho:L('🔊','Fazer barulho dentro da sala')})},
+      {q:'A escola ajuda a gente a pensar no quê? 💭',
+       audio:['es_q_futuro'], stage:cena('💭🌟'), colorOpts:true,
+       options:mkOpts('es_sonhos',['es_sonhos','es_passado','es_almoco'],
+         {es_sonhos:L('🌟','Nos sonhos para o futuro'), es_passado:L('⏪','Só no que já aconteceu'), es_almoco:L('🍽️','Só na hora do almoço')})},
+      {q:'Quais <b>atividades</b> a escola oferece? 🏫',
+       audio:['es_q_atividades'], stage:cena('🏫📚⚽'), colorOpts:true,
+       options:mkOpts('es_varias',['es_varias','es_so_ler','es_so_correr'],
+         {es_varias:L('📚⚽','Estudar, brincar e fazer esportes'), es_so_ler:L('📖','Só ler livros o dia inteiro na sala'), es_so_correr:L('🏃','Só correr no pátio sem parar')})},
+    ];
+    return shuffle(fixas);
+  },
+
+};
+
+/* ===== INICIAR ===== */
+document.getElementById('startBtn').addEventListener('click',()=>{
+  initAudio();
+  unlockAudio(()=>goHome());
+  document.getElementById('splash').style.display='none';
+});
+</script>
+</body>
+</html>
