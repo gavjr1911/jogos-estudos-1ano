@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🏆 Matemática — Avaliação Final 🏆</title>
+<style>
+  :root{
+    --rosa:#ff6b9d; --roxo:#a06cd5; --azul:#4d96ff; --verde:#6bcB77;
+    --amarelo:#ffd93d; --laranja:#ff924c; --vermelho:#ff5e5e; --ceu:#b8e3ff;
+    --turquesa:#19c3b1; --magenta:#f76eb0;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0; height:100%;}
+  body{
+    font-family:'Comic Sans MS','Baloo',"Trebuchet MS",sans-serif;
+    background:linear-gradient(160deg,#ffecd2 0%,#d4e7ff 50%,#d9ffd6 100%);
+    color:#3a3a55; overflow-x:hidden; user-select:none;
+    min-height:100%; touch-action:manipulation;
+  }
+  #app{max-width:760px; margin:0 auto; padding:14px; min-height:100vh;}
+
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    background:#fff; border-radius:22px; padding:8px 14px; margin-bottom:14px;
+    box-shadow:0 6px 0 rgba(0,0,0,.08);
+  }
+  .topbar .home-btn{
+    background:var(--azul); color:#fff; border:none; border-radius:16px;
+    font-size:22px; padding:8px 14px; font-weight:bold; cursor:pointer; box-shadow:0 4px 0 #2f6fd0;
+  }
+  .topbar .home-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #2f6fd0;}
+  .topbar .nav{display:flex; align-items:center; gap:8px;}
+  .topbar .back-btn{
+    background:var(--roxo); color:#fff; border:none; border-radius:16px;
+    font-size:22px; padding:8px 14px; font-weight:bold; cursor:pointer;
+    box-shadow:0 4px 0 #7d49b0; text-decoration:none; display:inline-block; line-height:1;
+  }
+  .topbar .back-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #7d49b0;}
+  .stars{font-size:24px; font-weight:bold; color:var(--laranja); display:flex; align-items:center; gap:6px;}
+  .stars .num{background:var(--amarelo); border-radius:14px; padding:2px 12px; box-shadow:0 3px 0 #d9a800;}
+
+  .hero{
+    text-align:center; background:#fff; border-radius:30px; padding:22px 18px;
+    box-shadow:0 8px 0 rgba(0,0,0,.08); margin-bottom:18px;
+  }
+  .hero h1{font-size:30px; margin:6px 0; color:var(--verde); line-height:1.2;}
+  .hero p{font-size:18px; margin:4px 0; color:#666;}
+  .mascote{font-size:78px; display:inline-block; animation:flutua 2.5s ease-in-out infinite;}
+  @keyframes flutua{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-14px) rotate(3deg);}}
+
+  .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+  .card{
+    border:none; border-radius:26px; padding:16px 10px; cursor:pointer;
+    color:#fff; font-size:19px; font-weight:bold; text-align:center;
+    box-shadow:0 7px 0 rgba(0,0,0,.18); transition:transform .08s;
+    display:flex; flex-direction:column; align-items:center; gap:6px; line-height:1.15;
+  }
+  .card:active{transform:translateY(4px); box-shadow:0 3px 0 rgba(0,0,0,.18);}
+  .card .ico{font-size:46px;}
+  .c1{background:var(--rosa);} .c2{background:var(--azul);} .c3{background:var(--verde);}
+  .c4{background:var(--laranja);} .c5{background:var(--roxo);} .c6{background:var(--vermelho);}
+  .c7{background:var(--turquesa);} .c8{background:var(--magenta);}
+
+  .game{
+    background:#fff; border-radius:30px; padding:18px; box-shadow:0 8px 0 rgba(0,0,0,.08);
+    text-align:center;
+  }
+  .game-title{font-size:24px; color:var(--verde); margin:0 0 4px;}
+  .progress{font-size:16px; color:#999; margin-bottom:10px;}
+  .question{
+    font-size:22px; font-weight:bold; color:#3a3a55; margin:6px 0 14px; line-height:1.3;
+    display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;
+  }
+  .speak-btn{
+    background:var(--amarelo); border:none; border-radius:50%; width:54px; height:54px;
+    font-size:28px; cursor:pointer; box-shadow:0 4px 0 #d9a800; flex:0 0 auto;
+  }
+  .speak-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #d9a800;}
+  .speak-btn.playing{animation:pulse .7s infinite;}
+  @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
+
+  .stage{
+    min-height:80px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+    gap:10px; margin:10px auto 18px; padding:16px;
+    background:linear-gradient(160deg,#fff8ec,#eef5ff); border-radius:22px; border:4px dashed #f3d9a8;
+    flex-direction:column;
+  }
+  .money-row{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; align-items:center;}
+  .bill{border-radius:10px; padding:8px 14px; font-size:22px; font-weight:bold; color:#fff;
+        box-shadow:0 3px 0 rgba(0,0,0,.15); display:inline-block; min-width:60px; text-align:center;
+        animation:pop .35s ease;}
+  .bill-10{background:linear-gradient(135deg,#5a87c5,#3466a5);} 
+  .bill-20{background:linear-gradient(135deg,#f0a030,#d08010);}
+  .bill-5{background:linear-gradient(135deg,#9a6dbd,#7a4db0);}
+  .coin-2{background:linear-gradient(135deg,#c0c0c0,#9a9a9a); border-radius:50%; width:44px; height:44px;
+           display:inline-flex; align-items:center; justify-content:center;}
+  .coin-1{background:linear-gradient(135deg,#d4a845,#b8922e); border-radius:50%; width:38px; height:38px;
+           display:inline-flex; align-items:center; justify-content:center;}
+  @keyframes pop{0%{transform:scale(0);}70%{transform:scale(1.25);}100%{transform:scale(1);}}
+
+  .shape-box{display:inline-block; position:relative; margin:8px;}
+  .shape-box svg{display:block;}
+  .side-label{font-size:14px; font-weight:bold; fill:#e05020;}
+
+  .options{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(130px,1fr));}
+  .opt{
+    border:none; border-radius:22px; padding:16px 10px; font-size:22px; font-weight:bold;
+    cursor:pointer; background:var(--azul); color:#fff; box-shadow:0 6px 0 #2f6fd0;
+    min-height:70px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+    word-break:break-word; line-height:1.15;
+  }
+  .opt:active{transform:translateY(3px); box-shadow:0 3px 0 #2f6fd0;}
+  .opt.ok{background:var(--verde)!important; box-shadow:0 6px 0 #3f9c4f!important; animation:tada .5s;}
+  .opt.no{background:#cfcfe0!important; box-shadow:0 6px 0 #a0a0c0!important; opacity:.7;}
+  @keyframes tada{0%{transform:scale(1);}30%{transform:scale(1.18) rotate(-4deg);}60%{transform:scale(1.1) rotate(4deg);}100%{transform:scale(1);}}
+
+  .opt-colors .opt:nth-child(1){background:var(--rosa); box-shadow:0 6px 0 #d44d7c;}
+  .opt-colors .opt:nth-child(2){background:var(--verde); box-shadow:0 6px 0 #3f9c4f;}
+  .opt-colors .opt:nth-child(3){background:var(--laranja); box-shadow:0 6px 0 #d96d2e;}
+  .opt-colors .opt:nth-child(4){background:var(--roxo); box-shadow:0 6px 0 #7a4db0;}
+
+  .feedback{font-size:26px; font-weight:bold; min-height:40px; margin-top:12px;}
+  .feedback.good{color:var(--verde);} .feedback.bad{color:var(--laranja);}
+
+  .next-btn{
+    margin-top:14px; background:var(--verde); color:#fff; border:none; border-radius:22px;
+    font-size:24px; font-weight:bold; padding:14px 34px; cursor:pointer; box-shadow:0 6px 0 #3f9c4f;
+  }
+  .next-btn:active{transform:translateY(3px); box-shadow:0 3px 0 #3f9c4f;}
+
+  #splash{
+    position:fixed; inset:0; background:linear-gradient(160deg,#2ecc71,#3498db);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    color:#fff; text-align:center; z-index:50; cursor:pointer; padding:20px;
+  }
+  #splash h1{font-size:32px; margin:10px; line-height:1.2;}
+  #splash .big{font-size:100px; animation:flutua 2.5s infinite;}
+  #splash .play{
+    margin-top:24px; background:var(--amarelo); color:#5a4500; border:none; border-radius:30px;
+    font-size:30px; font-weight:bold; padding:18px 44px; box-shadow:0 8px 0 #d9a800; cursor:pointer;
+  }
+  #splash .caps{font-size:14px; text-transform:uppercase; letter-spacing:1px; opacity:.85; margin-top:8px;}
+
+  #confetti{position:fixed; inset:0; pointer-events:none; z-index:40;}
+  .win{text-align:center; padding:20px;}
+  .win .trophy{font-size:90px; animation:tada 1s;}
+
+  .hint{font-size:15px; color:#888; margin-top:6px; font-style:italic;}
+
+  @media(max-width:480px){
+    .hero h1{font-size:24px;} .question{font-size:19px;} .card{font-size:17px;}
+    .grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div id="splash">
+  <div class="big">🏆</div>
+  <h1>Matemática<br>Avaliação Final!</h1>
+  <p style="font-size:18px;max-width:360px;">Vamos revisar tudo para a prova!<br>Dinheiro, medidas, formas e muito mais! 🎉</p>
+  <div class="caps">Cap. 5 · 6 · 7 · 8</div>
+  <button class="play" id="startBtn">▶ COMEÇAR</button>
+</div>
+
+<canvas id="confetti"></canvas>
+<div id="app"></div>
+
+<script>
+/* ============================================================
+   MATEMÁTICA — AVALIAÇÃO FINAL · 1º ano (Bernoulli)
+   Cap. 5 Nosso dinheiro · Cap. 6 Medidas de comprimento
+   Cap. 7 A matemática no supermercado
+   Cap. 8 A cada medida um novo aprendizado
+   ============================================================ */
+
+const App = document.getElementById('app');
+let stars = parseInt(localStorage.getItem('vitor_matfinal_stars')||'0',10);
+
+const VOICE = {
+  greet:"Olá! Vamos revisar tudo para a prova de matemática!",
+  test:"Você está me ouvindo? Vamos revisar!",
+  win:"Parabéns! Você revisou tudo! Vai arrasar na prova!",
+  choose:"As respostas são:",
+  ok1:"Muito bem!", ok2:"Isso aí!", ok3:"Você acertou!",
+  ok4:"Boa demais!", ok5:"Mandou bem!", ok6:"Perfeito!",
+  no1:"Quase! Tenta outra.", no2:"Hmm, tenta de novo.", no3:"Não foi essa, tenta outra.",
+
+  n0:"zero",n1:"um",n2:"dois",n3:"três",n4:"quatro",n5:"cinco",
+  n6:"seis",n7:"sete",n8:"oito",n9:"nove",n10:"dez",
+  n11:"onze",n12:"doze",n13:"treze",n14:"quatorze",n15:"quinze",
+  n16:"dezesseis",n17:"dezessete",n18:"dezoito",n19:"dezenove",n20:"vinte",
+  n21:"vinte e um",n22:"vinte e dois",n23:"vinte e três",n24:"vinte e quatro",n25:"vinte e cinco",
+  n26:"vinte e seis",n27:"vinte e sete",n28:"vinte e oito",n29:"vinte e nove",n30:"trinta",
+  n31:"trinta e um",n32:"trinta e dois",n33:"trinta e três",n34:"trinta e quatro",n35:"trinta e cinco",
+  n36:"trinta e seis",n37:"trinta e sete",n38:"trinta e oito",n39:"trinta e nove",n40:"quarenta",
+  n50:"cinquenta",n60:"sessenta",n70:"setenta",n77:"setenta e sete",n78:"setenta e oito",
+  n98:"noventa e oito",n99:"noventa e nove",
+
+  /* 1. Contando Dinheiro */
+  d_quanto:"Quanto dinheiro esta criança tem? Some as cédulas e as moedas.",
+  d_troca:"Qual troca vale exatamente 20 reais?",
+  d_errada:"Qual troca NÃO vale 20 reais?",
+  d_reais:"reais",
+
+  /* 2. Na Cantina */
+  ct_comprou:"Na cantina, a criança comprou dois itens. Quanto gastou no total?",
+  ct_troco:"Pagou com uma nota de 20 reais. Quanto recebeu de troco?",
+  ct_total:"Quanto gastou no total?",
+
+  /* 3. Instrumentos de Medida */
+  im_qual:"Qual instrumento serve melhor para medir isto?",
+  im_regua:"a régua",
+  im_fita:"a fita métrica",
+  im_trena:"a trena",
+  im_metro:"Esse objeto tem mais ou menos de 1 metro?",
+  im_mais:"mais de 1 metro",
+  im_menos:"menos de 1 metro",
+
+  /* 4. Contorno */
+  co_q:"Qual é o contorno dessa figura? Some todos os lados.",
+  co_quad:"O quadrado tem 4 lados iguais.",
+  co_ret:"O retângulo tem 2 lados maiores e 2 menores.",
+
+  /* 5. Composição */
+  cp_q:"Olhe as barras de dez e os cubinhos. Que número está representado?",
+  cp_dica:"Cada barra vale 10. Conte de 10 em 10 e depois some os cubinhos.",
+
+  /* 6. Sólidos Geométricos */
+  sg_q:"Qual sólido geométrico se parece com este objeto?",
+  sg_rola:"Qual sólido rola em TODAS as direções?",
+  sg_cilindro:"o cilindro",
+  sg_paralelepipedo:"o paralelepípedo",
+  sg_esfera:"a esfera",
+  sg_cone:"o cone",
+  sg_cubo:"o cubo",
+
+  /* 7. Sequências */
+  sq_q:"Complete a sequência. Qual número vem na posição vazia?",
+  sq_suc:"Qual é o SUCESSOR deste número? O número que vem logo depois.",
+  sq_ant:"Qual é o ANTECESSOR deste número? O número que vem logo antes.",
+
+  /* 8. Massa e Capacidade */
+  mc_bal:"Na balança, qual pacote é mais pesado?",
+  mc_cap:"Qual unidade usamos para medir capacidade, ou seja, quanto cabe dentro de um recipiente?",
+  mc_massa:"Qual unidade usamos para medir massa, ou seja, quanto pesa?",
+  mc_kg:"quilograma",
+  mc_litro:"litro",
+  mc_metro_u:"metro",
+};
+
+/* ============================================================
+   PLAYER DE ÁUDIO
+   ============================================================ */
+const AUDIO_DIR='audio/', AUDIO_EXT='.mp3';
+const player=new Audio();
+player.preload='auto';
+let playToken=0, audioOn=true;
+function stopAudio(){ playToken++; try{player.pause();}catch(e){} setPlayingBadge(false); }
+function playKeys(keys){
+  if(!audioOn) return;
+  stopAudio();
+  const list=[].concat(...keys.map(k=>Array.isArray(k)?k:[k])).filter(Boolean);
+  if(!list.length) return;
+  const my=playToken; let i=0;
+  setPlayingBadge(true);
+  const next=()=>{
+    if(my!==playToken) return;
+    if(i>=list.length){ setPlayingBadge(false); return; }
+    const key=list[i++];
+    player.src=AUDIO_DIR+key+AUDIO_EXT;
+    player.onended=next;
+    player.onerror=()=>{ setTimeout(next,10); };
+    const p=player.play();
+    if(p&&p.catch) p.catch(()=>setTimeout(next,10));
+  };
+  next();
+}
+function setPlayingBadge(on){
+  const b=document.getElementById('qspeak'); if(b) b.classList.toggle('playing',on);
+}
+function unlockAudio(){
+  try{ player.muted=true; player.src=AUDIO_DIR+'greet'+AUDIO_EXT;
+       const p=player.play();
+       if(p&&p.then) p.then(()=>{player.pause();player.currentTime=0;player.muted=false;})
+                      .catch(()=>{player.muted=false;});
+       else {player.pause();player.muted=false;}
+  }catch(e){ player.muted=false; }
+}
+
+/* ===== SONS DE EFEITO ===== */
+let actx=null;
+function initAudio(){ try{ actx = actx || new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==='suspended') actx.resume(); }catch(e){} }
+function tone(freq,start,dur,type='sine',vol=0.2){
+  if(!actx) return;
+  const o=actx.createOscillator(), g=actx.createGain();
+  o.type=type; o.frequency.value=freq; o.connect(g); g.connect(actx.destination);
+  const t=actx.currentTime+start;
+  g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+0.02);
+  g.gain.exponentialRampToValueAtTime(0.001,t+dur);
+  o.start(t); o.stop(t+dur);
+}
+function sndClick(){ initAudio(); tone(540,0,0.07,'triangle',0.14); }
+function sndRight(){ initAudio(); [523,659,784,1047].forEach((f,i)=>tone(f,i*0.09,0.25,'triangle',0.18)); }
+function sndWrong(){ initAudio(); tone(300,0,0.18,'sine',0.13); tone(220,0.12,0.25,'sine',0.13); }
+function sndWin(){ initAudio(); [523,659,784,1047,784,1047,1319].forEach((f,i)=>tone(f,i*0.12,0.3,'triangle',0.2)); }
+
+/* ===== UTILIDADES ===== */
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function rint(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+const OK_KEYS=['ok1','ok2','ok3','ok4','ok5','ok6'], NO_KEYS=['no1','no2','no3'];
+
+function updateStars(){ const el=document.getElementById('starNum'); if(el) el.textContent=stars; localStorage.setItem('vitor_matfinal_stars',stars); }
+function addStar(n=1){ stars+=n; updateStars(); }
+
+/* ===== CONFETE ===== */
+const cv=document.getElementById('confetti'), cx=cv.getContext('2d');
+let confs=[];
+function resizeCv(){cv.width=innerWidth;cv.height=innerHeight;}
+addEventListener('resize',resizeCv); resizeCv();
+function burst(){
+  const cols=['#ff6b9d','#ffd93d','#6bcB77','#4d96ff','#a06cd5','#ff924c'];
+  for(let i=0;i<70;i++){confs.push({x:innerWidth/2,y:innerHeight/3,vx:(Math.random()-0.5)*14,vy:Math.random()*-12-3,c:pick(cols),s:rint(7,14),r:Math.random()*6,vr:(Math.random()-.5)*.4});}
+}
+function loopConf(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  confs.forEach(p=>{p.vy+=0.35;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/2,p.s,p.s);cx.restore();});
+  confs=confs.filter(p=>p.y<cv.height+30);
+  requestAnimationFrame(loopConf);
+}
+loopConf();
+
+/* ===== SHELL ===== */
+function shell(inner){
+  App.innerHTML=`
+    <div class="topbar">
+      <div class="nav"><a class="back-btn" href="../" title="Menu de matérias" aria-label="Menu de matérias">🏠</a><button class="home-btn" onclick="sndClick();goHome()" title="Escolher outro jogo" aria-label="Escolher outro jogo">🔄</button></div>
+      <div class="stars">⭐ <span class="num" id="starNum">${stars}</span></div>
+    </div>
+    ${inner}`;
+}
+
+/* ===== MENU ===== */
+const GAMES=[
+  {id:'dinheiro',   ico:'💰', nome:'Nosso Dinheiro',    sub:'Somar cédulas e moedas',     cls:'c1'},
+  {id:'cantina',    ico:'🛒', nome:'Na Cantina',         sub:'Compras e troco',            cls:'c2'},
+  {id:'instrumentos',ico:'📏', nome:'Instrumentos',      sub:'Régua, fita e trena',        cls:'c3'},
+  {id:'contorno',   ico:'🔲', nome:'Contorno',           sub:'Somar os lados da figura',   cls:'c4'},
+  {id:'composicao', ico:'🧱', nome:'Composição',         sub:'Barras de 10 e cubinhos',    cls:'c5'},
+  {id:'solidos',    ico:'📦', nome:'Sólidos',            sub:'Cilindro, esfera e mais',    cls:'c6'},
+  {id:'sequencias', ico:'🔢', nome:'Sequências',         sub:'Padrões e vizinhos',         cls:'c7'},
+  {id:'massa',      ico:'⚖️', nome:'Massa e Capacidade', sub:'Pesar e medir líquidos',     cls:'c8'},
+];
+function goHome(silent){
+  stopAudio();
+  shell(`
+    <div class="hero">
+      <div class="mascote">🏆</div>
+      <h1>Avaliação Final!</h1>
+      <p>Escolha o que revisar 👇</p>
+      <button onclick="testSound()" style="margin-top:6px;background:var(--amarelo);color:#5a4500;border:none;border-radius:18px;padding:9px 18px;font-size:16px;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #d9a800;">🔈 Testar som</button>
+    </div>
+    <div class="grid">
+      ${GAMES.map(g=>`<button class="card ${g.cls}" onclick="sndClick();startGame('${g.id}')">
+        <span class="ico">${g.ico}</span><span>${g.nome}</span>
+        <span style="font-size:13px;font-weight:normal;opacity:.9">${g.sub}</span>
+      </button>`).join('')}
+    </div>
+    <p style="text-align:center;color:#b8935a;margin-top:18px;font-size:14px;">Feito com 💜 para arrasar na prova</p>
+  `);
+  if(!silent) setTimeout(()=>playKeys(['greet']),250);
+}
+function testSound(){ initAudio(); sndClick(); playKeys(['test']); }
+
+/* ===== MOTOR DE RODADAS ===== */
+let current=null, locked=false;
+function startGame(id){
+  stopAudio();
+  switch(id){
+    case 'dinheiro': gameDinheiro(); break;
+    case 'cantina': gameCantina(); break;
+    case 'instrumentos': gameInstrumentos(); break;
+    case 'contorno': gameContorno(); break;
+    case 'composicao': gameComposicao(); break;
+    case 'solidos': gameSolidos(); break;
+    case 'sequencias': gameSequencias(); break;
+    case 'massa': gameMassa(); break;
+  }
+}
+
+function renderGame(title, prog, questionHtml, stageHtml, opts, voiceKeys, hint){
+  locked=false;
+  shell(`<div class="game">
+    <h2 class="game-title">${title}</h2>
+    <p class="progress">${prog}</p>
+    <div class="question">
+      <button class="speak-btn" id="qspeak" onclick="replayQ()">🔊</button>
+      <span>${questionHtml}</span>
+    </div>
+    ${stageHtml?'<div class="stage">'+stageHtml+'</div>':''}
+    <div class="options opt-colors" id="opts">
+      ${opts.map((o,i)=>`<button class="opt" data-idx="${i}" onclick="answer(this,${i})">${o.label}</button>`).join('')}
+    </div>
+    <div class="feedback" id="fb"></div>
+    ${hint?'<p class="hint">💡 '+hint+'</p>':''}
+  </div>`);
+  current._voiceKeys=voiceKeys;
+  setTimeout(()=>playKeys(voiceKeys),300);
+}
+
+function replayQ(){ if(current&&current._voiceKeys) playKeys(current._voiceKeys); }
+
+function answer(btn,idx){
+  if(locked) return;
+  sndClick();
+  const correct = current.correctIdx;
+  if(idx===correct){
+    locked=true; btn.classList.add('ok'); sndRight();
+    playKeys([pick(OK_KEYS)]);
+    addStar(1);
+    document.getElementById('fb').innerHTML='<span class="good">⭐ Acertou!</span>';
+    setTimeout(()=>{ if(current.next) current.next(); },1400);
+  } else {
+    btn.classList.add('no'); sndWrong();
+    playKeys([pick(NO_KEYS)]);
+    document.getElementById('fb').innerHTML='<span class="bad">Tenta outra! 💪</span>';
+    setTimeout(()=>{ document.getElementById('fb').innerHTML=''; },1200);
+  }
+}
+
+function showWin(gameName){
+  burst(); sndWin();
+  shell(`<div class="win">
+    <div class="trophy">🏆</div>
+    <h1 style="color:var(--verde);">Parabéns!</h1>
+    <p style="font-size:20px;">Você completou<br><b>${gameName}</b>!</p>
+    <button class="next-btn" onclick="sndClick();goHome()">🔄 Jogar outro</button>
+  </div>`);
+  playKeys(['win']);
+}
+
+/* ============================================================
+   1. NOSSO DINHEIRO
+   ============================================================ */
+function gameDinheiro(){
+  const rounds=[
+    // Contar dinheiro
+    {bills:[10,5,1,1], answer:17, opts:[15,17,19,12], q:'Bia tem estas cédulas e moedas. Quanto ela tem?', name:'Bia'},
+    {bills:[20,2,1], answer:23, opts:[23,22,21,25], q:'Tom tem estas cédulas e moedas. Quanto ele tem?', name:'Tom'},
+    {bills:[10,10,5], answer:25, opts:[20,25,15,30], q:'Quanto dinheiro tem aqui?'},
+    // Trocas
+    {type:'troca', q:'Qual troca NÃO vale 20 reais?', wrong:'10+5+2 = 17', 
+     opts:['10+10 = 20','5+5+5+5 = 20','10+5+2 = 17','10+5+5 = 20'], correctIdx:2},
+    {type:'troca', q:'Qual troca vale exatamente 10 reais?', 
+     opts:['5+5 = 10','5+2+1 = 8','10+2 = 12','5+2+2 = 9'], correctIdx:0},
+  ];
+  let ri=0;
+  function play(){
+    if(ri>=rounds.length){ showWin('Nosso Dinheiro'); return; }
+    const r=rounds[ri];
+    current={next:()=>{ri++;play();}};
+
+    if(r.type==='troca'){
+      current.correctIdx=r.correctIdx;
+      const opts=r.opts.map(o=>({label:o}));
+      renderGame('💰 Nosso Dinheiro',`${ri+1} de ${rounds.length}`,r.q,'',opts,['d_troca']);
+    } else {
+      const billsHtml=r.bills.map(v=>{
+        if(v>=10) return `<span class="bill bill-${v<=10?10:20}">R$${v}</span>`;
+        if(v===5) return `<span class="bill bill-5">R$5</span>`;
+        if(v===2) return `<span class="bill coin-2" style="font-size:16px;">R$2</span>`;
+        return `<span class="bill coin-1" style="font-size:14px;">R$1</span>`;
+      }).join('');
+      const stage=`<div class="money-row">${billsHtml}</div>`;
+      const shuffled=shuffle(r.opts);
+      current.correctIdx=shuffled.indexOf(r.answer);
+      const opts=shuffled.map(v=>({label:'R$ '+v}));
+      renderGame('💰 Nosso Dinheiro',`${ri+1} de ${rounds.length}`,r.q,stage,opts,['d_quanto'],
+        'Comece pela cédula maior e vá somando!');
+    }
+  }
+  play();
+}
+
+/* ============================================================
+   2. NA CANTINA
+   ============================================================ */
+function gameCantina(){
+  const items=[
+    {name:'🧃 Suco',price:3},{name:'🍪 Biscoito',price:4},{name:'🍎 Maçã',price:2},
+    {name:'🥪 Sanduíche',price:9},{name:'🍫 Chocolate',price:5},{name:'🍰 Bolo',price:6},
+    {name:'🥤 Água',price:1},{name:'🍿 Pipoca',price:3},
+  ];
+  const rounds=[];
+  // Generate 5 rounds
+  for(let i=0;i<5;i++){
+    const pair=shuffle(items).slice(0,2);
+    const total=pair[0].price+pair[1].price;
+    const troco=20-total;
+    rounds.push({a:pair[0],b:pair[1],total,troco,step:i%2===0?'total':'troco'});
+  }
+  let ri=0;
+  function play(){
+    if(ri>=rounds.length){ showWin('Na Cantina'); return; }
+    const r=rounds[ri];
+    current={next:()=>{ri++;play();}};
+    const stage=`<div style="display:flex;gap:18px;justify-content:center;flex-wrap:wrap;">
+      <div style="text-align:center"><span style="font-size:50px">${r.a.name.split(' ')[0]}</span><br><b>R$ ${r.a.price}</b></div>
+      <div style="font-size:36px;align-self:center">+</div>
+      <div style="text-align:center"><span style="font-size:50px">${r.b.name.split(' ')[0]}</span><br><b>R$ ${r.b.price}</b></div>
+    </div>`;
+    
+    if(r.step==='total'){
+      const alts=shuffle([r.total,r.total+2,r.total-1,r.total+3].filter(v=>v>0));
+      current.correctIdx=alts.indexOf(r.total);
+      const opts=alts.map(v=>({label:'R$ '+v}));
+      renderGame('🛒 Na Cantina',`${ri+1} de ${rounds.length}`,
+        `Comprou ${r.a.name} e ${r.b.name}. Quanto gastou?`,stage,opts,['ct_total'],
+        'Some os dois preços!');
+    } else {
+      const alts=shuffle([r.troco,r.troco+2,r.troco-2,20-r.a.price].filter((v,i,a)=>v>0&&a.indexOf(v)===i));
+      while(alts.length<4) alts.push(alts[0]+rint(1,3));
+      const uniq=[...new Set(alts)].slice(0,4);
+      if(!uniq.includes(r.troco)) uniq[0]=r.troco;
+      const shuffOpts=shuffle(uniq);
+      current.correctIdx=shuffOpts.indexOf(r.troco);
+      const opts=shuffOpts.map(v=>({label:'R$ '+v}));
+      renderGame('🛒 Na Cantina',`${ri+1} de ${rounds.length}`,
+        `Gastou R$ ${r.total} e pagou com R$ 20. Quanto de troco?`,stage,opts,['ct_troco'],
+        'Primeiro some o total, depois tire de 20!');
+    }
+  }
+  play();
+}
+
+/* ============================================================
+   3. INSTRUMENTOS DE MEDIDA + MAIS/MENOS DE 1 METRO
+   ============================================================ */
+function gameInstrumentos(){
+  const instrRounds=[
+    {obj:'📏 Lápis', q:'Medir o comprimento de um lápis', answer:'Régua', opts:['Régua','Fita métrica','Trena','Balança']},
+    {obj:'👤 Cintura', q:'Medir a cintura de uma pessoa', answer:'Fita métrica', opts:['Régua','Fita métrica','Trena','Balança']},
+    {obj:'🚪 Porta', q:'Medir a altura de uma porta', answer:'Trena', opts:['Régua','Fita métrica','Trena','Balança']},
+    {obj:'📐 Caderno', q:'Medir a lateral de um caderno', answer:'Régua', opts:['Régua','Fita métrica','Trena','Balança']},
+    {obj:'🏠 Parede', q:'Medir o comprimento de uma parede', answer:'Trena', opts:['Régua','Fita métrica','Trena','Balança']},
+  ];
+  const metroRounds=[
+    {obj:'Borracha', emoji:'🧽', answer:'M'},
+    {obj:'Porta da sala', emoji:'🚪', answer:'P'},
+    {obj:'Caderno', emoji:'📓', answer:'M'},
+    {obj:'Quadro da sala', emoji:'📋', answer:'P'},
+    {obj:'Caneta', emoji:'🖊️', answer:'M'},
+    {obj:'Geladeira', emoji:'🧊', answer:'P'},
+  ];
+  const all=[];
+  instrRounds.forEach(r=>all.push({type:'instr',...r}));
+  metroRounds.forEach(r=>all.push({type:'metro',...r}));
+  const rounds=shuffle(all).slice(0,8);
+  let ri=0;
+  function play(){
+    if(ri>=rounds.length){ showWin('Instrumentos de Medida'); return; }
+    const r=rounds[ri];
+    current={next:()=>{ri++;play();}};
+    if(r.type==='instr'){
+      const stage=`<span style="font-size:60px">${r.obj.split(' ')[0]}</span>`;
+      const shuffOpts=shuffle(r.opts);
+      current.correctIdx=shuffOpts.indexOf(r.answer);
+      renderGame('📏 Instrumentos',`${ri+1} de ${rounds.length}`,r.q,stage,
+        shuffOpts.map(o=>({label:o})),['im_qual'],
+        'Régua = pequeno e reto · Fita = contorna o corpo · Trena = distâncias grandes');
+    } else {
+      const stage=`<span style="font-size:70px">${r.emoji}</span><br><b>${r.obj}</b>`;
+      const opts=[{label:'Menos de 1 metro (M)'},{label:'Mais de 1 metro (P)'}];
+      current.correctIdx = r.answer==='M' ? 0 : 1;
+      renderGame('📏 Mais ou Menos?',`${ri+1} de ${rounds.length}`,
+        `${r.obj}: tem mais ou menos de 1 metro?`,stage,opts,['im_metro'],
+        '1 metro ≈ altura da cintura de um adulto');
+    }
+  }
+  play();
+}
+
+/* ============================================================
+   4. CONTORNO
+   ============================================================ */
+function gameContorno(){
+  const rounds=[
+    {shape:'quadrado', sides:[5,5,5,5], answer:20, svg:`<svg width="120" height="120" viewBox="0 0 120 120">
+      <rect x="10" y="10" width="100" height="100" fill="#b8e3ff" stroke="#3466a5" stroke-width="3" rx="4"/>
+      <text x="60" y="8" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">5</text>
+      <text x="60" y="128" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">5</text>
+      <text x="2" y="65" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">5</text>
+      <text x="118" y="65" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">5</text>
+    </svg>`},
+    {shape:'retângulo', sides:[3,10,3,10], answer:26, svg:`<svg width="200" height="80" viewBox="0 0 200 80">
+      <rect x="10" y="10" width="180" height="60" fill="#d9ffd6" stroke="#3f9c4f" stroke-width="3" rx="4"/>
+      <text x="100" y="8" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">10</text>
+      <text x="100" y="86" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">10</text>
+      <text x="4" y="45" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">3</text>
+      <text x="196" y="45" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">3</text>
+    </svg>`},
+    {shape:'retângulo', sides:[4,8,4,8], answer:24, svg:`<svg width="180" height="100" viewBox="0 0 180 100">
+      <rect x="10" y="10" width="160" height="80" fill="#ffe9c7" stroke="#d96d2e" stroke-width="3" rx="4"/>
+      <text x="90" y="8" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">8</text>
+      <text x="90" y="106" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">8</text>
+      <text x="4" y="55" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">4</text>
+      <text x="176" y="55" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">4</text>
+    </svg>`},
+    {shape:'quadrado', sides:[7,7,7,7], answer:28, svg:`<svg width="130" height="130" viewBox="0 0 130 130">
+      <rect x="10" y="10" width="110" height="110" fill="#e3d0ff" stroke="#7a4db0" stroke-width="3" rx="4"/>
+      <text x="65" y="8" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">7</text>
+      <text x="65" y="138" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">7</text>
+      <text x="4" y="70" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">7</text>
+      <text x="126" y="70" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">7</text>
+    </svg>`},
+  ];
+  let ri=0;
+  function play(){
+    if(ri>=rounds.length){ showWin('Contorno'); return; }
+    const r=rounds[ri];
+    current={next:()=>{ri++;play();}};
+    const stage=`<div class="shape-box">${r.svg}</div>
+      <p style="font-size:16px;color:#666;margin:4px 0;"><b>${r.shape}</b>: ${r.sides.join(' + ')} = ?</p>`;
+    const alts=shuffle([r.answer, r.answer+4, r.answer-2, r.answer+6].filter(v=>v>0));
+    const uniq=[...new Set(alts)].slice(0,4);
+    if(!uniq.includes(r.answer)) uniq[0]=r.answer;
+    const sh=shuffle(uniq);
+    current.correctIdx=sh.indexOf(r.answer);
+    renderGame('🔲 Contorno',`${ri+1} de ${rounds.length}`,
+      `Qual é o contorno deste ${r.shape}?`,stage,
+      sh.map(v=>({label:v+''})),['co_q'],
+      'Contorno = soma de TODOS os lados!');
+  }
+  play();
+}
+
+/* ============================================================
+   5. COMPOSIÇÃO (barras de 10 + cubinhos)
+   ============================================================ */
+function gameComposicao(){
+  const rounds=[
+    {bars:3, cubes:5, answer:35},
+    {bars:2, cubes:7, answer:27},
+    {bars:1, cubes:4, answer:14},
+    {bars:4, cubes:2, answer:42},
+    {bars:2, cubes:0, answer:20},
+  ];
+  let ri=0;
+  function play(){
+    if(ri>=rounds.length){ showWin('Composição'); return; }
+    const r=rounds[ri];
+    current={next:()=>{ri++;play();}};
+    let barsHtml='';
+    for(let i=0;i<r.bars;i++) barsHtml+=`<div style="width:20px;height:80px;background:linear-gradient(180deg,#8fd4ff,#3f9bdd);border-radius:6px;box-shadow:0 3px 0 rgba(0,0,0,.15);animation:pop .35s ease;"></div>`;
+    let cubesHtml='';
+    for(let i=0;i<r.cubes;i++) cubesHtml+=`<div style="width:20px;height:20px;background:linear-gradient(180deg,#b6f0a0,#5cb741);border-radius:4px;box-shadow:0 2px 0 rgba(0,0,0,.15);animation:pop .35s ease;"></div>`;
+    const stage=`
+      <div style="display:flex;gap:24px;align-items:flex-end;justify-content:center;flex-wrap:wrap;">
+        <div style="text-align:center">
+          <div style="display:flex;gap:4px;align-items:flex-end;">${barsHtml}</div>
+          <p style="font-size:14px;color:#3f9bdd;font-weight:bold;margin:4px 0;">${r.bars} barra${r.bars!==1?'s':''} de 10</p>
+        </div>
+        ${r.cubes>0?`<div style="text-align:center">
+          <div style="display:flex;gap:3px;flex-wrap:wrap;max-width:100px;">${cubesHtml}</div>
+          <p style="font-size:14px;color:#5cb741;font-weight:bold;margin:4px 0;">${r.cubes} cubinho${r.cubes!==1?'s':''}</p>
+        </div>`:''}
+      </div>`;
+    const alts=shuffle([r.answer, r.answer+10, r.answer-5, r.answer+3].filter(v=>v>=0));
+    const uniq=[...new Set(alts)].slice(0,4);
+    if(!uniq.includes(r.answer)) uniq[0]=r.answer;
+    const sh=shuffle(uniq);
+    current.correctIdx=sh.indexOf(r.answer);
+    renderGame('🧱 Composição',`${ri+1} de ${rounds.length}`,
+      'Que número está representado?',stage,
+      sh.map(v=>({label:v+''})),['cp_q'],
+      'Cada barra azul = 10. Conte de 10 em 10!');
+  }
+  play();
+}
+
+/* ============================================================
+   6. SÓLIDOS GEOMÉTRICOS
+   ============================================================ */
+function gameSolidos(){
+  const rounds=[
+    {obj:'🥫 Lata de óleo', answer:'Cilindro', opts:['Cilindro','Esfera','Paralelepípedo','Cone']},
+    {obj:'🧃 Caixa de leite', answer:'Paralelepípedo', opts:['Cilindro','Esfera','Paralelepípedo','Cone']},
+    {obj:'⚽ Bola de futebol', answer:'Esfera', opts:['Cilindro','Esfera','Paralelepípedo','Cone']},
+    {obj:'🎩 Chapéu de festa', answer:'Cone', opts:['Cilindro','Esfera','Cone','Cubo']},
+    {obj:'🎲 Dado', answer:'Cubo', opts:['Cilindro','Cubo','Paralelepípedo','Cone']},
+    {type:'rola', q:'Qual sólido rola em TODAS as direções?', answer:'Esfera', 
+     opts:['Cilindro','Esfera','Paralelepípedo','Cone']},
+  ];
+  let ri=0;
+  function play(){
+    if(ri>=rounds.length){ showWin('Sólidos Geométricos'); return; }
+    const r=rounds[ri];
+    current={next:()=>{ri++;play();}};
+    if(r.type==='rola'){
+      const sh=shuffle(r.opts);
+      current.correctIdx=sh.indexOf(r.answer);
+      renderGame('📦 Sólidos',`${ri+1} de ${rounds.length}`,r.q,'',
+        sh.map(o=>({label:o})),['sg_rola'],
+        'O cilindro rola em linha reta. A esfera rola para qualquer lado!');
+    } else {
+      const stage=`<span style="font-size:60px">${r.obj.split(' ')[0]}</span><br><b>${r.obj}</b>`;
+      const sh=shuffle(r.opts);
+      current.correctIdx=sh.indexOf(r.answer);
+      renderGame('📦 Sólidos',`${ri+1} de ${rounds.length}`,
+        'Qual sólido se parece com este objeto?',stage,
+        sh.map(o=>({label:o})),['sg_q'],
+        'Cilindro = lata · Esfera = bola · Paralelepípedo = caixa');
+    }
+  }
+  play();
+}
+
+/* ============================================================
+   7. SEQUÊNCIAS E VIZINHOS
+   ============================================================ */
+function gameSequencias(){
+  const rounds=[
+    {type:'seq', seq:[20,19,18,'?',16], answer:17, step:-1, hint:'Tira 1 a cada passo'},
+    {type:'seq', seq:[40,38,36,'?',32], answer:34, step:-2, hint:'Tira 2 a cada passo'},
+    {type:'seq', seq:[10,15,20,'?',30], answer:25, step:5, hint:'Soma 5 a cada passo'},
+    {type:'seq', seq:[2,4,6,8,'?'], answer:10, step:2, hint:'Soma 2 a cada passo'},
+    {type:'suc', num:77, answer:78, q:'Qual é o SUCESSOR de 77?'},
+    {type:'ant', num:99, answer:98, q:'Qual é o ANTECESSOR de 99?'},
+    {type:'suc', num:39, answer:40, q:'Qual é o SUCESSOR de 39?'},
+    {type:'ant', num:50, answer:49, q:'Qual é o ANTECESSOR de 50?'},
+  ];
+  let ri=0;
+  function play(){
+    if(ri>=rounds.length){ showWin('Sequências'); return; }
+    const r=rounds[ri];
+    current={next:()=>{ri++;play();}};
+    if(r.type==='seq'){
+      const stage=`<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+        ${r.seq.map(v=>`<div style="width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:bold;
+        ${v==='?'?'background:var(--amarelo);color:#5a4500;border:3px dashed #d9a800;':'background:#eef5ff;color:#3a3a55;border:2px solid #d4e7ff;'}">${v}</div>`).join('')}
+      </div>`;
+      const alts=shuffle([r.answer, r.answer+r.step, r.answer-r.step, r.answer+1].filter((v,i,a)=>a.indexOf(v)===i));
+      const uniq=[...new Set(alts)].slice(0,4);
+      if(!uniq.includes(r.answer)) uniq[0]=r.answer;
+      const sh=shuffle(uniq);
+      current.correctIdx=sh.indexOf(r.answer);
+      renderGame('🔢 Sequências',`${ri+1} de ${rounds.length}`,
+        'Qual número entra no lugar do <b>?</b>',stage,
+        sh.map(v=>({label:v+''})),['sq_q'],r.hint);
+    } else {
+      const voiceKey = r.type==='suc' ? 'sq_suc' : 'sq_ant';
+      const alts=[r.answer, r.answer+1, r.answer-1, r.answer+2].filter((v,i,a)=>v>=0&&a.indexOf(v)===i);
+      const sh=shuffle(alts).slice(0,4);
+      if(!sh.includes(r.answer)){ sh[0]=r.answer; }
+      const shf=shuffle(sh);
+      current.correctIdx=shf.indexOf(r.answer);
+      const stage=`<span style="font-size:60px;font-weight:bold;color:var(--roxo);">${r.num}</span>`;
+      renderGame('🔢 Sequências',`${ri+1} de ${rounds.length}`,r.q,stage,
+        shf.map(v=>({label:v+''})),[voiceKey],
+        r.type==='suc'?'Sucessor = o número que vem DEPOIS':'Antecessor = o número que vem ANTES');
+    }
+  }
+  play();
+}
+
+/* ============================================================
+   8. MASSA E CAPACIDADE
+   ============================================================ */
+function gameMassa(){
+  const rounds=[
+    {type:'balanca', q:'Na balança, o prato que DESCE carrega o mais pesado. Qual é mais pesado?',
+     a:'Pacote A ⬇️', b:'Pacote B', answer:0,
+     stage:`<div style="display:flex;gap:20px;align-items:flex-end;justify-content:center;">
+       <div style="text-align:center"><div style="font-size:50px">📦</div><div style="background:#ff9a9a;padding:6px 14px;border-radius:12px;font-weight:bold;">A</div><div style="font-size:12px;color:#999;">prato baixo ⬇️</div></div>
+       <div style="font-size:40px;align-self:center;">⚖️</div>
+       <div style="text-align:center"><div style="font-size:40px;opacity:.6;">📦</div><div style="background:#9af;padding:6px 14px;border-radius:12px;font-weight:bold;">B</div><div style="font-size:12px;color:#999;">prato alto ⬆️</div></div>
+     </div>`},
+    {type:'unidade', q:'Qual unidade mede CAPACIDADE (quanto cabe dentro)?',
+     answer:'Litro', opts:['Quilograma','Litro','Metro','Centímetro']},
+    {type:'unidade', q:'Qual unidade mede MASSA (quanto pesa)?',
+     answer:'Quilograma', opts:['Quilograma','Litro','Metro','Centímetro']},
+    {type:'conceito', q:'Massa é "quanto pesa". Capacidade é...',
+     answer:'quanto cabe dentro', opts:['quanto pesa','quanto cabe dentro','quanto mede','quanto custa']},
+    {type:'balanca', q:'Na balança, qual pacote é MAIS LEVE?',
+     a:'Pacote X', b:'Pacote Y ⬇️', answer:0, lighter:true,
+     stage:`<div style="display:flex;gap:20px;align-items:flex-end;justify-content:center;">
+       <div style="text-align:center"><div style="font-size:40px;opacity:.6;">📦</div><div style="background:#9af;padding:6px 14px;border-radius:12px;font-weight:bold;">X</div><div style="font-size:12px;color:#999;">prato alto ⬆️</div></div>
+       <div style="font-size:40px;align-self:center;">⚖️</div>
+       <div style="text-align:center"><div style="font-size:50px">📦</div><div style="background:#ff9a9a;padding:6px 14px;border-radius:12px;font-weight:bold;">Y</div><div style="font-size:12px;color:#999;">prato baixo ⬇️</div></div>
+     </div>`},
+  ];
+  let ri=0;
+  function play(){
+    if(ri>=rounds.length){ showWin('Massa e Capacidade'); return; }
+    const r=rounds[ri];
+    current={next:()=>{ri++;play();}};
+    if(r.type==='balanca'){
+      const opts=r.lighter
+        ? [{label:'Pacote X (leve ⬆️)'},{label:'Pacote Y (pesado ⬇️)'}]
+        : [{label:'Pacote A (pesado ⬇️)'},{label:'Pacote B (leve ⬆️)'}];
+      current.correctIdx=r.answer;
+      renderGame('⚖️ Massa e Capacidade',`${ri+1} de ${rounds.length}`,r.q,r.stage,opts,['mc_bal'],
+        'Na balança, o prato que desce tem mais massa!');
+    } else {
+      const sh=shuffle(r.opts);
+      current.correctIdx=sh.indexOf(r.answer);
+      renderGame('⚖️ Massa e Capacidade',`${ri+1} de ${rounds.length}`,r.q,'',
+        sh.map(o=>({label:o})),['mc_cap'],
+        'kg = massa (peso) · L = capacidade (líquido)');
+    }
+  }
+  play();
+}
+
+/* ===== SPLASH & START ===== */
+document.getElementById('startBtn').addEventListener('click',()=>{
+  initAudio(); unlockAudio();
+  document.getElementById('splash').style.display='none';
+  goHome();
+});
+document.getElementById('splash').addEventListener('click',(e)=>{
+  if(e.target.id!=='startBtn') return;
+});
+</script>
+</body>
+</html>
