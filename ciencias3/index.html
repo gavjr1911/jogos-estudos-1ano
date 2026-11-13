@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>🏘️ Ciências Novembro 🏘️</title>
+<title>Ciências Novembro</title>
 <style>
   :root{
     --rosa:#ff6b9d; --roxo:#a06cd5; --azul:#4d96ff; --verde:#6bcB77;
@@ -157,14 +157,36 @@
     .obj{font-size:60px;} .cardtxt{font-size:17px;}
     .opt{font-size:20px;} .opt .cap{font-size:15px;} .ficha{font-size:15px;}
   }
+
+  /* Pergunta e alternativa com ilustração (jogo "Escola Para Quê?") */
+  .options.fig-opts{grid-template-columns:1fr; max-width:520px; margin:0 auto;}
+  .opt.fig-opt{
+    flex-direction:row; justify-content:flex-start; gap:14px; text-align:left;
+    background:#fff; color:#3a3a55; border:4px solid #e3eaf7; box-shadow:0 6px 0 #d9e3f5;
+    padding:8px 14px; min-height:110px;
+  }
+  .opt.fig-opt:active{box-shadow:0 3px 0 #d9e3f5;}
+  .opt.fig-opt .fig{width:92px; height:92px; flex:0 0 92px;}
+  .opt.fig-opt .cap{font-size:19px; line-height:1.25;}
+  .opt.fig-opt.ok{color:#fff; border-color:#3f9c4f;}
+  .opt.fig-opt.no{border-color:#a0a0c0;}
+  /* Alvos de no mínimo 70px também nos botões de ouvir e de avançar. */
+  .speak-btn{width:70px; height:70px; font-size:34px;}
+  .next-btn{min-height:70px;}
+  /* Ordenar: as cenas de rua têm detalhes (chão, luz, carros); 104px em vez de 86px. */
+  .game .or-vaga{width:104px; height:104px;}
+  #orItens .adesivo{width:104px; height:104px;}
+  @media(max-width:480px){ .opt.fig-opt .cap{font-size:17px;} .opt.fig-opt .fig{width:84px;height:84px;flex-basis:84px;} }
 </style>
+<link rel="stylesheet" href="../motor/interacoes.css">
+<script src="../motor/interacoes.js"></script>
 </head>
 <body>
 
 <div id="splash">
-  <div class="big">🏘️</div>
+  <div class="big"><img src="images/mascote.webp" alt="" style="width:170px;height:170px" class="flutua"></div>
   <h1>Ciências Novembro!</h1>
-  <p style="font-size:20px;max-width:380px;">Vamos aprender sobre ruas, escola e transporte! 🚌<br>Toque no botão para começar.</p>
+  <p style="font-size:20px;max-width:380px;">Ruas, escola e o caminho até a escola!<br>Toque no botão para começar.</p>
   <button class="play" id="startBtn">▶ COMEÇAR</button>
 </div>
 
@@ -174,11 +196,22 @@
 <script>
 /* ============================================================
    CIÊNCIAS NOVEMBRO — 1º ano (Bernoulli, Capítulo 5)
-   Módulo 10 do projeto.
+   Módulo 10 do projeto. Refeito com o motor de interações
+   (motor/interacoes.js): arrastar, ligar, estourar, procurar...
    Conteúdos: DA SUA CASA ATÉ A ESCOLA — ruas antigamente e hoje,
-   espaços públicos e privados, meios de transporte, funções das ruas,
-   fontes históricas, profissionais da escola, materiais escolares
-   antigos e modernos, importância da escola.
+   espaços públicos e privados, meios de transporte e poluição,
+   funções das ruas, fontes históricas, profissionais da escola,
+   materiais escolares antigos e atuais, para que serve a escola.
+
+   Jogos (todos com 3 rodadas, da mais fácil para a mais difícil):
+     ruas          ordenar      antigo → hoje (veículos, chão, a rua inteira)
+     espacos       classificar  público × privado
+     transporte    baloes       jeitos de ir à escola; o que polui
+     funcoes       cena         comercial, residencial, cultural
+     fontes        mascote      a Coruja Detetive pede pistas do passado
+     profissionais ligar        pessoa ↔ o que faz na escola
+     materiais     memoria      material de antigamente ↔ o de hoje
+     escola        options      pergunta com ilustração nas opções
    ============================================================ */
 
 const App = document.getElementById('app');
@@ -189,253 +222,222 @@ let stars = parseInt(localStorage.getItem('vitor_ci3_stars')||'0',10);
    ============================================================ */
 const VOICE = {
   /* navegação e feedback */
-  greet:"Olá! Bem-vindo aos jogos de Ciências Novembro! Escolha uma brincadeira para começar.",
+  greet:"Oi! Eu sou a Coruja Sabida! Vamos aprender sobre as ruas, a escola e o caminho de casa até a escola. Escolha uma brincadeira!",
   test:"Olá! Você está me ouvindo? Vamos aprender sobre ruas, escola e transporte!",
   win:"Parabéns! Você conseguiu! Que orgulho de você!",
   choose:"As respostas são:",
   ok1:"Muito bem!", ok2:"Isso aí!", ok3:"Você acertou!",
   ok4:"Boa demais!", ok5:"Mandou bem!", ok6:"Perfeito!",
   no1:"Quase! Tenta outra.", no2:"Hmm, tenta de novo.", no3:"Não foi essa, tenta outra.",
+  figurinha:"Você ganhou uma figurinha nova para o seu álbum!",
+  album:"Este é o seu álbum de figurinhas! Termine os jogos para completar.",
 
-  /* ============ 1. RUAS: ANTES E HOJE ============ */
-  ru_q_antes:"Como eram as ruas antigamente?",
-  ru_terra:"Eram de terra ou pedras",
-  ru_asfalto:"Eram cobertas de asfalto liso",
-  ru_plastico:"Eram feitas de plástico colorido",
-  ru_q_hoje:"Como são as ruas de hoje?",
-  ru_asfaltadas:"São asfaltadas e iluminadas",
-  ru_barro:"São de barro e sem luz nenhuma",
-  ru_madeira:"São feitas de tábuas de madeira",
-  ru_q_mudou:"O que mudou nas ruas ao longo do tempo?",
-  ru_tudo:"O chão, a luz e os veículos",
-  ru_nada:"Nada mudou, são todas iguais",
-  ru_cor:"Só a cor das casas mudou",
-  ru_q_patrimonio:"O que é patrimônio cultural de uma cidade?",
-  ru_bens:"Bens importantes da cultura do lugar",
-  ru_lixo:"O lixo jogado nas calçadas da rua",
-  ru_brinquedos:"Os brinquedos das crianças da escola",
-  ru_q_preservar:"Por que algumas ruas preservam características do passado?",
-  ru_historia:"Porque contam a história do lugar",
-  ru_velhas:"Porque ninguém quis arrumar elas",
-  ru_feias:"Porque ficam mais bonitas assim",
-  ru_q_conhecer:"O que podemos fazer para conhecer as ruas da cidade?",
-  ru_passear:"Passear por elas e observar",
-  ru_esconder:"Se esconder dentro de casa",
-  ru_dormir:"Dormir o dia inteiro",
-  ru_q_historica:"Por que uma rua pode ser considerada histórica?",
-  ru_preserva:"Por preservar traços do passado",
-  ru_nova:"Por ser a mais nova da cidade",
-  ru_larga:"Por ser a mais larga de todas",
+  /* ===== 1. RUAS: ANTES E HOJE (ordenar) ===== */
+  ru_q1:"Coloque em ordem: primeiro o mais antigo, depois o de hoje! Arraste cada figura para o número certo. Como as pessoas andavam pelas ruas?",
+  ru_carroca:"A carroça puxada por cavalo, de antigamente",
+  ru_carro:"O carro de hoje",
+  ru_exp1:"Antigamente muita gente andava de carroça. Hoje as ruas têm carros e ônibus. Para conhecer as ruas da cidade, podemos passear por elas e observar.",
+  ru_q2:"Agora o chão da rua! Coloque em ordem, do mais antigo para o de hoje.",
+  ru_terra:"A rua de terra",
+  ru_pedras:"A rua de pedras",
+  ru_asfalto:"A rua de asfalto",
+  ru_exp2:"Antigamente as ruas eram de terra ou de pedras. Hoje elas são asfaltadas, com um chão mais liso para os carros passarem.",
+  ru_q3:"Agora a rua inteira! Olhe o chão, a luz e os carros, e coloque em ordem, do mais antigo para o de hoje.",
+  ru_c1:"Uma rua de terra, escura, com carroça",
+  ru_c2:"Uma rua de pedras, com lampião e carro antigo",
+  ru_c3:"Uma rua de asfalto, iluminada, com carros de hoje",
+  ru_exp3:"Com o tempo mudaram o chão, a luz e os veículos das ruas. Algumas ruas guardam traços do passado: são ruas históricas, que contam a história do lugar e fazem parte do patrimônio cultural da cidade.",
 
-  /* ============ 2. PÚBLICO OU PRIVADO? ============ */
-  ep_q_publico:"O que é um espaço público?",
-  ep_todos:"Um lugar aberto para todas as pessoas",
-  ep_dono:"Um lugar que só o dono pode usar",
-  ep_fechado:"Um lugar trancado com um cadeado",
-  ep_q_privado:"O que é um espaço privado?",
-  ep_pertence:"Um lugar que pertence a alguém",
-  ep_rua:"Um lugar aberto a todas as pessoas",
-  ep_ninguem:"Um lugar que não pertence a ninguém",
-  ep_q_praca:"Que tipo de espaço é a praça?",
-  ep_pub:"É um espaço público",
-  ep_pri:"É um espaço privado",
-  ep_nem:"Não é nenhum dos dois",
-  ep_q_shopping:"Que tipo de espaço é o shopping?",
-  ep_q_mercado:"Que tipo de espaço é o mercado municipal?",
-  ep_q_cinema:"Que tipo de espaço é o cinema?",
-  ep_q_parque:"Que tipo de espaço é o parquinho da cidade?",
-  ep_q_regra:"Nos lugares abertos a todos, precisamos seguir o quê?",
-  ep_regras:"Regras de boa convivência",
-  ep_nenhuma:"Não precisamos seguir nada",
-  ep_fugir:"Precisamos sair correndo de lá",
-  ep_q_exemplo:"Qual destes é um lugar aberto para todas as pessoas?",
-  ep_a_praca:"A praça da cidade",
-  ep_a_quarto:"O quarto de alguém",
-  ep_a_escritorio:"O escritório do chefe",
+  /* ===== 2. PÚBLICO OU PRIVADO? (classificar) ===== */
+  ep_q1:"Arraste cada lugar para o grupo certo! O portão aberto é para os lugares abertos a todas as pessoas. A casa com cadeado é para os lugares que pertencem a alguém.",
+  ep_pub:"Espaço público: aberto para todas as pessoas.",
+  ep_pri:"Espaço privado: pertence a alguém.",
+  l_praca:"A praça",
+  l_parquinho:"O parquinho da cidade",
+  l_mercado:"O mercado municipal",
+  l_rua:"A rua",
+  l_shopping:"O shopping",
+  l_cinema:"O cinema",
+  l_quarto:"O quarto de alguém",
+  l_escritorio:"O escritório de uma empresa",
+  ep_exp1:"A praça e o parquinho são públicos: qualquer pessoa pode usar. O shopping e o quarto são privados: pertencem a alguém.",
+  ep_q2:"Mais lugares! Público ou privado? Arraste cada um para o grupo certo.",
+  ep_exp2:"O mercado municipal e a rua são públicos, são de todos da cidade. O cinema e o escritório são privados: eles têm dono.",
+  ep_q3:"Agora são muitos lugares! Separe todos: público ou privado.",
+  ep_exp3:"Os espaços públicos são de todos. Por isso, neles precisamos seguir regras de boa convivência.",
 
-  /* ============ 3. COMO VAMOS À ESCOLA? ============ */
-  tr_q_meios:"Quais são meios de transporte para ir à escola?",
-  tr_carro:"Carro, ônibus e bicicleta",
-  tr_foguete:"Foguete, avião e helicóptero",
-  tr_patins:"Patins, skate e submarino",
-  tr_q_onibus:"O ônibus escolar serve para quê?",
-  tr_levar:"Levar as crianças até a escola",
-  tr_passeio:"Passear pela cidade à noite",
-  tr_carregar:"Carregar caixas do mercado",
-  tr_q_barco:"Em alguns lugares, as crianças vão à escola de quê?",
-  tr_barco:"De barco",
-  tr_aviao:"De avião",
-  tr_trem:"De trem-bala",
-  tr_q_poluicao:"Muitos carros nas ruas podem causar o quê?",
-  tr_polui:"Poluição do ar",
-  tr_chuva:"Chuva de doces",
-  tr_flores:"Mais flores na rua",
-  tr_q_ape:"Ir a pé para a escola é bom por quê?",
-  tr_npolui:"Não polui e faz bem ao corpo",
-  tr_rapido:"É o jeito mais rápido de todos",
-  tr_barulho:"Faz barulho demais na rua toda",
-  tr_q_bike:"A bicicleta é um meio de transporte que polui?",
-  tr_naopolui:"Não, a bicicleta não polui",
-  tr_sim_polui:"Sim, ela polui bastante",
-  tr_talvez:"Só polui quando está chovendo",
-  tr_q_diferente:"Por que crianças de lugares diferentes usam transportes diferentes?",
-  tr_realidade:"Porque cada lugar tem uma realidade",
-  tr_igual:"Todas usam o mesmo transporte",
-  tr_nenhum:"Porque nenhuma criança vai à escola",
+  /* ===== 3. COMO VAMOS À ESCOLA? (balões) ===== */
+  tr_q1:"Estoure os balões dos jeitos de ir à escola!",
+  t_carro:"O carro",
+  t_onibus:"O ônibus escolar",
+  t_bicicleta:"A bicicleta",
+  t_ape:"A pé",
+  t_barco:"O barco",
+  t_foguete:"O foguete",
+  t_submarino:"O submarino",
+  tr_exp1:"Cada criança vai à escola de um jeito: de carro, de ônibus escolar, de bicicleta, a pé e até de barco. Cada lugar tem uma realidade diferente.",
+  tr_q2:"Agora estoure só os jeitos de ir à escola que não poluem o ar!",
+  tr_exp2:"Ir a pé e de bicicleta não polui o ar, e ainda faz bem para o corpo.",
+  tr_q3:"Agora é o contrário! Estoure só os que soltam fumaça e poluem o ar.",
+  tr_exp3:"Carros e ônibus soltam fumaça. Muitos carros nas ruas causam poluição do ar. O ônibus escolar leva muitas crianças juntas até a escola.",
 
-  /* ============ 4. PARA QUE SERVE A RUA? ============ */
-  fn_q_servem:"Para que servem as ruas?",
-  fn_ligar:"Para ligar os lugares da cidade",
-  fn_enfeite:"Só para enfeitar a cidade toda",
-  fn_guardar:"Para guardar os carros velhos lá",
-  fn_q_comercial:"Uma rua com muitas lojas tem função de quê?",
-  fn_comercial:"Função comercial",
-  fn_residencial:"Função residencial",
-  fn_cultural:"Função cultural",
-  fn_q_residencial:"Uma rua onde as pessoas moram tem função de quê?",
-  fn_q_cultural:"Uma rua com museus e teatros tem função de quê?",
-  fn_q_nomes:"Os nomes das ruas podem contar o quê?",
-  fn_historia_lugar:"A história do lugar",
-  fn_receita:"Uma receita de bolo gostoso",
-  fn_piada:"Uma piada muito engraçada",
-  fn_q_minhocao:"O Minhocão em São Paulo é um elevado que nos fins de semana vira o quê?",
-  fn_lazer:"Espaço de lazer para pedestres",
-  fn_estacionamento:"Estacionamento grande de caminhões",
-  fn_piscina:"Uma piscina gigante com tobogã",
-  fn_q_diferenca:"As ruas de uma cidade são todas iguais?",
-  fn_nao:"Não, cada rua tem algo diferente",
-  fn_sim:"Sim, são todas iguais mesmo",
-  fn_quase:"Quase todas são bem iguais",
+  /* ===== 4. PARA QUE SERVE A RUA? (cena) ===== */
+  fn_q1:"Toque nas lojas! Uma rua com muitas lojas tem função comercial.",
+  fn_q2:"Toque onde as pessoas moram! Uma rua com casas e prédios tem função residencial.",
+  fn_q3:"Toque nos lugares de arte e de história! Uma rua com museu e teatro tem função cultural.",
+  r_loja:"Uma loja de roupas",
+  r_padaria:"Uma padaria",
+  r_casa:"Uma casa",
+  r_predio:"Um prédio de apartamentos",
+  r_museu:"Um museu",
+  r_teatro:"Um teatro",
+  fn_exp1:"As ruas ligam os lugares da cidade. Lojas e padarias mostram que a rua tem função comercial: é lugar de comprar e vender.",
+  fn_exp2:"Casas e prédios mostram que a rua tem função residencial: é onde as pessoas moram. As ruas não são todas iguais, cada uma tem algo diferente.",
+  fn_exp3:"Museu e teatro mostram a função cultural. E tem rua que vira lazer: o Minhocão, em São Paulo, nos fins de semana fica só para as pessoas passearem.",
 
-  /* ============ 5. DESCOBRIR A HISTÓRIA ============ */
-  fh_q_fonte:"O que são fontes históricas?",
-  fh_ajudam:"Coisas que ajudam a conhecer o passado",
-  fh_inventadas:"Histórias inventadas só para brincar",
-  fh_futuro:"Coisas que mostram apenas o futuro",
-  fh_q_foto:"Fotografias antigas ajudam a conhecer o quê?",
-  fh_passado:"Como era o lugar no passado",
-  fh_clima:"O clima que fará amanhã cedo",
-  fh_receita:"Receitas de comida gostosa",
-  fh_q_morador:"Conversar com moradores antigos é importante por quê?",
-  fh_relatos:"Porque eles contam o que viveram",
-  fh_cantar:"Porque eles cantam músicas do rádio",
-  fh_correr:"Porque eles correm mais que todos",
-  fh_q_mapa:"Os mapas ajudam a entender o quê?",
-  fh_como_era:"Como era o lugar antes",
-  fh_comida:"O que comer lá no almoço",
-  fh_roupa:"Que roupa vestir no dia",
-  fh_q_texto:"Os textos históricos servem para quê?",
-  fh_registro:"Registrar o que aconteceu no passado",
-  fh_brincar:"Fazer brincadeiras divertidas na escola",
-  fh_pintar:"Pintar as paredes coloridas de casa",
-  fh_q_mudancas:"Ao comparar fotos antigas e atuais, o que podemos ver?",
-  fh_mudaram:"As mudanças que aconteceram",
-  fh_nada_mudou:"Que nada mudou por ali",
-  fh_cores_so:"Só as cores das fotos velhas",
-  fh_q_pesquisa:"Como podemos conhecer a história da nossa rua?",
-  fh_pesquisar:"Pesquisando em fotos, livros e relatos",
-  fh_adivinhando:"Adivinhando sem perguntar nada a ninguém",
-  fh_esquecendo:"Esquecendo tudo sobre o lugar que vivemos",
+  /* ===== 5. CORUJA DETETIVE: FONTES HISTÓRICAS (mascote) ===== */
+  fo_q1:"Eu sou a Coruja Detetive! Quero descobrir como era a nossa rua antigamente. Arraste até mim o que ajuda a conhecer o passado!",
+  fo_q2:"Preciso de mais pistas do passado! Me dê tudo o que ajuda a saber como o lugar era antes.",
+  fo_q3:"Última missão! Me dê todas as fontes históricas: tudo o que conta como era o passado.",
+  fo_foto:"Uma fotografia antiga",
+  fo_mapa:"Um mapa antigo",
+  fo_livro:"Um livro antigo de história",
+  fo_vovo:"O vovô, morador antigo, contando o que viveu",
+  fo_cristal:"Uma bola de cristal de adivinhar",
+  fo_bola:"Uma bola de futebol",
+  fo_bolo:"Um bolo de aniversário",
+  fo_exp1:"A fotografia antiga mostra como o lugar era no passado. Comparando com uma foto de hoje, vemos as mudanças que aconteceram.",
+  fo_exp2:"Fotografias e mapas antigos são fontes históricas: eles ajudam a conhecer como o lugar era antes.",
+  fo_exp3:"Fotos, mapas, textos e a conversa com moradores antigos são fontes históricas. Os moradores contam o que viveram. Até o nome de uma rua pode contar a história do lugar.",
 
-  /* ============ 6. QUEM TRABALHA NA ESCOLA? ============ */
-  pe_q_diretora:"Quem organiza e cuida de toda a escola?",
-  pe_diretora:"A diretora",
-  pe_carteiro:"O carteiro",
-  pe_bombeiro:"O bombeiro",
-  pe_q_limpeza:"Quem cuida da limpeza da escola?",
-  pe_auxiliar:"O auxiliar de limpeza",
-  pe_piloto:"O piloto de avião",
-  pe_pintor:"O pintor de quadros",
-  pe_q_porteiro:"Quem cuida da entrada da escola?",
-  pe_porteiro:"O porteiro",
-  pe_padeiro:"O padeiro",
-  pe_dentista:"O dentista",
-  pe_q_cozinheira:"Quem prepara a comida na escola?",
-  pe_cozinheira:"A cozinheira",
-  pe_motorista:"O motorista de táxi",
-  pe_jardineiro:"O jardineiro do parque",
-  pe_q_professor:"Quem ensina as matérias na sala de aula?",
-  pe_professor:"O professor",
-  pe_cozinheira2:"A cozinheira da escola",
-  pe_porteiro2:"O porteiro da escola",
-  pe_q_comunidade:"Todas essas pessoas juntas formam o quê?",
-  pe_comunidade:"A comunidade escolar",
-  pe_time:"Um time de futebol",
-  pe_banda:"Uma banda de música",
-  pe_q_importancia:"Por que cada profissional da escola é importante?",
-  pe_funciona:"Cada um faz a escola funcionar bem",
-  pe_so_professor:"Só o professor faz alguma coisa",
-  pe_nenhum:"Nenhum deles faz diferença na escola",
+  /* ===== 6. QUEM TRABALHA NA ESCOLA? (ligar) ===== */
+  pr_q1:"Puxe uma linha de cada pessoa até o que ela faz na escola!",
+  pr_q2:"Agora são quatro pessoas! Ligue cada uma ao seu trabalho na escola.",
+  pr_q3:"Agora são cinco! Ligue cada pessoa ao que ela faz na escola.",
+  p_diretora:"A diretora",
+  p_auxiliar:"O auxiliar de limpeza",
+  p_porteiro:"O porteiro",
+  p_cozinheira:"A cozinheira",
+  p_professor:"O professor",
+  f_escola:"Organiza e cuida de toda a escola",
+  f_vassoura:"Cuida da limpeza da escola",
+  f_portao:"Cuida da entrada da escola",
+  f_panela:"Prepara a comida da escola",
+  f_sala:"Ensina as matérias na sala de aula",
+  pr_exp1:"O auxiliar de limpeza deixa a escola limpa, o porteiro cuida da entrada e a cozinheira prepara a comida. Cada um faz a escola funcionar bem.",
+  pr_exp2:"A diretora organiza e cuida de toda a escola, e o professor ensina as matérias na sala de aula.",
+  pr_exp3:"Todas essas pessoas juntas formam a comunidade escolar. Cada uma é importante para a escola funcionar.",
 
-  /* ============ 7. MATERIAL DE ESTUDAR ============ */
-  me_q_antigamente:"O que as crianças usavam para estudar antigamente?",
-  me_lousa:"Lousa, cartilha e goma árabe",
-  me_tablet:"Tablet e computador",
-  me_celular:"Celular e fone de ouvido",
-  me_q_cartilha:"A cartilha escolar antiga servia para quê?",
-  me_ler:"Ensinar as crianças a ler",
-  me_correr:"Ensinar a correr rápido",
-  me_cozinhar:"Ensinar a cozinhar",
-  me_q_goma:"A goma árabe era usada como o quê?",
-  me_cola:"Era usada como cola",
-  me_tinta:"Era usada como tinta",
-  me_comida:"Era usada como comida",
-  me_q_lousa:"A lousa escolar antiga servia para quê?",
-  me_escrever:"Para escrever e aprender",
-  me_dormir2:"Para dormir em cima dela",
-  me_brincar2:"Para jogar bola na escola",
-  me_q_bolsa:"As bolsas escolares antigas eram feitas de quê?",
-  me_couro:"De couro",
-  me_papel:"De papel fino",
-  me_folhas:"De folhas de árvore",
-  me_q_mudou:"Os materiais escolares mudaram com o tempo?",
-  me_sim:"Sim, hoje são bem diferentes",
-  me_nao:"Não, são todos iguais",
-  me_talvez:"Só mudou a cor dos lápis",
-  me_q_hoje:"Quais materiais você usa hoje na escola?",
-  me_caderno:"Caderno, lápis e estojo",
-  me_lousa2:"Lousa de pedra e goma árabe",
-  me_martelo:"Martelo e parafuso",
+  /* ===== 7. MATERIAL DE ANTIGAMENTE (memória) ===== */
+  ma_q1:"Jogo da memória! Cada material de antigamente tem um par: o material de hoje que serve para a mesma coisa. Vire as cartas e encontre os pares!",
+  ma_q2:"Agora são três pares! Ache o material de antigamente e o de hoje que servem para a mesma coisa.",
+  ma_q3:"Agora são quatro pares! Vire as cartas e ache os pares de antigamente e de hoje.",
+  ma_lousa:"A lousa de pedra, onde as crianças escreviam antigamente",
+  ma_caderno:"O caderno, onde escrevemos hoje",
+  ma_goma:"A goma árabe, a cola de antigamente",
+  ma_cola:"A cola de hoje",
+  ma_bolsa:"A bolsa de couro de antigamente",
+  ma_mochila:"A mochila de hoje",
+  ma_cartilha:"A cartilha, que ensinava as crianças a ler",
+  ma_livro:"O livro da escola de hoje",
+  ma_exp1:"Antigamente as crianças escreviam numa lousa de pedra, e hoje escrevemos no caderno. A goma árabe era usada como cola.",
+  ma_exp2:"As bolsas escolares de antigamente eram feitas de couro. Hoje usamos mochila.",
+  ma_exp3:"A cartilha ensinava as crianças a ler. Os materiais da escola mudaram muito com o tempo: hoje usamos caderno, lápis, estojo e livro.",
 
-  /* ============ 8. ESCOLA PARA QUÊ? ============ */
-  es_q_serve:"Para que serve a escola?",
-  es_aprender:"Para aprender e fazer amigos novos",
-  es_brincar:"Só para brincar o dia todo inteiro",
-  es_dormir:"Para dormir e descansar na sala",
-  es_q_amigos:"Na escola, além de estudar, o que podemos fazer?",
-  es_amizades:"Fazer amizades e brincar",
-  es_esconder:"Se esconder e ficar sozinho lá",
-  es_nada:"Não podemos fazer nada de bom",
-  es_q_aprendiam:"Antes de existir escola, como as crianças aprendiam?",
-  es_observando:"Observando os mais velhos",
-  es_sozinhas:"Ficavam sozinhas sem aprender nada",
-  es_maquina:"Aprendiam dentro de uma máquina grande",
-  es_q_velhos:"Os mais velhos ensinavam o quê às crianças?",
-  es_oficio:"A cuidar de animais e consertar",
-  es_nada2:"Não ensinavam nada para ninguém",
-  es_voar:"A voar bem alto como os pássaros",
-  es_q_historias:"Contar histórias é uma forma de quê?",
-  es_ensinar:"Ensinar e passar conhecimento",
-  es_esquecer:"Esquecer tudo que aconteceu",
-  es_barulho:"Fazer barulho dentro da sala",
-  es_q_futuro:"A escola ajuda a gente a pensar no quê?",
+  /* ===== 8. ESCOLA PARA QUÊ? (pergunta com ilustração) ===== */
+  es_q1:"Para que serve a escola?",
+  es_aprender:"Aprender e fazer amigos",
+  es_dormir:"Dormir na sala o dia todo",
+  es_esconder:"Ficar escondido sem ninguém",
+  es_exp1:"A escola é o lugar de aprender e fazer amigos. Lá a gente estuda, brinca e faz esportes.",
+  es_q2:"Antes de existir escola, como as crianças aprendiam?",
+  es_observar:"Observando os mais velhos",
+  es_maquina:"Dentro de uma máquina grande",
+  es_sozinha:"Sozinhas, sem ninguém ensinar",
+  es_exp2:"Antes da escola, as crianças aprendiam observando os mais velhos: a cuidar dos animais e a consertar as coisas. Contar histórias também era um jeito de ensinar.",
+  es_q3:"A escola ajuda a gente a pensar no quê?",
   es_sonhos:"Nos sonhos para o futuro",
-  es_passado:"Só no que já aconteceu",
   es_almoco:"Só na hora do almoço",
-  es_q_atividades:"Quais atividades a escola oferece?",
-  es_varias:"Estudar, brincar e fazer esportes",
-  es_so_ler:"Só ler livros o dia inteiro na sala",
-  es_so_correr:"Só correr no pátio sem parar",
+  es_tv:"Só no desenho da televisão",
+  es_exp3:"A escola ajuda a gente a pensar nos sonhos para o futuro: em tudo o que vamos aprender e em quem queremos ser.",
+};
 
-  /* ---- frases de reforço ---- */
-  exp_ruas:"As ruas mudaram muito ao longo do tempo. Antes eram de terra, hoje são asfaltadas.",
-  exp_espacos:"Espaços públicos são para todos. Espaços privados pertencem a alguém.",
-  exp_transporte:"Existem muitos meios de transporte para ir à escola, como carro, ônibus, bicicleta e barco.",
-  exp_funcoes:"As ruas podem ter função comercial, residencial ou cultural.",
-  exp_fontes:"Fotografias, mapas, textos e relatos de moradores são fontes históricas.",
-  exp_profissionais:"Na escola trabalham muitas pessoas, como a diretora, o porteiro, a cozinheira e os professores.",
-  exp_materiais:"Os materiais escolares mudaram muito. Antes usavam lousa de pedra e cartilha, hoje usamos caderno e lápis.",
-  exp_escola:"A escola é o lugar onde aprendemos, fazemos amigos e sonhamos com o futuro.",
+/* Objetos isolados, fundo transparente. Em inglês.
+   Os que vieram do laboratorio/ mantêm a descrição de lá (não são regerados). */
+const ADESIVOS = {
+  /* --- copiados do laboratório --- */
+  mascote: "A cute friendly owl mascot wearing a small red school backpack, waving one wing, full body",
+  praca: "A small town square with a green tree, a park bench and a little fountain",
+  parquinho: "A colorful children's playground with a slide and a swing",
+  mercado: "A Brazilian municipal market building with fruit and vegetable stalls in front",
+  shopping: "A big modern shopping mall building with glass doors and shopping bags icons, absolutely no words or letters on the facade",
+  cinema: "A movie theater building decorated with a film reel and popcorn",
+  quarto: "A child's bed with a pillow, a blanket and a teddy bear",
+  g_publico: "An open garden gate with three happy tiny people walking through it",
+  g_privado: "A cozy little house with a big golden padlock on the front door",
+  lousa: "An old green chalkboard with a wooden frame and a piece of white chalk",
+  cartilha: "An old vintage school primer book with a worn brown cover",
+  goma: "An old small glass bottle of liquid glue with a brush in the lid",
+  diretora: "A friendly female school principal holding a clipboard, full body",
+  auxiliar: "A friendly school cleaning worker man in a blue uniform with empty hands, waving, full body",
+  porteiro: "A friendly school doorman in a uniform and cap, full body",
+  cozinheira: "A friendly school cook woman with a white chef hat and apron, full body",
+  professor: "A friendly male teacher with glasses holding a book, full body",
+  escola: "A school building with a flag on top and a clock",
+  vassoura: "A broom and a dustpan",
+  portao: "A school entrance gate, open",
+  panela: "A cooking pot full of steaming food",
+  carro: "A small red car, side view",
+  onibus: "A yellow school bus, side view",
+  bicicleta: "A blue bicycle, side view",
+  barco: "A small wooden rowing boat",
+  ape: "A happy child walking with a school backpack, side view",
+  loja: "A small clothing shop storefront with a striped awning and clothes in the window",
+  padaria: "A bakery storefront with bread and cakes in the window",
+  casa: "A small family house with a red roof and a little garden",
+  predio: "A small apartment building with balconies and plants",
+  museu: "A classical museum building with columns and steps",
+  teatro: "A theater building with red curtains and masks decoration",
+
+  /* --- novos deste módulo --- */
+  carroca: "An old wooden horse-drawn cart pulled by a brown horse, side view, vintage muted sepia colors",
+  rua_terra: "A short piece of unpaved brown dirt road with small puddles, pebbles and tufts of grass on the edges, seen from slightly above like a small square tile, nothing else",
+  rua_pedras: "A short piece of old cobblestone street paved with rounded grey stones, seen from slightly above like a small square tile, nothing else",
+  rua_asfalto: "A small square patch of paved road seen from directly above, like a ground tile: smooth dark grey asphalt with a white dashed center line, a strip of light grey sidewalk along each edge and a tuft of grass in one corner, nothing else",
+  rua_c1: "A small round vignette of an old dirt road at night, dark sky, no street lights at all, a horse-drawn cart and a simple old house, muted sepia colors",
+  rua_c2: "A small round vignette of an old cobblestone street at dusk with an old-fashioned gas lamp post and a vintage 1920s black car, old houses",
+  rua_c3: "A small round vignette of a modern smooth asphalt street at night with white lane stripes, two tall modern metal street lamp posts shining bright yellow light onto the road, modern colorful cars and modern buildings",
+  escritorio: "A company office room with a desk, a computer, an office chair and a potted plant",
+  foguete: "A red and white cartoon space rocket flying",
+  submarino: "A yellow cartoon submarine with round windows and bubbles",
+  coruja_detetive: "A cute friendly brown owl detective wearing a brown detective hat and holding a big magnifying glass, full body",
+  foto_antiga: "An old sepia photograph with a white scalloped border showing an old street with old houses and a horse cart",
+  mapa_antigo: "An old yellowed paper map of a small town with curled edges, drawn streets, little houses and a river, absolutely no words or letters",
+  livro_antigo: "A thick old history book with a worn brown leather cover and golden corners, closed, absolutely no words or letters",
+  vovo: "A friendly elderly grandfather with white hair sitting in an armchair, talking and telling a story, gesturing with one open hand, full body",
+  bola_cristal: "A fortune-teller's crystal ball on a golden stand, glowing purple with sparkles",
+  bola: "A black and white soccer ball",
+  bolo: "A birthday cake with pink frosting and lit candles",
+  caderno: "A modern spiral school notebook lying open with blank lined pages and a yellow pencil on it",
+  cola: "A modern white school glue bottle with an orange cap, absolutely no words or letters on the label",
+  bolsa_couro: "An old-fashioned brown leather school satchel with a buckle and a shoulder strap, vintage",
+  mochila: "A modern colorful children's school backpack with zippers",
+  livro_hoje: "A modern colorful children's school book, closed, with a picture of a sun and a tree on the cover, absolutely no words or letters",
+  sala_aula: "A classroom seen from the back: a big blank green blackboard on the wall, a teacher's desk and small student desks, no people",
+  es_aprender: "Three happy children studying together at one table with open books and smiling at each other like good friends",
+  es_dormir: "A child sleeping with the head down on a school desk, eyes closed",
+  es_esconder: "A sad child hiding alone behind a curtain, peeking out",
+  es_observar: "A small child watching closely and curiously as an elderly grandfather feeds a cow on a farm",
+  es_maquina: "A big strange grey machine with gears, levers and blinking colored buttons",
+  es_sozinha: "A lonely child sitting alone on the floor hugging the knees, nobody around",
+  es_sonhos: "A happy child with a big thought bubble above the head showing a space rocket, a doctor's stethoscope and a paint palette",
+  es_almoco: "A plate of rice, beans and chicken with a fork beside it",
+  es_tv: "A child sitting on the floor watching cartoons on an old television set",
+};
+
+/* Fundos em paisagem 3:2 (copiado do laboratório). */
+const CENARIOS = {
+  rua: "A sunny city street seen straight from the front: blue sky with clouds on the top half, a wide light gray sidewalk across the middle band, and an asphalt road with a crosswalk at the bottom. No buildings, no people, no cars",
 };
 
 /* ============================================================
@@ -501,8 +503,6 @@ function rint(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
 function pick(a){return a[Math.floor(Math.random()*a.length)];}
 function mix(){ return shuffle([].concat(...arguments)); }
 const OK_KEYS=['ok1','ok2','ok3','ok4','ok5','ok6'], NO_KEYS=['no1','no2','no3'];
-function emo(e,size){ return '<span class="obj" style="font-size:'+(size||74)+'px">'+e+'</span>'; }
-function cena(e,txt,size){ return emo(e,size||88)+(txt?'<div class="cardtxt">'+txt+'</div>':''); }
 
 function updateStars(){ const el=document.getElementById('starNum'); if(el) el.textContent=stars; localStorage.setItem('vitor_ci3_stars',stars); }
 function addStar(n=1){ stars+=n; updateStars(); }
@@ -535,21 +535,22 @@ function shell(inner){
 }
 
 /* ===== MENU ===== */
+const ico = k => '<img class="fig" src="images/'+k+'.webp" alt="">';
 const GAMES=[
-  {id:'ruas',        ico:'🏘️', nome:'Ruas: Antes e Hoje',     sub:'Terra, pedras e asfalto',     cls:'c1'},
-  {id:'espacos',     ico:'🏛️', nome:'Público ou Privado?',    sub:'Praça, shopping, parque',      cls:'c2'},
-  {id:'transporte',  ico:'🚌', nome:'Como Vamos à Escola?',   sub:'Carro, ônibus e bicicleta',    cls:'c3'},
-  {id:'funcoes',     ico:'🛣️', nome:'Para Que Serve a Rua?',  sub:'Comercial, residencial',       cls:'c4'},
-  {id:'fontes',      ico:'📸', nome:'Descobrir a História',    sub:'Fotos, mapas e relatos',        cls:'c5'},
-  {id:'profissionais',ico:'👩‍🏫', nome:'Quem Trabalha na Escola?',sub:'Diretora, porteiro e mais', cls:'c6'},
-  {id:'materiais',   ico:'📚', nome:'Material de Estudar',     sub:'Lousa, cartilha e caderno',     cls:'c7'},
-  {id:'escola',      ico:'🏫', nome:'Escola Para Quê?',        sub:'Aprender e fazer amigos',       cls:'c8'},
+  {id:'ruas',          ico:ico('carroca'),         nome:'Ruas: Antes e Hoje',      sub:'Coloque em ordem',            cls:'c1'},
+  {id:'espacos',       ico:ico('g_publico'),       nome:'Público ou Privado?',     sub:'Arraste para o grupo certo',  cls:'c2'},
+  {id:'transporte',    ico:ico('onibus'),          nome:'Como Vamos à Escola?',    sub:'Estoure os balões',           cls:'c3'},
+  {id:'funcoes',       ico:ico('loja'),            nome:'Para Que Serve a Rua?',   sub:'Procure na rua',              cls:'c4'},
+  {id:'fontes',        ico:ico('coruja_detetive'), nome:'Coruja Detetive',         sub:'Pistas do passado',           cls:'c5'},
+  {id:'profissionais', ico:ico('professor'),       nome:'Quem Trabalha na Escola?',sub:'Ligue cada um ao seu trabalho',cls:'c6'},
+  {id:'materiais',     ico:ico('cartilha'),        nome:'Material de Antigamente', sub:'Memória: antes e hoje',       cls:'c7'},
+  {id:'escola',        ico:ico('escola'),          nome:'Escola Para Quê?',        sub:'Escolha a figura certa',      cls:'c8'},
 ];
 function goHome(silent){
   stopAudio();
   shell(`
     <div class="hero">
-      <div class="mascote">🏘️</div>
+      <div class="mascote"><img src="images/mascote.webp" alt="" style="width:120px;height:120px" class="flutua"></div>
       <h1>Olá!</h1>
       <p>Escolha uma brincadeira 👇</p>
       <button onclick="testSound()" style="margin-top:6px;background:var(--amarelo);color:#5a4500;border:none;border-radius:18px;padding:9px 18px;font-size:16px;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #d9a800;">🔈 Testar som</button>
@@ -567,7 +568,7 @@ function goHome(silent){
 function testSound(){ initAudio(); sndClick(); playKeys(['test']); }
 
 /* ===== MOTOR DE RODADAS ===== */
-let current=null, locked=false, seqPos=0;
+let current=null, locked=false;
 function startGame(id){
   const rounds=BUILDERS[id]();
   current={id, title:GAMES.find(g=>g.id===id).nome, rounds, idx:0};
@@ -592,13 +593,13 @@ function gameFrame(c,r,bodyHtml){
 function renderRound(){
   locked=false;
   const c=current, r=c.rounds[c.idx];
-  if(r.mode==='seq'){ return renderSeq(c,r); }
-  gameFrame(c,r,`<div class="options ${r.colorOpts?'opt-colors':''}" id="opts"></div>`);
+  if(window.MODOS && MODOS[r.mode]) return MODOS[r.mode](c,r);
+  gameFrame(c,r,`<div class="options ${r.figOpts?'fig-opts':''}" id="opts"></div>`);
   const shown=shuffle(r.options);
   const opts=document.getElementById('opts');
   shown.forEach(o=>{
     const b=document.createElement('button');
-    b.className='opt'+(o.big?' big':'');
+    b.className='opt'+(r.figOpts?' fig-opt':'');
     b.innerHTML=o.label;
     b.onclick=()=>answer(b,o);
     opts.appendChild(b);
@@ -610,7 +611,6 @@ function speakRound(){ playKeys(window._roundKeys||[]); }
 
 function showNextButton(){
   document.querySelectorAll('.opt').forEach(b=>b.onclick=null);
-  document.querySelectorAll('.ficha').forEach(b=>b.onclick=null);
   const nb=document.createElement('button');
   nb.className='next-btn';
   const last=current.idx>=current.rounds.length-1;
@@ -644,44 +644,6 @@ function answer(btn,opt){
   }
 }
 
-/* ---- modo MONTAR A ORDEM ---- */
-function renderSeq(c,r){
-  seqPos=0;
-  const slots=r.itens.map((_,i)=>`<div class="seqslot" id="sl${i}"><span class="nn">${i+1}</span><span class="tx">...</span></div>`).join('');
-  gameFrame(c,r,`
-    <div class="seqslots">${slots}</div>
-    <div class="fichas" id="fichas"></div>
-  `);
-  const box=document.getElementById('fichas');
-  shuffle(r.itens.map((it,i)=>({it,i}))).forEach(t=>{
-    const b=document.createElement('button');
-    b.className='ficha'; b.textContent=t.it.txt;
-    b.onclick=()=>tapFicha(b,t.i,r);
-    box.appendChild(b);
-  });
-  window._roundKeys=[].concat(r.audio||[]);
-  setTimeout(()=>speakRound(),400);
-}
-function tapFicha(btn,idx,r){
-  if(locked) return;
-  if(idx===seqPos){
-    const sl=document.getElementById('sl'+seqPos);
-    sl.querySelector('.tx').textContent=r.itens[idx].txt;
-    sl.classList.add('filled');
-    btn.classList.add('used'); btn.onclick=null;
-    sndClick(); playKeys([r.itens[idx].aud]);
-    seqPos++;
-    if(seqPos>=r.itens.length){
-      setTimeout(()=>correctFlow([pick(OK_KEYS), r.expAud]),600);
-    }
-  }else{
-    sndWrong();
-    btn.classList.add('shake'); setTimeout(()=>btn.classList.remove('shake'),420);
-    const fb=document.getElementById('fb'); fb.className='feedback bad'; fb.textContent='🤔 Esse não é o próximo!';
-    playKeys([r.itens[idx].aud, pick(NO_KEYS)]);
-  }
-}
-
 function winScreen(){
   sndWin(); burst(); setTimeout(burst,400); setTimeout(burst,800);
   const c=current;
@@ -699,301 +661,147 @@ function winScreen(){
   setTimeout(()=>playKeys(['win']),250);
 }
 
-/* opções a partir de um mapa de rótulos */
-function mkOpts(correct, all, lblMap, extra){
-  return shuffle(all).map(k=>{
-    const o={label:lblMap[k], aud:k, correct:k===correct};
-    if(extra) Object.assign(o, extra(k));
-    return o;
-  });
+/* Opção de pergunta e alternativa com ilustração: a figura é o que a
+   criança usa; o texto é para o adulto (e bate com a narração). */
+function figOpt(chave, correct, expAud){
+  const o={label:'<img class="fig" src="images/'+chave+'.webp" alt="" draggable="false"><span class="cap">'+VOICE[chave]+'</span>', aud:chave, correct:!!correct};
+  if(correct) o.expAud=expAud;
+  return o;
 }
-function exp(options, expAud){ options.forEach(o=>{ if(o.correct) o.expAud=expAud; }); return options; }
-function L(e,txt){ return e+'<span class="cap">'+txt+'</span>'; }
 
 /* ============================================================
-   CONSTRUTORES DE RODADAS
+   CONSTRUTORES DE RODADAS — 3 rodadas por jogo, da mais fácil
+   para a mais difícil. A ordem das rodadas é fixa de propósito.
    ============================================================ */
 const BUILDERS={
 
-  /* 1. RUAS: ANTES E HOJE */
-  ruas(){
-    const fixas=[
-      {q:'Como eram as <b>ruas antigamente</b>? 🏚️',
-       audio:['ru_q_antes'], stage:cena('🏚️'), colorOpts:true,
-       options:exp(mkOpts('ru_terra',['ru_terra','ru_asfalto','ru_plastico'],
-         {ru_terra:L('🪨','Eram de terra ou pedras'), ru_asfalto:L('🛣️','Eram cobertas de asfalto liso'), ru_plastico:L('🧴','Eram feitas de plástico colorido')}),'exp_ruas')},
-      {q:'Como são as <b>ruas de hoje</b>? 🛣️',
-       audio:['ru_q_hoje'], stage:cena('🛣️'), colorOpts:true,
-       options:mkOpts('ru_asfaltadas',['ru_asfaltadas','ru_barro','ru_madeira'],
-         {ru_asfaltadas:L('🛣️','São asfaltadas e iluminadas'), ru_barro:L('🏚️','São de barro e sem luz nenhuma'), ru_madeira:L('🪵','São feitas de tábuas de madeira')})},
-      {q:'O que <b>mudou</b> nas ruas ao longo do tempo? 🔄',
-       audio:['ru_q_mudou'], stage:cena('🔄'), colorOpts:true,
-       options:mkOpts('ru_tudo',['ru_tudo','ru_nada','ru_cor'],
-         {ru_tudo:L('🔄','O chão, a luz e os veículos'), ru_nada:L('🟰','Nada mudou, são todas iguais'), ru_cor:L('🎨','Só a cor das casas mudou')})},
-      {q:'O que é <b>patrimônio cultural</b> de uma cidade? 🏛️',
-       audio:['ru_q_patrimonio'], stage:cena('🏛️'), colorOpts:true,
-       options:mkOpts('ru_bens',['ru_bens','ru_lixo','ru_brinquedos'],
-         {ru_bens:L('🏛️','Bens importantes da cultura do lugar'), ru_lixo:L('🗑️','O lixo jogado nas calçadas da rua'), ru_brinquedos:L('🧸','Os brinquedos das crianças da escola')})},
-      {q:'Por que algumas ruas <b>preservam</b> o passado? 🕰️',
-       audio:['ru_q_preservar'], stage:cena('🕰️'), colorOpts:true,
-       options:mkOpts('ru_historia',['ru_historia','ru_velhas','ru_feias'],
-         {ru_historia:L('📜','Porque contam a história do lugar'), ru_velhas:L('😕','Porque ninguém quis arrumar elas'), ru_feias:L('🤷','Porque ficam mais bonitas assim')})},
-      {q:'O que podemos fazer para <b>conhecer</b> as ruas da cidade? 👀',
-       audio:['ru_q_conhecer'], stage:cena('👀🏘️'), colorOpts:true,
-       options:mkOpts('ru_passear',['ru_passear','ru_esconder','ru_dormir'],
-         {ru_passear:L('🚶','Passear por elas e observar'), ru_esconder:L('🏠','Se esconder dentro de casa'), ru_dormir:L('😴','Dormir o dia inteiro')})},
-      {q:'Por que uma rua pode ser considerada <b>histórica</b>? 📜',
-       audio:['ru_q_historica'], stage:cena('📜'), colorOpts:true,
-       options:mkOpts('ru_preserva',['ru_preserva','ru_nova','ru_larga'],
-         {ru_preserva:L('🏛️','Por preservar traços do passado'), ru_nova:L('🆕','Por ser a mais nova da cidade'), ru_larga:L('↔️','Por ser a mais larga de todas')})},
-    ];
-    return shuffle(fixas);
-  },
+  /* 1. RUAS: ANTES E HOJE — ordenar do mais antigo para o de hoje */
+  ruas(){ return [
+    {mode:'ordenar', q:'Do mais <b>antigo</b> para o de <b>hoje</b>: como as pessoas andavam?', audio:['ru_q1'], expAud:'ru_exp1',
+     itens:[{img:'carroca', aud:'ru_carroca'}, {img:'carro', aud:'ru_carro'}]},
+    {mode:'ordenar', q:'O <b>chão</b> da rua: do mais antigo para o de hoje', audio:['ru_q2'], expAud:'ru_exp2',
+     itens:[{img:'rua_terra', aud:'ru_terra'}, {img:'rua_pedras', aud:'ru_pedras'}, {img:'rua_asfalto', aud:'ru_asfalto'}]},
+    {mode:'ordenar', q:'A <b>rua inteira</b>: chão, luz e carros', audio:['ru_q3'], expAud:'ru_exp3',
+     itens:[{img:'rua_c1', aud:'ru_c1'}, {img:'rua_c2', aud:'ru_c2'}, {img:'rua_c3', aud:'ru_c3'}]},
+  ];},
 
-  /* 2. PÚBLICO OU PRIVADO? */
+  /* 2. PÚBLICO OU PRIVADO? — classificar, cada rodada com mais lugares */
   espacos(){
-    const ESPACOS=[
-      {nome:'A praça',     e:'🏞️', aud:'ep_q_praca',    pub:true},
-      {nome:'O shopping',  e:'🏬', aud:'ep_q_shopping', pub:false},
-      {nome:'O mercado municipal', e:'🏪', aud:'ep_q_mercado', pub:true},
-      {nome:'O cinema',    e:'🎬', aud:'ep_q_cinema',   pub:false},
-      {nome:'O parquinho', e:'🛝', aud:'ep_q_parque',   pub:true},
+    const G=[{id:'pub', img:'g_publico', aud:'ep_pub'}, {id:'pri', img:'g_privado', aud:'ep_pri'}];
+    const L={
+      praca:{img:'praca', aud:'l_praca', grupo:'pub'}, parquinho:{img:'parquinho', aud:'l_parquinho', grupo:'pub'},
+      mercado:{img:'mercado', aud:'l_mercado', grupo:'pub'}, rua:{img:'rua_asfalto', aud:'l_rua', grupo:'pub'},
+      shopping:{img:'shopping', aud:'l_shopping', grupo:'pri'}, cinema:{img:'cinema', aud:'l_cinema', grupo:'pri'},
+      quarto:{img:'quarto', aud:'l_quarto', grupo:'pri'}, escritorio:{img:'escritorio', aud:'l_escritorio', grupo:'pri'},
+    };
+    return [
+      {mode:'classificar', q:'<b>Público</b> ou <b>privado</b>? Arraste cada lugar', audio:['ep_q1'], expAud:'ep_exp1', grupos:G,
+       itens:[L.praca, L.parquinho, L.shopping, L.quarto]},
+      {mode:'classificar', q:'Mais lugares: público ou privado?', audio:['ep_q2'], expAud:'ep_exp2', grupos:G,
+       itens:[L.mercado, L.rua, L.praca, L.cinema, L.escritorio, L.shopping]},
+      {mode:'classificar', q:'Separe <b>todos</b> os lugares!', audio:['ep_q3'], expAud:'ep_exp3', grupos:G,
+       itens:Object.values(L)},
     ];
-    const classif=shuffle(ESPACOS).slice(0,3).map(e=>({
-      q:'Que <b>tipo de espaço</b> é este? 🤔',
-      audio:[e.aud], stage:cena(e.e, e.nome), colorOpts:true,
-      options:mkOpts(e.pub?'ep_pub':'ep_pri',['ep_pub','ep_pri','ep_nem'],
-        {ep_pub:L('🏛️','É um espaço público'), ep_pri:L('🔒','É um espaço privado'), ep_nem:L('🤷','Não é nenhum dos dois')})
-    }));
-    const fixas=[
-      {q:'O que é um <b>espaço público</b>? 🏛️',
-       audio:['ep_q_publico'], stage:cena('🏛️'), colorOpts:true,
-       options:exp(mkOpts('ep_todos',['ep_todos','ep_dono','ep_fechado'],
-         {ep_todos:L('🏛️','Aberto para todas as pessoas'), ep_dono:L('🔒','Só o dono pode usar'), ep_fechado:L('🔐','Trancado com um cadeado')}),'exp_espacos')},
-      {q:'O que é um <b>espaço privado</b>? 🔒',
-       audio:['ep_q_privado'], stage:cena('🔒'), colorOpts:true,
-       options:mkOpts('ep_pertence',['ep_pertence','ep_rua','ep_ninguem'],
-         {ep_pertence:L('🔒','Um lugar que pertence a alguém'), ep_rua:L('🛣️','Um lugar aberto a todas as pessoas'), ep_ninguem:L('🤷','Um lugar que não pertence a ninguém')})},
-      {q:'Nos lugares abertos a todos, precisamos seguir o quê? 📋',
-       audio:['ep_q_regra'], stage:cena('📋'), colorOpts:true,
-       options:mkOpts('ep_regras',['ep_regras','ep_nenhuma','ep_fugir'],
-         {ep_regras:L('📋','Regras de boa convivência'), ep_nenhuma:L('🚫','Não precisamos seguir nada'), ep_fugir:L('🏃','Precisamos sair correndo de lá')})},
-      {q:'Qual destes é um lugar aberto para <b>todas as pessoas</b>? 🏞️',
-       audio:['ep_q_exemplo'], stage:cena('🏞️'), colorOpts:true,
-       options:mkOpts('ep_a_praca',['ep_a_praca','ep_a_quarto','ep_a_escritorio'],
-         {ep_a_praca:L('🏞️','A praça da cidade'), ep_a_quarto:L('🛏️','O quarto de alguém'), ep_a_escritorio:L('💼','O escritório do chefe')})},
-    ];
-    return mix(classif, fixas);
   },
 
-  /* 3. COMO VAMOS À ESCOLA? */
+  /* 3. COMO VAMOS À ESCOLA? — balões; a regra muda a cada rodada */
   transporte(){
-    const fixas=[
-      {q:'Quais são <b>meios de transporte</b> para ir à escola? 🚌',
-       audio:['tr_q_meios'], stage:cena('🚌🚗🚲'), colorOpts:true,
-       options:exp(mkOpts('tr_carro',['tr_carro','tr_foguete','tr_patins'],
-         {tr_carro:L('🚗','Carro, ônibus e bicicleta'), tr_foguete:L('🚀','Foguete, avião e helicóptero'), tr_patins:L('🛹','Patins, skate e submarino')}),'exp_transporte')},
-      {q:'O <b>ônibus escolar</b> serve para quê? 🚌',
-       audio:['tr_q_onibus'], stage:cena('🚌'), colorOpts:true,
-       options:mkOpts('tr_levar',['tr_levar','tr_passeio','tr_carregar'],
-         {tr_levar:L('🚌','Levar as crianças até a escola'), tr_passeio:L('🌙','Passear pela cidade à noite'), tr_carregar:L('📦','Carregar caixas do mercado')})},
-      {q:'Em alguns lugares, as crianças vão à escola de quê? ⛵',
-       audio:['tr_q_barco'], stage:cena('⛵'), colorOpts:true,
-       options:mkOpts('tr_barco',['tr_barco','tr_aviao','tr_trem'],
-         {tr_barco:L('⛵','De barco'), tr_aviao:L('✈️','De avião'), tr_trem:L('🚄','De trem-bala')})},
-      {q:'Muitos carros nas ruas podem causar o quê? 🚗💨',
-       audio:['tr_q_poluicao'], stage:cena('🚗💨'), colorOpts:true,
-       options:mkOpts('tr_polui',['tr_polui','tr_chuva','tr_flores'],
-         {tr_polui:L('💨','Poluição do ar'), tr_chuva:L('🍬','Chuva de doces'), tr_flores:L('🌸','Mais flores na rua')})},
-      {q:'Ir <b>a pé</b> para a escola é bom por quê? 🚶',
-       audio:['tr_q_ape'], stage:cena('🚶'), colorOpts:true,
-       options:mkOpts('tr_npolui',['tr_npolui','tr_rapido','tr_barulho'],
-         {tr_npolui:L('🌱','Não polui e faz bem ao corpo'), tr_rapido:L('⚡','É o jeito mais rápido de todos'), tr_barulho:L('🔊','Faz barulho demais na rua toda')})},
-      {q:'A <b>bicicleta</b> é um meio de transporte que polui? 🚲',
-       audio:['tr_q_bike'], stage:cena('🚲'), colorOpts:true,
-       options:mkOpts('tr_naopolui',['tr_naopolui','tr_sim_polui','tr_talvez'],
-         {tr_naopolui:L('🌱','Não, a bicicleta não polui'), tr_sim_polui:L('💨','Sim, ela polui bastante'), tr_talvez:L('🌧️','Só polui quando está chovendo')})},
-      {q:'Por que crianças de lugares diferentes usam <b>transportes diferentes</b>? 🌍',
-       audio:['tr_q_diferente'], stage:cena('🌍'), colorOpts:true,
-       options:mkOpts('tr_realidade',['tr_realidade','tr_igual','tr_nenhum'],
-         {tr_realidade:L('🌍','Porque cada lugar tem uma realidade'), tr_igual:L('🟰','Todas usam o mesmo transporte'), tr_nenhum:L('🚫','Porque nenhuma criança vai à escola')})},
+    const T={
+      carro:{img:'carro', aud:'t_carro'}, onibus:{img:'onibus', aud:'t_onibus'}, bicicleta:{img:'bicicleta', aud:'t_bicicleta'},
+      ape:{img:'ape', aud:'t_ape'}, barco:{img:'barco', aud:'t_barco'},
+      foguete:{img:'foguete', aud:'t_foguete'}, submarino:{img:'submarino', aud:'t_submarino'},
+    };
+    const certo=(it,c)=>({...it, certo:c});
+    return [
+      {mode:'baloes', q:'Estoure os jeitos de <b>ir à escola</b>!', audio:['tr_q1'], expAud:'tr_exp1', meta:4,
+       itens:[certo(T.carro,true), certo(T.onibus,true), certo(T.bicicleta,true), certo(T.ape,true), certo(T.barco,true),
+              certo(T.foguete,false), certo(T.submarino,false)]},
+      {mode:'baloes', q:'Estoure só o que <b>não polui</b> o ar!', audio:['tr_q2'], expAud:'tr_exp2', meta:5,
+       itens:[certo(T.ape,true), certo(T.bicicleta,true), certo(T.carro,false), certo(T.onibus,false)]},
+      {mode:'baloes', q:'O contrário: estoure o que solta <b>fumaça</b>!', audio:['tr_q3'], expAud:'tr_exp3', meta:6,
+       itens:[certo(T.carro,true), certo(T.onibus,true), certo(T.ape,false), certo(T.bicicleta,false)]},
     ];
-    return shuffle(fixas);
   },
 
-  /* 4. PARA QUE SERVE A RUA? */
+  /* 4. PARA QUE SERVE A RUA? — procurar na cena da rua */
   funcoes(){
-    const FUNC_LBL={fn_comercial:L('🏪','Função comercial'), fn_residencial:L('🏠','Função residencial'), fn_cultural:L('🎭','Função cultural')};
-    const fixas=[
-      {q:'Para que servem as <b>ruas</b>? 🛣️',
-       audio:['fn_q_servem'], stage:cena('🛣️'), colorOpts:true,
-       options:exp(mkOpts('fn_ligar',['fn_ligar','fn_enfeite','fn_guardar'],
-         {fn_ligar:L('🛣️','Para ligar os lugares da cidade'), fn_enfeite:L('🎀','Só para enfeitar a cidade toda'), fn_guardar:L('🚗','Para guardar os carros velhos lá')}),'exp_funcoes')},
-      {q:'Uma rua com muitas <b>lojas</b> tem função de quê? 🏪',
-       audio:['fn_q_comercial'], stage:cena('🏪🛍️'), colorOpts:true,
-       options:mkOpts('fn_comercial',['fn_comercial','fn_residencial','fn_cultural'],FUNC_LBL)},
-      {q:'Uma rua onde as <b>pessoas moram</b> tem função de quê? 🏠',
-       audio:['fn_q_residencial'], stage:cena('🏠🏡'), colorOpts:true,
-       options:mkOpts('fn_residencial',['fn_comercial','fn_residencial','fn_cultural'],FUNC_LBL)},
-      {q:'Uma rua com <b>museus e teatros</b> tem função de quê? 🎭',
-       audio:['fn_q_cultural'], stage:cena('🎭🏛️'), colorOpts:true,
-       options:mkOpts('fn_cultural',['fn_comercial','fn_residencial','fn_cultural'],FUNC_LBL)},
-      {q:'Os <b>nomes das ruas</b> podem contar o quê? 🪧',
-       audio:['fn_q_nomes'], stage:cena('🪧'), colorOpts:true,
-       options:mkOpts('fn_historia_lugar',['fn_historia_lugar','fn_receita','fn_piada'],
-         {fn_historia_lugar:L('📜','A história do lugar'), fn_receita:L('🍰','Uma receita de bolo gostoso'), fn_piada:L('😂','Uma piada muito engraçada')})},
-      {q:'O <b>Minhocão</b> em São Paulo é um elevado que nos fins de semana vira o quê? 🚶',
-       audio:['fn_q_minhocao'], stage:cena('🚶🛣️'), colorOpts:true,
-       options:mkOpts('fn_lazer',['fn_lazer','fn_estacionamento','fn_piscina'],
-         {fn_lazer:L('🚶','Espaço de lazer para pedestres'), fn_estacionamento:L('🚛','Estacionamento grande de caminhões'), fn_piscina:L('🏊','Uma piscina gigante com tobogã')})},
-      {q:'As ruas de uma cidade são <b>todas iguais</b>? 🤔',
-       audio:['fn_q_diferenca'], stage:cena('🤔'), colorOpts:true,
-       options:mkOpts('fn_nao',['fn_nao','fn_sim','fn_quase'],
-         {fn_nao:L('🔀','Não, cada rua tem algo diferente'), fn_sim:L('🟰','Sim, são todas iguais mesmo'), fn_quase:L('➡️','Quase todas são bem iguais')})},
+    const lugares=[
+      {img:'loja', aud:'r_loja', tipo:'com'}, {img:'casa', aud:'r_casa', tipo:'res'}, {img:'museu', aud:'r_museu', tipo:'cul'},
+      {img:'padaria', aud:'r_padaria', tipo:'com'}, {img:'predio', aud:'r_predio', tipo:'res'}, {img:'teatro', aud:'r_teatro', tipo:'cul'},
     ];
-    return shuffle(fixas);
+    // 4 prédios por cena: os 2 do tipo pedido e 1 de cada outro tipo
+    // (6 lado a lado ficariam com ~55px no celular — pequeno para o dedo).
+    const rua = tipo => {
+      const outros = ['com','res','cul'].filter(t=>t!==tipo).map(t=>pick(lugares.filter(l=>l.tipo===t)));
+      return shuffle([...lugares.filter(l=>l.tipo===tipo), ...outros])
+        .map((l,i)=>({img:l.img, aud:l.aud, certo:l.tipo===tipo, x:1+i*24.6, y:36, w:24}));
+    };
+    return [
+      {mode:'cena', q:'Toque nas <b>lojas</b>!', audio:['fn_q1'], expAud:'fn_exp1', fundo:'rua', objetos:rua('com')},
+      {mode:'cena', q:'Toque onde as pessoas <b>moram</b>!', audio:['fn_q2'], expAud:'fn_exp2', fundo:'rua', objetos:rua('res')},
+      {mode:'cena', q:'Toque nos lugares de <b>arte e história</b>!', audio:['fn_q3'], expAud:'fn_exp3', fundo:'rua', objetos:rua('cul')},
+    ];
   },
 
-  /* 5. DESCOBRIR A HISTÓRIA */
+  /* 5. CORUJA DETETIVE — dar à coruja as fontes históricas */
   fontes(){
-    const fixas=[
-      {q:'O que são <b>fontes históricas</b>? 📜',
-       audio:['fh_q_fonte'], stage:cena('📜🔍'), colorOpts:true,
-       options:exp(mkOpts('fh_ajudam',['fh_ajudam','fh_inventadas','fh_futuro'],
-         {fh_ajudam:L('📜','Coisas que ajudam a conhecer o passado'), fh_inventadas:L('🧸','Histórias inventadas só para brincar'), fh_futuro:L('🔮','Coisas que mostram apenas o futuro')}),'exp_fontes')},
-      {q:'<b>Fotografias</b> antigas ajudam a conhecer o quê? 📷',
-       audio:['fh_q_foto'], stage:cena('📷'), colorOpts:true,
-       options:mkOpts('fh_passado',['fh_passado','fh_clima','fh_receita'],
-         {fh_passado:L('📷','Como era o lugar no passado'), fh_clima:L('🌤️','O clima que fará amanhã cedo'), fh_receita:L('🍰','Receitas de comida gostosa')})},
-      {q:'Conversar com <b>moradores antigos</b> é importante por quê? 👴',
-       audio:['fh_q_morador'], stage:cena('👴👵'), colorOpts:true,
-       options:mkOpts('fh_relatos',['fh_relatos','fh_cantar','fh_correr'],
-         {fh_relatos:L('🗣️','Porque eles contam o que viveram'), fh_cantar:L('🎤','Porque eles cantam músicas do rádio'), fh_correr:L('🏃','Porque eles correm mais que todos')})},
-      {q:'Os <b>mapas</b> ajudam a entender o quê? 🗺️',
-       audio:['fh_q_mapa'], stage:cena('🗺️'), colorOpts:true,
-       options:mkOpts('fh_como_era',['fh_como_era','fh_comida','fh_roupa'],
-         {fh_como_era:L('🗺️','Como era o lugar antes'), fh_comida:L('🍽️','O que comer lá no almoço'), fh_roupa:L('👕','Que roupa vestir no dia')})},
-      {q:'Os <b>textos históricos</b> servem para quê? 📖',
-       audio:['fh_q_texto'], stage:cena('📖'), colorOpts:true,
-       options:mkOpts('fh_registro',['fh_registro','fh_brincar','fh_pintar'],
-         {fh_registro:L('📖','Registrar o que aconteceu no passado'), fh_brincar:L('🧸','Fazer brincadeiras divertidas na escola'), fh_pintar:L('🎨','Pintar as paredes coloridas de casa')})},
-      {q:'Ao comparar <b>fotos antigas e atuais</b>, o que podemos ver? 🔍',
-       audio:['fh_q_mudancas'], stage:cena('🔍📷'), colorOpts:true,
-       options:mkOpts('fh_mudaram',['fh_mudaram','fh_nada_mudou','fh_cores_so'],
-         {fh_mudaram:L('🔄','As mudanças que aconteceram'), fh_nada_mudou:L('🟰','Que nada mudou por ali'), fh_cores_so:L('🎨','Só as cores das fotos velhas')})},
-      {q:'Como podemos conhecer a <b>história da nossa rua</b>? 🏘️',
-       audio:['fh_q_pesquisa'], stage:cena('🏘️📚'), colorOpts:true,
-       options:mkOpts('fh_pesquisar',['fh_pesquisar','fh_adivinhando','fh_esquecendo'],
-         {fh_pesquisar:L('📚','Pesquisando em fotos, livros e relatos'), fh_adivinhando:L('🔮','Adivinhando sem perguntar nada a ninguém'), fh_esquecendo:L('🤷','Esquecendo tudo sobre o lugar que vivemos')})},
+    const F={
+      foto:{img:'foto_antiga', aud:'fo_foto', certo:true}, mapa:{img:'mapa_antigo', aud:'fo_mapa', certo:true},
+      livro:{img:'livro_antigo', aud:'fo_livro', certo:true}, vovo:{img:'vovo', aud:'fo_vovo', certo:true},
+      cristal:{img:'bola_cristal', aud:'fo_cristal', certo:false}, bola:{img:'bola', aud:'fo_bola', certo:false},
+      bolo:{img:'bolo', aud:'fo_bolo', certo:false},
+    };
+    const m='coruja_detetive';
+    return [
+      {mode:'mascote', q:'Dê à Coruja Detetive uma <b>pista do passado</b>!', audio:['fo_q1'], expAud:'fo_exp1', mascote:m,
+       itens:[F.foto, F.bola, F.bolo]},
+      {mode:'mascote', q:'Mais pistas do <b>passado</b>!', audio:['fo_q2'], expAud:'fo_exp2', mascote:m,
+       itens:[F.foto, F.mapa, F.cristal, F.bola, F.bolo]},
+      {mode:'mascote', q:'Todas as <b>fontes históricas</b>!', audio:['fo_q3'], expAud:'fo_exp3', mascote:m,
+       itens:Object.values(F)},
     ];
-    return shuffle(fixas);
   },
 
-  /* 6. QUEM TRABALHA NA ESCOLA? */
+  /* 6. QUEM TRABALHA NA ESCOLA? — ligar pessoa ↔ trabalho */
   profissionais(){
-    const fixas=[
-      {q:'Quem organiza e cuida de <b>toda a escola</b>? 🏫',
-       audio:['pe_q_diretora'], stage:cena('🏫'), colorOpts:true,
-       options:exp(mkOpts('pe_diretora',['pe_diretora','pe_carteiro','pe_bombeiro'],
-         {pe_diretora:L('👩‍💼','A diretora'), pe_carteiro:L('📬','O carteiro'), pe_bombeiro:L('🚒','O bombeiro')}),'exp_profissionais')},
-      {q:'Quem cuida da <b>limpeza</b> da escola? 🧹',
-       audio:['pe_q_limpeza'], stage:cena('🧹'), colorOpts:true,
-       options:mkOpts('pe_auxiliar',['pe_auxiliar','pe_piloto','pe_pintor'],
-         {pe_auxiliar:L('🧹','O auxiliar de limpeza'), pe_piloto:L('✈️','O piloto de avião'), pe_pintor:L('🖌️','O pintor de quadros')})},
-      {q:'Quem cuida da <b>entrada</b> da escola? 🚪',
-       audio:['pe_q_porteiro'], stage:cena('🚪'), colorOpts:true,
-       options:mkOpts('pe_porteiro',['pe_porteiro','pe_padeiro','pe_dentista'],
-         {pe_porteiro:L('🚪','O porteiro'), pe_padeiro:L('🍞','O padeiro'), pe_dentista:L('🦷','O dentista')})},
-      {q:'Quem prepara a <b>comida</b> na escola? 🍽️',
-       audio:['pe_q_cozinheira'], stage:cena('🍽️🧑‍🍳'), colorOpts:true,
-       options:mkOpts('pe_cozinheira',['pe_cozinheira','pe_motorista','pe_jardineiro'],
-         {pe_cozinheira:L('🧑‍🍳','A cozinheira'), pe_motorista:L('🚕','O motorista de táxi'), pe_jardineiro:L('🌳','O jardineiro do parque')})},
-      {q:'Quem ensina as <b>matérias</b> na sala de aula? 📝',
-       audio:['pe_q_professor'], stage:cena('📝👩‍🏫'), colorOpts:true,
-       options:mkOpts('pe_professor',['pe_professor','pe_cozinheira2','pe_porteiro2'],
-         {pe_professor:L('👩‍🏫','O professor'), pe_cozinheira2:L('🧑‍🍳','A cozinheira da escola'), pe_porteiro2:L('🚪','O porteiro da escola')})},
-      {q:'Todas essas pessoas juntas formam o quê? 👥',
-       audio:['pe_q_comunidade'], stage:cena('👥🏫'), colorOpts:true,
-       options:mkOpts('pe_comunidade',['pe_comunidade','pe_time','pe_banda'],
-         {pe_comunidade:L('👥','A comunidade escolar'), pe_time:L('⚽','Um time de futebol'), pe_banda:L('🎸','Uma banda de música')})},
-      {q:'Por que <b>cada profissional</b> da escola é importante? 💚',
-       audio:['pe_q_importancia'], stage:cena('💚'), colorOpts:true,
-       options:mkOpts('pe_funciona',['pe_funciona','pe_so_professor','pe_nenhum'],
-         {pe_funciona:L('💚','Cada um faz a escola funcionar bem'), pe_so_professor:L('1️⃣','Só o professor faz alguma coisa'), pe_nenhum:L('🚫','Nenhum deles faz diferença na escola')})},
+    const P={
+      diretora:{a:{img:'diretora',aud:'p_diretora'}, b:{img:'escola',aud:'f_escola'}},
+      auxiliar:{a:{img:'auxiliar',aud:'p_auxiliar'}, b:{img:'vassoura',aud:'f_vassoura'}},
+      porteiro:{a:{img:'porteiro',aud:'p_porteiro'}, b:{img:'portao',aud:'f_portao'}},
+      cozinheira:{a:{img:'cozinheira',aud:'p_cozinheira'}, b:{img:'panela',aud:'f_panela'}},
+      professor:{a:{img:'professor',aud:'p_professor'}, b:{img:'sala_aula',aud:'f_sala'}},
+    };
+    return [
+      {mode:'ligar', q:'Ligue cada pessoa ao que ela faz', audio:['pr_q1'], expAud:'pr_exp1', pares:[P.auxiliar, P.porteiro, P.cozinheira]},
+      {mode:'ligar', q:'Agora são <b>quatro</b>!', audio:['pr_q2'], expAud:'pr_exp2', pares:[P.diretora, P.professor, P.auxiliar, P.cozinheira]},
+      {mode:'ligar', q:'Agora são <b>cinco</b>!', audio:['pr_q3'], expAud:'pr_exp3', pares:Object.values(P)},
     ];
-    return shuffle(fixas);
   },
 
-  /* 7. MATERIAL DE ESTUDAR */
+  /* 7. MATERIAL DE ANTIGAMENTE — memória: o antigo e o de hoje que serve para o mesmo */
   materiais(){
-    const fixas=[
-      {q:'O que as crianças usavam para estudar <b>antigamente</b>? 🕰️',
-       audio:['me_q_antigamente'], stage:cena('🕰️📜'), colorOpts:true,
-       options:exp(mkOpts('me_lousa',['me_lousa','me_tablet','me_celular'],
-         {me_lousa:L('📜','Lousa, cartilha e goma árabe'), me_tablet:L('📱','Tablet e computador'), me_celular:L('🎧','Celular e fone de ouvido')}),'exp_materiais')},
-      {q:'A <b>cartilha</b> escolar antiga servia para quê? 📖',
-       audio:['me_q_cartilha'], stage:cena('📖'), colorOpts:true,
-       options:mkOpts('me_ler',['me_ler','me_correr','me_cozinhar'],
-         {me_ler:L('📖','Ensinar as crianças a ler'), me_correr:L('🏃','Ensinar a correr rápido'), me_cozinhar:L('🍳','Ensinar a cozinhar')})},
-      {q:'A <b>goma árabe</b> era usada como o quê? 🫙',
-       audio:['me_q_goma'], stage:cena('🫙'), colorOpts:true,
-       options:mkOpts('me_cola',['me_cola','me_tinta','me_comida'],
-         {me_cola:L('🫙','Era usada como cola'), me_tinta:L('🎨','Era usada como tinta'), me_comida:L('🍽️','Era usada como comida')})},
-      {q:'A <b>lousa</b> escolar antiga servia para quê? 📝',
-       audio:['me_q_lousa'], stage:cena('📝'), colorOpts:true,
-       options:mkOpts('me_escrever',['me_escrever','me_dormir2','me_brincar2'],
-         {me_escrever:L('📝','Para escrever e aprender'), me_dormir2:L('😴','Para dormir em cima dela'), me_brincar2:L('⚽','Para jogar bola na escola')})},
-      {q:'As <b>bolsas escolares</b> antigas eram feitas de quê? 🎒',
-       audio:['me_q_bolsa'], stage:cena('🎒'), colorOpts:true,
-       options:mkOpts('me_couro',['me_couro','me_papel','me_folhas'],
-         {me_couro:L('🎒','De couro'), me_papel:L('📄','De papel fino'), me_folhas:L('🍃','De folhas de árvore')})},
-      {q:'Os <b>materiais escolares</b> mudaram com o tempo? 🔄',
-       audio:['me_q_mudou'], stage:cena('🔄'), colorOpts:true,
-       options:mkOpts('me_sim',['me_sim','me_nao','me_talvez'],
-         {me_sim:L('✅','Sim, hoje são bem diferentes'), me_nao:L('🟰','Não, são todos iguais'), me_talvez:L('🖍️','Só mudou a cor dos lápis')})},
-      {q:'Quais materiais <b>você usa hoje</b> na escola? 🎒',
-       audio:['me_q_hoje'], stage:cena('✏️📓'), colorOpts:true,
-       options:mkOpts('me_caderno',['me_caderno','me_lousa2','me_martelo'],
-         {me_caderno:L('📓','Caderno, lápis e estojo'), me_lousa2:L('📜','Lousa de pedra e goma árabe'), me_martelo:L('🔨','Martelo e parafuso')})},
+    const M={
+      lousa:{a:{img:'lousa',aud:'ma_lousa'}, b:{img:'caderno',aud:'ma_caderno'}},
+      goma:{a:{img:'goma',aud:'ma_goma'}, b:{img:'cola',aud:'ma_cola'}},
+      bolsa:{a:{img:'bolsa_couro',aud:'ma_bolsa'}, b:{img:'mochila',aud:'ma_mochila'}},
+      cartilha:{a:{img:'cartilha',aud:'ma_cartilha'}, b:{img:'livro_hoje',aud:'ma_livro'}},
+    };
+    return [
+      {mode:'memoria', q:'Ache os pares: <b>antigamente</b> e <b>hoje</b>', audio:['ma_q1'], expAud:'ma_exp1', pares:[M.lousa, M.goma]},
+      {mode:'memoria', q:'Agora são <b>três</b> pares!', audio:['ma_q2'], expAud:'ma_exp2', pares:[M.lousa, M.goma, M.bolsa]},
+      {mode:'memoria', q:'Agora são <b>quatro</b> pares!', audio:['ma_q3'], expAud:'ma_exp3', pares:Object.values(M)},
     ];
-    return shuffle(fixas);
   },
 
-  /* 8. ESCOLA PARA QUÊ? */
-  escola(){
-    const fixas=[
-      {q:'Para que serve a <b>escola</b>? 🏫',
-       audio:['es_q_serve'], stage:cena('🏫'), colorOpts:true,
-       options:exp(mkOpts('es_aprender',['es_aprender','es_brincar','es_dormir'],
-         {es_aprender:L('📚','Para aprender e fazer amigos novos'), es_brincar:L('🎮','Só para brincar o dia todo inteiro'), es_dormir:L('😴','Para dormir e descansar na sala')}),'exp_escola')},
-      {q:'Na escola, além de estudar, o que podemos fazer? 🤝',
-       audio:['es_q_amigos'], stage:cena('🤝'), colorOpts:true,
-       options:mkOpts('es_amizades',['es_amizades','es_esconder','es_nada'],
-         {es_amizades:L('🤝','Fazer amizades e brincar'), es_esconder:L('🫣','Se esconder e ficar sozinho lá'), es_nada:L('🚫','Não podemos fazer nada de bom')})},
-      {q:'Antes de existir escola, como as crianças <b>aprendiam</b>? 🕰️',
-       audio:['es_q_aprendiam'], stage:cena('👴🧒'), colorOpts:true,
-       options:mkOpts('es_observando',['es_observando','es_sozinhas','es_maquina'],
-         {es_observando:L('👀','Observando os mais velhos'), es_sozinhas:L('😢','Ficavam sozinhas sem aprender nada'), es_maquina:L('🤖','Aprendiam dentro de uma máquina grande')})},
-      {q:'Os mais velhos ensinavam o quê às <b>crianças</b>? 👴',
-       audio:['es_q_velhos'], stage:cena('👴'), colorOpts:true,
-       options:mkOpts('es_oficio',['es_oficio','es_nada2','es_voar'],
-         {es_oficio:L('🐄','A cuidar de animais e consertar'), es_nada2:L('🚫','Não ensinavam nada para ninguém'), es_voar:L('🦅','A voar bem alto como os pássaros')})},
-      {q:'Contar <b>histórias</b> é uma forma de quê? 📖',
-       audio:['es_q_historias'], stage:cena('📖'), colorOpts:true,
-       options:mkOpts('es_ensinar',['es_ensinar','es_esquecer','es_barulho'],
-         {es_ensinar:L('📖','Ensinar e passar conhecimento'), es_esquecer:L('🤷','Esquecer tudo que aconteceu'), es_barulho:L('🔊','Fazer barulho dentro da sala')})},
-      {q:'A escola ajuda a gente a pensar no quê? 💭',
-       audio:['es_q_futuro'], stage:cena('💭🌟'), colorOpts:true,
-       options:mkOpts('es_sonhos',['es_sonhos','es_passado','es_almoco'],
-         {es_sonhos:L('🌟','Nos sonhos para o futuro'), es_passado:L('⏪','Só no que já aconteceu'), es_almoco:L('🍽️','Só na hora do almoço')})},
-      {q:'Quais <b>atividades</b> a escola oferece? 🏫',
-       audio:['es_q_atividades'], stage:cena('🏫📚⚽'), colorOpts:true,
-       options:mkOpts('es_varias',['es_varias','es_so_ler','es_so_correr'],
-         {es_varias:L('📚⚽','Estudar, brincar e fazer esportes'), es_so_ler:L('📖','Só ler livros o dia inteiro na sala'), es_so_correr:L('🏃','Só correr no pátio sem parar')})},
-    ];
-    return shuffle(fixas);
-  },
-
+  /* 8. ESCOLA PARA QUÊ? — pergunta com ilustração em cada opção */
+  escola(){ return [
+    {q:'Para que serve a <b>escola</b>?', audio:['es_q1'], figOpts:true,
+     options:[figOpt('es_aprender',true,'es_exp1'), figOpt('es_dormir'), figOpt('es_esconder')]},
+    {q:'Antes de existir escola, como as crianças <b>aprendiam</b>?', audio:['es_q2'], figOpts:true,
+     options:[figOpt('es_observar',true,'es_exp2'), figOpt('es_maquina'), figOpt('es_sozinha')]},
+    {q:'A escola ajuda a gente a pensar no quê?', audio:['es_q3'], figOpts:true,
+     options:[figOpt('es_sonhos',true,'es_exp3'), figOpt('es_almoco'), figOpt('es_tv')]},
+  ];},
 };
 
 /* ===== INICIAR ===== */

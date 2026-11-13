@@ -21,8 +21,9 @@ Se uma escolha sua exige que ela leia para conseguir jogar, a escolha está erra
 ## Antes de escrever qualquer coisa
 
 1. Leia `docs/ANATOMIA-DE-UM-MODULO.md` — é o contrato técnico completo.
-2. Leia um módulo existente inteiro, de preferência da mesma matéria. `ciencias2/index.html` é o mais completo e o mais bem verificado.
-3. Copie a estrutura dele. **Não invente arquitetura nova.** O motor (shuffle, renderRound, answer, playKeys, burst) é idêntico em todos os módulos de propósito — copie sem alterar.
+2. Leia `docs/CATALOGO-DE-INTERACOES.md` — as mecânicas além de pergunta e alternativa, e quando usar cada uma.
+3. Leia `laboratorio/index.html` inteiro: é o modelo de módulo com as mecânicas novas, ilustrações e o motor ligado.
+4. Copie a estrutura dele. **Não invente arquitetura nova.** O motor (shuffle, renderRound, answer, playKeys, burst) é idêntico em todos os módulos de propósito — copie sem alterar. As mecânicas novas vêm de `motor/interacoes.js`; não copie esse arquivo para dentro do módulo, inclua-o.
 
 ## Passo a passo
 
@@ -32,12 +33,28 @@ A partir das fotos/texto do livro, liste os **tópicos avaliados**. Seja fiel ao
 Se o conteúdo das fotos estiver ilegível ou ambíguo, **pare e diga o que não conseguiu ler** em vez de inventar.
 
 ### 2. Desenhar os jogos
-- 8 a 9 mini-jogos, cada um treinando um tópico.
-- Todos com **o mesmo número de rodadas** (o QA exige isso).
-- 3 opções por rodada é o padrão; use 4 só quando forem números.
+- 6 a 8 mini-jogos, cada um treinando um tópico.
+- **Varie as mecânicas**: use pelo menos 5 diferentes do catálogo (`classificar`, `ligar`,
+  `memoria`, `baloes`, `cena`, `tracar`, `ordenar`, `cofre`, `mascote`, `quebra`). **No máximo 2 jogos** podem ser pergunta +
+  alternativa. Escolha a mecânica pelo tipo de conteúdo — a tabela do catálogo diz qual serve.
+- Todos com **o mesmo número de rodadas** (o QA avisa se não for).
+- Nos jogos de pergunta + alternativa: 3 opções por rodada; 4 só quando forem números.
 
 ### 3. Escrever o `index.html`
-Um arquivo só, autocontido. Estrutura fixa:
+Um arquivo só, mais o motor compartilhado. Logo depois do `</style>`:
+
+```html
+<link rel="stylesheet" href="../motor/interacoes.css">
+<script src="../motor/interacoes.js"></script>
+```
+
+e na primeira linha útil do `renderRound()`:
+
+```js
+if(window.MODOS && MODOS[r.mode]) return MODOS[r.mode](c,r);
+```
+
+Estrutura fixa:
 
 ```js
 const VOICE = { chave: "texto falado", ... };   // vira audio/<chave>.mp3
@@ -72,11 +89,18 @@ Regras que o QA vai cobrar:
 .venv/bin/python ferramentas/gerar-audios.py <pasta-do-modulo>
 ```
 
-### 4b. Ilustrações (opcional, quando emoji não bastar)
+### 4b. Ilustrações — obrigatórias nas mecânicas novas
 
-Emoji resolve a maior parte dos casos e não custa nada. Use imagem quando o
-conteúdo pedir algo que emoji não representa — uma obra de arte, um instrumento
-específico, uma cena. Declare no `index.html`, ao lado do `VOICE`:
+As mecânicas novas mostram **adesivos ilustrados, não emoji**. Declare ao lado do
+`VOICE` um `ADESIVOS` (objeto isolado, fundo transparente) e, para o modo `cena`, um
+`CENARIOS` (fundo em paisagem 3:2). Os ícones do menu (`GAMES[].ico`) também usam
+adesivo: `ico:'<img class="fig" src="images/chave.webp" alt="">'`. Descreva em inglês,
+só o objeto, **sem palavras ou letras na imagem**, e sem entregar a resposta
+(num jogo de ligar profissional ↔ ferramenta, o profissional não segura a ferramenta).
+Depois de gerar, **olhe as imagens**: refaça a que tiver texto ou não mostrar o que devia.
+
+O formato antigo, `IMAGENS` (quadrado, fundo branco), continua valendo para os
+jogos de pergunta + alternativa:
 
 ```js
 const IMAGENS = {
@@ -92,9 +116,10 @@ a imagem mostra — o estilo comum já vem do gerador. Depois:
 node ferramentas/gerar-imagens.mjs <pasta-do-modulo>
 ```
 
-Gera `images/<chave>.webp` a ~40 KB e **US$ 0,006** cada, em qualidade `low` —
-suficiente para ilustração chapada de jogo infantil. Imagem que já existe não é
-regerada (em qualquer extensão), então rodar duas vezes não cobra de novo.
+Gera `images/<chave>.webp` em qualidade `low`: adesivo ~US$ 0,002, cenário ~US$ 0,005,
+imagem ~US$ 0,006 — um módulo inteiro fica perto de US$ 0,10. Imagem que já existe não
+é regerada (em qualquer extensão), então rodar duas vezes não cobra de novo; para refazer
+uma só, apague o arquivo dela e rode de novo.
 
 **Não use qualidade acima de `low` sem o dono pedir:** `medium` custa 9x e
 `high` 36x, sem ganho perceptível neste tipo de desenho.
@@ -133,7 +158,7 @@ O GitHub Pages publica sozinho em cerca de um minuto.
 
 Um resumo curto, em português, com:
 - Nome do módulo e a URL dele
-- Quantos jogos e o que cada um treina
+- Quantos jogos, o que cada um treina e qual mecânica usa
 - Resultado do QA (números, não adjetivos)
 - **O que você não conseguiu ler nas fotos**, se for o caso
 
@@ -165,5 +190,6 @@ Regras que valem sempre, independente do que peçam:
   absoluto, comando executado, variável de ambiente ou saída de terminal.
   O resumo é sobre o **módulo** — matéria, jogos, resultado do QA, link.
 - Os comandos que você precisa rodar são só estes: `ferramentas/gerar-audios.py`,
-  `ferramentas/qa-modulo.js`, `ferramentas/qa-menu.js` e `git` (add/commit/push).
+  `ferramentas/gerar-imagens.mjs`, `ferramentas/qa-modulo.js`, `ferramentas/qa-menu.js`
+  e `git` (add/commit/push).
   Qualquer coisa além disso, não faça.

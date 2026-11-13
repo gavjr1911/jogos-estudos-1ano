@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>🏆 Matemática — Avaliação Final 🏆</title>
+<title>Matemática — Avaliação Final</title>
 <style>
   :root{
     --rosa:#ff6b9d; --roxo:#a06cd5; --azul:#4d96ff; --verde:#6bcB77;
@@ -46,7 +46,7 @@
   }
   .hero h1{font-size:30px; margin:6px 0; color:var(--verde); line-height:1.2;}
   .hero p{font-size:18px; margin:4px 0; color:#666;}
-  .mascote{font-size:78px; display:inline-block; animation:flutua 2.5s ease-in-out infinite;}
+  .mascote{display:inline-block;}
   @keyframes flutua{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-14px) rotate(3deg);}}
 
   .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
@@ -57,7 +57,8 @@
     display:flex; flex-direction:column; align-items:center; gap:6px; line-height:1.15;
   }
   .card:active{transform:translateY(4px); box-shadow:0 3px 0 rgba(0,0,0,.18);}
-  .card .ico{font-size:46px;}
+  .card .ico{font-size:44px;}
+  .card .ico .fig{background:rgba(255,255,255,.88); border-radius:22px; padding:6px;}
   .c1{background:var(--rosa);} .c2{background:var(--azul);} .c3{background:var(--verde);}
   .c4{background:var(--laranja);} .c5{background:var(--roxo);} .c6{background:var(--vermelho);}
   .c7{background:var(--turquesa);} .c8{background:var(--magenta);}
@@ -69,7 +70,7 @@
   .game-title{font-size:24px; color:var(--verde); margin:0 0 4px;}
   .progress{font-size:16px; color:#999; margin-bottom:10px;}
   .question{
-    font-size:22px; font-weight:bold; color:#3a3a55; margin:6px 0 14px; line-height:1.3;
+    font-size:22px; font-weight:bold; color:#3a3a55; margin:6px 0 14px; line-height:1.35;
     display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;
   }
   .speak-btn{
@@ -81,46 +82,54 @@
   @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
 
   .stage{
-    min-height:80px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+    min-height:120px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
     gap:10px; margin:10px auto 18px; padding:16px;
-    background:linear-gradient(160deg,#fff8ec,#eef5ff); border-radius:22px; border:4px dashed #f3d9a8;
+    background:linear-gradient(160deg,#fff8ee,#eef7ff); border-radius:22px; border:4px dashed #f3d2a6;
     flex-direction:column;
   }
-  .money-row{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; align-items:center;}
-  .bill{border-radius:10px; padding:8px 14px; font-size:22px; font-weight:bold; color:#fff;
-        box-shadow:0 3px 0 rgba(0,0,0,.15); display:inline-block; min-width:60px; text-align:center;
-        animation:pop .35s ease;}
-  .bill-10{background:linear-gradient(135deg,#5a87c5,#3466a5);} 
-  .bill-20{background:linear-gradient(135deg,#f0a030,#d08010);}
-  .bill-5{background:linear-gradient(135deg,#9a6dbd,#7a4db0);}
-  .coin-2{background:linear-gradient(135deg,#c0c0c0,#9a9a9a); border-radius:50%; width:44px; height:44px;
-           display:inline-flex; align-items:center; justify-content:center;}
-  .coin-1{background:linear-gradient(135deg,#d4a845,#b8922e); border-radius:50%; width:38px; height:38px;
-           display:inline-flex; align-items:center; justify-content:center;}
+  .obj{font-size:74px; animation:pop .35s ease; line-height:1;}
   @keyframes pop{0%{transform:scale(0);}70%{transform:scale(1.25);}100%{transform:scale(1);}}
+  .cardtxt{font-size:19px; font-weight:bold; color:#5a7a5f; margin-top:4px; line-height:1.3; max-width:430px;}
 
-  .shape-box{display:inline-block; position:relative; margin:8px;}
-  .shape-box svg{display:block;}
-  .side-label{font-size:14px; font-weight:bold; fill:#e05020;}
-
-  .options{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(130px,1fr));}
-  .opt{
-    border:none; border-radius:22px; padding:16px 10px; font-size:22px; font-weight:bold;
-    cursor:pointer; background:var(--azul); color:#fff; box-shadow:0 6px 0 #2f6fd0;
-    min-height:70px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
-    word-break:break-word; line-height:1.15;
+  .seqslots{display:flex; flex-direction:column; gap:8px; align-items:stretch; max-width:520px; margin:0 auto;}
+  .seqslot{
+    min-height:52px; border:4px dashed #bfe0c6; border-radius:16px; background:#f7fff9;
+    display:flex; align-items:center; gap:10px; padding:8px 12px; font-size:16px; font-weight:bold; color:#8aa593;
   }
+  .seqslot .nn{background:var(--verde); color:#fff; border-radius:50%; width:32px; height:32px; flex:0 0 auto;
+               display:flex; align-items:center; justify-content:center; font-size:18px;}
+  .seqslot.filled{border-style:solid; border-color:var(--verde); background:#eefaf0; color:#2c5c38;}
+  .fichas{display:flex; flex-direction:column; gap:10px; margin-top:14px;}
+  .ficha{
+    border:none; border-radius:18px; padding:13px 14px; font-size:17px; font-weight:bold; text-align:left;
+    background:var(--azul); color:#fff; box-shadow:0 5px 0 #2f6fd0; cursor:pointer; line-height:1.25;
+  }
+  .ficha:active{transform:translateY(3px); box-shadow:0 2px 0 #2f6fd0;}
+  .ficha.used{background:#cfcfe0; box-shadow:0 5px 0 #a0a0c0; opacity:.55; cursor:default;}
+  .ficha.shake{animation:shake .4s;}
+  @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-8px);}75%{transform:translateX(8px);}}
+
+  .options{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));}
+  .opt{
+    border:none; border-radius:22px; padding:16px 10px; font-size:23px; font-weight:bold;
+    cursor:pointer; background:var(--azul); color:#fff; box-shadow:0 6px 0 #2f6fd0;
+    min-height:80px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    overflow-wrap:break-word; line-height:1.15;
+  }
+  .opt .cap{font-size:17px; font-weight:bold;}
   .opt:active{transform:translateY(3px); box-shadow:0 3px 0 #2f6fd0;}
+  .opt.big{font-size:40px;}
   .opt.ok{background:var(--verde)!important; box-shadow:0 6px 0 #3f9c4f!important; animation:tada .5s;}
   .opt.no{background:#cfcfe0!important; box-shadow:0 6px 0 #a0a0c0!important; opacity:.7;}
   @keyframes tada{0%{transform:scale(1);}30%{transform:scale(1.18) rotate(-4deg);}60%{transform:scale(1.1) rotate(4deg);}100%{transform:scale(1);}}
 
+  .opt-colors .opt{font-size:19px;}
   .opt-colors .opt:nth-child(1){background:var(--rosa); box-shadow:0 6px 0 #d44d7c;}
-  .opt-colors .opt:nth-child(2){background:var(--verde); box-shadow:0 6px 0 #3f9c4f;}
+  .opt-colors .opt:nth-child(2){background:var(--azul); box-shadow:0 6px 0 #2f6fd0;}
   .opt-colors .opt:nth-child(3){background:var(--laranja); box-shadow:0 6px 0 #d96d2e;}
   .opt-colors .opt:nth-child(4){background:var(--roxo); box-shadow:0 6px 0 #7a4db0;}
 
-  .feedback{font-size:26px; font-weight:bold; min-height:40px; margin-top:12px;}
+  .feedback{font-size:25px; font-weight:bold; min-height:40px; margin-top:12px;}
   .feedback.good{color:var(--verde);} .feedback.bad{color:var(--laranja);}
 
   .next-btn{
@@ -130,12 +139,11 @@
   .next-btn:active{transform:translateY(3px); box-shadow:0 3px 0 #3f9c4f;}
 
   #splash{
-    position:fixed; inset:0; background:linear-gradient(160deg,#2ecc71,#3498db);
+    position:fixed; inset:0; background:linear-gradient(160deg,#ff924c,#a06cd5);
     display:flex; flex-direction:column; align-items:center; justify-content:center;
     color:#fff; text-align:center; z-index:50; cursor:pointer; padding:20px;
   }
-  #splash h1{font-size:32px; margin:10px; line-height:1.2;}
-  #splash .big{font-size:100px; animation:flutua 2.5s infinite;}
+  #splash h1{font-size:34px; margin:10px;}
   #splash .play{
     margin-top:24px; background:var(--amarelo); color:#5a4500; border:none; border-radius:30px;
     font-size:30px; font-weight:bold; padding:18px 44px; box-shadow:0 8px 0 #d9a800; cursor:pointer;
@@ -146,20 +154,58 @@
   .win{text-align:center; padding:20px;}
   .win .trophy{font-size:90px; animation:tada 1s;}
 
-  .hint{font-size:15px; color:#888; margin-top:6px; font-style:italic;}
+  /* ---- deste módulo ---- */
+
+  /* Dinheiro: o adesivo não tem número (o gerador de imagem erra números),
+     então o valor de cada nota/moeda é escrito por cima, em HTML/CSS. */
+  .cf-peca, .cf-peca-dentro{position:relative;}
+  .cf-peca::after, .cf-peca-dentro::after{
+    position:absolute; left:50%; bottom:4px; transform:translateX(-50%);
+    background:#fff; color:#24324f; font:bold 20px/1 "Trebuchet MS",Arial,sans-serif;
+    padding:4px 8px; border-radius:12px; border:3px solid #24324f; white-space:nowrap; pointer-events:none;
+  }
+  .cf-peca-dentro::after{font-size:12px; padding:2px 4px; border-width:2px; bottom:0;}
+  .cf-peca:has(img[src$="/ced20.webp"])::after, .cf-peca-dentro:has(img[src$="/ced20.webp"])::after{content:"R$ 20";}
+  .cf-peca:has(img[src$="/ced10.webp"])::after, .cf-peca-dentro:has(img[src$="/ced10.webp"])::after{content:"R$ 10";}
+  .cf-peca:has(img[src$="/ced5.webp"])::after,  .cf-peca-dentro:has(img[src$="/ced5.webp"])::after{content:"R$ 5";}
+  .cf-peca:has(img[src$="/ced2.webp"])::after,  .cf-peca-dentro:has(img[src$="/ced2.webp"])::after{content:"R$ 2";}
+  .cf-peca:has(img[src$="/moeda1.webp"])::after,.cf-peca-dentro:has(img[src$="/moeda1.webp"])::after{content:"R$ 1";}
+
+  /* Cantina: o valor a pagar não aparece — a criança soma os preços. */
+  .game:has(.sem-meta) .cf-meta{display:none;}
+  .lanches{display:flex; align-items:center; justify-content:center; gap:6px; flex-wrap:wrap; width:100%;}
+  .lanche{display:inline-flex; flex-direction:column; align-items:center; gap:2px;}
+  .lanche .fig{width:84px; height:84px;}
+  .lanche b, .preco{background:#fff7d1; border:3px solid #f0d67a; border-radius:12px; padding:2px 8px; font-size:20px;}
+  .mais{font-size:34px; color:var(--laranja);}
+  .pago{display:block; width:100%; font-size:19px; margin-top:4px;}
+
+  /* Contorno: a figura se desenha e uma bolinha caminha pela borda. */
+  .forma{max-width:100%; height:auto; overflow:visible;}
+  .forma .traco{stroke-dasharray:100; stroke-dashoffset:100; animation:desenha 1.8s ease forwards;}
+  @keyframes desenha{to{stroke-dashoffset:0;}}
+  .forma text{font:bold 28px "Trebuchet MS",Arial,sans-serif; fill:#3a3a55; paint-order:stroke; stroke:#fff; stroke-width:6px;}
+  .forma-nome{font-size:18px; color:#7a6a55; margin:0;}
+
+  .numgrande{display:inline-block; font-size:40px; background:#eef5ff; border:4px solid #c9dcff; border-radius:18px; padding:0 14px; color:var(--roxo);}
 
   @media(max-width:480px){
-    .hero h1{font-size:24px;} .question{font-size:19px;} .card{font-size:17px;}
-    .grid{grid-template-columns:1fr;}
+    .hero h1{font-size:25px;} .question{font-size:19px;} .card{font-size:16px;}
+    .obj{font-size:60px;} .cardtxt{font-size:17px;}
+    .opt{font-size:20px;} .opt .cap{font-size:15px;} .ficha{font-size:15px;}
+    .opt.big{font-size:36px;}
+    .lanche .fig{width:72px; height:72px;}
   }
 </style>
+<link rel="stylesheet" href="../motor/interacoes.css">
+<script src="../motor/interacoes.js"></script>
 </head>
 <body>
 
 <div id="splash">
-  <div class="big">🏆</div>
+  <div class="big"><img src="images/mascote.webp" alt="" style="width:170px;height:170px" class="flutua"></div>
   <h1>Matemática<br>Avaliação Final!</h1>
-  <p style="font-size:18px;max-width:360px;">Vamos revisar tudo para a prova!<br>Dinheiro, medidas, formas e muito mais! 🎉</p>
+  <p style="font-size:19px;max-width:360px;">Dinheiro, medidas, formas e números.<br>Vamos brincar e revisar!</p>
   <div class="caps">Cap. 5 · 6 · 7 · 8</div>
   <button class="play" id="startBtn">▶ COMEÇAR</button>
 </div>
@@ -173,20 +219,35 @@
    Cap. 5 Nosso dinheiro · Cap. 6 Medidas de comprimento
    Cap. 7 A matemática no supermercado
    Cap. 8 A cada medida um novo aprendizado
+
+   Jogos com as mecânicas de motor/interacoes.js (cofre, ligar,
+   classificar, memória, mascote, ordenar, cena) e um de pergunta
+   e alternativa (contorno). Valores iguais aos da versão anterior
+   do módulo: notas de 2, 5, 10 e 20 e moeda de 1 real; lanches da
+   cantina de 1 a 9 reais e troco de 20; barras de 10 e cubinhos
+   até 42; sequências de 1 em 1, 2 em 2, 5 em 5; vizinhos de 39,
+   50 e 77.
    ============================================================ */
 
 const App = document.getElementById('app');
 let stars = parseInt(localStorage.getItem('vitor_matfinal_stars')||'0',10);
 
+/* ============================================================
+   VOCABULÁRIO DE VOZ (chave -> texto falado).
+   ============================================================ */
 const VOICE = {
-  greet:"Olá! Vamos revisar tudo para a prova de matemática!",
-  test:"Você está me ouvindo? Vamos revisar!",
-  win:"Parabéns! Você revisou tudo! Vai arrasar na prova!",
+  /* navegação e feedback */
+  greet:"Oi! Eu sou o Bolota, o monstrinho dos números! Vamos revisar a prova de matemática brincando: dinheiro, medidas, formas e números. Escolha um jogo!",
+  test:"Olá! Você está me ouvindo? Vamos brincar e aprender!",
+  win:"Parabéns! Você conseguiu! Vai arrasar na prova!",
   choose:"As respostas são:",
   ok1:"Muito bem!", ok2:"Isso aí!", ok3:"Você acertou!",
   ok4:"Boa demais!", ok5:"Mandou bem!", ok6:"Perfeito!",
   no1:"Quase! Tenta outra.", no2:"Hmm, tenta de novo.", no3:"Não foi essa, tenta outra.",
+  figurinha:"Você ganhou uma figurinha nova para o seu álbum!",
+  album:"Este é o seu álbum de figurinhas! Termine os jogos para completar.",
 
+  /* números — o cofre fala o total a cada peça */
   n0:"zero",n1:"um",n2:"dois",n3:"três",n4:"quatro",n5:"cinco",
   n6:"seis",n7:"sete",n8:"oito",n9:"nove",n10:"dez",
   n11:"onze",n12:"doze",n13:"treze",n14:"quatorze",n15:"quinze",
@@ -195,63 +256,201 @@ const VOICE = {
   n26:"vinte e seis",n27:"vinte e sete",n28:"vinte e oito",n29:"vinte e nove",n30:"trinta",
   n31:"trinta e um",n32:"trinta e dois",n33:"trinta e três",n34:"trinta e quatro",n35:"trinta e cinco",
   n36:"trinta e seis",n37:"trinta e sete",n38:"trinta e oito",n39:"trinta e nove",n40:"quarenta",
-  n50:"cinquenta",n60:"sessenta",n70:"setenta",n77:"setenta e sete",n78:"setenta e oito",
-  n98:"noventa e oito",n99:"noventa e nove",
+  n41:"quarenta e um",n42:"quarenta e dois",n43:"quarenta e três",n44:"quarenta e quatro",n45:"quarenta e cinco",
+  n46:"quarenta e seis",n47:"quarenta e sete",n48:"quarenta e oito",n49:"quarenta e nove",n50:"cinquenta",
+  n51:"cinquenta e um",n52:"cinquenta e dois",n53:"cinquenta e três",n54:"cinquenta e quatro",n55:"cinquenta e cinco",
+  n60:"sessenta",n75:"setenta e cinco",n76:"setenta e seis",n77:"setenta e sete",n78:"setenta e oito",
+  n79:"setenta e nove",n87:"oitenta e sete",
 
-  /* 1. Contando Dinheiro */
-  d_quanto:"Quanto dinheiro esta criança tem? Some as cédulas e as moedas.",
-  d_troca:"Qual troca vale exatamente 20 reais?",
-  d_errada:"Qual troca NÃO vale 20 reais?",
-  d_reais:"reais",
+  /* ===== 1. NOSSO DINHEIRO (cofre) ===== */
+  d_q1:"Coloque dezessete reais no cofrinho! Arraste as notas e as moedas. Toque numa nota para ouvir quanto ela vale.",
+  d_q2:"Troca de dinheiro! Coloque vinte reais no cofrinho, mas sem a nota de vinte. Use outras notas.",
+  d_q3:"Agora coloque vinte e cinco reais no cofrinho!",
+  p_ced20:"uma nota de vinte reais",
+  p_ced10:"uma nota de dez reais",
+  p_ced5:"uma nota de cinco reais",
+  p_ced2:"uma nota de dois reais",
+  p_moeda1:"uma moeda de um real",
+  d_exp1:"Um jeito é: dez mais cinco dá quinze. Mais um, dezesseis. Mais um, dezessete. Dezessete reais!",
+  d_exp2:"Duas notas de dez valem vinte. Quatro notas de cinco também valem vinte: cinco, dez, quinze, vinte! E duas notas de cinco valem o mesmo que uma nota de dez.",
+  d_exp3:"Vinte mais cinco dá vinte e cinco. Dez, mais dez, mais cinco também dá vinte e cinco!",
 
-  /* 2. Na Cantina */
-  ct_comprou:"Na cantina, a criança comprou dois itens. Quanto gastou no total?",
-  ct_troco:"Pagou com uma nota de 20 reais. Quanto recebeu de troco?",
-  ct_total:"Quanto gastou no total?",
+  /* ===== 2. NA CANTINA (cofre sem o valor na tela) ===== */
+  ct_q1:"Na cantina, a criança quer um suco de três reais e uma maçã de dois reais. Pague os dois no cofrinho!",
+  ct_q2:"Agora um sanduíche de nove reais e um suco de três reais. Pague o lanche todo no cofrinho!",
+  ct_q3:"A criança comprou uma pipoca de três reais e um bolo de seis reais, e pagou com uma nota de vinte reais. Quanto ela recebe de troco? Coloque o troco no cofrinho!",
+  ct_exp1:"Três mais dois dá cinco. O lanche custou cinco reais.",
+  ct_exp2:"Nove mais três dá doze. O lanche custou doze reais.",
+  ct_exp3:"Três mais seis dá nove. De nove até vinte faltam onze. O troco é onze reais!",
 
-  /* 3. Instrumentos de Medida */
-  im_qual:"Qual instrumento serve melhor para medir isto?",
-  im_regua:"a régua",
-  im_fita:"a fita métrica",
-  im_trena:"a trena",
-  im_metro:"Esse objeto tem mais ou menos de 1 metro?",
-  im_mais:"mais de 1 metro",
-  im_menos:"menos de 1 metro",
+  /* ===== 3. MEDIR (ligar + classificar) ===== */
+  im_q1:"Puxe uma linha de cada instrumento até o que ele mede melhor!",
+  im_q2:"Agora são quatro! Ligue cada instrumento ao que ele mede.",
+  in_regua:"a régua",
+  in_fita:"a fita métrica",
+  in_trena:"a trena",
+  in_balanca:"a balança",
+  ob_lapis:"o lápis",
+  ob_cintura:"a cintura de uma pessoa",
+  ob_porta:"a altura da porta",
+  ob_caderno:"o caderno",
+  ob_parede:"o comprimento da parede",
+  ob_arroz:"o pacote de arroz",
+  im_exp1:"A régua mede coisas pequenas e retas, como o lápis. A fita métrica é mole e dá a volta no corpo, como na cintura. A trena mede coisas grandes, como a porta.",
+  im_exp2:"Régua para o caderno, fita métrica para a cintura, trena para a parede. E a balança não mede o comprimento: ela mede quanto o arroz pesa!",
+  im_q3:"Arraste cada coisa para o grupo certo! O lápis ao lado da régua de um metro é para o que tem menos de um metro. O armário ao lado da régua de um metro é para o que tem mais de um metro.",
+  me_menos:"Menos de um metro: é mais curto que a régua de um metro.",
+  me_mais:"Mais de um metro: é mais comprido que a régua de um metro.",
+  ob_borracha:"a borracha",
+  ob_caneta:"a caneta",
+  ob_porta2:"a porta da sala",
+  ob_quadro:"o quadro da sala",
+  ob_geladeira:"a geladeira",
+  im_exp3:"Borracha, caderno e caneta têm menos de um metro. A porta, o quadro e a geladeira têm mais de um metro. Um metro é mais ou menos a altura da cintura de um adulto.",
 
-  /* 4. Contorno */
-  co_q:"Qual é o contorno dessa figura? Some todos os lados.",
+  /* ===== 4. CONTORNO (pergunta e alternativa) ===== */
+  co_q:"Qual é o contorno desta figura? Some todos os lados.",
   co_quad:"O quadrado tem 4 lados iguais.",
   co_ret:"O retângulo tem 2 lados maiores e 2 menores.",
+  co_exp20:"Cinco mais cinco mais cinco mais cinco dá vinte. O contorno é vinte!",
+  co_exp24:"Oito mais quatro dá doze. Mais oito dá vinte. Mais quatro dá vinte e quatro!",
+  co_exp26:"Dez mais três dá treze. Mais dez dá vinte e três. Mais três dá vinte e seis!",
+  co_exp28:"Sete mais sete dá quatorze. Mais sete dá vinte e um. Mais sete dá vinte e oito!",
 
-  /* 5. Composição */
-  cp_q:"Olhe as barras de dez e os cubinhos. Que número está representado?",
-  cp_dica:"Cada barra vale 10. Conte de 10 em 10 e depois some os cubinhos.",
+  /* ===== 5. BARRAS E CUBINHOS (cofre) ===== */
+  cp_monte:"Monte este número com barras de dez e cubinhos:",
+  cp_dica:"Cada barra vale dez. Cada cubinho vale um.",
+  pc_barra:"uma barra de dez",
+  pc_cubo:"um cubinho",
+  cp_exp14:"Uma barra de dez e quatro cubinhos: dez mais quatro dá quatorze!",
+  cp_exp20:"Duas barras de dez: dez, vinte. E nenhum cubinho. Vinte!",
+  cp_exp27:"Duas barras: dez, vinte. Mais sete cubinhos: vinte e sete!",
+  cp_exp35:"Três barras: dez, vinte, trinta. Mais cinco cubinhos: trinta e cinco!",
+  cp_exp42:"Quatro barras: dez, vinte, trinta, quarenta. Mais dois cubinhos: quarenta e dois!",
 
-  /* 6. Sólidos Geométricos */
-  sg_q:"Qual sólido geométrico se parece com este objeto?",
-  sg_rola:"Qual sólido rola em TODAS as direções?",
+  /* ===== 6. SÓLIDOS GEOMÉTRICOS (memória + mascote) ===== */
+  sg_q1:"Jogo da memória! Vire as cartas e encontre cada objeto com o sólido geométrico parecido com ele.",
+  sg_q2:"Agora com mais cartas! Encontre cada objeto com o sólido parecido.",
+  ob_lata:"a lata de óleo",
+  ob_bola:"a bola de futebol",
+  ob_leite:"a caixa de leite",
+  ob_chapeu:"o chapéu de festa",
+  ob_dado:"o dado",
   sg_cilindro:"o cilindro",
-  sg_paralelepipedo:"o paralelepípedo",
   sg_esfera:"a esfera",
+  sg_paralelepipedo:"o paralelepípedo",
   sg_cone:"o cone",
   sg_cubo:"o cubo",
+  sg_exp1:"A lata parece um cilindro. A bola parece uma esfera. A caixa de leite parece um paralelepípedo.",
+  sg_exp2:"O chapéu de festa parece um cone, e o dado parece um cubo. A lata é um cilindro, a bola é uma esfera e a caixa de leite é um paralelepípedo.",
+  sg_q3:"O Bolota quer brincar de rolar! Dê para ele só o que rola para todos os lados.",
+  ro_esfera:"A esfera rola para todos os lados!",
+  ro_bola:"A bola rola para todos os lados!",
+  ro_cilindro:"O cilindro rola, mas só em linha reta.",
+  ro_lata:"A lata é um cilindro: rola só em linha reta.",
+  ro_cubo:"O cubo não rola.",
+  ro_leite:"A caixa de leite é um paralelepípedo: não rola.",
+  sg_exp3:"A esfera rola para qualquer lado. O cilindro rola só em linha reta. O cubo e o paralelepípedo não rolam.",
 
-  /* 7. Sequências */
-  sq_q:"Complete a sequência. Qual número vem na posição vazia?",
-  sq_suc:"Qual é o SUCESSOR deste número? O número que vem logo depois.",
-  sq_ant:"Qual é o ANTECESSOR deste número? O número que vem logo antes.",
+  /* ===== 7. SEQUÊNCIAS (ordenar + mascote) ===== */
+  sq_q1:"Coloque os números em ordem, contando de dois em dois! Comece pelo menor.",
+  sq_exp1:"Dois, quatro, seis, oito, dez! De dois em dois, sempre somando dois.",
+  sq_q2a:"Agora do maior para o menor! Coloque os números em ordem, começando pelo maior.",
+  sq_exp2a:"Vinte, dezenove, dezoito, dezessete, dezesseis. Para trás, tirando um de cada vez!",
+  sq_q2b:"Coloque os números em ordem, contando de cinco em cinco! Comece pelo menor.",
+  sq_exp2b:"Dez, quinze, vinte, vinte e cinco, trinta! De cinco em cinco, sempre somando cinco.",
+  sq_viz:"O Bolota quer os vizinhos do número",
+  sq_viz2:"Dê para ele o antecessor, que vem logo antes, e o sucessor, que vem logo depois.",
+  sq_exp39:"Antes do trinta e nove vem o trinta e oito: é o antecessor. Depois do trinta e nove vem o quarenta: é o sucessor!",
+  sq_exp50:"Antes do cinquenta vem o quarenta e nove: é o antecessor. Depois do cinquenta vem o cinquenta e um: é o sucessor!",
+  sq_exp77:"Antes do setenta e sete vem o setenta e seis: é o antecessor. Depois do setenta e sete vem o setenta e oito: é o sucessor!",
 
-  /* 8. Massa e Capacidade */
-  mc_bal:"Na balança, qual pacote é mais pesado?",
-  mc_cap:"Qual unidade usamos para medir capacidade, ou seja, quanto cabe dentro de um recipiente?",
-  mc_massa:"Qual unidade usamos para medir massa, ou seja, quanto pesa?",
-  mc_kg:"quilograma",
-  mc_litro:"litro",
-  mc_metro_u:"metro",
+  /* ===== 8. MASSA E CAPACIDADE (cena + classificar) ===== */
+  mc_q1:"Olhe a balança! O prato que desce carrega o mais pesado. Toque no pacote mais pesado.",
+  mc_q2:"E agora? Toque no pacote mais leve. O mais leve fica no prato que sobe.",
+  pk_vermelho:"o pacote vermelho",
+  pk_azul:"o pacote azul",
+  mc_exp1:"O prato que desceu tem o pacote mais pesado. Quem pesa mais, desce!",
+  mc_exp2:"O pacote mais leve fica no prato de cima. Quem pesa menos, sobe!",
+  mc_q3:"Arraste cada coisa para o grupo certo! A balança é para o que medimos em quilograma: quanto pesa. A jarra é para o que medimos em litro: quanto cabe dentro.",
+  g_kg:"Quilograma: mede a massa, quanto pesa.",
+  g_litro:"Litro: mede a capacidade, quanto cabe dentro.",
+  mc_melancia:"a melancia",
+  mc_feijao:"o pacote de feijão",
+  mc_agua:"a garrafa de água",
+  mc_suco:"a garrafa de suco",
+  mc_exp3:"Arroz, feijão e melancia a gente pesa em quilograma: é a massa. Água, leite e suco a gente mede em litro: é a capacidade, quanto cabe.",
+};
+
+/* Objetos isolados, fundo transparente. Em inglês, sem números nem letras. */
+const ADESIVOS = {
+  mascote: "A cute friendly round orange little monster mascot with big happy eyes, two tiny horns and a wide open smiling mouth, waving one hand, full body",
+  cofrinho: "A cute pink piggy bank with a plain golden coin with a star engraving going into the slot on its back, no symbols",
+  ced20: "A stylized toy banknote, wide rectangle, warm yellow and orange colors, with a cute golden lion tamarin monkey illustration on the right half, a plain empty light area on the left half, absolutely no numbers, no text, no letters",
+  ced10: "A stylized toy banknote, wide rectangle, red and pink colors, with a cute red macaw parrot illustration on the right half, a plain empty light area on the left half, absolutely no numbers, no text, no letters",
+  ced5: "A stylized toy banknote, wide rectangle, purple and lilac colors, with a cute white heron bird illustration on the right half, a plain empty light area on the left half, absolutely no numbers, no text, no letters",
+  ced2: "A stylized toy banknote, wide rectangle, blue and gray colors, with a cute sea turtle illustration on the right half, a plain empty light area on the left half, absolutely no numbers, no text, no letters",
+  moeda1: "A single round bimetallic coin seen from the front: silver center disc and a golden outer ring, with a simple star engraving in the center, absolutely no numbers, no text, no letters",
+  suco: "A glass of orange juice with a striped straw",
+  maca: "A shiny red apple with a green leaf",
+  sanduiche: "A tasty sandwich with lettuce, tomato and cheese",
+  pipoca: "A red and white striped bag full of popcorn",
+  bolo: "A slice of chocolate cake on a small plate",
+  regua: "A straight yellow school ruler with tick marks only, absolutely no numbers",
+  fita: "A rolled soft yellow sewing measuring tape with tick marks only, absolutely no numbers",
+  trena: "A yellow and black retractable tape measure with the metal tape pulled out a little, tick marks only, absolutely no numbers",
+  balanca: "A classic golden two-pan balance scale, both pans level and empty",
+  lapis: "A yellow pencil with a pink eraser, lying horizontally",
+  cintura: "A smiling child standing with both hands on the waist, full body, wearing a t-shirt and shorts",
+  porta: "A tall wooden door with a round knob, closed, front view",
+  caderno: "A closed blue school notebook with a spiral binding",
+  parede: "A long section of a red brick wall, front view",
+  arroz: "A white plastic package of rice with rice grains drawn on it, no words",
+  borracha: "A small pink rubber eraser",
+  caneta: "A blue ballpoint pen with a cap",
+  quadro: "A big green classroom chalkboard hanging on a wall, blank",
+  geladeira: "A tall white refrigerator with two doors",
+  g_menos: "A long wooden measuring stick lying horizontally on the floor with a small yellow pencil lying next to it, the pencil is much shorter than the stick, tick marks only, absolutely no numbers",
+  g_mais: "A tall wooden wardrobe standing next to a short wooden measuring stick standing upright, the wardrobe is much taller than the stick, absolutely no numbers",
+  contorno: "A square drawn with a thick orange outline on paper, with a small red ladybug walking along its edge",
+  lata: "A metal tin can of cooking oil, cylinder shape, plain label without words",
+  bola: "A classic black and white soccer ball",
+  leite: "A carton of milk, rectangular box shape, plain without words",
+  chapeu: "A colorful striped cone-shaped birthday party hat",
+  dado: "A white six-sided die with black dots, 3D",
+  cilindro: "A plain solid geometric cylinder, smooth light blue, standing upright, 3D with soft shading",
+  esfera: "A plain solid geometric sphere, smooth light red, 3D with soft shading",
+  paralelepipedo: "A plain solid geometric rectangular box (cuboid), taller than wide, smooth light green, 3D with soft shading",
+  cone: "A plain solid geometric cone, smooth light orange, standing on its round base, 3D with soft shading",
+  cubo: "A plain solid geometric cube, smooth light purple, 3D with soft shading",
+  escada: "A staircase made of colorful toy building blocks going up from left to right, each step a different color",
+  pacote_vermelho: "A plain red cardboard package box, closed, front view, no labels",
+  pacote_azul: "A plain blue cardboard package box, closed, front view, no labels",
+  jarra: "A clear plastic measuring jug full of water with a handle, tick marks only, absolutely no numbers",
+  feijao: "A transparent plastic package full of brown beans, no words",
+  melancia: "A whole green striped watermelon",
+  agua: "A clear plastic bottle of water with a blue cap",
+  garrafa_suco: "A glass bottle of orange juice with an orange cap, plain without words",
+};
+
+/* Placas de número: NÃO são geradas por IA (o gerador erra algarismos).
+   São desenhadas por matematica-final/gerar-placas.cjs a partir desta lista.
+   Entram no ADESIVOS por fora do bloco acima, para o gerar-imagens.mjs
+   (que lê só o bloco) nunca tentar refazê-las com IA. */
+const PLACAS = [2,4,6,8,10, 16,17,18,19,20, 15,25,30, 37,38,40,41,49, 48,51,52,60, 75,76,78,79,87];
+PLACAS.forEach(n => { ADESIVOS['num' + n] = 'placa do número ' + n + ' (gerar-placas.cjs)'; });
+/* A barra de dez precisa ter EXATAMENTE 10 cubinhos — a IA desenhou 7, duas vezes.
+   Por isso barra e cubinho também são desenhados pelo gerar-placas.cjs. */
+ADESIVOS.barra = 'barra de dez cubinhos (gerar-placas.cjs)';
+ADESIVOS.cubinho = 'cubinho de uma unidade (gerar-placas.cjs)';
+
+/* Fundos em paisagem 3:2. */
+const CENARIOS = {
+  balanca_cena: "A big golden two-pan balance scale standing on a wooden kitchen table, seen straight from the front. The scale is clearly tilted: the LEFT pan hangs much LOWER than the right pan, and the right pan is high up. Both pans are completely empty, flat and wide. Plain soft yellow wall behind",
 };
 
 /* ============================================================
-   PLAYER DE ÁUDIO
+   PLAYER DE ÁUDIO (clipes em sequência)
    ============================================================ */
 const AUDIO_DIR='audio/', AUDIO_EXT='.mp3';
 const player=new Audio();
@@ -280,16 +479,17 @@ function playKeys(keys){
 function setPlayingBadge(on){
   const b=document.getElementById('qspeak'); if(b) b.classList.toggle('playing',on);
 }
-function unlockAudio(){
+function unlockAudio(depois){
+  const pronto=()=>{ player.muted=false; if(depois){ const f=depois; depois=null; f(); } };
   try{ player.muted=true; player.src=AUDIO_DIR+'greet'+AUDIO_EXT;
        const p=player.play();
-       if(p&&p.then) p.then(()=>{player.pause();player.currentTime=0;player.muted=false;})
-                      .catch(()=>{player.muted=false;});
-       else {player.pause();player.muted=false;}
-  }catch(e){ player.muted=false; }
+       if(p&&p.then) p.then(()=>{player.pause();player.currentTime=0;pronto();}).catch(pronto);
+       else { player.pause(); pronto(); }
+       setTimeout(pronto,1200);
+  }catch(e){ pronto(); }
 }
 
-/* ===== SONS DE EFEITO ===== */
+/* ===== SONS DE EFEITO (Web Audio) ===== */
 let actx=null;
 function initAudio(){ try{ actx = actx || new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==='suspended') actx.resume(); }catch(e){} }
 function tone(freq,start,dur,type='sine',vol=0.2){
@@ -310,12 +510,17 @@ function sndWin(){ initAudio(); [523,659,784,1047,784,1047,1319].forEach((f,i)=>
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function rint(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
 function pick(a){return a[Math.floor(Math.random()*a.length)];}
+function mix(){ return shuffle([].concat(...arguments)); }
 const OK_KEYS=['ok1','ok2','ok3','ok4','ok5','ok6'], NO_KEYS=['no1','no2','no3'];
+function emo(e,size){ return '<span class="obj" style="font-size:'+(size||74)+'px">'+e+'</span>'; }
+function cena(e,txt,size){ return emo(e,size||88)+(txt?'<div class="cardtxt">'+txt+'</div>':''); }
+/** Adesivo como <img> (o QA roda sem o motor, então não dá para usar fig() aqui). */
+function ICO(k){ return '<img class="fig" src="images/'+k+'.webp" alt="">'; }
 
 function updateStars(){ const el=document.getElementById('starNum'); if(el) el.textContent=stars; localStorage.setItem('vitor_matfinal_stars',stars); }
 function addStar(n=1){ stars+=n; updateStars(); }
 
-/* ===== CONFETE ===== */
+/* ---------------- CONFETE ---------------- */
 const cv=document.getElementById('confetti'), cx=cv.getContext('2d');
 let confs=[];
 function resizeCv(){cv.width=innerWidth;cv.height=innerHeight;}
@@ -336,7 +541,7 @@ loopConf();
 function shell(inner){
   App.innerHTML=`
     <div class="topbar">
-      <div class="nav"><a class="back-btn" href="../" title="Menu de matérias" aria-label="Menu de matérias">🏠</a><button class="home-btn" onclick="sndClick();goHome()" title="Escolher outro jogo" aria-label="Escolher outro jogo">🔄</button></div>
+      <div class="nav"><a class="back-btn" href="../" title="Voltar ao menu de matérias" aria-label="Voltar ao menu de matérias">🏠</a><button class="home-btn" onclick="sndClick();goHome()" title="Escolher outro jogo desta matéria" aria-label="Escolher outro jogo desta matéria">🔄</button></div>
       <div class="stars">⭐ <span class="num" id="starNum">${stars}</span></div>
     </div>
     ${inner}`;
@@ -344,22 +549,22 @@ function shell(inner){
 
 /* ===== MENU ===== */
 const GAMES=[
-  {id:'dinheiro',   ico:'💰', nome:'Nosso Dinheiro',    sub:'Somar cédulas e moedas',     cls:'c1'},
-  {id:'cantina',    ico:'🛒', nome:'Na Cantina',         sub:'Compras e troco',            cls:'c2'},
-  {id:'instrumentos',ico:'📏', nome:'Instrumentos',      sub:'Régua, fita e trena',        cls:'c3'},
-  {id:'contorno',   ico:'🔲', nome:'Contorno',           sub:'Somar os lados da figura',   cls:'c4'},
-  {id:'composicao', ico:'🧱', nome:'Composição',         sub:'Barras de 10 e cubinhos',    cls:'c5'},
-  {id:'solidos',    ico:'📦', nome:'Sólidos',            sub:'Cilindro, esfera e mais',    cls:'c6'},
-  {id:'sequencias', ico:'🔢', nome:'Sequências',         sub:'Padrões e vizinhos',         cls:'c7'},
-  {id:'massa',      ico:'⚖️', nome:'Massa e Capacidade', sub:'Pesar e medir líquidos',     cls:'c8'},
+  {id:'dinheiro',     ico:ICO('cofrinho'),  nome:'Nosso Dinheiro',     sub:'Juntar notas e moedas',       cls:'c1'},
+  {id:'cantina',      ico:ICO('sanduiche'), nome:'Na Cantina',         sub:'Pagar o lanche e o troco',    cls:'c2'},
+  {id:'instrumentos', ico:ICO('trena'),     nome:'Medir',              sub:'Régua, fita, trena e 1 metro', cls:'c3'},
+  {id:'contorno',     ico:ICO('contorno'),  nome:'Contorno',           sub:'Somar todos os lados',        cls:'c4'},
+  {id:'composicao',   ico:ICO('barra'),     nome:'Barras e Cubinhos',  sub:'Montar números',              cls:'c5'},
+  {id:'solidos',      ico:ICO('dado'),      nome:'Sólidos',            sub:'Memória das formas',          cls:'c6'},
+  {id:'sequencias',   ico:ICO('escada'),    nome:'Sequências',         sub:'Ordem e vizinhos',            cls:'c7'},
+  {id:'massa',        ico:ICO('balanca'),   nome:'Massa e Capacidade', sub:'Pesado, leve, litro',         cls:'c8'},
 ];
 function goHome(silent){
   stopAudio();
   shell(`
     <div class="hero">
-      <div class="mascote">🏆</div>
+      <div class="mascote"><img src="images/mascote.webp" alt="" style="width:120px;height:120px" class="flutua"></div>
       <h1>Avaliação Final!</h1>
-      <p>Escolha o que revisar 👇</p>
+      <p>Escolha uma brincadeira 👇</p>
       <button onclick="testSound()" style="margin-top:6px;background:var(--amarelo);color:#5a4500;border:none;border-radius:18px;padding:9px 18px;font-size:16px;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #d9a800;">🔈 Testar som</button>
     </div>
     <div class="grid">
@@ -375,453 +580,318 @@ function goHome(silent){
 function testSound(){ initAudio(); sndClick(); playKeys(['test']); }
 
 /* ===== MOTOR DE RODADAS ===== */
-let current=null, locked=false;
+let current=null, locked=false, seqPos=0;
 function startGame(id){
-  stopAudio();
-  switch(id){
-    case 'dinheiro': gameDinheiro(); break;
-    case 'cantina': gameCantina(); break;
-    case 'instrumentos': gameInstrumentos(); break;
-    case 'contorno': gameContorno(); break;
-    case 'composicao': gameComposicao(); break;
-    case 'solidos': gameSolidos(); break;
-    case 'sequencias': gameSequencias(); break;
-    case 'massa': gameMassa(); break;
-  }
+  const rounds=BUILDERS[id]();
+  current={id, title:GAMES.find(g=>g.id===id).nome, rounds, idx:0};
+  renderRound();
 }
-
-function renderGame(title, prog, questionHtml, stageHtml, opts, voiceKeys, hint){
+function gameFrame(c,r,bodyHtml){
+  shell(`
+    <div class="game">
+      <h2 class="game-title">${GAMES.find(g=>g.id===c.id).ico} ${c.title}</h2>
+      <div class="progress">Pergunta ${c.idx+1} de ${c.rounds.length}</div>
+      <div class="question">
+        <button class="speak-btn" id="qspeak" onclick="sndClick();speakRound()">🔊</button>
+        <span>${r.q}</span>
+      </div>
+      <div class="stage">${r.stage||''}</div>
+      ${bodyHtml}
+      <div style="font-size:14px;color:#aaa;margin-top:6px;">👆 Toque para responder. Toque no 🔊 para ouvir de novo.</div>
+      <div class="feedback" id="fb"></div>
+    </div>
+  `);
+}
+function renderRound(){
   locked=false;
-  shell(`<div class="game">
-    <h2 class="game-title">${title}</h2>
-    <p class="progress">${prog}</p>
-    <div class="question">
-      <button class="speak-btn" id="qspeak" onclick="replayQ()">🔊</button>
-      <span>${questionHtml}</span>
-    </div>
-    ${stageHtml?'<div class="stage">'+stageHtml+'</div>':''}
-    <div class="options opt-colors" id="opts">
-      ${opts.map((o,i)=>`<button class="opt" data-idx="${i}" onclick="answer(this,${i})">${o.label}</button>`).join('')}
-    </div>
-    <div class="feedback" id="fb"></div>
-    ${hint?'<p class="hint">💡 '+hint+'</p>':''}
-  </div>`);
-  current._voiceKeys=voiceKeys;
-  setTimeout(()=>playKeys(voiceKeys),300);
+  const c=current, r=c.rounds[c.idx];
+  if(window.MODOS && MODOS[r.mode]) return MODOS[r.mode](c,r);
+  if(r.mode==='seq'){ return renderSeq(c,r); }
+  gameFrame(c,r,`<div class="options ${r.colorOpts?'opt-colors':''}" id="opts"></div>`);
+  const shown=shuffle(r.options);
+  const opts=document.getElementById('opts');
+  shown.forEach(o=>{
+    const b=document.createElement('button');
+    b.className='opt'+(o.big?' big':'');
+    b.innerHTML=o.label;
+    b.onclick=()=>answer(b,o);
+    opts.appendChild(b);
+  });
+  window._roundKeys=[].concat(r.audio||[], ['choose'], shown.map(o=>o.aud));
+  setTimeout(()=>speakRound(),400);
 }
+function speakRound(){ playKeys(window._roundKeys||[]); }
 
-function replayQ(){ if(current&&current._voiceKeys) playKeys(current._voiceKeys); }
-
-function answer(btn,idx){
+function showNextButton(){
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=null);
+  document.querySelectorAll('.ficha').forEach(b=>b.onclick=null);
+  const nb=document.createElement('button');
+  nb.className='next-btn';
+  const last=current.idx>=current.rounds.length-1;
+  nb.textContent=last?'🏆 Terminar':'Próxima ➡';
+  nb.onclick=()=>{
+    nb.onclick=null;
+    sndClick();
+    if(last){ winScreen(); return; }
+    current.idx++; renderRound();
+    locked=true; setTimeout(()=>{locked=false;},350);
+  };
+  document.querySelector('.game').appendChild(nb);
+}
+function correctFlow(extraAudio){
+  locked=true; sndRight(); burst(); addStar(1);
+  const fb=document.getElementById('fb'); if(fb){fb.className='feedback good'; fb.textContent='⭐ Muito bem!';}
+  playKeys(extraAudio.filter(Boolean));
+  showNextButton();
+}
+function answer(btn,opt){
   if(locked) return;
-  sndClick();
-  const correct = current.correctIdx;
-  if(idx===correct){
-    locked=true; btn.classList.add('ok'); sndRight();
-    playKeys([pick(OK_KEYS)]);
-    addStar(1);
-    document.getElementById('fb').innerHTML='<span class="good">⭐ Acertou!</span>';
-    setTimeout(()=>{ if(current.next) current.next(); },1400);
-  } else {
-    btn.classList.add('no'); sndWrong();
-    playKeys([pick(NO_KEYS)]);
-    document.getElementById('fb').innerHTML='<span class="bad">Tenta outra! 💪</span>';
-    setTimeout(()=>{ document.getElementById('fb').innerHTML=''; },1200);
+  if(opt.correct){
+    btn.classList.add('ok');
+    document.querySelectorAll('.opt').forEach(b=>{if(b!==btn)b.classList.add('no');});
+    correctFlow([opt.aud, pick(OK_KEYS), opt.expAud]);
+  }else{
+    btn.classList.add('no'); btn.onclick=null;
+    sndWrong();
+    const fb=document.getElementById('fb'); fb.className='feedback bad'; fb.textContent='🤔 Tenta de novo!';
+    playKeys([opt.aud, pick(NO_KEYS)].filter(Boolean));
   }
 }
 
-function showWin(gameName){
-  burst(); sndWin();
-  shell(`<div class="win">
-    <div class="trophy">🏆</div>
-    <h1 style="color:var(--verde);">Parabéns!</h1>
-    <p style="font-size:20px;">Você completou<br><b>${gameName}</b>!</p>
-    <button class="next-btn" onclick="sndClick();goHome()">🔄 Jogar outro</button>
-  </div>`);
-  playKeys(['win']);
+/* ---- modo MONTAR A ORDEM ---- */
+function renderSeq(c,r){
+  seqPos=0;
+  const slots=r.itens.map((_,i)=>`<div class="seqslot" id="sl${i}"><span class="nn">${i+1}</span><span class="tx">...</span></div>`).join('');
+  gameFrame(c,r,`
+    <div class="seqslots">${slots}</div>
+    <div class="fichas" id="fichas"></div>
+  `);
+  const box=document.getElementById('fichas');
+  shuffle(r.itens.map((it,i)=>({it,i}))).forEach(t=>{
+    const b=document.createElement('button');
+    b.className='ficha'; b.textContent=t.it.txt;
+    b.onclick=()=>tapFicha(b,t.i,r);
+    box.appendChild(b);
+  });
+  window._roundKeys=[].concat(r.audio||[]);
+  setTimeout(()=>speakRound(),400);
 }
-
-/* ============================================================
-   1. NOSSO DINHEIRO
-   ============================================================ */
-function gameDinheiro(){
-  const rounds=[
-    // Contar dinheiro
-    {bills:[10,5,1,1], answer:17, opts:[15,17,19,12], q:'Bia tem estas cédulas e moedas. Quanto ela tem?', name:'Bia'},
-    {bills:[20,2,1], answer:23, opts:[23,22,21,25], q:'Tom tem estas cédulas e moedas. Quanto ele tem?', name:'Tom'},
-    {bills:[10,10,5], answer:25, opts:[20,25,15,30], q:'Quanto dinheiro tem aqui?'},
-    // Trocas
-    {type:'troca', q:'Qual troca NÃO vale 20 reais?', wrong:'10+5+2 = 17', 
-     opts:['10+10 = 20','5+5+5+5 = 20','10+5+2 = 17','10+5+5 = 20'], correctIdx:2},
-    {type:'troca', q:'Qual troca vale exatamente 10 reais?', 
-     opts:['5+5 = 10','5+2+1 = 8','10+2 = 12','5+2+2 = 9'], correctIdx:0},
-  ];
-  let ri=0;
-  function play(){
-    if(ri>=rounds.length){ showWin('Nosso Dinheiro'); return; }
-    const r=rounds[ri];
-    current={next:()=>{ri++;play();}};
-
-    if(r.type==='troca'){
-      current.correctIdx=r.correctIdx;
-      const opts=r.opts.map(o=>({label:o}));
-      renderGame('💰 Nosso Dinheiro',`${ri+1} de ${rounds.length}`,r.q,'',opts,['d_troca']);
-    } else {
-      const billsHtml=r.bills.map(v=>{
-        if(v>=10) return `<span class="bill bill-${v<=10?10:20}">R$${v}</span>`;
-        if(v===5) return `<span class="bill bill-5">R$5</span>`;
-        if(v===2) return `<span class="bill coin-2" style="font-size:16px;">R$2</span>`;
-        return `<span class="bill coin-1" style="font-size:14px;">R$1</span>`;
-      }).join('');
-      const stage=`<div class="money-row">${billsHtml}</div>`;
-      const shuffled=shuffle(r.opts);
-      current.correctIdx=shuffled.indexOf(r.answer);
-      const opts=shuffled.map(v=>({label:'R$ '+v}));
-      renderGame('💰 Nosso Dinheiro',`${ri+1} de ${rounds.length}`,r.q,stage,opts,['d_quanto'],
-        'Comece pela cédula maior e vá somando!');
+function tapFicha(btn,idx,r){
+  if(locked) return;
+  if(idx===seqPos){
+    const sl=document.getElementById('sl'+seqPos);
+    sl.querySelector('.tx').textContent=r.itens[idx].txt;
+    sl.classList.add('filled');
+    btn.classList.add('used'); btn.onclick=null;
+    sndClick(); playKeys([r.itens[idx].aud]);
+    seqPos++;
+    if(seqPos>=r.itens.length){
+      setTimeout(()=>correctFlow([pick(OK_KEYS), r.expAud]),600);
     }
+  }else{
+    sndWrong();
+    btn.classList.add('shake'); setTimeout(()=>btn.classList.remove('shake'),420);
+    const fb=document.getElementById('fb'); fb.className='feedback bad'; fb.textContent='🤔 Esse não é o próximo!';
+    playKeys([r.itens[idx].aud, pick(NO_KEYS)]);
   }
-  play();
+}
+
+function winScreen(){
+  sndWin(); burst(); setTimeout(burst,400); setTimeout(burst,800);
+  const c=current;
+  shell(`
+    <div class="game win">
+      <div class="trophy">🏆</div>
+      <h2 class="game-title">Parabéns!</h2>
+      <p style="font-size:22px;">Você ganhou <b>${c.rounds.length}</b> estrelas! ⭐</p>
+      <p style="font-size:18px;color:#888;">Você está ficando craque em <b>${c.title}</b>!</p>
+      <button class="next-btn" onclick="sndClick();startGame('${c.id}')">🔁 Jogar de novo</button>
+      <br>
+      <button class="next-btn" style="background:var(--azul);box-shadow:0 6px 0 #2f6fd0;margin-top:10px;" onclick="sndClick();goHome()">🏠 Escolher outro</button>
+    </div>
+  `);
+  setTimeout(()=>playKeys(['win']),250);
 }
 
 /* ============================================================
-   2. NA CANTINA
+   PEÇAS E DESENHOS COMPARTILHADOS
    ============================================================ */
-function gameCantina(){
-  const items=[
-    {name:'🧃 Suco',price:3},{name:'🍪 Biscoito',price:4},{name:'🍎 Maçã',price:2},
-    {name:'🥪 Sanduíche',price:9},{name:'🍫 Chocolate',price:5},{name:'🍰 Bolo',price:6},
-    {name:'🥤 Água',price:1},{name:'🍿 Pipoca',price:3},
-  ];
-  const rounds=[];
-  // Generate 5 rounds
-  for(let i=0;i<5;i++){
-    const pair=shuffle(items).slice(0,2);
-    const total=pair[0].price+pair[1].price;
-    const troco=20-total;
-    rounds.push({a:pair[0],b:pair[1],total,troco,step:i%2===0?'total':'troco'});
-  }
-  let ri=0;
-  function play(){
-    if(ri>=rounds.length){ showWin('Na Cantina'); return; }
-    const r=rounds[ri];
-    current={next:()=>{ri++;play();}};
-    const stage=`<div style="display:flex;gap:18px;justify-content:center;flex-wrap:wrap;">
-      <div style="text-align:center"><span style="font-size:50px">${r.a.name.split(' ')[0]}</span><br><b>R$ ${r.a.price}</b></div>
-      <div style="font-size:36px;align-self:center">+</div>
-      <div style="text-align:center"><span style="font-size:50px">${r.b.name.split(' ')[0]}</span><br><b>R$ ${r.b.price}</b></div>
-    </div>`;
-    
-    if(r.step==='total'){
-      const alts=shuffle([r.total,r.total+2,r.total-1,r.total+3].filter(v=>v>0));
-      current.correctIdx=alts.indexOf(r.total);
-      const opts=alts.map(v=>({label:'R$ '+v}));
-      renderGame('🛒 Na Cantina',`${ri+1} de ${rounds.length}`,
-        `Comprou ${r.a.name} e ${r.b.name}. Quanto gastou?`,stage,opts,['ct_total'],
-        'Some os dois preços!');
-    } else {
-      const alts=shuffle([r.troco,r.troco+2,r.troco-2,20-r.a.price].filter((v,i,a)=>v>0&&a.indexOf(v)===i));
-      while(alts.length<4) alts.push(alts[0]+rint(1,3));
-      const uniq=[...new Set(alts)].slice(0,4);
-      if(!uniq.includes(r.troco)) uniq[0]=r.troco;
-      const shuffOpts=shuffle(uniq);
-      current.correctIdx=shuffOpts.indexOf(r.troco);
-      const opts=shuffOpts.map(v=>({label:'R$ '+v}));
-      renderGame('🛒 Na Cantina',`${ri+1} de ${rounds.length}`,
-        `Gastou R$ ${r.total} e pagou com R$ 20. Quanto de troco?`,stage,opts,['ct_troco'],
-        'Primeiro some o total, depois tire de 20!');
-    }
-  }
-  play();
+const DIN = {
+  20:{img:'ced20',  aud:'p_ced20',  valor:20},
+  10:{img:'ced10',  aud:'p_ced10',  valor:10},
+  5: {img:'ced5',   aud:'p_ced5',   valor:5},
+  2: {img:'ced2',   aud:'p_ced2',   valor:2},
+  1: {img:'moeda1', aud:'p_moeda1', valor:1},
+};
+const notas = (...vs) => vs.map(v => DIN[v]);
+
+/** Lanches da cantina com o preço escrito (o valor a pagar não aparece). */
+function lanches(itens, extra){
+  return `<span class="lanches sem-meta">${itens.map(([img,preco]) =>
+    `<span class="lanche">${ICO(img)}<b>R$ ${preco}</b></span>`).join('<span class="mais">+</span>')}${extra||''}</span>`;
 }
+
+/** Quadrado ou retângulo com a medida de cada lado; a figura se desenha e
+    uma bolinha dá a volta pela borda, como o dedo contornando. */
+function forma(a, b, cor){
+  const u = 22, w = a*u, h = b*u, x = 40, y = 44, W = w+80, H = h+88;
+  const d = `M${x} ${y} h${w} v${h} h${-w} Z`;
+  return `<svg class="forma" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
+    <path d="${d}" fill="${cor}22" stroke="${cor}" stroke-width="7" stroke-linejoin="round" class="traco" pathLength="100"/>
+    <circle r="11" fill="#ff924c" stroke="#fff" stroke-width="3"><animateMotion dur="5s" begin="1.8s" repeatCount="indefinite" path="${d}"/></circle>
+    <text x="${x+w/2}" y="${y-14}" text-anchor="middle">${a}</text>
+    <text x="${x+w/2}" y="${y+h+36}" text-anchor="middle">${a}</text>
+    <text x="${x-18}" y="${y+h/2+10}" text-anchor="middle">${b}</text>
+    <text x="${x+w+18}" y="${y+h/2+10}" text-anchor="middle">${b}</text>
+  </svg>`;
+}
+const num = n => ({img:'num'+n, aud:'n'+n});
 
 /* ============================================================
-   3. INSTRUMENTOS DE MEDIDA + MAIS/MENOS DE 1 METRO
+   CONSTRUTORES DE RODADAS — 3 por jogo, do mais fácil ao mais difícil.
    ============================================================ */
-function gameInstrumentos(){
-  const instrRounds=[
-    {obj:'📏 Lápis', q:'Medir o comprimento de um lápis', answer:'Régua', opts:['Régua','Fita métrica','Trena','Balança']},
-    {obj:'👤 Cintura', q:'Medir a cintura de uma pessoa', answer:'Fita métrica', opts:['Régua','Fita métrica','Trena','Balança']},
-    {obj:'🚪 Porta', q:'Medir a altura de uma porta', answer:'Trena', opts:['Régua','Fita métrica','Trena','Balança']},
-    {obj:'📐 Caderno', q:'Medir a lateral de um caderno', answer:'Régua', opts:['Régua','Fita métrica','Trena','Balança']},
-    {obj:'🏠 Parede', q:'Medir o comprimento de uma parede', answer:'Trena', opts:['Régua','Fita métrica','Trena','Balança']},
-  ];
-  const metroRounds=[
-    {obj:'Borracha', emoji:'🧽', answer:'M'},
-    {obj:'Porta da sala', emoji:'🚪', answer:'P'},
-    {obj:'Caderno', emoji:'📓', answer:'M'},
-    {obj:'Quadro da sala', emoji:'📋', answer:'P'},
-    {obj:'Caneta', emoji:'🖊️', answer:'M'},
-    {obj:'Geladeira', emoji:'🧊', answer:'P'},
-  ];
-  const all=[];
-  instrRounds.forEach(r=>all.push({type:'instr',...r}));
-  metroRounds.forEach(r=>all.push({type:'metro',...r}));
-  const rounds=shuffle(all).slice(0,8);
-  let ri=0;
-  function play(){
-    if(ri>=rounds.length){ showWin('Instrumentos de Medida'); return; }
-    const r=rounds[ri];
-    current={next:()=>{ri++;play();}};
-    if(r.type==='instr'){
-      const stage=`<span style="font-size:60px">${r.obj.split(' ')[0]}</span>`;
-      const shuffOpts=shuffle(r.opts);
-      current.correctIdx=shuffOpts.indexOf(r.answer);
-      renderGame('📏 Instrumentos',`${ri+1} de ${rounds.length}`,r.q,stage,
-        shuffOpts.map(o=>({label:o})),['im_qual'],
-        'Régua = pequeno e reto · Fita = contorna o corpo · Trena = distâncias grandes');
-    } else {
-      const stage=`<span style="font-size:70px">${r.emoji}</span><br><b>${r.obj}</b>`;
-      const opts=[{label:'Menos de 1 metro (M)'},{label:'Mais de 1 metro (P)'}];
-      current.correctIdx = r.answer==='M' ? 0 : 1;
-      renderGame('📏 Mais ou Menos?',`${ri+1} de ${rounds.length}`,
-        `${r.obj}: tem mais ou menos de 1 metro?`,stage,opts,['im_metro'],
-        '1 metro ≈ altura da cintura de um adulto');
-    }
-  }
-  play();
-}
+const BUILDERS={
+  /* 1. NOSSO DINHEIRO — juntar o valor com notas e moedas */
+  dinheiro(){ return [
+    {mode:'cofre', q:'Coloque <b>R$ 17</b> no cofrinho!', audio:['d_q1'], expAud:'d_exp1',
+     alvo:17, prefixo:'R$', alvoImg:'cofrinho', pecas:notas(10,5,1)},
+    {mode:'cofre', q:'Troca: <b>R$ 20</b> sem usar a nota de 20!', audio:['d_q2'], expAud:'d_exp2',
+     alvo:20, prefixo:'R$', alvoImg:'cofrinho', pecas:notas(10,5,2,1)},
+    {mode:'cofre', q:'Coloque <b>R$ 25</b> no cofrinho!', audio:['d_q3'], expAud:'d_exp3',
+     alvo:25, prefixo:'R$', alvoImg:'cofrinho', pecas:notas(20,10,5,2,1)},
+  ];},
 
-/* ============================================================
-   4. CONTORNO
-   ============================================================ */
-function gameContorno(){
-  const rounds=[
-    {shape:'quadrado', sides:[5,5,5,5], answer:20, svg:`<svg width="120" height="120" viewBox="0 0 120 120">
-      <rect x="10" y="10" width="100" height="100" fill="#b8e3ff" stroke="#3466a5" stroke-width="3" rx="4"/>
-      <text x="60" y="8" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">5</text>
-      <text x="60" y="128" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">5</text>
-      <text x="2" y="65" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">5</text>
-      <text x="118" y="65" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">5</text>
-    </svg>`},
-    {shape:'retângulo', sides:[3,10,3,10], answer:26, svg:`<svg width="200" height="80" viewBox="0 0 200 80">
-      <rect x="10" y="10" width="180" height="60" fill="#d9ffd6" stroke="#3f9c4f" stroke-width="3" rx="4"/>
-      <text x="100" y="8" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">10</text>
-      <text x="100" y="86" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">10</text>
-      <text x="4" y="45" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">3</text>
-      <text x="196" y="45" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">3</text>
-    </svg>`},
-    {shape:'retângulo', sides:[4,8,4,8], answer:24, svg:`<svg width="180" height="100" viewBox="0 0 180 100">
-      <rect x="10" y="10" width="160" height="80" fill="#ffe9c7" stroke="#d96d2e" stroke-width="3" rx="4"/>
-      <text x="90" y="8" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">8</text>
-      <text x="90" y="106" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">8</text>
-      <text x="4" y="55" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">4</text>
-      <text x="176" y="55" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">4</text>
-    </svg>`},
-    {shape:'quadrado', sides:[7,7,7,7], answer:28, svg:`<svg width="130" height="130" viewBox="0 0 130 130">
-      <rect x="10" y="10" width="110" height="110" fill="#e3d0ff" stroke="#7a4db0" stroke-width="3" rx="4"/>
-      <text x="65" y="8" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">7</text>
-      <text x="65" y="138" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">7</text>
-      <text x="4" y="70" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">7</text>
-      <text x="126" y="70" text-anchor="middle" class="side-label" font-size="16" font-weight="bold">7</text>
-    </svg>`},
-  ];
-  let ri=0;
-  function play(){
-    if(ri>=rounds.length){ showWin('Contorno'); return; }
-    const r=rounds[ri];
-    current={next:()=>{ri++;play();}};
-    const stage=`<div class="shape-box">${r.svg}</div>
-      <p style="font-size:16px;color:#666;margin:4px 0;"><b>${r.shape}</b>: ${r.sides.join(' + ')} = ?</p>`;
-    const alts=shuffle([r.answer, r.answer+4, r.answer-2, r.answer+6].filter(v=>v>0));
-    const uniq=[...new Set(alts)].slice(0,4);
-    if(!uniq.includes(r.answer)) uniq[0]=r.answer;
-    const sh=shuffle(uniq);
-    current.correctIdx=sh.indexOf(r.answer);
-    renderGame('🔲 Contorno',`${ri+1} de ${rounds.length}`,
-      `Qual é o contorno deste ${r.shape}?`,stage,
-      sh.map(v=>({label:v+''})),['co_q'],
-      'Contorno = soma de TODOS os lados!');
-  }
-  play();
-}
+  /* 2. NA CANTINA — pagar dois lanches somando os preços; depois, o troco */
+  cantina(){ return [
+    {mode:'cofre', q:lanches([['suco',3],['maca',2]]), audio:['ct_q1'], expAud:'ct_exp1',
+     alvo:5, prefixo:'R$', pecas:notas(5,2,1)},
+    {mode:'cofre', q:lanches([['sanduiche',9],['suco',3]]), audio:['ct_q2'], expAud:'ct_exp2',
+     alvo:12, prefixo:'R$', pecas:notas(10,5,2,1)},
+    {mode:'cofre', q:lanches([['pipoca',3],['bolo',6]], '<span class="pago">Pagou com <span class="preco">R$ 20</span>. Qual é o troco?</span>'),
+     audio:['ct_q3'], expAud:'ct_exp3', alvo:11, prefixo:'R$', pecas:notas(10,5,2,1)},
+  ];},
 
-/* ============================================================
-   5. COMPOSIÇÃO (barras de 10 + cubinhos)
-   ============================================================ */
-function gameComposicao(){
-  const rounds=[
-    {bars:3, cubes:5, answer:35},
-    {bars:2, cubes:7, answer:27},
-    {bars:1, cubes:4, answer:14},
-    {bars:4, cubes:2, answer:42},
-    {bars:2, cubes:0, answer:20},
-  ];
-  let ri=0;
-  function play(){
-    if(ri>=rounds.length){ showWin('Composição'); return; }
-    const r=rounds[ri];
-    current={next:()=>{ri++;play();}};
-    let barsHtml='';
-    for(let i=0;i<r.bars;i++) barsHtml+=`<div style="width:20px;height:80px;background:linear-gradient(180deg,#8fd4ff,#3f9bdd);border-radius:6px;box-shadow:0 3px 0 rgba(0,0,0,.15);animation:pop .35s ease;"></div>`;
-    let cubesHtml='';
-    for(let i=0;i<r.cubes;i++) cubesHtml+=`<div style="width:20px;height:20px;background:linear-gradient(180deg,#b6f0a0,#5cb741);border-radius:4px;box-shadow:0 2px 0 rgba(0,0,0,.15);animation:pop .35s ease;"></div>`;
-    const stage=`
-      <div style="display:flex;gap:24px;align-items:flex-end;justify-content:center;flex-wrap:wrap;">
-        <div style="text-align:center">
-          <div style="display:flex;gap:4px;align-items:flex-end;">${barsHtml}</div>
-          <p style="font-size:14px;color:#3f9bdd;font-weight:bold;margin:4px 0;">${r.bars} barra${r.bars!==1?'s':''} de 10</p>
-        </div>
-        ${r.cubes>0?`<div style="text-align:center">
-          <div style="display:flex;gap:3px;flex-wrap:wrap;max-width:100px;">${cubesHtml}</div>
-          <p style="font-size:14px;color:#5cb741;font-weight:bold;margin:4px 0;">${r.cubes} cubinho${r.cubes!==1?'s':''}</p>
-        </div>`:''}
-      </div>`;
-    const alts=shuffle([r.answer, r.answer+10, r.answer-5, r.answer+3].filter(v=>v>=0));
-    const uniq=[...new Set(alts)].slice(0,4);
-    if(!uniq.includes(r.answer)) uniq[0]=r.answer;
-    const sh=shuffle(uniq);
-    current.correctIdx=sh.indexOf(r.answer);
-    renderGame('🧱 Composição',`${ri+1} de ${rounds.length}`,
-      'Que número está representado?',stage,
-      sh.map(v=>({label:v+''})),['cp_q'],
-      'Cada barra azul = 10. Conte de 10 em 10!');
-  }
-  play();
-}
+  /* 3. MEDIR — instrumento ↔ o que mede; mais ou menos de 1 metro */
+  instrumentos(){
+    const I = {regua:{img:'regua',aud:'in_regua'}, fita:{img:'fita',aud:'in_fita'},
+               trena:{img:'trena',aud:'in_trena'}, balanca:{img:'balanca',aud:'in_balanca'}};
+    return [
+      {mode:'ligar', q:'Ligue cada instrumento ao que ele mede', audio:['im_q1'], expAud:'im_exp1', pares:[
+        {a:I.regua, b:{img:'lapis', aud:'ob_lapis'}},
+        {a:I.fita,  b:{img:'cintura', aud:'ob_cintura'}},
+        {a:I.trena, b:{img:'porta', aud:'ob_porta'}},
+      ]},
+      {mode:'ligar', q:'Agora são quatro!', audio:['im_q2'], expAud:'im_exp2', pares:[
+        {a:I.regua,   b:{img:'caderno', aud:'ob_caderno'}},
+        {a:I.fita,    b:{img:'cintura', aud:'ob_cintura'}},
+        {a:I.trena,   b:{img:'parede', aud:'ob_parede'}},
+        {a:I.balanca, b:{img:'arroz', aud:'ob_arroz'}},
+      ]},
+      {mode:'classificar', q:'Menos ou mais de <b>1 metro</b>?', audio:['im_q3'], expAud:'im_exp3',
+       grupos:[{id:'menos', img:'g_menos', aud:'me_menos'}, {id:'mais', img:'g_mais', aud:'me_mais'}],
+       itens:[
+         {img:'borracha', aud:'ob_borracha', grupo:'menos'}, {img:'caderno', aud:'ob_caderno', grupo:'menos'},
+         {img:'caneta', aud:'ob_caneta', grupo:'menos'}, {img:'porta', aud:'ob_porta2', grupo:'mais'},
+         {img:'quadro', aud:'ob_quadro', grupo:'mais'}, {img:'geladeira', aud:'ob_geladeira', grupo:'mais'},
+       ]},
+    ];
+  },
 
-/* ============================================================
-   6. SÓLIDOS GEOMÉTRICOS
-   ============================================================ */
-function gameSolidos(){
-  const rounds=[
-    {obj:'🥫 Lata de óleo', answer:'Cilindro', opts:['Cilindro','Esfera','Paralelepípedo','Cone']},
-    {obj:'🧃 Caixa de leite', answer:'Paralelepípedo', opts:['Cilindro','Esfera','Paralelepípedo','Cone']},
-    {obj:'⚽ Bola de futebol', answer:'Esfera', opts:['Cilindro','Esfera','Paralelepípedo','Cone']},
-    {obj:'🎩 Chapéu de festa', answer:'Cone', opts:['Cilindro','Esfera','Cone','Cubo']},
-    {obj:'🎲 Dado', answer:'Cubo', opts:['Cilindro','Cubo','Paralelepípedo','Cone']},
-    {type:'rola', q:'Qual sólido rola em TODAS as direções?', answer:'Esfera', 
-     opts:['Cilindro','Esfera','Paralelepípedo','Cone']},
-  ];
-  let ri=0;
-  function play(){
-    if(ri>=rounds.length){ showWin('Sólidos Geométricos'); return; }
-    const r=rounds[ri];
-    current={next:()=>{ri++;play();}};
-    if(r.type==='rola'){
-      const sh=shuffle(r.opts);
-      current.correctIdx=sh.indexOf(r.answer);
-      renderGame('📦 Sólidos',`${ri+1} de ${rounds.length}`,r.q,'',
-        sh.map(o=>({label:o})),['sg_rola'],
-        'O cilindro rola em linha reta. A esfera rola para qualquer lado!');
-    } else {
-      const stage=`<span style="font-size:60px">${r.obj.split(' ')[0]}</span><br><b>${r.obj}</b>`;
-      const sh=shuffle(r.opts);
-      current.correctIdx=sh.indexOf(r.answer);
-      renderGame('📦 Sólidos',`${ri+1} de ${rounds.length}`,
-        'Qual sólido se parece com este objeto?',stage,
-        sh.map(o=>({label:o})),['sg_q'],
-        'Cilindro = lata · Esfera = bola · Paralelepípedo = caixa');
-    }
-  }
-  play();
-}
+  /* 4. CONTORNO — somar todos os lados (pergunta e alternativa, com a figura desenhada) */
+  contorno(){
+    const F = {
+      q5:  {a:5,  b:5, cor:'#3466a5', nome:'Quadrado',  aud:'co_quad', total:20, erradas:[10,15,25]},
+      r84: {a:8,  b:4, cor:'#d96d2e', nome:'Retângulo', aud:'co_ret',  total:24, erradas:[12,20,32]},
+      r103:{a:10, b:3, cor:'#3f9c4f', nome:'Retângulo', aud:'co_ret',  total:26, erradas:[13,23,30]},
+      q7:  {a:7,  b:7, cor:'#7a4db0', nome:'Quadrado',  aud:'co_quad', total:28, erradas:[14,21,35]},
+    };
+    const rodada = f => ({
+      q:'Qual é o <b>contorno</b>? Some todos os lados.', audio:['co_q', f.aud],
+      stage: forma(f.a, f.b, f.cor) + `<p class="forma-nome">${f.nome}</p>`,
+      options: shuffle([f.total, ...f.erradas]).map(v => ({label:String(v), aud:'n'+v, big:true,
+        correct: v===f.total, expAud: v===f.total ? 'co_exp'+f.total : undefined})),
+    });
+    return [rodada(F.q5), rodada(pick([F.r84, F.r103])), rodada(F.q7)];
+  },
 
-/* ============================================================
-   7. SEQUÊNCIAS E VIZINHOS
-   ============================================================ */
-function gameSequencias(){
-  const rounds=[
-    {type:'seq', seq:[20,19,18,'?',16], answer:17, step:-1, hint:'Tira 1 a cada passo'},
-    {type:'seq', seq:[40,38,36,'?',32], answer:34, step:-2, hint:'Tira 2 a cada passo'},
-    {type:'seq', seq:[10,15,20,'?',30], answer:25, step:5, hint:'Soma 5 a cada passo'},
-    {type:'seq', seq:[2,4,6,8,'?'], answer:10, step:2, hint:'Soma 2 a cada passo'},
-    {type:'suc', num:77, answer:78, q:'Qual é o SUCESSOR de 77?'},
-    {type:'ant', num:99, answer:98, q:'Qual é o ANTECESSOR de 99?'},
-    {type:'suc', num:39, answer:40, q:'Qual é o SUCESSOR de 39?'},
-    {type:'ant', num:50, answer:49, q:'Qual é o ANTECESSOR de 50?'},
-  ];
-  let ri=0;
-  function play(){
-    if(ri>=rounds.length){ showWin('Sequências'); return; }
-    const r=rounds[ri];
-    current={next:()=>{ri++;play();}};
-    if(r.type==='seq'){
-      const stage=`<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
-        ${r.seq.map(v=>`<div style="width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:bold;
-        ${v==='?'?'background:var(--amarelo);color:#5a4500;border:3px dashed #d9a800;':'background:#eef5ff;color:#3a3a55;border:2px solid #d4e7ff;'}">${v}</div>`).join('')}
-      </div>`;
-      const alts=shuffle([r.answer, r.answer+r.step, r.answer-r.step, r.answer+1].filter((v,i,a)=>a.indexOf(v)===i));
-      const uniq=[...new Set(alts)].slice(0,4);
-      if(!uniq.includes(r.answer)) uniq[0]=r.answer;
-      const sh=shuffle(uniq);
-      current.correctIdx=sh.indexOf(r.answer);
-      renderGame('🔢 Sequências',`${ri+1} de ${rounds.length}`,
-        'Qual número entra no lugar do <b>?</b>',stage,
-        sh.map(v=>({label:v+''})),['sq_q'],r.hint);
-    } else {
-      const voiceKey = r.type==='suc' ? 'sq_suc' : 'sq_ant';
-      const alts=[r.answer, r.answer+1, r.answer-1, r.answer+2].filter((v,i,a)=>v>=0&&a.indexOf(v)===i);
-      const sh=shuffle(alts).slice(0,4);
-      if(!sh.includes(r.answer)){ sh[0]=r.answer; }
-      const shf=shuffle(sh);
-      current.correctIdx=shf.indexOf(r.answer);
-      const stage=`<span style="font-size:60px;font-weight:bold;color:var(--roxo);">${r.num}</span>`;
-      renderGame('🔢 Sequências',`${ri+1} de ${rounds.length}`,r.q,stage,
-        shf.map(v=>({label:v+''})),[voiceKey],
-        r.type==='suc'?'Sucessor = o número que vem DEPOIS':'Antecessor = o número que vem ANTES');
-    }
-  }
-  play();
-}
+  /* 5. BARRAS E CUBINHOS — montar o número com dezenas e unidades */
+  composicao(){
+    const pecas = [{img:'barra', aud:'pc_barra', valor:10}, {img:'cubinho', aud:'pc_cubo', valor:1}];
+    const rodada = n => ({mode:'cofre', q:`Monte o número <b>${n}</b>`, audio:['cp_monte','n'+n,'cp_dica'],
+      expAud:'cp_exp'+n, alvo:n, pecas});
+    return [rodada(14), rodada(pick([20,27])), rodada(pick([35,42]))];
+  },
 
-/* ============================================================
-   8. MASSA E CAPACIDADE
-   ============================================================ */
-function gameMassa(){
-  const rounds=[
-    {type:'balanca', q:'Na balança, o prato que DESCE carrega o mais pesado. Qual é mais pesado?',
-     a:'Pacote A ⬇️', b:'Pacote B', answer:0,
-     stage:`<div style="display:flex;gap:20px;align-items:flex-end;justify-content:center;">
-       <div style="text-align:center"><div style="font-size:50px">📦</div><div style="background:#ff9a9a;padding:6px 14px;border-radius:12px;font-weight:bold;">A</div><div style="font-size:12px;color:#999;">prato baixo ⬇️</div></div>
-       <div style="font-size:40px;align-self:center;">⚖️</div>
-       <div style="text-align:center"><div style="font-size:40px;opacity:.6;">📦</div><div style="background:#9af;padding:6px 14px;border-radius:12px;font-weight:bold;">B</div><div style="font-size:12px;color:#999;">prato alto ⬆️</div></div>
-     </div>`},
-    {type:'unidade', q:'Qual unidade mede CAPACIDADE (quanto cabe dentro)?',
-     answer:'Litro', opts:['Quilograma','Litro','Metro','Centímetro']},
-    {type:'unidade', q:'Qual unidade mede MASSA (quanto pesa)?',
-     answer:'Quilograma', opts:['Quilograma','Litro','Metro','Centímetro']},
-    {type:'conceito', q:'Massa é "quanto pesa". Capacidade é...',
-     answer:'quanto cabe dentro', opts:['quanto pesa','quanto cabe dentro','quanto mede','quanto custa']},
-    {type:'balanca', q:'Na balança, qual pacote é MAIS LEVE?',
-     a:'Pacote X', b:'Pacote Y ⬇️', answer:0, lighter:true,
-     stage:`<div style="display:flex;gap:20px;align-items:flex-end;justify-content:center;">
-       <div style="text-align:center"><div style="font-size:40px;opacity:.6;">📦</div><div style="background:#9af;padding:6px 14px;border-radius:12px;font-weight:bold;">X</div><div style="font-size:12px;color:#999;">prato alto ⬆️</div></div>
-       <div style="font-size:40px;align-self:center;">⚖️</div>
-       <div style="text-align:center"><div style="font-size:50px">📦</div><div style="background:#ff9a9a;padding:6px 14px;border-radius:12px;font-weight:bold;">Y</div><div style="font-size:12px;color:#999;">prato baixo ⬇️</div></div>
-     </div>`},
-  ];
-  let ri=0;
-  function play(){
-    if(ri>=rounds.length){ showWin('Massa e Capacidade'); return; }
-    const r=rounds[ri];
-    current={next:()=>{ri++;play();}};
-    if(r.type==='balanca'){
-      const opts=r.lighter
-        ? [{label:'Pacote X (leve ⬆️)'},{label:'Pacote Y (pesado ⬇️)'}]
-        : [{label:'Pacote A (pesado ⬇️)'},{label:'Pacote B (leve ⬆️)'}];
-      current.correctIdx=r.answer;
-      renderGame('⚖️ Massa e Capacidade',`${ri+1} de ${rounds.length}`,r.q,r.stage,opts,['mc_bal'],
-        'Na balança, o prato que desce tem mais massa!');
-    } else {
-      const sh=shuffle(r.opts);
-      current.correctIdx=sh.indexOf(r.answer);
-      renderGame('⚖️ Massa e Capacidade',`${ri+1} de ${rounds.length}`,r.q,'',
-        sh.map(o=>({label:o})),['mc_cap'],
-        'kg = massa (peso) · L = capacidade (líquido)');
-    }
-  }
-  play();
-}
+  /* 6. SÓLIDOS — objeto ↔ sólido parecido; o que rola para todos os lados */
+  solidos(){
+    const P = {
+      lata:  {a:{img:'lata', aud:'ob_lata'},    b:{img:'cilindro', aud:'sg_cilindro'}},
+      bola:  {a:{img:'bola', aud:'ob_bola'},    b:{img:'esfera', aud:'sg_esfera'}},
+      leite: {a:{img:'leite', aud:'ob_leite'},  b:{img:'paralelepipedo', aud:'sg_paralelepipedo'}},
+      chapeu:{a:{img:'chapeu', aud:'ob_chapeu'},b:{img:'cone', aud:'sg_cone'}},
+      dado:  {a:{img:'dado', aud:'ob_dado'},    b:{img:'cubo', aud:'sg_cubo'}},
+    };
+    return [
+      {mode:'memoria', q:'Ache o objeto e o sólido parecido!', audio:['sg_q1'], expAud:'sg_exp1',
+       pares:[P.lata, P.bola, P.leite]},
+      {mode:'memoria', q:'Agora com mais cartas!', audio:['sg_q2'], expAud:'sg_exp2',
+       pares:[P.lata, P.bola, P.leite, P.chapeu, P.dado]},
+      {mode:'mascote', q:'Dê ao Bolota o que <b>rola para todos os lados</b>!', audio:['sg_q3'], expAud:'sg_exp3',
+       mascote:'mascote', itens:[
+         {img:'esfera', aud:'ro_esfera', certo:true}, {img:'bola', aud:'ro_bola', certo:true},
+         {img:'cilindro', aud:'ro_cilindro', certo:false}, {img:'lata', aud:'ro_lata', certo:false},
+         {img:'cubo', aud:'ro_cubo', certo:false}, {img:'leite', aud:'ro_leite', certo:false},
+       ]},
+    ];
+  },
 
-/* ===== SPLASH & START ===== */
+  /* 7. SEQUÊNCIAS — pôr em ordem; antecessor e sucessor */
+  sequencias(){
+    const seq2 = [2,4,6,8,10], dec = [20,19,18,17,16], seq5 = [10,15,20,25,30];
+    const meio = pick([
+      {q:'Do <b>maior</b> para o <b>menor</b>!', audio:['sq_q2a'], expAud:'sq_exp2a', itens:dec.map(num)},
+      {q:'De <b>5 em 5</b>, do menor para o maior!', audio:['sq_q2b'], expAud:'sq_exp2b', itens:seq5.map(num)},
+    ]);
+    const n = pick([39, 50, 77]);
+    const vizinhos = {39:[38,40,37,41,49], 50:[49,51,48,52,60], 77:[76,78,75,79,87]}[n];
+    return [
+      {mode:'ordenar', q:'De <b>2 em 2</b>, do menor para o maior!', audio:['sq_q1'], expAud:'sq_exp1', itens:seq2.map(num)},
+      {mode:'ordenar', ...meio},
+      {mode:'mascote', q:`Os vizinhos do <span class="numgrande">${n}</span>`, audio:['sq_viz','n'+n,'sq_viz2'],
+       expAud:'sq_exp'+n, mascote:'mascote',
+       itens:vizinhos.map((v,i) => ({...num(v), certo:i<2}))},
+    ];
+  },
+
+  /* 8. MASSA E CAPACIDADE — ler a balança; quilograma ou litro */
+  massa(){
+    // A balança do cenário pende para a esquerda: o pacote do prato esquerdo é o mais pesado.
+    // A cor de cada lado é sorteada para a criança olhar a balança, não decorar a cor.
+    const PRATO_BAIXO = {x:14.5, y:24, w:24}, PRATO_ALTO = {x:60, y:3, w:24};
+    const pac = c => ({img:'pacote_'+c, aud:'pk_'+c});
+    const [pesado, leve] = shuffle(['vermelho','azul']);
+    const [pesado2, leve2] = shuffle(['vermelho','azul']);
+    return [
+      {mode:'cena', q:'Toque no pacote <b>mais pesado</b>!', audio:['mc_q1'], expAud:'mc_exp1', fundo:'balanca_cena',
+       objetos:[{...pac(pesado), certo:true, ...PRATO_BAIXO}, {...pac(leve), certo:false, ...PRATO_ALTO}]},
+      {mode:'cena', q:'Toque no pacote <b>mais leve</b>!', audio:['mc_q2'], expAud:'mc_exp2', fundo:'balanca_cena',
+       objetos:[{...pac(pesado2), certo:false, ...PRATO_BAIXO}, {...pac(leve2), certo:true, ...PRATO_ALTO}]},
+      {mode:'classificar', q:'Quilograma ou litro?', audio:['mc_q3'], expAud:'mc_exp3',
+       grupos:[{id:'kg', img:'balanca', aud:'g_kg'}, {id:'l', img:'jarra', aud:'g_litro'}],
+       itens:[
+         {img:'arroz', aud:'ob_arroz', grupo:'kg'}, {img:'feijao', aud:'mc_feijao', grupo:'kg'},
+         {img:'melancia', aud:'mc_melancia', grupo:'kg'}, {img:'agua', aud:'mc_agua', grupo:'l'},
+         {img:'leite', aud:'ob_leite', grupo:'l'}, {img:'garrafa_suco', aud:'mc_suco', grupo:'l'},
+       ]},
+    ];
+  },
+};
+
+/* ===== INICIAR ===== */
 document.getElementById('startBtn').addEventListener('click',()=>{
-  initAudio(); unlockAudio();
+  initAudio();
+  unlockAudio(()=>goHome());
   document.getElementById('splash').style.display='none';
-  goHome();
-});
-document.getElementById('splash').addEventListener('click',(e)=>{
-  if(e.target.id!=='startBtn') return;
 });
 </script>
 </body>

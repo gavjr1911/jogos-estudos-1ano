@@ -37,6 +37,98 @@ const fakeEl = {
    quando a opção é falada como sequência. Normaliza para array. */
 const chavesDe = a => a == null ? [] : (Array.isArray(a) ? a : [a]);
 
+/* Modos do motor/interacoes.js. Cada um tem formato próprio; a regra em
+   comum é: todo áudio existe no VOICE e toda imagem foi declarada e gerada. */
+const MODOS_MOTOR = ['classificar', 'ligar', 'memoria', 'baloes', 'cena', 'tracar',
+                     'ordenar', 'cofre', 'mascote', 'quebra'];
+
+/** Junta todo `aud`/`audio`/`expAud` e todo `img`/`fundo` de uma rodada, em qualquer profundidade. */
+function coletar(obj, auds = [], imgs = []) {
+  if (Array.isArray(obj)) { obj.forEach(o => coletar(o, auds, imgs)); return { auds, imgs }; }
+  if (!obj || typeof obj !== 'object') return { auds, imgs };
+  for (const [k, v] of Object.entries(obj)) {
+    if (k === 'aud' || k === 'audio' || k === 'expAud') chavesDe(v).forEach(x => auds.push(x));
+    else if (['img', 'fundo', 'mascote', 'alvoImg'].includes(k) && typeof v === 'string') imgs.push(v);
+    else if (typeof v === 'object') coletar(v, auds, imgs);
+  }
+  return { auds, imgs };
+}
+
+function regrasDoModo(r, where, errors) {
+  const n = (x, min, max, o) => { if (!Array.isArray(x) || x.length < min || x.length > max) errors.push(`${where}: ${o} precisa ter de ${min} a ${max}`); };
+  const repetida = (lista, o) => { const v = lista.filter(Boolean); if (new Set(v).size !== v.length) errors.push(`${where}: ${o} repetida`); };
+  switch (r.mode) {
+    case 'classificar': {
+      n(r.grupos, 2, 4, 'grupos'); n(r.itens, 3, 10, 'itens');
+      const ids = new Set((r.grupos || []).map(g => g.id));
+      (r.itens || []).forEach(it => { if (!ids.has(it.grupo)) errors.push(`${where}: item "${it.aud}" aponta para grupo inexistente "${it.grupo}"`); });
+      (r.grupos || []).forEach(g => { if (!(r.itens || []).some(it => it.grupo === g.id)) errors.push(`${where}: grupo "${g.id}" sem nenhum item`); });
+      repetida((r.itens || []).map(i => i.img), 'imagem de item');
+      break;
+    }
+    case 'ligar':
+      n(r.pares, 2, 5, 'pares');
+      repetida((r.pares || []).map(p => p.a && p.a.img), 'imagem da esquerda');
+      repetida((r.pares || []).map(p => p.b && p.b.img), 'imagem da direita');
+      break;
+    case 'memoria':
+      n(r.pares, 2, 6, 'pares');
+      repetida((r.pares || []).map(p => p.img || (p.a && p.a.img)), 'carta');
+      break;
+    case 'baloes': {
+      const it = r.itens || [];
+      if (!it.some(i => i.certo)) errors.push(`${where}: nenhum balão certo`);
+      if (!it.some(i => !i.certo)) errors.push(`${where}: nenhum balão errado — não há o que decidir`);
+      const certos = new Set(it.filter(i => i.certo).map(i => i.img));
+      it.filter(i => !i.certo).forEach(i => { if (certos.has(i.img)) errors.push(`${where}: "${i.img}" é certo e errado ao mesmo tempo`); });
+      if (!(r.meta >= 1 && r.meta <= 10)) errors.push(`${where}: meta de balões deve ser de 1 a 10`);
+      break;
+    }
+    case 'cena': {
+      const o = r.objetos || [];
+      if (!r.fundo) errors.push(`${where}: cena sem fundo`);
+      if (!o.some(x => x.certo)) errors.push(`${where}: nada certo para achar na cena`);
+      if (!o.some(x => !x.certo)) errors.push(`${where}: tudo na cena é certo — não há o que decidir`);
+      o.forEach(x => {
+        if (![x.x, x.y, x.w].every(v => typeof v === 'number' && v >= 0 && v <= 100) || x.x + x.w > 101)
+          errors.push(`${where}: objeto "${x.img}" fora da cena (x=${x.x}, y=${x.y}, w=${x.w})`);
+      });
+      break;
+    }
+    case 'tracar':
+      if (typeof r.letra !== 'string' || r.letra.length !== 1) errors.push(`${where}: traçar precisa de uma letra só`);
+      break;
+    case 'ordenar':
+      n(r.itens, 2, 6, 'itens');
+      repetida((r.itens || []).map(i => i.img), 'imagem');
+      break;
+    case 'cofre': {
+      const p = r.pecas || [];
+      n(p, 1, 6, 'peças');
+      if (!(Number.isInteger(r.alvo) && r.alvo > 0)) errors.push(`${where}: alvo do cofre precisa ser inteiro positivo`);
+      p.forEach(x => { if (!(Number.isInteger(x.valor) && x.valor > 0)) errors.push(`${where}: peça "${x.img}" sem valor inteiro positivo`); });
+      // Com peças de valor v, só dá para chegar a alvos que o mdc divide.
+      const mdc = (a, b) => b ? mdc(b, a % b) : a;
+      const d = p.reduce((a, x) => mdc(a, x.valor || 0), 0);
+      if (d && r.alvo % d) errors.push(`${where}: impossível chegar a ${r.alvo} com peças de ${p.map(x => x.valor).join(', ')}`);
+      repetida(p.map(x => x.img), 'imagem de peça');
+      break;
+    }
+    case 'mascote': {
+      const it = r.itens || [];
+      n(it, 3, 8, 'itens');
+      if (!it.some(i => i.certo)) errors.push(`${where}: o mascote não pede nada certo`);
+      if (!it.some(i => !i.certo)) errors.push(`${where}: tudo é certo — não há o que decidir`);
+      repetida(it.map(i => i.img), 'imagem');
+      break;
+    }
+    case 'quebra':
+      if (!r.img) errors.push(`${where}: quebra-cabeça sem imagem`);
+      if (![2, 3].includes(r.grade || 2)) errors.push(`${where}: grade do quebra-cabeça deve ser 2 ou 3`);
+      break;
+  }
+}
+
 const stripTags = s => String(s).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
 const norm = s => stripTags(s).toLowerCase()
   .normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9 ]/g, ' ')
@@ -89,7 +181,7 @@ function verificar(pasta) {
   }
 
   const bias = { total: 0, maisLonga: 0, porJogo: {} };
-  const seen = { keys: new Set(), rounds: 0 };
+  const seen = { keys: new Set(), imgs: new Set(), rounds: 0 };
 
   for (const g of GAMES) {
     for (let n = 0; n < RUNS; n++) {
@@ -117,6 +209,15 @@ function verificar(pasta) {
           return;
         }
 
+        if (MODOS_MOTOR.includes(r.mode)) {
+          const { auds, imgs } = coletar(r);
+          auds.forEach(k => { seen.keys.add(k); if (!(k in VOICE)) errors.push(`${where}: áudio inexistente "${k}"`); });
+          imgs.forEach(k => seen.imgs.add(k));
+          if (!r.q) errors.push(`${where}: sem enunciado (q)`);
+          if (!(r.audio || []).length) errors.push(`${where}: enunciado sem áudio`);
+          regrasDoModo(r, where, errors);
+          return;
+        }
         // Rodadas de formato próprio (ex.: mode 'build', montar palavra com
         // sílabas) não usam `options`. O QA não conhece esses formatos — ignora
         // em vez de adivinhar campos e gerar alarme falso.
@@ -198,6 +299,15 @@ function verificar(pasta) {
     avisos.push('jogos com número de rodadas diferente: ' +
       Object.entries(tamanhos).map(([k, v]) => `${k}=${[...v].join('/')}`).join(', '));
 
+  // Toda imagem usada precisa estar declarada (é o que o gerador lê) e gerada.
+  const declaradas = { ...(dados.IMAGENS || {}), ...(dados.ADESIVOS || {}), ...(dados.CENARIOS || {}) };
+  GAMES.forEach(g => [...String(g.ico).matchAll(/images\/([\w-]+)\./g)].forEach(m => seen.imgs.add(m[1])));
+  for (const k of seen.imgs) {
+    if (!(k in declaradas)) errors.push(`imagem "${k}" usada mas não declarada em IMAGENS/ADESIVOS/CENARIOS`);
+    else if (!['webp', 'png', 'jpg'].some(e => fs.existsSync(path.join(dir, 'images', `${k}.${e}`))))
+      errors.push(`falta images/${k}.webp — rode node ferramentas/gerar-imagens.mjs ${pasta}`);
+  }
+
   // Toda chave usada precisa ter virado .mp3 de verdade
   const audioDir = path.join(dir, 'audio');
   for (const k of seen.keys)
@@ -214,7 +324,9 @@ function verificar(pasta) {
     errors.push(`viés alto em "${jogo}": ${p}% acerta chutando na opção mais longa (limite ${BIAS_MAX}%)`);
 
   const infra = new Set(['greet','test','win','choose','ok1','ok2','ok3','ok4','ok5','ok6','no1','no2','no3']);
-  const orfas = Object.keys(VOICE).filter(k => !seen.keys.has(k) && !infra.has(k));
+  // figurinha/album: vozes do álbum; n<número>: o cofre fala o total somado.
+  ['figurinha', 'album'].forEach(k => infra.add(k));
+  const orfas = Object.keys(VOICE).filter(k => !seen.keys.has(k) && !infra.has(k) && !/^n\d+$/.test(k));
 
   return {
     pasta, errors: [...new Set(errors)],
@@ -226,7 +338,7 @@ function verificar(pasta) {
 function modulos() {
   return fs.readdirSync(RAIZ, { withFileTypes: true })
     .filter(d => d.isDirectory() && !d.name.startsWith('.') && !d.name.startsWith('_')
-      && !['audio','ferramentas','docs','node_modules'].includes(d.name)
+      && !['audio','ferramentas','docs','node_modules','motor'].includes(d.name)
       && fs.existsSync(path.join(RAIZ, d.name, 'index.html')))
     .map(d => d.name).sort();
 }

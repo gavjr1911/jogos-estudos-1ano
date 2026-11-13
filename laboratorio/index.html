@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Laboratório de Jogos</title>
+<style>
+  :root{
+    --rosa:#ff6b9d; --roxo:#a06cd5; --azul:#4d96ff; --verde:#6bcB77;
+    --amarelo:#ffd93d; --laranja:#ff924c; --vermelho:#ff5e5e; --ceu:#b8e3ff;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0; height:100%;}
+  body{
+    font-family:'Comic Sans MS','Baloo',"Trebuchet MS",sans-serif;
+    background:linear-gradient(160deg,#e8fbe9 0%,#dff3ff 50%,#f3ecff 100%);
+    color:#3a3a55; overflow-x:hidden; user-select:none;
+    min-height:100%; touch-action:manipulation;
+  }
+  #app{max-width:760px; margin:0 auto; padding:14px; min-height:100vh;}
+
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    background:#fff; border-radius:22px; padding:8px 14px; margin-bottom:14px;
+    box-shadow:0 6px 0 rgba(0,0,0,.08);
+  }
+  .topbar .home-btn{
+    background:var(--azul); color:#fff; border:none; border-radius:16px;
+    font-size:22px; padding:8px 14px; font-weight:bold; cursor:pointer; box-shadow:0 4px 0 #2f6fd0;
+  }
+  .topbar .home-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #2f6fd0;}
+  .topbar .nav{display:flex; align-items:center; gap:8px;}
+  .topbar .back-btn{
+    background:var(--roxo); color:#fff; border:none; border-radius:16px;
+    font-size:22px; padding:8px 14px; font-weight:bold; cursor:pointer;
+    box-shadow:0 4px 0 #7d49b0; text-decoration:none; display:inline-block; line-height:1;
+  }
+  .topbar .back-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #7d49b0;}
+  .stars{font-size:24px; font-weight:bold; color:var(--laranja); display:flex; align-items:center; gap:6px;}
+  .stars .num{background:var(--amarelo); border-radius:14px; padding:2px 12px; box-shadow:0 3px 0 #d9a800;}
+
+  .hero{
+    text-align:center; background:#fff; border-radius:30px; padding:22px 18px;
+    box-shadow:0 8px 0 rgba(0,0,0,.08); margin-bottom:18px;
+  }
+  .hero h1{font-size:32px; margin:6px 0; color:var(--verde); line-height:1.2;}
+  .hero p{font-size:18px; margin:4px 0; color:#666;}
+  .mascote{font-size:78px; display:inline-block; animation:flutua 2.5s ease-in-out infinite;}
+  @keyframes flutua{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-14px) rotate(3deg);}}
+
+  .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+  .card{
+    border:none; border-radius:26px; padding:16px 10px; cursor:pointer;
+    color:#fff; font-size:19px; font-weight:bold; text-align:center;
+    box-shadow:0 7px 0 rgba(0,0,0,.18); transition:transform .08s;
+    display:flex; flex-direction:column; align-items:center; gap:6px; line-height:1.15;
+  }
+  .card:active{transform:translateY(4px); box-shadow:0 3px 0 rgba(0,0,0,.18);}
+  .card .ico{font-size:44px;}
+  .c1{background:var(--laranja);} .c2{background:var(--azul);} .c3{background:var(--roxo);}
+  .c4{background:var(--rosa);} .c5{background:var(--verde);} .c6{background:#19c3b1;}
+  .c7{background:#b07d4b;} .c8{background:#3aa7e8;}
+
+  .game{
+    background:#fff; border-radius:30px; padding:18px; box-shadow:0 8px 0 rgba(0,0,0,.08);
+    text-align:center;
+  }
+  .game-title{font-size:24px; color:var(--verde); margin:0 0 4px;}
+  .progress{font-size:16px; color:#999; margin-bottom:10px;}
+  .question{
+    font-size:22px; font-weight:bold; color:#3a3a55; margin:6px 0 14px; line-height:1.35;
+    display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;
+  }
+  .speak-btn{
+    background:var(--amarelo); border:none; border-radius:50%; width:54px; height:54px;
+    font-size:28px; cursor:pointer; box-shadow:0 4px 0 #d9a800; flex:0 0 auto;
+  }
+  .speak-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #d9a800;}
+  .speak-btn.playing{animation:pulse .7s infinite;}
+  @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
+
+  .stage{
+    min-height:120px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+    gap:10px; margin:10px auto 18px; padding:16px;
+    background:linear-gradient(160deg,#f3fff5,#eef7ff); border-radius:22px; border:4px dashed #bfe6c6;
+    flex-direction:column;
+  }
+  .obj{font-size:74px; animation:pop .35s ease; line-height:1;}
+  @keyframes pop{0%{transform:scale(0);}70%{transform:scale(1.25);}100%{transform:scale(1);}}
+  .cardtxt{font-size:19px; font-weight:bold; color:#5a7a5f; margin-top:4px; line-height:1.3; max-width:430px;}
+
+  .seqslots{display:flex; flex-direction:column; gap:8px; align-items:stretch; max-width:520px; margin:0 auto;}
+  .seqslot{
+    min-height:52px; border:4px dashed #bfe0c6; border-radius:16px; background:#f7fff9;
+    display:flex; align-items:center; gap:10px; padding:8px 12px; font-size:16px; font-weight:bold; color:#8aa593;
+  }
+  .seqslot .nn{background:var(--verde); color:#fff; border-radius:50%; width:32px; height:32px; flex:0 0 auto;
+               display:flex; align-items:center; justify-content:center; font-size:18px;}
+  .seqslot.filled{border-style:solid; border-color:var(--verde); background:#eefaf0; color:#2c5c38;}
+  .fichas{display:flex; flex-direction:column; gap:10px; margin-top:14px;}
+  .ficha{
+    border:none; border-radius:18px; padding:13px 14px; font-size:17px; font-weight:bold; text-align:left;
+    background:var(--azul); color:#fff; box-shadow:0 5px 0 #2f6fd0; cursor:pointer; line-height:1.25;
+  }
+  .ficha:active{transform:translateY(3px); box-shadow:0 2px 0 #2f6fd0;}
+  .ficha.used{background:#cfcfe0; box-shadow:0 5px 0 #a0a0c0; opacity:.55; cursor:default;}
+  .ficha.shake{animation:shake .4s;}
+  @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-8px);}75%{transform:translateX(8px);}}
+
+  .options{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));}
+  .opt{
+    border:none; border-radius:22px; padding:16px 10px; font-size:23px; font-weight:bold;
+    cursor:pointer; background:var(--azul); color:#fff; box-shadow:0 6px 0 #2f6fd0;
+    min-height:80px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    overflow-wrap:break-word; line-height:1.15;
+  }
+  .opt .cap{font-size:17px; font-weight:bold;}
+  .opt:active{transform:translateY(3px); box-shadow:0 3px 0 #2f6fd0;}
+  .opt.big{font-size:40px;}
+  .opt.ok{background:var(--verde)!important; box-shadow:0 6px 0 #3f9c4f!important; animation:tada .5s;}
+  .opt.no{background:#cfcfe0!important; box-shadow:0 6px 0 #a0a0c0!important; opacity:.7;}
+  @keyframes tada{0%{transform:scale(1);}30%{transform:scale(1.18) rotate(-4deg);}60%{transform:scale(1.1) rotate(4deg);}100%{transform:scale(1);}}
+
+  .opt-colors .opt{font-size:19px;}
+  .opt-colors .opt:nth-child(1){background:var(--rosa); box-shadow:0 6px 0 #d44d7c;}
+  .opt-colors .opt:nth-child(2){background:var(--azul); box-shadow:0 6px 0 #2f6fd0;}
+  .opt-colors .opt:nth-child(3){background:var(--laranja); box-shadow:0 6px 0 #d96d2e;}
+  .opt-colors .opt:nth-child(4){background:var(--roxo); box-shadow:0 6px 0 #7a4db0;}
+
+  .feedback{font-size:25px; font-weight:bold; min-height:40px; margin-top:12px;}
+  .feedback.good{color:var(--verde);} .feedback.bad{color:var(--laranja);}
+
+  .next-btn{
+    margin-top:14px; background:var(--verde); color:#fff; border:none; border-radius:22px;
+    font-size:24px; font-weight:bold; padding:14px 34px; cursor:pointer; box-shadow:0 6px 0 #3f9c4f;
+  }
+  .next-btn:active{transform:translateY(3px); box-shadow:0 3px 0 #3f9c4f;}
+
+  #splash{
+    position:fixed; inset:0; background:linear-gradient(160deg,#4fb477,#3aa7e8);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    color:#fff; text-align:center; z-index:50; cursor:pointer; padding:20px;
+  }
+  #splash h1{font-size:34px; margin:10px;}
+  #splash .big{font-size:100px; animation:flutua 2.5s infinite;}
+  #splash .play{
+    margin-top:24px; background:var(--amarelo); color:#5a4500; border:none; border-radius:30px;
+    font-size:30px; font-weight:bold; padding:18px 44px; box-shadow:0 8px 0 #d9a800; cursor:pointer;
+  }
+
+  #confetti{position:fixed; inset:0; pointer-events:none; z-index:40;}
+  .win{text-align:center; padding:20px;}
+  .win .trophy{font-size:90px; animation:tada 1s;}
+
+  @media(max-width:480px){
+    .hero h1{font-size:26px;} .question{font-size:19px;} .card{font-size:16px;}
+    .obj{font-size:60px;} .cardtxt{font-size:17px;}
+    .opt{font-size:20px;} .opt .cap{font-size:15px;} .ficha{font-size:15px;}
+  }
+</style>
+<link rel="stylesheet" href="../motor/interacoes.css">
+<script src="../motor/interacoes.js"></script>
+</head>
+<body>
+
+<div id="splash">
+  <div class="big"><img src="images/mascote.webp" alt="" style="width:170px;height:170px" class="flutua"></div>
+  <h1>Laboratório de Jogos!</h1>
+  <p style="font-size:20px;max-width:380px;">Jogos novos para aprender brincando!<br>Toque no botão para começar.</p>
+  <button class="play" id="startBtn">▶ COMEÇAR</button>
+</div>
+
+<canvas id="confetti"></canvas>
+<div id="app"></div>
+
+<script>
+/* ============================================================
+   LABORATÓRIO — protótipo das mecânicas novas (motor/interacoes.js)
+   com o conteúdo de Ciências Novembro (Bernoulli, Capítulo 5).
+   Conteúdos: DA SUA CASA ATÉ A ESCOLA — ruas antigamente e hoje,
+   espaços públicos e privados, meios de transporte, funções das ruas,
+   fontes históricas, profissionais da escola, materiais escolares
+   antigos e modernos, importância da escola.
+   ============================================================ */
+
+const App = document.getElementById('app');
+let stars = parseInt(localStorage.getItem('vitor_lab_stars')||'0',10);
+
+/* ============================================================
+   VOCABULÁRIO DE VOZ (chave -> texto falado).
+   ============================================================ */
+const VOICE = {
+  /* navegação e feedback */
+  greet:"Oi! Eu sou a Coruja Sabida! Hoje tem jogos novos: arrastar, ligar, memória, balões e mais! Escolha uma brincadeira.",
+  test:"Olá! Você está me ouvindo? Vamos brincar e aprender!",
+  win:"Parabéns! Você conseguiu! Que orgulho de você!",
+  choose:"As respostas são:",
+  ok1:"Muito bem!", ok2:"Isso aí!", ok3:"Você acertou!",
+  ok4:"Boa demais!", ok5:"Mandou bem!", ok6:"Perfeito!",
+  no1:"Quase! Tenta outra.", no2:"Hmm, tenta de novo.", no3:"Não foi essa, tenta outra.",
+
+  /* ===== 1. ARRASTAR: PÚBLICO OU PRIVADO / ANTES OU HOJE ===== */
+  cl_q1:"Arraste cada lugar para o grupo certo! O portão aberto é para lugares abertos a todas as pessoas. A casa com cadeado é para lugares que pertencem a alguém.",
+  cl_pub:"Espaço público: aberto para todas as pessoas.",
+  cl_pri:"Espaço privado: pertence a alguém.",
+  l_praca:"A praça",
+  l_parquinho:"O parquinho da cidade",
+  l_mercado:"O mercado municipal",
+  l_shopping:"O shopping",
+  l_cinema:"O cinema",
+  l_quarto:"O quarto de alguém",
+  cl_exp1:"A praça, o parquinho e o mercado municipal são públicos. O shopping, o cinema e o quarto são privados.",
+  cl_q2:"Arraste cada material para o tempo certo! A escola antiga é para antigamente. A escola colorida é para hoje.",
+  cl_antes:"Antigamente",
+  cl_hoje:"Hoje em dia",
+  m_lousa:"A lousa",
+  m_cartilha:"A cartilha",
+  m_goma:"A goma árabe, que era usada como cola",
+  m_tablet:"O tablet",
+  m_computador:"O computador",
+  m_celular:"O celular",
+  cl_exp2:"Antigamente as crianças estudavam com lousa, cartilha e goma árabe.",
+
+  /* ===== 2. LIGAR: QUEM TRABALHA NA ESCOLA ===== */
+  lg_q:"Puxe uma linha de cada pessoa até o que ela faz na escola!",
+  p_diretora:"A diretora",
+  p_auxiliar:"O auxiliar de limpeza",
+  p_porteiro:"O porteiro",
+  p_cozinheira:"A cozinheira",
+  p_professor:"O professor",
+  f_escola:"Organiza e cuida de toda a escola",
+  f_vassoura:"Cuida da limpeza da escola",
+  f_portao:"Cuida da entrada da escola",
+  f_panela:"Prepara a comida da escola",
+  f_lousa:"Ensina as matérias na sala de aula",
+  lg_exp:"Cada profissional faz a escola funcionar bem. Juntos, eles formam a comunidade escolar.",
+
+  /* ===== 3. MEMÓRIA: COMO VAMOS À ESCOLA ===== */
+  mm_q:"Jogo da memória! Vire as cartas e encontre os pares de transportes.",
+  t_carro:"Carro",
+  t_onibus:"Ônibus escolar",
+  t_bicicleta:"Bicicleta",
+  t_barco:"Barco",
+  t_ape:"A pé",
+  mm_exp:"Cada lugar tem uma realidade: tem criança que vai de carro, de ônibus, de bicicleta, a pé e até de barco!",
+
+  /* ===== 4. BALÕES ===== */
+  bl_q1:"Estoure só os balões dos jeitos de ir à escola que não poluem!",
+  bl_exp1:"Ir a pé e de bicicleta não polui o ar. Muitos carros nas ruas causam poluição.",
+  bl_q2:"Estoure só os balões dos materiais de estudar de antigamente!",
+  bl_exp2:"Lousa, cartilha e goma árabe eram usadas pelas crianças de antigamente.",
+
+  /* ===== 5. CENA: PARA QUE SERVE A RUA ===== */
+  cn_q1:"Toque nas lojas! Uma rua com muitas lojas tem função comercial.",
+  cn_q2:"Toque onde as pessoas moram! Uma rua com casas tem função residencial.",
+  r_loja:"Uma loja de roupas",
+  r_padaria:"Uma padaria",
+  r_casa:"Uma casa",
+  r_predio:"Um prédio de apartamentos",
+  r_museu:"Um museu",
+  r_teatro:"Um teatro",
+  cn_exp1:"Isso! Lojas mostram a função comercial da rua.",
+  cn_exp2:"Isso! Casas e prédios mostram a função residencial da rua.",
+
+  /* ===== 6. TRAÇAR ===== */
+  tr_qE:"Escreva com o dedo a letra E, de Escola! Siga o desenho pontilhado.",
+  tr_qB:"Escreva com o dedo a letra B, de Bicicleta! Siga o desenho pontilhado.",
+  tr_expE:"E de Escola! A escola é o lugar de aprender e fazer amigos.",
+  tr_expB:"B de Bicicleta! A bicicleta não polui.",
+};
+
+/* Objetos isolados, fundo transparente (arrastar e compor cenas). Em inglês. */
+const ADESIVOS = {
+  mascote: "A cute friendly owl mascot wearing a small red school backpack, waving one wing, full body",
+  praca: "A small town square with a green tree, a park bench and a little fountain",
+  parquinho: "A colorful children's playground with a slide and a swing",
+  mercado: "A Brazilian municipal market building with fruit and vegetable stalls in front",
+  shopping: "A big modern shopping mall building with glass doors and shopping bags icons, absolutely no words or letters on the facade",
+  cinema: "A movie theater building decorated with a film reel and popcorn",
+  quarto: "A child's bed with a pillow, a blanket and a teddy bear",
+  g_publico: "An open garden gate with three happy tiny people walking through it",
+  g_privado: "A cozy little house with a big golden padlock on the front door",
+  g_antes: "An old wooden one-room schoolhouse with a bell on the roof, warm sepia colors",
+  g_hoje: "A modern colorful school building with big windows",
+  lousa: "An old green chalkboard with a wooden frame and a piece of white chalk",
+  cartilha: "An old vintage school primer book with a worn brown cover",
+  goma: "An old small glass bottle of liquid glue with a brush in the lid",
+  tablet: "A modern tablet computer with colorful app icons on the screen",
+  computador: "A desktop computer with monitor, keyboard and mouse",
+  celular: "A modern smartphone",
+  diretora: "A friendly female school principal holding a clipboard, full body",
+  auxiliar: "A friendly school cleaning worker man in a blue uniform with empty hands, waving, full body",
+  porteiro: "A friendly school doorman in a uniform and cap, full body",
+  cozinheira: "A friendly school cook woman with a white chef hat and apron, full body",
+  professor: "A friendly male teacher with glasses holding a book, full body",
+  escola: "A school building with a flag on top and a clock",
+  vassoura: "A broom and a dustpan",
+  portao: "A school entrance gate, open",
+  panela: "A cooking pot full of steaming food",
+  carro: "A small red car, side view",
+  onibus: "A yellow school bus, side view",
+  bicicleta: "A blue bicycle, side view",
+  barco: "A small wooden rowing boat",
+  ape: "A happy child walking with a school backpack, side view",
+  loja: "A small clothing shop storefront with a striped awning and clothes in the window",
+  padaria: "A bakery storefront with bread and cakes in the window",
+  casa: "A small family house with a red roof and a little garden",
+  predio: "A small apartment building with balconies and plants",
+  museu: "A classical museum building with columns and steps",
+  teatro: "A theater building with red curtains and masks decoration",
+  baloes: "A bunch of three colorful balloons",
+  lapis: "A big yellow pencil",
+};
+
+/* Fundos em paisagem 3:2. */
+const CENARIOS = {
+  rua: "A sunny city street seen straight from the front: blue sky with clouds on the top half, a wide light gray sidewalk across the middle band, and an asphalt road with a crosswalk at the bottom. No buildings, no people, no cars",
+};
+
+/* ============================================================
+   PLAYER DE ÁUDIO (clipes em sequência)
+   ============================================================ */
+const AUDIO_DIR='audio/', AUDIO_EXT='.mp3';
+const player=new Audio();
+player.preload='auto';
+let playToken=0, audioOn=true;
+function stopAudio(){ playToken++; try{player.pause();}catch(e){} setPlayingBadge(false); }
+function playKeys(keys){
+  if(!audioOn) return;
+  stopAudio();
+  const list=[].concat(...keys.map(k=>Array.isArray(k)?k:[k])).filter(Boolean);
+  if(!list.length) return;
+  const my=playToken; let i=0;
+  setPlayingBadge(true);
+  const next=()=>{
+    if(my!==playToken) return;
+    if(i>=list.length){ setPlayingBadge(false); return; }
+    const key=list[i++];
+    player.src=AUDIO_DIR+key+AUDIO_EXT;
+    player.onended=next;
+    player.onerror=()=>{ setTimeout(next,10); };
+    const p=player.play();
+    if(p&&p.catch) p.catch(()=>setTimeout(next,10));
+  };
+  next();
+}
+function setPlayingBadge(on){
+  const b=document.getElementById('qspeak'); if(b) b.classList.toggle('playing',on);
+}
+function unlockAudio(depois){
+  const pronto=()=>{ player.muted=false; if(depois){ const f=depois; depois=null; f(); } };
+  try{ player.muted=true; player.src=AUDIO_DIR+'greet'+AUDIO_EXT;
+       const p=player.play();
+       if(p&&p.then) p.then(()=>{player.pause();player.currentTime=0;pronto();}).catch(pronto);
+       else { player.pause(); pronto(); }
+       setTimeout(pronto,1200);
+  }catch(e){ pronto(); }
+}
+
+/* ===== SONS DE EFEITO (Web Audio) ===== */
+let actx=null;
+function initAudio(){ try{ actx = actx || new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==='suspended') actx.resume(); }catch(e){} }
+function tone(freq,start,dur,type='sine',vol=0.2){
+  if(!actx) return;
+  const o=actx.createOscillator(), g=actx.createGain();
+  o.type=type; o.frequency.value=freq; o.connect(g); g.connect(actx.destination);
+  const t=actx.currentTime+start;
+  g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+0.02);
+  g.gain.exponentialRampToValueAtTime(0.001,t+dur);
+  o.start(t); o.stop(t+dur);
+}
+function sndClick(){ initAudio(); tone(540,0,0.07,'triangle',0.14); }
+function sndRight(){ initAudio(); [523,659,784,1047].forEach((f,i)=>tone(f,i*0.09,0.25,'triangle',0.18)); }
+function sndWrong(){ initAudio(); tone(300,0,0.18,'sine',0.13); tone(220,0.12,0.25,'sine',0.13); }
+function sndWin(){ initAudio(); [523,659,784,1047,784,1047,1319].forEach((f,i)=>tone(f,i*0.12,0.3,'triangle',0.2)); }
+
+/* ===== UTILIDADES ===== */
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function rint(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+function mix(){ return shuffle([].concat(...arguments)); }
+const OK_KEYS=['ok1','ok2','ok3','ok4','ok5','ok6'], NO_KEYS=['no1','no2','no3'];
+function emo(e,size){ return '<span class="obj" style="font-size:'+(size||74)+'px">'+e+'</span>'; }
+function cena(e,txt,size){ return emo(e,size||88)+(txt?'<div class="cardtxt">'+txt+'</div>':''); }
+
+function updateStars(){ const el=document.getElementById('starNum'); if(el) el.textContent=stars; localStorage.setItem('vitor_lab_stars',stars); }
+function addStar(n=1){ stars+=n; updateStars(); }
+
+/* ---------------- CONFETE ---------------- */
+const cv=document.getElementById('confetti'), cx=cv.getContext('2d');
+let confs=[];
+function resizeCv(){cv.width=innerWidth;cv.height=innerHeight;}
+addEventListener('resize',resizeCv); resizeCv();
+function burst(){
+  const cols=['#ff6b9d','#ffd93d','#6bcB77','#4d96ff','#a06cd5','#ff924c'];
+  for(let i=0;i<70;i++){confs.push({x:innerWidth/2,y:innerHeight/3,vx:(Math.random()-0.5)*14,vy:Math.random()*-12-3,c:pick(cols),s:rint(7,14),r:Math.random()*6,vr:(Math.random()-.5)*.4});}
+}
+function loopConf(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  confs.forEach(p=>{p.vy+=0.35;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/2,p.s,p.s);cx.restore();});
+  confs=confs.filter(p=>p.y<cv.height+30);
+  requestAnimationFrame(loopConf);
+}
+loopConf();
+
+/* ===== SHELL ===== */
+function shell(inner){
+  App.innerHTML=`
+    <div class="topbar">
+      <div class="nav"><a class="back-btn" href="../" title="Voltar ao menu de matérias" aria-label="Voltar ao menu de matérias">🏠</a><button class="home-btn" onclick="sndClick();goHome()" title="Escolher outro jogo desta matéria" aria-label="Escolher outro jogo desta matéria">🔄</button></div>
+      <div class="stars">⭐ <span class="num" id="starNum">${stars}</span></div>
+    </div>
+    ${inner}`;
+}
+
+/* ===== MENU ===== */
+const GAMES=[
+  {id:'classificar', ico:'<img class="fig" src="images/g_publico.webp" alt="">', nome:'Arrastar e Separar', sub:'Público ou privado? Antes ou hoje?', cls:'c1'},
+  {id:'ligar',       ico:'<img class="fig" src="images/professor.webp" alt="">', nome:'Ligar os Pares',     sub:'Quem trabalha na escola',           cls:'c2'},
+  {id:'memoria',     ico:'<img class="fig" src="images/onibus.webp" alt="">',    nome:'Jogo da Memória',    sub:'Como vamos à escola',               cls:'c3'},
+  {id:'baloes',      ico:'<img class="fig" src="images/baloes.webp" alt="">',    nome:'Estoura Balão',      sub:'Não polui? Antigamente?',           cls:'c4'},
+  {id:'cena',        ico:'<img class="fig" src="images/loja.webp" alt="">',      nome:'Passeio na Rua',     sub:'Para que serve a rua',              cls:'c5'},
+  {id:'tracar',      ico:'<img class="fig" src="images/lapis.webp" alt="">',     nome:'Escrever com o Dedo',sub:'E de escola, B de bicicleta',       cls:'c6'},
+];
+function goHome(silent){
+  stopAudio();
+  shell(`
+    <div class="hero">
+      <div class="mascote"><img src="images/mascote.webp" alt="" style="width:120px;height:120px" class="flutua"></div>
+      <h1>Olá!</h1>
+      <p>Escolha uma brincadeira 👇</p>
+      <button onclick="testSound()" style="margin-top:6px;background:var(--amarelo);color:#5a4500;border:none;border-radius:18px;padding:9px 18px;font-size:16px;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #d9a800;">🔈 Testar som</button>
+    </div>
+    <div class="grid">
+      ${GAMES.map(g=>`<button class="card ${g.cls}" onclick="sndClick();startGame('${g.id}')">
+        <span class="ico">${g.ico}</span><span>${g.nome}</span>
+        <span style="font-size:13px;font-weight:normal;opacity:.9">${g.sub}</span>
+      </button>`).join('')}
+    </div>
+    <p style="text-align:center;color:#8aa593;margin-top:18px;font-size:14px;">Feito com 💚 para estudar pra prova</p>
+  `);
+  if(!silent) setTimeout(()=>playKeys(['greet']),250);
+}
+function testSound(){ initAudio(); sndClick(); playKeys(['test']); }
+
+/* ===== MOTOR DE RODADAS ===== */
+let current=null, locked=false, seqPos=0;
+function startGame(id){
+  const rounds=BUILDERS[id]();
+  current={id, title:GAMES.find(g=>g.id===id).nome, rounds, idx:0};
+  renderRound();
+}
+function gameFrame(c,r,bodyHtml){
+  shell(`
+    <div class="game">
+      <h2 class="game-title">${GAMES.find(g=>g.id===c.id).ico} ${c.title}</h2>
+      <div class="progress">Pergunta ${c.idx+1} de ${c.rounds.length}</div>
+      <div class="question">
+        <button class="speak-btn" id="qspeak" onclick="sndClick();speakRound()">🔊</button>
+        <span>${r.q}</span>
+      </div>
+      <div class="stage">${r.stage||''}</div>
+      ${bodyHtml}
+      <div style="font-size:14px;color:#aaa;margin-top:6px;">👆 Toque para responder. Toque no 🔊 para ouvir de novo.</div>
+      <div class="feedback" id="fb"></div>
+    </div>
+  `);
+}
+function renderRound(){
+  locked=false;
+  const c=current, r=c.rounds[c.idx];
+  if(window.MODOS && MODOS[r.mode]) return MODOS[r.mode](c,r);
+  if(r.mode==='seq'){ return renderSeq(c,r); }
+  gameFrame(c,r,`<div class="options ${r.colorOpts?'opt-colors':''}" id="opts"></div>`);
+  const shown=shuffle(r.options);
+  const opts=document.getElementById('opts');
+  shown.forEach(o=>{
+    const b=document.createElement('button');
+    b.className='opt'+(o.big?' big':'');
+    b.innerHTML=o.label;
+    b.onclick=()=>answer(b,o);
+    opts.appendChild(b);
+  });
+  window._roundKeys=[].concat(r.audio||[], ['choose'], shown.map(o=>o.aud));
+  setTimeout(()=>speakRound(),400);
+}
+function speakRound(){ playKeys(window._roundKeys||[]); }
+
+function showNextButton(){
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=null);
+  document.querySelectorAll('.ficha').forEach(b=>b.onclick=null);
+  const nb=document.createElement('button');
+  nb.className='next-btn';
+  const last=current.idx>=current.rounds.length-1;
+  nb.textContent=last?'🏆 Terminar':'Próxima ➡';
+  nb.onclick=()=>{
+    nb.onclick=null;
+    sndClick();
+    if(last){ winScreen(); return; }
+    current.idx++; renderRound();
+    locked=true; setTimeout(()=>{locked=false;},350);
+  };
+  document.querySelector('.game').appendChild(nb);
+}
+function correctFlow(extraAudio){
+  locked=true; sndRight(); burst(); addStar(1);
+  const fb=document.getElementById('fb'); if(fb){fb.className='feedback good'; fb.textContent='⭐ Muito bem!';}
+  playKeys(extraAudio.filter(Boolean));
+  showNextButton();
+}
+function answer(btn,opt){
+  if(locked) return;
+  if(opt.correct){
+    btn.classList.add('ok');
+    document.querySelectorAll('.opt').forEach(b=>{if(b!==btn)b.classList.add('no');});
+    correctFlow([opt.aud, pick(OK_KEYS), opt.expAud]);
+  }else{
+    btn.classList.add('no'); btn.onclick=null;
+    sndWrong();
+    const fb=document.getElementById('fb'); fb.className='feedback bad'; fb.textContent='🤔 Tenta de novo!';
+    playKeys([opt.aud, pick(NO_KEYS)].filter(Boolean));
+  }
+}
+
+/* ---- modo MONTAR A ORDEM ---- */
+function renderSeq(c,r){
+  seqPos=0;
+  const slots=r.itens.map((_,i)=>`<div class="seqslot" id="sl${i}"><span class="nn">${i+1}</span><span class="tx">...</span></div>`).join('');
+  gameFrame(c,r,`
+    <div class="seqslots">${slots}</div>
+    <div class="fichas" id="fichas"></div>
+  `);
+  const box=document.getElementById('fichas');
+  shuffle(r.itens.map((it,i)=>({it,i}))).forEach(t=>{
+    const b=document.createElement('button');
+    b.className='ficha'; b.textContent=t.it.txt;
+    b.onclick=()=>tapFicha(b,t.i,r);
+    box.appendChild(b);
+  });
+  window._roundKeys=[].concat(r.audio||[]);
+  setTimeout(()=>speakRound(),400);
+}
+function tapFicha(btn,idx,r){
+  if(locked) return;
+  if(idx===seqPos){
+    const sl=document.getElementById('sl'+seqPos);
+    sl.querySelector('.tx').textContent=r.itens[idx].txt;
+    sl.classList.add('filled');
+    btn.classList.add('used'); btn.onclick=null;
+    sndClick(); playKeys([r.itens[idx].aud]);
+    seqPos++;
+    if(seqPos>=r.itens.length){
+      setTimeout(()=>correctFlow([pick(OK_KEYS), r.expAud]),600);
+    }
+  }else{
+    sndWrong();
+    btn.classList.add('shake'); setTimeout(()=>btn.classList.remove('shake'),420);
+    const fb=document.getElementById('fb'); fb.className='feedback bad'; fb.textContent='🤔 Esse não é o próximo!';
+    playKeys([r.itens[idx].aud, pick(NO_KEYS)]);
+  }
+}
+
+function winScreen(){
+  sndWin(); burst(); setTimeout(burst,400); setTimeout(burst,800);
+  const c=current;
+  shell(`
+    <div class="game win">
+      <div class="trophy">🏆</div>
+      <h2 class="game-title">Parabéns!</h2>
+      <p style="font-size:22px;">Você ganhou <b>${c.rounds.length}</b> estrelas! ⭐</p>
+      <p style="font-size:18px;color:#888;">Você está ficando craque em <b>${c.title}</b>!</p>
+      <button class="next-btn" onclick="sndClick();startGame('${c.id}')">🔁 Jogar de novo</button>
+      <br>
+      <button class="next-btn" style="background:var(--azul);box-shadow:0 6px 0 #2f6fd0;margin-top:10px;" onclick="sndClick();goHome()">🏠 Escolher outro</button>
+    </div>
+  `);
+  setTimeout(()=>playKeys(['win']),250);
+}
+
+/* opções a partir de um mapa de rótulos */
+function mkOpts(correct, all, lblMap, extra){
+  return shuffle(all).map(k=>{
+    const o={label:lblMap[k], aud:k, correct:k===correct};
+    if(extra) Object.assign(o, extra(k));
+    return o;
+  });
+}
+function exp(options, expAud){ options.forEach(o=>{ if(o.correct) o.expAud=expAud; }); return options; }
+function L(e,txt){ return e+'<span class="cap">'+txt+'</span>'; }
+
+/* ============================================================
+   CONSTRUTORES DE RODADAS
+   ============================================================ */
+const BUILDERS={
+  classificar(){ return [
+    {mode:'classificar', q:'Arraste cada lugar para o grupo certo!', audio:['cl_q1'], expAud:'cl_exp1',
+     grupos:[{id:'pub', img:'g_publico', aud:'cl_pub'}, {id:'pri', img:'g_privado', aud:'cl_pri'}],
+     itens:[
+       {img:'praca', aud:'l_praca', grupo:'pub'}, {img:'parquinho', aud:'l_parquinho', grupo:'pub'},
+       {img:'mercado', aud:'l_mercado', grupo:'pub'}, {img:'shopping', aud:'l_shopping', grupo:'pri'},
+       {img:'cinema', aud:'l_cinema', grupo:'pri'}, {img:'quarto', aud:'l_quarto', grupo:'pri'},
+     ]},
+    {mode:'classificar', q:'Antigamente ou hoje em dia?', audio:['cl_q2'], expAud:'cl_exp2',
+     grupos:[{id:'antes', img:'g_antes', aud:'cl_antes'}, {id:'hoje', img:'g_hoje', aud:'cl_hoje'}],
+     itens:[
+       {img:'lousa', aud:'m_lousa', grupo:'antes'}, {img:'cartilha', aud:'m_cartilha', grupo:'antes'},
+       {img:'goma', aud:'m_goma', grupo:'antes'}, {img:'tablet', aud:'m_tablet', grupo:'hoje'},
+       {img:'computador', aud:'m_computador', grupo:'hoje'}, {img:'celular', aud:'m_celular', grupo:'hoje'},
+     ]},
+  ];},
+  ligar(){
+    const P={
+      diretora:{a:{img:'diretora',aud:'p_diretora'}, b:{img:'escola',aud:'f_escola'}},
+      auxiliar:{a:{img:'auxiliar',aud:'p_auxiliar'}, b:{img:'vassoura',aud:'f_vassoura'}},
+      porteiro:{a:{img:'porteiro',aud:'p_porteiro'}, b:{img:'portao',aud:'f_portao'}},
+      cozinheira:{a:{img:'cozinheira',aud:'p_cozinheira'}, b:{img:'panela',aud:'f_panela'}},
+      professor:{a:{img:'professor',aud:'p_professor'}, b:{img:'lousa',aud:'f_lousa'}},
+    };
+    return [
+      {mode:'ligar', q:'Ligue cada pessoa ao que ela faz', audio:['lg_q'], expAud:'lg_exp', pares:[P.auxiliar, P.porteiro, P.cozinheira]},
+      {mode:'ligar', q:'Ligue cada pessoa ao que ela faz', audio:['lg_q'], expAud:'lg_exp', pares:[P.diretora, P.professor, P.porteiro]},
+    ];
+  },
+  memoria(){ return [
+    {mode:'memoria', q:'Encontre os pares!', audio:['mm_q'], expAud:'mm_exp',
+     pares:[{img:'carro',aud:'t_carro'}, {img:'onibus',aud:'t_onibus'}, {img:'bicicleta',aud:'t_bicicleta'}]},
+    {mode:'memoria', q:'Encontre os pares!', audio:['mm_q'], expAud:'mm_exp',
+     pares:[{img:'barco',aud:'t_barco'}, {img:'ape',aud:'t_ape'}, {img:'onibus',aud:'t_onibus'}, {img:'bicicleta',aud:'t_bicicleta'}]},
+  ];},
+  baloes(){ return [
+    {mode:'baloes', q:'Estoure só o que <b>não polui</b>!', audio:['bl_q1'], expAud:'bl_exp1', meta:5,
+     itens:[{img:'bicicleta',aud:'t_bicicleta',certo:true}, {img:'ape',aud:'t_ape',certo:true}, {img:'carro',aud:'t_carro',certo:false}]},
+    {mode:'baloes', q:'Estoure só os materiais de <b>antigamente</b>!', audio:['bl_q2'], expAud:'bl_exp2', meta:5,
+     itens:[{img:'lousa',aud:'m_lousa',certo:true}, {img:'cartilha',aud:'m_cartilha',certo:true}, {img:'goma',aud:'m_goma',certo:true},
+            {img:'tablet',aud:'m_tablet',certo:false}, {img:'celular',aud:'m_celular',certo:false}, {img:'computador',aud:'m_computador',certo:false}]},
+  ];},
+  cena(){
+    const lugares=[
+      {img:'loja', aud:'r_loja', tipo:'com'}, {img:'casa', aud:'r_casa', tipo:'res'}, {img:'museu', aud:'r_museu', tipo:'cul'},
+      {img:'padaria', aud:'r_padaria', tipo:'com'}, {img:'predio', aud:'r_predio', tipo:'res'}, {img:'teatro', aud:'r_teatro', tipo:'cul'},
+    ];
+    // 4 prédios por cena: os 2 do tipo pedido e 1 de cada outro tipo. Com 6 lado a lado
+    // cada um ficava com ~55px no celular — pequeno demais para o dedo.
+    const rua = tipo => {
+      const outros = ['com','res','cul'].filter(t=>t!==tipo).map(t=>pick(lugares.filter(l=>l.tipo===t)));
+      return shuffle([...lugares.filter(l=>l.tipo===tipo), ...outros])
+        .map((l,i)=>({...l, certo:l.tipo===tipo, x:1+i*24.6, y:36, w:24}));
+    };
+    return [
+      {mode:'cena', q:'Toque nas <b>lojas</b>!', audio:['cn_q1'], expAud:'cn_exp1', fundo:'rua', objetos:rua('com')},
+      {mode:'cena', q:'Toque onde as pessoas <b>moram</b>!', audio:['cn_q2'], expAud:'cn_exp2', fundo:'rua', objetos:rua('res')},
+    ];
+  },
+  tracar(){ return [
+    {mode:'tracar', q:'Escreva a letra <b>E</b>', audio:['tr_qE'], expAud:'tr_expE', letra:'E', img:'escola'},
+    {mode:'tracar', q:'Escreva a letra <b>B</b>', audio:['tr_qB'], expAud:'tr_expB', letra:'B', img:'bicicleta'},
+  ];},
+};
+
+/* ===== INICIAR ===== */
+document.getElementById('startBtn').addEventListener('click',()=>{
+  initAudio();
+  unlockAudio(()=>goHome());
+  document.getElementById('splash').style.display='none';
+});
+</script>
+</body>
+</html>

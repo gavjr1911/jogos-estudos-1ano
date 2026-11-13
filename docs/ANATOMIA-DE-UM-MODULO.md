@@ -144,3 +144,13 @@ git add -A && git commit -m "Módulo N: matéria" && git push origin main
 Foi uma decisão consciente de adiar: extrair um `motor.js` compartilhado mexeria nos módulos que já funcionam e estão em uso. Ao criar um módulo novo, **copie o motor como está** — não tente melhorá-lo isoladamente, senão a divergência piora.
 
 **O QA tem ruído nos módulos legados.** Ele foi escrito a partir do `ciencias2` e generalizado depois; nos outros módulos, de formatos mais heterogêneos, ainda acusa falsos positivos. Para módulos novos, que seguem este contrato, ele é confiável.
+
+## Mecânicas além de pergunta e alternativa
+
+Rodadas com `mode` de `motor/interacoes.js` (`classificar`, `ligar`, `memoria`,
+`baloes`, `cena`, `tracar`) não usam `options`: cada uma tem formato próprio,
+descrito em `docs/CATALOGO-DE-INTERACOES.md`. O módulo inclui o motor com
+`<link href="../motor/interacoes.css">` + `<script src="../motor/interacoes.js">` e
+despacha no `renderRound()` com `if(window.MODOS && MODOS[r.mode]) return MODOS[r.mode](c,r);`.
+As figuras vêm de `ADESIVOS`/`CENARIOS` e o QA confere que toda imagem usada foi
+declarada e gerada. Modelo completo: `laboratorio/index.html`.

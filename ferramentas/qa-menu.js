@@ -22,7 +22,8 @@ for (const [, k, v] of vm_[1].matchAll(/(\w+)\s*:\s*"([^"]*)"/g)) VOICE[k] = v;
 
 const pastas = fs.readdirSync(ROOT, { withFileTypes: true })
   .filter(d => d.isDirectory() && !d.name.startsWith('.')
-    && !['audio','ferramentas','docs','node_modules'].includes(d.name)
+    // motor: código compartilhado; laboratorio: protótipo de mecânicas, fora do menu de propósito
+    && !['audio','ferramentas','docs','node_modules','motor','laboratorio'].includes(d.name)
     && fs.existsSync(path.join(ROOT, d.name, 'index.html')))
   .map(d => d.name).sort();
 

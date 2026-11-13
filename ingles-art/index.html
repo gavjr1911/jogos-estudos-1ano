@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -8,12 +8,11 @@
   :root{
     --rosa:#ff6b9d; --roxo:#7c49b0; --azul:#4d96ff; --verde:#6bcB77;
     --amarelo:#ffd93d; --laranja:#ff924c; --vermelho:#ff5e5e; --ceu:#b8e3ff;
-    --deep:#2a1052; --gold:#e8a838; --night:#0f0f3d;
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
   html,body{margin:0; padding:0; height:100%;}
   body{
-    font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;
+    font-family:'Comic Sans MS','Baloo',"Trebuchet MS",sans-serif;
     background:linear-gradient(160deg,#e8d5f5 0%,#fce4ec 50%,#fff3e0 100%);
     color:#3a3a55; overflow-x:hidden; user-select:none;
     min-height:100%; touch-action:manipulation;
@@ -25,101 +24,88 @@
     background:#fff; border-radius:22px; padding:8px 14px; margin-bottom:14px;
     box-shadow:0 6px 0 rgba(0,0,0,.08);
   }
-  .topbar .nav{display:flex; align-items:center; gap:8px;}
-  .topbar .back-btn,.topbar .home-btn{
-    color:#fff; border:none; border-radius:16px;
-    font-size:18px; padding:8px 14px; font-weight:bold; cursor:pointer;
-    text-decoration:none; display:inline-flex; align-items:center; gap:4px;
+  .topbar .home-btn{
+    background:var(--azul); color:#fff; border:none; border-radius:16px;
+    font-size:22px; padding:8px 14px; font-weight:bold; cursor:pointer; box-shadow:0 4px 0 #2f6fd0;
   }
-  .topbar .back-btn{background:var(--roxo); box-shadow:0 4px 0 #5c2e90;}
-  .topbar .home-btn{background:var(--azul); box-shadow:0 4px 0 #2f6fd0;}
-  .topbar .back-btn:active,.topbar .home-btn:active{transform:translateY(3px); box-shadow:none;}
-  .stars{font-size:20px; font-weight:bold; color:var(--laranja); display:flex; align-items:center; gap:6px;}
+  .topbar .home-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #2f6fd0;}
+  .topbar .nav{display:flex; align-items:center; gap:8px;}
+  .topbar .back-btn{
+    background:var(--roxo); color:#fff; border:none; border-radius:16px;
+    font-size:22px; padding:8px 14px; font-weight:bold; cursor:pointer;
+    box-shadow:0 4px 0 #5c2e90; text-decoration:none; display:inline-block; line-height:1;
+  }
+  .topbar .back-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #5c2e90;}
+  .stars{font-size:24px; font-weight:bold; color:var(--laranja); display:flex; align-items:center; gap:6px;}
   .stars .num{background:var(--amarelo); border-radius:14px; padding:2px 12px; box-shadow:0 3px 0 #d9a800;}
 
   .hero{
     text-align:center; background:#fff; border-radius:30px; padding:22px 18px;
     box-shadow:0 8px 0 rgba(0,0,0,.08); margin-bottom:18px;
   }
-  .hero h1{font-size:30px; margin:6px 0; color:var(--roxo); line-height:1.2;}
-  .hero p{font-size:17px; margin:4px 0; color:#666;}
-
-  .mascote-wrap{width:120px; height:120px; margin:0 auto 8px; animation:flutua 2.5s ease-in-out infinite;}
-  @keyframes flutua{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-12px) rotate(2deg);}}
+  .hero h1{font-size:32px; margin:6px 0; color:var(--roxo); line-height:1.2;}
+  .hero p{font-size:18px; margin:4px 0; color:#666;}
+  .mascote{display:inline-block;}
 
   .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
   .card{
-    border:none; border-radius:22px; padding:14px 10px; cursor:pointer;
-    color:#fff; font-size:17px; font-weight:bold; text-align:center;
-    box-shadow:0 6px 0 rgba(0,0,0,.18); transition:transform .08s;
-    display:flex; flex-direction:column; align-items:center; gap:8px; line-height:1.15;
+    border:none; border-radius:26px; padding:16px 10px; cursor:pointer;
+    color:#fff; font-size:19px; font-weight:bold; text-align:center;
+    box-shadow:0 7px 0 rgba(0,0,0,.18); transition:transform .08s;
+    display:flex; flex-direction:column; align-items:center; gap:6px; line-height:1.15;
+    text-shadow:0 1px 2px rgba(0,0,0,.25);
   }
-  .card:active{transform:translateY(4px); box-shadow:0 2px 0 rgba(0,0,0,.18);}
-  .card .card-icon{width:64px; height:64px;}
-  .card .card-icon img{width:100%; height:100%; object-fit:cover; border-radius:12px;}
-  .opt .opt-icon img{width:48px; height:48px; object-fit:cover; border-radius:8px;}
-  .title-icon img{width:32px; height:32px; object-fit:cover; border-radius:8px;}
-  .mascote-wrap img{width:100%; height:100%; object-fit:contain;}
-  .trophy-wrap img,.trophy-wrap svg{width:100%; height:100%;}
-  .card .sub{font-size:12px; font-weight:normal; opacity:.9;}
+  .card:active{transform:translateY(4px); box-shadow:0 3px 0 rgba(0,0,0,.18);}
+  .card .ico{font-size:44px;}
+  .card .ico .fig{background:rgba(255,255,255,.9); border-radius:18px; padding:4px;}
   .c1{background:linear-gradient(135deg,#e84393,#fd79a8);} .c2{background:linear-gradient(135deg,#0984e3,#74b9ff);}
-  .c3{background:linear-gradient(135deg,#00b894,#55efc4);} .c4{background:linear-gradient(135deg,#2d3436,#636e72);}
-  .c5{background:linear-gradient(135deg,#e17055,#fab1a0);} .c6{background:linear-gradient(135deg,#6c5ce7,#a29bfe);}
-  .c7{background:linear-gradient(135deg,#fdcb6e,#f39c12);} .c8{background:linear-gradient(135deg,#00cec9,#81ecec);}
+  .c3{background:linear-gradient(135deg,#00a383,#55d6b4);} .c4{background:linear-gradient(135deg,#2d3466,#5a63a8);}
+  .c5{background:linear-gradient(135deg,#e17055,#f5a08a);} .c6{background:linear-gradient(135deg,#6c5ce7,#a29bfe);}
+  .c7{background:linear-gradient(135deg,#1e3c8c,#3a6fd0);} .c8{background:linear-gradient(135deg,#e0a020,#f3c04a);}
 
   .game{
     background:#fff; border-radius:30px; padding:18px; box-shadow:0 8px 0 rgba(0,0,0,.08);
     text-align:center;
   }
-  .game-title{font-size:22px; color:var(--roxo); margin:0 0 4px; display:flex; align-items:center; justify-content:center; gap:8px;}
-  .game-title .title-icon{width:32px; height:32px;}
-  .progress{font-size:15px; color:#999; margin-bottom:10px;}
+  .game-title{font-size:24px; color:var(--roxo); margin:0 0 4px;}
+  .progress{font-size:16px; color:#999; margin-bottom:10px;}
   .question{
-    font-size:20px; font-weight:bold; color:#3a3a55; margin:6px 0 14px; line-height:1.35;
+    font-size:22px; font-weight:bold; color:#3a3a55; margin:6px 0 14px; line-height:1.35;
     display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;
   }
   .speak-btn{
-    background:var(--amarelo); border:none; border-radius:50%; width:48px; height:48px;
-    font-size:24px; cursor:pointer; box-shadow:0 4px 0 #d9a800; flex:0 0 auto;
-    display:flex; align-items:center; justify-content:center;
+    background:var(--amarelo); border:none; border-radius:50%; width:54px; height:54px;
+    font-size:28px; cursor:pointer; box-shadow:0 4px 0 #d9a800; flex:0 0 auto;
   }
   .speak-btn:active{transform:translateY(3px); box-shadow:0 1px 0 #d9a800;}
   .speak-btn.playing{animation:pulse .7s infinite;}
-  @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.12);}}
+  @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
 
   .stage{
-    min-height:140px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
-    gap:12px; margin:10px auto 18px; padding:16px;
-    background:linear-gradient(160deg,#f8f4ff,#fff5f8); border-radius:22px; border:3px solid #e8d5f5;
-    flex-direction:column; position:relative; overflow:hidden;
+    min-height:120px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+    gap:10px; margin:10px auto 18px; padding:16px;
+    background:linear-gradient(160deg,#f8f4ff,#fff5f8); border-radius:22px; border:4px dashed #e3cdf3;
+    flex-direction:column;
   }
-  .stage .illust{max-width:320px; width:100%; height:auto;}
-  .stage .illust-sm{max-width:160px; width:100%; height:auto;}
-  .stage .label-txt{font-size:20px; font-weight:bold; color:var(--roxo); margin-top:6px; line-height:1.3;}
-  .stage .desc-txt{font-size:16px; color:#555; margin-top:4px; line-height:1.5; max-width:440px; text-align:left;}
-  .stage .clue-box{background:#fef9e7; border:2px solid #f0d78c; border-radius:14px; padding:14px 16px; margin:8px 0; max-width:440px; text-align:left; font-size:16px; line-height:1.55; color:#5a4000;}
 
-  .options{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(140px,1fr));}
+  .options{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));}
   .opt{
-    border:none; border-radius:22px; padding:14px 10px; font-size:20px; font-weight:bold;
+    border:none; border-radius:22px; padding:16px 10px; font-size:23px; font-weight:bold;
     cursor:pointer; background:var(--azul); color:#fff; box-shadow:0 6px 0 #2f6fd0;
-    min-height:72px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
-    word-break:break-word; line-height:1.15;
+    min-height:80px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    overflow-wrap:break-word; line-height:1.15;
   }
-  .opt .opt-icon{width:56px; height:56px; margin-bottom:2px;}
-  .opt .opt-label{font-size:15px; font-weight:normal; opacity:.95;}
   .opt:active{transform:translateY(3px); box-shadow:0 3px 0 #2f6fd0;}
   .opt.ok{background:var(--verde)!important; box-shadow:0 6px 0 #3f9c4f!important; animation:tada .5s;}
   .opt.no{background:#cfcfe0!important; box-shadow:0 6px 0 #a0a0c0!important; opacity:.7;}
-  @keyframes tada{0%{transform:scale(1);}30%{transform:scale(1.18) rotate(-4deg);}60%{transform:scale(1.1) rotate(4deg);}100%{transform:scale(1);};}
+  @keyframes tada{0%{transform:scale(1);}30%{transform:scale(1.18) rotate(-4deg);}60%{transform:scale(1.1) rotate(4deg);}100%{transform:scale(1);}}
 
-  .feedback{font-size:24px; font-weight:bold; min-height:36px; margin-top:12px;}
+  .feedback{font-size:25px; font-weight:bold; min-height:40px; margin-top:12px;}
   .feedback.good{color:var(--verde);} .feedback.bad{color:var(--laranja);}
-  .hint{font-size:13px; color:#bbb; margin:6px 0 0;}
 
   .next-btn{
     margin-top:14px; background:var(--verde); color:#fff; border:none; border-radius:22px;
-    font-size:22px; font-weight:bold; padding:14px 34px; cursor:pointer; box-shadow:0 6px 0 #3f9c4f;
+    font-size:24px; font-weight:bold; padding:14px 34px; cursor:pointer; box-shadow:0 6px 0 #3f9c4f;
   }
   .next-btn:active{transform:translateY(3px); box-shadow:0 3px 0 #3f9c4f;}
 
@@ -128,61 +114,193 @@
     display:flex; flex-direction:column; align-items:center; justify-content:center;
     color:#fff; text-align:center; z-index:50; cursor:pointer; padding:20px;
   }
-  #splash h1{font-size:32px; margin:10px;}
-  #splash .big{width:130px; height:130px; animation:flutua 2.5s infinite;}
+  #splash h1{font-size:34px; margin:10px;}
   #splash .play{
     margin-top:24px; background:var(--amarelo); color:#5a4500; border:none; border-radius:30px;
-    font-size:28px; font-weight:bold; padding:18px 44px; box-shadow:0 8px 0 #d9a800; cursor:pointer;
+    font-size:30px; font-weight:bold; padding:18px 44px; box-shadow:0 8px 0 #d9a800; cursor:pointer;
   }
 
   #confetti{position:fixed; inset:0; pointer-events:none; z-index:40;}
   .win{text-align:center; padding:20px;}
-  .win .trophy-wrap{width:100px; height:100px; margin:0 auto 10px; animation:tada 1s;}
+  .win .trophy{font-size:90px; animation:tada 1s;}
 
   @media(max-width:480px){
-    .hero h1{font-size:24px;} .question{font-size:18px;} .card{font-size:15px;}
-    .stage .illust{max-width:280px;} .stage .desc-txt{font-size:15px;}
+    .hero h1{font-size:26px;} .question{font-size:19px;} .card{font-size:16px;}
   }
 </style>
+<link rel="stylesheet" href="../motor/interacoes.css">
+<style>
+  /* Quadro montado: sem as bordas tracejadas das vagas por cima da pintura. */
+  .qb-tabuleiro.completo .qb-vaga{border:none; border-radius:0;}
+</style>
+<script src="../motor/interacoes.js"></script>
 </head>
 <body>
 
 <div id="splash">
-  <div class="big" id="splashIcon"></div>
-  <h1>Art Fun!<br><span style="font-size:20px;font-weight:normal">Art &amp; English Adventures</span></h1>
-  <p style="font-size:18px;max-width:340px;">Explore famous paintings and learn English through art!</p>
-  <button class="play" id="startBtn">START</button>
+  <div><img src="images/st_owl.webp" alt="" style="width:170px;height:170px" class="flutua"></div>
+  <h1>Art Fun!<br><span style="font-size:20px;font-weight:normal">Art &amp; English</span></h1>
+  <p style="font-size:20px;max-width:380px;">Aprender inglês com a arte de Van Gogh!<br>Toque no botão para começar.</p>
+  <button class="play" id="startBtn">▶ START</button>
 </div>
 
 <canvas id="confetti"></canvas>
 <div id="app"></div>
 
 <script>
+/* ============================================================
+   ART FUN! — Módulo 9: arte em inglês e Van Gogh.
+   Tópicos (os mesmos da versão anterior, de pergunta e alternativa):
+   materiais de arte; qual material usar para cada tarefa; palavras
+   da natureza; dia e noite; quadros famosos; detetive de arte (pistas
+   de cada quadro); a Noite Estrelada explorada; a vida de Van Gogh.
+
+   Didática: o comando e o vocabulário vêm em inglês (VOICE_EN, voz
+   en-US) e a criança AGE — dá à coruja, estoura, procura, arrasta.
+   O apoio e a explicação vêm em português (VOICE, voz pt-BR).
+   ============================================================ */
+
+const App = document.getElementById('app');
+let stars = parseInt(localStorage.getItem('vitor_art_stars')||'0',10);
 
 /* ============================================================
-   IMAGENS
-   Cada chave vira images/<chave>.webp, gerado por
-   `node ferramentas/gerar-imagens.mjs ingles-art`.
-   O estilo comum fica no gerador — aqui só o que a imagem mostra.
+   VOZ EM PORTUGUÊS — apoio, instruções e significado das palavras.
    ============================================================ */
+const VOICE = {
+  greet:"Oi! Eu sou a Coruja Artista! Vamos aprender inglês brincando com a arte de Van Gogh. Escolha uma brincadeira!",
+  test:"Olá! Você está me ouvindo? Vamos brincar e aprender inglês!",
+  figurinha:"Você ganhou uma figurinha nova para o seu álbum!",
+  album:"Este é o seu álbum de figurinhas! Termine os jogos para completar.",
+
+  /* significado das palavras (tocam logo depois da palavra em inglês) */
+  pm_brush:"quer dizer pincel.",
+  pm_paint:"quer dizer tinta.",
+  pm_canvas:"quer dizer tela de pintura.",
+  pm_palette:"quer dizer paleta, a tábua onde o artista mistura as cores.",
+  pm_pencil:"quer dizer lápis.",
+  pm_crayon:"quer dizer giz de cera.",
+  pm_scissors:"quer dizer tesoura.",
+  pm_paper:"quer dizer papel.",
+  pm_glue:"quer dizer cola.",
+  pm_star:"quer dizer estrela.",
+  pm_moon:"quer dizer lua.",
+  pm_sun:"quer dizer sol.",
+  pm_tree:"quer dizer árvore.",
+  pm_flower:"quer dizer flor.",
+  pm_cloud:"quer dizer nuvem.",
+  pm_mountain:"quer dizer montanha.",
+  pm_cypress:"quer dizer cipreste, uma árvore alta e escura.",
+  pm_wheat:"quer dizer trigo, a plantação dourada.",
+  pm_painting:"quer dizer quadro, uma arte feita com tinta.",
+
+  /* 1. ART SUPPLIES — mascote */
+  ms_q:"A Coruja Artista vai pedir uma coisa em inglês. Escute e arraste para ela!",
+
+  /* 2. ART STUDIO — balões */
+  bt_draw:"O artista quer desenhar. Estoure só os balões com o material que ele precisa!",
+  bt_paint:"O artista quer pintar um quadro na tela. Estoure só os balões com o material que ele precisa!",
+  bt_cut:"O artista quer recortar formas de papel. Estoure só os balões com o material que ele precisa!",
+  bt_glue:"O artista quer colar pedaços de papel numa colagem. Estoure só os balões com o material que ele precisa!",
+  bt_mix:"O artista quer misturar as cores da tinta. Estoure só os balões com o lugar onde ele mistura!",
+  bt_color:"O artista quer colorir um desenho com cores fortes. Estoure só os balões com o material que ele precisa!",
+  be_draw:"Para desenhar no papel, usamos o lápis.",
+  be_paint:"Para pintar na tela com cores, usamos o pincel.",
+  be_cut:"Para recortar formas de papel, usamos a tesoura.",
+  be_glue:"Para colar o papel numa colagem, usamos a cola.",
+  be_mix:"Para misturar as cores da tinta, usamos a paleta.",
+  be_color:"Para colorir um desenho com cores fortes, usamos o giz de cera.",
+
+  /* 3. NATURE WORDS — memória */
+  mm_q:"Jogo da memória da natureza! Vire as cartas, escute a palavra em inglês e encontre os pares.",
+
+  /* 4. DAY OR NIGHT — classificar */
+  dn_q1:"Arraste cada figura para o dia ou para a noite!",
+  dn_q2:"Agora as figuras e os quadros de Van Gogh! Cada um mostra o dia ou a noite? Arraste para o grupo certo.",
+  dn_q3:"Arraste tudo! O que aparece na hora do dia, e o que aparece na hora da noite?",
+  dn_dia:"quer dizer dia: tem sol e nuvens no céu azul.",
+  dn_noite:"quer dizer noite: tem lua e estrelas no céu escuro.",
+  dn_starry:"é um quadro de noite, com estrelas girando no céu escuro.",
+  dn_wheat:"é um quadro de dia, com céu azul, nuvens e sol.",
+  dn_daytime:"é a hora do dia, quando o sol brilha.",
+  dn_nighttime:"é a hora da noite, quando aparecem a lua e as estrelas.",
+
+  /* 5. FAMOUS ART — quebra-cabeça */
+  qb_q:"Monte o quadro famoso de Van Gogh! Arraste cada pedaço para o lugar certo.",
+  qe_sunflowers:"Os Girassóis! Van Gogh pintou flores amarelas num vaso de barro, em 1888. Algumas flores já estão murchando.",
+  qe_self:"O Autorretrato! Van Gogh pintou o próprio rosto, com barba ruiva e olhos azuis. Ele fez mais de 30 autorretratos.",
+  qe_bedroom:"O Quarto! É o quarto onde Van Gogh dormia, na cidade de Arles, na França. Tem cama vermelha, duas cadeiras e paredes azuis. Pintado em 1888.",
+  qe_wheat:"Campo de Trigo com Ciprestes! Um campo de trigo dourado, ciprestes altos e escuros e o céu azul com nuvens. Pintado em 1889.",
+  qe_starry:"A Noite Estrelada! Estrelas girando no céu escuro, uma lua crescente, um cipreste e uma vila dormindo. Van Gogh pintou em 1889.",
+
+  /* 6. ART DETECTIVE — ligar */
+  dt_q:"Detetive de arte! Puxe uma linha de cada quadro até a pista que aparece nele.",
+  de_starry:"tem uma vila pequena dormindo embaixo do céu estrelado.",
+  de_wheat:"tem um campo de trigo dourado e um cipreste alto.",
+  de_sunflowers:"tem girassóis amarelos num vaso de barro.",
+  de_bedroom:"tem uma cama vermelha, duas cadeiras e paredes azuis.",
+  de_self:"mostra o rosto de Van Gogh, com barba ruiva e olhos azuis.",
+
+  /* 7. STARRY NIGHT — cena */
+  sn_q:"Esta é a Noite Estrelada! Escute em inglês e toque.",
+  sx_moon:"Na Noite Estrelada brilha uma lua crescente, que ilumina a noite.",
+  sx_stars:"quer dizer estrelas. Na Noite Estrelada elas brilham e giram no céu escuro.",
+  sx_village:"quer dizer vila, um grupo de casinhas. Van Gogh pintou a Noite Estrelada em 1889.",
+
+  /* 8. VAN GOGH — ordenar */
+  vg_q1:"A vida de Van Gogh! Primeiro, ele nasceu na Holanda. Depois, foi morar em Arles, na França. Lá ele pintou os Girassóis. Coloque na ordem: um, dois, três!",
+  vg_q2:"Primeiro, Van Gogh nasceu na Holanda. Depois, foi morar em Arles, na França. Lá pintou os Girassóis, em 1888. E em 1889 pintou a Noite Estrelada. Coloque na ordem!",
+  vg_q3:"Primeiro, Van Gogh nasceu na Holanda. Depois, foi morar em Arles, na França. Lá pintou o quarto onde dormia, em 1888. E em 1889 pintou o Campo de Trigo com Ciprestes. Coloque na ordem!",
+  vx_holanda:"é a Holanda, o país onde Van Gogh nasceu.",
+  vx_franca:"é a França, onde ele morou na cidade de Arles e pintou muitos quadros.",
+  vx_artist:"quer dizer artista: uma pessoa que cria arte. Van Gogh usava cores fortes e brilhantes.",
+};
+
+/* ============================================================
+   VOZ EM INGLÊS (en-US) — comandos, vocabulário e elogios.
+   ============================================================ */
+const VOICE_EN = {
+  win:"Congratulations! You did it!",
+  choose:"The answers are:",
+  ok1:"Very good!", ok2:"That's right!", ok3:"You got it!",
+  ok4:"Great job!", ok5:"Well done!", ok6:"Perfect!",
+  no1:"Almost! Try again.", no2:"Hmm, try another one.", no3:"Not that one. Try again!",
+
+  en_brush:"Brush", en_paint:"Paint", en_canvas:"Canvas", en_palette:"Palette",
+  en_pencil:"Pencil", en_crayon:"Crayon", en_scissors:"Scissors", en_paper:"Paper", en_glue:"Glue",
+  give_brush:"Give me the brush!", give_paint:"Give me the paint!", give_canvas:"Give me the canvas!",
+  give_palette:"Give me the palette!", give_pencil:"Give me the pencil!", give_crayon:"Give me the crayon!",
+  give_scissors:"Give me the scissors!", give_paper:"Give me the paper!", give_glue:"Give me the glue!",
+
+  tk_draw:"I want to draw a picture!",
+  tk_paint:"I want to paint a picture!",
+  tk_cut:"I want to cut out shapes!",
+  tk_glue:"I want to stick paper together!",
+  tk_mix:"I want to mix colors!",
+  tk_color:"I want to color a drawing!",
+
+  en_star:"Star", en_stars:"Stars", en_moon:"Moon", en_sun:"Sun", en_tree:"Tree", en_flower:"Flower",
+  en_cloud:"Cloud", en_mountain:"Mountain", en_cypress:"Cypress", en_wheat:"Wheat",
+
+  en_day:"Day", en_night:"Night", en_daytime:"Daytime", en_nighttime:"Nighttime",
+
+  en_called:"This painting is called...",
+  en_painting:"Painting",
+  en_starry_night:"The Starry Night", en_wheat_field:"Wheat Field with Cypresses",
+  en_sunflowers:"Sunflowers", en_bedroom:"The Bedroom", en_self_portrait:"Self Portrait",
+
+  dd_village:"A small village", dd_wheat:"Golden wheat", dd_vase:"A clay vase",
+  dd_bed:"A red bed", dd_beard:"A red beard",
+
+  fd_moon:"Find the moon!", fd_stars:"Find the stars!", fd_cv:"Find the cypress tree and the village!",
+  en_village:"Village",
+
+  vi_born:"Born in the Netherlands", vi_arles:"Moved to Arles, in France",
+  en_netherlands:"The Netherlands", en_france:"France",
+  en_vangogh:"Vincent van Gogh", en_artist:"Artist",
+};
+
+/* Ilustrações quadradas com fundo (as pinturas e as cenas de dia e noite). */
 const IMAGENS = {
-  brush: "A paintbrush with wooden handle and soft bristles loaded with blue paint, paint dripping slightly. Side view.",
-  paint: "An open paint pot with bright red paint inside, a small splash of paint on the side. Front view.",
-  canvas: "A blank white painting canvas on a small wooden easel, ready to be painted. Front view.",
-  palette: "A wooden artist palette with colorful paint blobs (red, blue, yellow, green, white) and a thumb hole. Top view.",
-  pencil: "A yellow number 2 pencil with pink eraser, sharpened tip with graphite visible. Slight angle view.",
-  crayon: "A set of 6 wax crayons in a small box: red, orange, yellow, green, blue, purple. Pointed tips. Front view.",
-  scissors: "Childrens safety scissors with rounded tips, green plastic handles, slightly open blades. Front view.",
-  paper: "A white sheet of paper, slightly curled at one corner, with a few colorful pencil marks. Front view.",
-  glue: "A bottle of white school glue with orange cap. Front view.",
-  star: "A glowing golden five-pointed star radiating soft yellow light against dark blue sky. Dreamy and magical.",
-  moon: "A crescent moon with warm yellow glow in a dark blue starry night sky. Peaceful and dreamy.",
-  sun: "A bright warm sun with orange-yellow rays extending outward against light blue sky. Friendly.",
-  tree: "A green cypress tree, tall and narrow like Van Gogh painted, with dark green swirling foliage on a grassy hill.",
-  flower: "A bright yellow sunflower with brown center and green stem, inspired by Van Gogh sunflowers. Front view.",
-  cloud: "A fluffy white cumulus cloud with soft gray shadows, in a bright blue sky. Side view.",
-  mountain: "A green rolling mountain with wildflowers, blue sky with white clouds above. Landscape view.",
-  wheat: "A golden wheat field with tall wheat stalks swaying in wind, warm golden tones. Landscape view.",
   "starry-night": "A child-friendly recreation of Van Gogh The Starry Night: swirling deep blue night sky with large glowing yellow stars and spirals, bright crescent moon, dark flame-shaped cypress tree on left, small charming village with church steeple below, rolling hills. Post-impressionist visible brushstroke style.",
   "wheat-field": "A child-friendly recreation of Van Gogh Wheat Field with Cypresses: golden wheat field in foreground swaying in wind, dark green flame-shaped cypress trees in middle, brilliant blue sky with large swirling white clouds. Post-impressionist visible brushstroke style.",
   sunflowers: "A child-friendly recreation of Van Gogh Sunflowers painting: a round yellow ceramic vase filled with bright sunflowers in various stages of bloom against warm yellow background. Post-impressionist visible brushstroke style.",
@@ -191,533 +309,418 @@ const IMAGENS = {
   "scene-day": "A cheerful bright daytime countryside scene: vivid blue sky with puffy white clouds, lush green rolling hills, warm yellow sun shining, colorful wildflowers in a meadow, a butterfly and a bird flying. Warm, vibrant, joyful.",
   "scene-night": "A peaceful magical nighttime scene: deep dark blue starry sky with crescent moon, a small cozy village with warmly lit windows, gentle fireflies glowing, a friendly owl sitting on a tree branch. Calm and dreamy.",
   "vangogh-artist": "A friendly warm cartoon illustration of Vincent Van Gogh as a painter: distinctive red-orange beard, wearing a straw hat, blue work clothes, holding a painters palette and paintbrush, standing in front of an easel outdoors in a sunny wheat field. Approachable and kind.",
-  mascot: "A cute cartoon owl wearing a purple French beret and holding a thin paintbrush with paint on it. The owl is colorful with big round expressive friendly eyes, small wings, sitting on a branch. Artistic and cheerful."
+};
+
+/* Objetos isolados, fundo transparente (arrastar, virar, estourar, compor cenas). */
+const ADESIVOS = {
+  st_owl: "A cute cartoon owl artist wearing a purple French beret, big round friendly eyes, both wings open wide as if asking for something, wings empty and holding nothing, full body",
+  st_brush: "A single paintbrush with a wooden handle and blue paint on the bristles, diagonal",
+  st_paint: "An open round pot of bright red paint, seen from the front",
+  st_canvas: "A blank painting canvas with a solid cream-colored surface, standing on a small wooden easel, nothing painted on it, opaque",
+  st_palette: "A wooden artist palette with a thumb hole and blobs of red, blue, yellow and green paint, no brush",
+  st_pencil: "A single yellow pencil with a pink eraser, diagonal",
+  st_crayon: "A small open box of colorful wax crayons",
+  st_scissors: "A pair of children's safety scissors with green handles",
+  st_paper: "A small stack of three sheets of colored paper, pink, yellow and light blue, slightly fanned out, blank",
+  st_glue: "A school glue bottle with an opaque solid white body, a light blue blank label and an orange cap",
+  st_star: "A golden yellow five-pointed star with a soft glow",
+  st_moon: "A yellow crescent moon",
+  st_sun: "A bright yellow sun with orange rays and a friendly smile",
+  st_tree: "A round leafy green tree with a brown trunk",
+  st_flower: "A single flower with pink petals, a yellow center and a green stem with two leaves",
+  st_cloud: "A fluffy cloud filled with solid opaque white and light gray-blue shading, with a blue outline",
+  st_mountain: "A tall rocky mountain with a white snowy peak",
+  st_cypress: "A tall narrow dark green cypress tree shaped like a flame, with swirly brushstroke foliage in Van Gogh style",
+  st_wheat: "A bundle of golden wheat stalks tied together",
+  st_village: "A small village of little houses with lit windows and a church with a pointed steeple",
+  st_vase: "An empty round clay vase, yellow and orange glazed ceramic, no flowers",
+  st_bed: "A simple wooden bed with a red blanket and two white pillows",
+  st_beard: "A big bushy red-orange beard with a mustache, only the beard and mustache, no face, no head",
+  st_holanda: "A traditional Dutch windmill with red and yellow tulips in front of it",
+  st_arles: "A small sunny town in the south of France: a few yellow and orange houses with red tile roofs and green shutters",
+  st_lupa: "A magnifying glass with a wooden handle",
+};
+
+/* Fundo em paisagem 3:2 para a cena da Noite Estrelada. */
+const CENARIOS = {
+  cn_starry: "A night landscape in the swirling brushstroke style of Van Gogh: deep blue swirling night sky with wind spirals filling the top half, dark blue and green rolling hills across the bottom part. No moon, no stars, no trees, no houses, no people, no animals",
 };
 
 /* ============================================================
-   ART FUN! v2 — Detailed SVG illustrations, English-first,
-   reasoning-based activities about Van Gogh, art supplies,
-   nature, day/night, and famous paintings.
+   PLAYER DE ÁUDIO (clipes em sequência)
    ============================================================ */
-
-const App = document.getElementById('app');
-let stars = parseInt(localStorage.getItem('vitor_art_stars')||'0',10);
-
-/* ============================================================
-   DETAILED SVG ILLUSTRATIONS
-   Each one uses gradients, shadows, textures for richer visuals
-   ============================================================ */
-
-/* ============================================================
-   IMAGES — DALL-E 3 generated high-quality illustrations
-   ============================================================ */
-const IMG = {
-  // Art supplies
-  brush: 'images/brush.png',
-  paint: 'images/paint.png',
-  canvas: 'images/canvas.png',
-  palette: 'images/palette.png',
-  pencil: 'images/pencil.png',
-  crayon: 'images/crayon.png',
-  scissors: 'images/scissors.png',
-  paper: 'images/paper.png',
-  glue: 'images/glue.png',
-  // Nature
-  star_shape: 'images/star.png',
-  moon_shape: 'images/moon.png',
-  sun_shape: 'images/sun.png',
-  tree_shape: 'images/tree.png',
-  flower_shape: 'images/flower.png',
-  cloud_shape: 'images/cloud.png',
-  mountain_shape: 'images/mountain.png',
-  cypress_shape: 'images/tree.png',
-  wheat_shape: 'images/wheat.png',
-  // Paintings
-  starry_night: 'images/starry-night.png',
-  wheat_field: 'images/wheat-field.png',
-  sunflowers: 'images/sunflowers.png',
-  bedroom: 'images/bedroom.png',
-  self_portrait: 'images/self-portrait.png',
-  // Scenes
-  scene_day: 'images/scene-day.png',
-  scene_night: 'images/scene-night.png',
-  // Artist
-  vangogh_artist: 'images/vangogh-artist.png',
-  // Mascot
-  mascot: 'images/mascot.png',
-};
-
-// Trophy SVG kept inline (small, decorative)
-const SVG = {
-  trophy: () => `<svg viewBox="0 0 100 100">
-    <defs><linearGradient id="tr1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f9e44c"/><stop offset="1" stop-color="#e8a838"/></linearGradient></defs>
-    <path d="M30 22 H70 L65 58 Q50 72 35 58 Z" fill="url(#tr1)" stroke="#d4a017" stroke-width="2"/>
-    <path d="M36 26 H64 L60 54 Q50 64 40 54 Z" fill="#ffeaa7" opacity=".3"/>
-    <rect x="42" y="64" width="16" height="12" rx="2" fill="#d4a017"/>
-    <rect x="34" y="74" width="32" height="7" rx="3" fill="#d4a017"/>
-    <rect x="30" y="79" width="40" height="5" rx="2" fill="#c9960c"/>
-    <path d="M30 22 Q12 26 16 42 Q18 55 35 52" fill="none" stroke="#f1c40f" stroke-width="5"/>
-    <path d="M70 22 Q88 26 84 42 Q82 55 65 52" fill="none" stroke="#f1c40f" stroke-width="5"/>
-    <text x="50" y="48" text-anchor="middle" fill="#d4a017" font-size="14" font-weight="bold">1</text>
-  </svg>`,
-  speaker: () => `<svg viewBox="0 0 24 24" width="24" height="24"><polygon points="3,9 3,15 7,15 13,19 13,5 7,9" fill="#5a4500"/><path d="M16 8.5 Q19 12 16 15.5" fill="none" stroke="#5a4500" stroke-width="1.5" stroke-linecap="round"/><path d="M18 6 Q23 12 18 18" fill="none" stroke="#5a4500" stroke-width="1.5" stroke-linecap="round"/></svg>`,
-};
-
-function imgTag(key, w) {
-  const src = IMG[key] || IMG.mascot;
-  return `<img src="${src}" alt="" class="illust" style="max-width:${w||320}px;border-radius:14px;box-shadow:0 4px 16px rgba(0,0,0,.12);" loading="lazy">`;
-}
-function imgOpt(key) {
-  const src = IMG[key] || IMG.mascot;
-  return `<img src="${src}" alt="" class="opt-icon" style="width:48px;height:48px;border-radius:8px;object-fit:cover;" loading="lazy">`;
-}
-
-
-function svgStage(key,w){return imgTag(key,w);}
-function svgOpt(key){return imgOpt(key);}
-
-/* ============================================================
-   VOICE (Portuguese — for audio generation)
-   ============================================================ */
-const VOICE={
-  greet:"Welcome! Choose an activity to explore art in English!",
-  test:"Hello! Can you hear me? Let's learn about art!",
-  win:"Congratulations! You did it! Amazing work!",
-  choose:"The answers are:",
-  ok1:"Very good!", ok2:"That's right!", ok3:"You got it!",
-  ok4:"Great job!", ok5:"Well done!", ok6:"Perfect!",
-  no1:"Almost! Try again.", no2:"Hmm, try another.", no3:"Not that one, try again.",
-  q_supply_name:"Look at the illustration. What is the name of this art supply in English?",
-  q_supply_use:"Think: which art supply do you need for this task?",
-  q_nature_word:"Look at the illustration. What is this element of nature called in English?",
-  q_daynight:"Is this a day scene or a night scene?",
-  q_painting_id:"Look at this painting carefully. What is its name?",
-  q_painting_describe:"Read the clues carefully and figure out which painting it is!",
-  q_starry_detail:"Look at The Starry Night and answer the question.",
-  q_vangogh_fact:"Answer the question about Van Gogh.",
-  use_draw:"The artist wants to draw on paper. Which supply does he need?",
-  use_paint:"The artist wants to paint on canvas with colors. What does he need?",
-  use_cut:"The artist needs to cut paper shapes. What does he use?",
-  use_glue:"The artist wants to glue pieces of paper in a collage. What does he need?",
-  use_mix:"The artist will mix different paint colors. Where does he do that?",
-  use_color:"The artist wants to color a drawing with bright colors. Which supply?",
-};
-
-const VOICE_EN={
-  en_brush:"Brush", en_paint:"Paint", en_canvas:"Canvas", en_palette:"Palette",
-  en_pencil:"Pencil", en_crayon:"Crayon", en_scissors:"Scissors", en_paper:"Paper", en_glue:"Glue",
-  en_star:"Star", en_moon:"Moon", en_sun:"Sun", en_tree:"Tree", en_flower:"Flower",
-  en_cloud:"Cloud", en_mountain:"Mountain", en_cypress:"Cypress", en_wheat:"Wheat",
-  en_day:"Day", en_night:"Night", en_daytime:"Daytime", en_nighttime:"Nighttime",
-  en_starry_night:"The Starry Night", en_wheat_field:"Wheat Field with Cypresses",
-  en_sunflowers:"Sunflowers", en_bedroom:"The Bedroom", en_self_portrait:"Self Portrait",
-  en_stars:"Stars", en_village:"Village", en_painting:"Painting", en_artist:"Artist",
-  en_netherlands:"The Netherlands", en_france:"France", en_vangogh:"Vincent Van Gogh",
-  en_field:"Field",
-};
-
-/* ============================================================
-   AUDIO ENGINE (same pattern as other modules)
-   ============================================================ */
-let audioCtx,audioQueue=[],audioPlaying=false;
-function initAudio(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();}
-function unlockAudio(){if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume();}
-function stopAudio(){audioQueue=[];audioPlaying=false;document.querySelectorAll('audio').forEach(a=>{a.pause();a.currentTime=0;});}
+const AUDIO_DIR='audio/', AUDIO_EXT='.mp3';
+const player=new Audio();
+player.preload='auto';
+let playToken=0, audioOn=true;
+function stopAudio(){ playToken++; try{player.pause();}catch(e){} setPlayingBadge(false); }
 function playKeys(keys){
-  keys=keys.filter(Boolean);if(!keys.length)return;
-  audioQueue.push(...keys);if(!audioPlaying)playNext();
+  if(!audioOn) return;
+  stopAudio();
+  const list=[].concat(...keys.map(k=>Array.isArray(k)?k:[k])).filter(Boolean);
+  if(!list.length) return;
+  const my=playToken; let i=0;
+  setPlayingBadge(true);
+  const next=()=>{
+    if(my!==playToken) return;
+    if(i>=list.length){ setPlayingBadge(false); return; }
+    const key=list[i++];
+    player.src=AUDIO_DIR+key+AUDIO_EXT;
+    player.onended=next;
+    player.onerror=()=>{ setTimeout(next,10); };
+    const p=player.play();
+    if(p&&p.catch) p.catch(()=>setTimeout(next,10));
+  };
+  next();
 }
-function playNext(){
-  if(!audioQueue.length){audioPlaying=false;return;}
-  audioPlaying=true;const k=audioQueue.shift();
-  const a=new Audio('audio/'+k+'.mp3');
-  a.onended=()=>setTimeout(playNext,150);
-  a.onerror=()=>setTimeout(playNext,50);
-  a.play().catch(()=>setTimeout(playNext,50));
+function setPlayingBadge(on){
+  const b=document.getElementById('qspeak'); if(b) b.classList.toggle('playing',on);
 }
-function sndClick(){try{const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.frequency.value=880;g.gain.value=.08;o.start();o.stop(audioCtx.currentTime+.06);}catch(e){}}
-function sndRight(){try{const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.type='triangle';o.frequency.value=660;g.gain.value=.1;o.start();o.stop(audioCtx.currentTime+.15);}catch(e){}}
-function sndWrong(){try{const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.type='sawtooth';o.frequency.value=180;g.gain.value=.07;o.start();o.stop(audioCtx.currentTime+.2);}catch(e){}}
-function sndWin(){try{[523,659,784,1047].forEach((f,i)=>{const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.type='triangle';o.frequency.value=f;g.gain.value=.08;o.start(audioCtx.currentTime+i*.12);o.stop(audioCtx.currentTime+i*.12+.2);});}catch(e){}}
+function unlockAudio(depois){
+  const pronto=()=>{ player.muted=false; if(depois){ const f=depois; depois=null; f(); } };
+  try{ player.muted=true; player.src=AUDIO_DIR+'greet'+AUDIO_EXT;
+       const p=player.play();
+       if(p&&p.then) p.then(()=>{player.pause();player.currentTime=0;pronto();}).catch(pronto);
+       else { player.pause(); pronto(); }
+       setTimeout(pronto,1200);
+  }catch(e){ pronto(); }
+}
 
-/* ===== HELPERS ===== */
-const OK_KEYS=['ok1','ok2','ok3','ok4','ok5','ok6'];
-const NO_KEYS=['no1','no2','no3'];
+/* ===== SONS DE EFEITO (Web Audio) ===== */
+let actx=null;
+function initAudio(){ try{ actx = actx || new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==='suspended') actx.resume(); }catch(e){} }
+function tone(freq,start,dur,type='sine',vol=0.2){
+  if(!actx) return;
+  const o=actx.createOscillator(), g=actx.createGain();
+  o.type=type; o.frequency.value=freq; o.connect(g); g.connect(actx.destination);
+  const t=actx.currentTime+start;
+  g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+0.02);
+  g.gain.exponentialRampToValueAtTime(0.001,t+dur);
+  o.start(t); o.stop(t+dur);
+}
+function sndClick(){ initAudio(); tone(540,0,0.07,'triangle',0.14); }
+function sndRight(){ initAudio(); [523,659,784,1047].forEach((f,i)=>tone(f,i*0.09,0.25,'triangle',0.18)); }
+function sndWrong(){ initAudio(); tone(300,0,0.18,'sine',0.13); tone(220,0.12,0.25,'sine',0.13); }
+function sndWin(){ initAudio(); [523,659,784,1047,784,1047,1319].forEach((f,i)=>tone(f,i*0.12,0.3,'triangle',0.2)); }
+
+/* ===== UTILIDADES ===== */
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function rint(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
 function pick(a){return a[Math.floor(Math.random()*a.length)];}
-function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
-function pickN(a,n){return shuffle(a).slice(0,n);}
-function shell(h){App.innerHTML=`
-  <div class="topbar">
-    <div class="nav"><a class="back-btn" href="../" title="Voltar ao menu de matérias" aria-label="Voltar ao menu de matérias">🏠</a><button class="home-btn" onclick="sndClick();goHome()" title="Escolher outro jogo desta matéria" aria-label="Escolher outro jogo desta matéria">🔄</button></div>
-    <div class="stars"><span class="num">${stars}</span></div>
-  </div>`+h;
-  window.scrollTo({top:0,behavior:'smooth'});
+const OK_KEYS=['ok1','ok2','ok3','ok4','ok5','ok6'], NO_KEYS=['no1','no2','no3'];
+
+function updateStars(){ const el=document.getElementById('starNum'); if(el) el.textContent=stars; localStorage.setItem('vitor_art_stars',stars); }
+function addStar(n=1){ stars+=n; updateStars(); }
+
+/* ---------------- CONFETE ---------------- */
+const cv=document.getElementById('confetti'), cx=cv.getContext('2d');
+let confs=[];
+function resizeCv(){cv.width=innerWidth;cv.height=innerHeight;}
+addEventListener('resize',resizeCv); resizeCv();
+function burst(){
+  const cols=['#ff6b9d','#ffd93d','#6bcB77','#4d96ff','#a06cd5','#ff924c'];
+  for(let i=0;i<70;i++){confs.push({x:innerWidth/2,y:innerHeight/3,vx:(Math.random()-0.5)*14,vy:Math.random()*-12-3,c:pick(cols),s:rint(7,14),r:Math.random()*6,vr:(Math.random()-.5)*.4});}
 }
-function addStar(n){stars+=n;localStorage.setItem('vitor_art_stars',stars);document.querySelectorAll('.num').forEach(e=>e.textContent=stars);}
+function loopConf(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  confs.forEach(p=>{p.vy+=0.35;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/2,p.s,p.s);cx.restore();});
+  confs=confs.filter(p=>p.y<cv.height+30);
+  requestAnimationFrame(loopConf);
+}
+loopConf();
 
-/* confetti */
-const CC=document.getElementById('confetti'),cx=CC.getContext('2d');
-function resizeCC(){CC.width=window.innerWidth;CC.height=window.innerHeight;}
-window.addEventListener('resize',resizeCC);resizeCC();
-function burst(){const ps=[];for(let i=0;i<40;i++)ps.push({x:CC.width/2,y:CC.height/2,vx:(Math.random()-.5)*14,vy:Math.random()*-12-4,r:Math.random()*6+3,c:`hsl(${Math.random()*360},90%,60%)`,life:1});(function ani(){cx.clearRect(0,0,CC.width,CC.height);let alive=false;ps.forEach(p=>{if(p.life<=0)return;alive=true;p.x+=p.vx;p.y+=p.vy;p.vy+=.3;p.life-=.015;cx.globalAlpha=p.life;cx.fillStyle=p.c;cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fill();});cx.globalAlpha=1;if(alive)requestAnimationFrame(ani);else cx.clearRect(0,0,CC.width,CC.height);})();}
+/* ===== SHELL ===== */
+function shell(inner){
+  App.innerHTML=`
+    <div class="topbar">
+      <div class="nav"><a class="back-btn" href="../" title="Voltar ao menu de matérias" aria-label="Voltar ao menu de matérias">🏠</a><button class="home-btn" onclick="sndClick();goHome()" title="Escolher outro jogo desta matéria" aria-label="Escolher outro jogo desta matéria">🔄</button></div>
+      <div class="stars">⭐ <span class="num" id="starNum">${stars}</span></div>
+    </div>
+    ${inner}`;
+  window.scrollTo(0,0);
+}
 
-/* ============================================================
-   GAMES
-   ============================================================ */
+/* ===== MENU ===== */
+const ico = k => `<img class="fig" src="images/${k}.webp" alt="">`;
 const GAMES=[
-  {id:'supplies',  svg:'palette',  nome:'Art Supplies',    sub:'Name the art materials',       cls:'c1'},
-  {id:'studio',    svg:'brush',    nome:'Art Studio',       sub:'Which supply do you need?',  cls:'c2'},
-  {id:'nature',    svg:'tree_shape',nome:'Nature Words',    sub:'Nature in the landscape',    cls:'c3'},
-  {id:'daynight',  svg:'moon_shape',nome:'Day or Night',    sub:'Observe the scene',          cls:'c4'},
-  {id:'paintings', svg:'canvas',   nome:'Famous Art',       sub:'Identify the painting',      cls:'c5'},
-  {id:'detective', svg:'palette',  nome:'Art Detective',    sub:'Read the clues',          cls:'c6'},
-  {id:'starry',    svg:'star_shape',nome:'Starry Night',    sub:'Explore the masterpiece',          cls:'c7'},
-  {id:'vangogh',   svg:'self_portrait',nome:'Van Gogh',     sub:'The artist\'s life',       cls:'c8'},
+  {id:'supplies',  ico:ico('st_brush'),       nome:'Art Supplies',  sub:'Give me the brush!',       cls:'c1'},
+  {id:'studio',    ico:ico('st_scissors'),    nome:'Art Studio',    sub:'Pop the right tool',       cls:'c2'},
+  {id:'nature',    ico:ico('st_tree'),        nome:'Nature Words',  sub:'Memory game',              cls:'c3'},
+  {id:'daynight',  ico:ico('st_moon'),        nome:'Day or Night',  sub:'Drag to day or night',     cls:'c4'},
+  {id:'paintings', ico:ico('sunflowers'),     nome:'Famous Art',    sub:'Painting puzzle',          cls:'c5'},
+  {id:'detective', ico:ico('st_lupa'),        nome:'Art Detective', sub:'Match the clue',           cls:'c6'},
+  {id:'starry',    ico:ico('starry-night'),   nome:'Starry Night',  sub:'Find the moon!',           cls:'c7'},
+  {id:'vangogh',   ico:ico('vangogh-artist'), nome:'Van Gogh',      sub:'The artist\'s life',       cls:'c8'},
 ];
 function goHome(silent){
   stopAudio();
   shell(`
     <div class="hero">
-      <div class="mascote-wrap">${imgTag("mascot",120)}</div>
+      <div class="mascote"><img src="images/st_owl.webp" alt="" style="width:120px;height:120px" class="flutua"></div>
       <h1>Art Fun!</h1>
-      <p>Choose an activity to explore art in English</p>
-      <button onclick="testSound()" style="margin-top:8px;background:var(--amarelo);color:#5a4500;border:none;border-radius:18px;padding:9px 18px;font-size:15px;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #d9a800;">Test sound</button>
+      <p>Escolha uma brincadeira 👇</p>
+      <button onclick="testSound()" style="margin-top:6px;background:var(--amarelo);color:#5a4500;border:none;border-radius:18px;padding:9px 18px;font-size:16px;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #d9a800;">🔈 Testar som</button>
     </div>
     <div class="grid">
       ${GAMES.map(g=>`<button class="card ${g.cls}" onclick="sndClick();startGame('${g.id}')">
-        <div class="card-icon">${imgTag(g.svg,64)}</div><span>${g.nome}</span>
-        <span class="sub">${g.sub}</span>
+        <span class="ico">${g.ico}</span><span>${g.nome}</span>
+        <span style="font-size:13px;font-weight:normal;opacity:.95">${g.sub}</span>
       </button>`).join('')}
     </div>
-    <p style="text-align:center;color:#aaa;margin-top:18px;font-size:13px;">Made with love for Vitor</p>
+    <p style="text-align:center;color:#a98cc0;margin-top:18px;font-size:14px;">Feito com 💜 para o Vitor</p>
   `);
-  if(!silent)setTimeout(()=>playKeys(['greet']),250);
+  if(!silent) setTimeout(()=>playKeys(['greet']),250);
 }
-function testSound(){initAudio();sndClick();playKeys(['test']);}
+function testSound(){ initAudio(); sndClick(); playKeys(['test']); }
 
-/* ===== GAME ENGINE ===== */
-let current=null,locked=false;
+/* ===== MOTOR DE RODADAS ===== */
+let current=null, locked=false;
 function startGame(id){
   const rounds=BUILDERS[id]();
-  current={id,title:GAMES.find(g=>g.id===id).nome,rounds,idx:0};
+  current={id, title:GAMES.find(g=>g.id===id).nome, rounds, idx:0};
   renderRound();
 }
 function gameFrame(c,r,bodyHtml){
-  const g=GAMES.find(g=>g.id===c.id);
   shell(`
     <div class="game">
-      <h2 class="game-title"><div class="title-icon">${imgTag(g.svg,64)}</div> ${c.title}</h2>
-      <div class="progress">Question ${c.idx+1} of ${c.rounds.length}</div>
+      <h2 class="game-title">${GAMES.find(g=>g.id===c.id).ico} ${c.title}</h2>
+      <div class="progress">Rodada ${c.idx+1} de ${c.rounds.length}</div>
       <div class="question">
-        <button class="speak-btn" id="qspeak" onclick="sndClick();speakRound()">${SVG.speaker()}</button>
+        <button class="speak-btn" id="qspeak" onclick="sndClick();speakRound()">🔊</button>
         <span>${r.q}</span>
       </div>
       <div class="stage">${r.stage||''}</div>
       ${bodyHtml}
-      <p class="hint">Tap to answer. Tap the speaker to hear again.</p>
+      <div style="font-size:14px;color:#aaa;margin-top:6px;">👆 Toque nas figuras para ouvir em inglês. Toque no 🔊 para ouvir de novo.</div>
       <div class="feedback" id="fb"></div>
     </div>
   `);
 }
 function renderRound(){
   locked=false;
-  const c=current,r=c.rounds[c.idx];
+  const c=current, r=c.rounds[c.idx];
+  if(window.MODOS && MODOS[r.mode]) return MODOS[r.mode](c,r);
   gameFrame(c,r,`<div class="options" id="opts"></div>`);
   const shown=shuffle(r.options);
   const opts=document.getElementById('opts');
   shown.forEach(o=>{
     const b=document.createElement('button');
     b.className='opt';
-    b.innerHTML=(o.svg?svgOpt(o.svg):'')+`<span class="opt-label">${o.label}</span>`;
+    b.innerHTML=o.label;
     b.onclick=()=>answer(b,o);
     opts.appendChild(b);
   });
-  window._roundKeys=[].concat(r.audio||[],['choose'],shown.map(o=>o.aud).filter(Boolean));
+  window._roundKeys=[].concat(r.audio||[], ['choose'], shown.map(o=>o.aud));
   setTimeout(()=>speakRound(),400);
 }
-function speakRound(){playKeys(window._roundKeys||[]);}
+function speakRound(){ playKeys(window._roundKeys||[]); }
 
 function showNextButton(){
   document.querySelectorAll('.opt').forEach(b=>b.onclick=null);
-  const nb=document.createElement('button');nb.className='next-btn';
+  const nb=document.createElement('button');
+  nb.className='next-btn';
   const last=current.idx>=current.rounds.length-1;
-  nb.textContent=last?'Finish!':'Next';
-  nb.onclick=()=>{sndClick();locked=false;if(last)winScreen();else{current.idx++;renderRound();}};
+  nb.textContent=last?'🏆 Terminar':'Próxima ➡';
+  nb.onclick=()=>{
+    nb.onclick=null;
+    sndClick();
+    if(last){ winScreen(); return; }
+    current.idx++; renderRound();
+    locked=true; setTimeout(()=>{locked=false;},350);
+  };
   document.querySelector('.game').appendChild(nb);
 }
-function correctFlow(ea){
-  locked=true;sndRight();burst();addStar(1);
-  const fb=document.getElementById('fb');if(fb){fb.className='feedback good';fb.textContent='Great job!';}
-  playKeys(ea.filter(Boolean));showNextButton();
+function correctFlow(extraAudio){
+  locked=true; sndRight(); burst(); addStar(1);
+  const fb=document.getElementById('fb'); if(fb){fb.className='feedback good'; fb.textContent='⭐ Great job!';}
+  playKeys(extraAudio.filter(Boolean));
+  showNextButton();
 }
 function answer(btn,opt){
-  if(locked)return;
+  if(locked) return;
   if(opt.correct){
     btn.classList.add('ok');
     document.querySelectorAll('.opt').forEach(b=>{if(b!==btn)b.classList.add('no');});
-    correctFlow([opt.aud,pick(OK_KEYS),opt.expAud]);
+    correctFlow([opt.aud, pick(OK_KEYS), opt.expAud]);
   }else{
-    btn.classList.add('no');btn.onclick=null;sndWrong();
-    const fb=document.getElementById('fb');fb.className='feedback bad';fb.textContent='Try again!';
-    playKeys([opt.aud,pick(NO_KEYS)].filter(Boolean));
+    btn.classList.add('no'); btn.onclick=null;
+    sndWrong();
+    const fb=document.getElementById('fb'); fb.className='feedback bad'; fb.textContent='🤔 Try again!';
+    playKeys([opt.aud, pick(NO_KEYS)].filter(Boolean));
   }
 }
+
 function winScreen(){
-  sndWin();burst();setTimeout(burst,400);setTimeout(burst,800);
+  sndWin(); burst(); setTimeout(burst,400); setTimeout(burst,800);
+  const c=current;
   shell(`
     <div class="game win">
-      <div class="trophy-wrap">${SVG.trophy()}</div>
+      <div class="trophy">🏆</div>
       <h2 class="game-title">Congratulations!</h2>
-      <p style="font-size:20px;">You earned <b>${current.rounds.length}</b> stars!</p>
-      <p style="font-size:16px;color:#888;">You are becoming an expert in <b>${current.title}</b>!</p>
-      <button class="next-btn" onclick="sndClick();startGame('${current.id}')">Play again</button>
+      <p style="font-size:22px;">Você ganhou <b>${c.rounds.length}</b> estrelas! ⭐</p>
+      <p style="font-size:18px;color:#888;">Você está ficando craque em <b>${c.title}</b>!</p>
+      <button class="next-btn" onclick="sndClick();startGame('${c.id}')">🔁 Jogar de novo</button>
       <br>
-      <button class="next-btn" style="background:var(--roxo);box-shadow:0 6px 0 #5c2e90;margin-top:10px;" onclick="sndClick();goHome()">Choose another</button>
+      <button class="next-btn" style="background:var(--azul);box-shadow:0 6px 0 #2f6fd0;margin-top:10px;" onclick="sndClick();goHome()">🏠 Escolher outro</button>
     </div>
   `);
   setTimeout(()=>playKeys(['win']),250);
 }
 
 /* ============================================================
-   VOCABULARY
+   CONTEÚDO
    ============================================================ */
-const SUPPLIES=[
-  {k:'brush',svg:'brush',en:'BRUSH',cap:'paintbrush',aud:'en_brush'},
-  {k:'paint',svg:'paint',en:'PAINT',cap:'paint set',aud:'en_paint'},
-  {k:'canvas',svg:'canvas',en:'CANVAS',cap:'painting surface',aud:'en_canvas'},
-  {k:'palette',svg:'palette',en:'PALETTE',cap:'color mixing board',aud:'en_palette'},
-  {k:'pencil',svg:'pencil',en:'PENCIL',cap:'drawing tool',aud:'en_pencil'},
-  {k:'crayon',svg:'crayon',en:'CRAYON',cap:'wax crayon',aud:'en_crayon'},
-  {k:'scissors',svg:'scissors',en:'SCISSORS',cap:'cutting tool',aud:'en_scissors'},
-  {k:'paper',svg:'paper',en:'PAPER',cap:'drawing sheet',aud:'en_paper'},
-  {k:'glue',svg:'glue',en:'GLUE',cap:'glue stick',aud:'en_glue'},
+const SUPPLIES=['brush','paint','canvas','palette','pencil','crayon','scissors','paper','glue'];
+const NATURE=['star','moon','sun','tree','flower','cloud','mountain','cypress','wheat'];
+
+/* Qual material para cada tarefa (os distratores são os da versão anterior,
+   escolhidos para não haver duas respostas possíveis). */
+const TASKS=[
+  {k:'draw', frase:'draw a picture',      tool:'pencil',   wrongs:['scissors','glue','paint']},
+  {k:'paint', frase:'paint a picture',     tool:'brush',    wrongs:['scissors','pencil','paper']},
+  {k:'cut', frase:'cut out shapes',      tool:'scissors', wrongs:['brush','crayon','palette']},
+  {k:'glue', frase:'stick paper together',tool:'glue',     wrongs:['pencil','scissors','canvas']},
+  {k:'mix', frase:'mix colors',          tool:'palette',  wrongs:['paper','glue','scissors']},
+  {k:'color', frase:'color a drawing',     tool:'crayon',   wrongs:['scissors','glue','canvas']},
 ];
-const NATURE=[
-  {k:'star',svg:'star_shape',en:'STAR',cap:'a bright point in the sky',aud:'en_star'},
-  {k:'moon',svg:'moon_shape',en:'MOON',cap:'lights up the night',aud:'en_moon'},
-  {k:'sun',svg:'sun_shape',en:'SUN',cap:'lights up the day',aud:'en_sun'},
-  {k:'tree',svg:'tree_shape',en:'TREE',cap:'tall plant with branches',aud:'en_tree'},
-  {k:'flower',svg:'flower_shape',en:'FLOWER',cap:'colorful plant',aud:'en_flower'},
-  {k:'cloud',svg:'cloud_shape',en:'CLOUD',cap:'white shape in the sky',aud:'en_cloud'},
-  {k:'mountain',svg:'mountain_shape',en:'MOUNTAIN',cap:'very tall land',aud:'en_mountain'},
-  {k:'cypress',svg:'cypress_shape',en:'CYPRESS',cap:'tall dark tree',aud:'en_cypress'},
-  {k:'wheat',svg:'wheat_shape',en:'WHEAT',cap:'golden grain crop',aud:'en_wheat'},
-];
-const PAINTINGS=[
-  {k:'starry_night',svg:'starry_night',en:'THE STARRY NIGHT',cap:'A Noite Estrelada',aud:'en_starry_night',artist:'Van Gogh',year:'1889',
-   desc:'A dark night sky filled with swirling bright stars and a glowing crescent moon. A tall dark cypress tree stands on the left. Below, a small quiet village sleeps under the magical sky.'},
-  {k:'wheat_field',svg:'wheat_field',en:'WHEAT FIELD WITH CYPRESSES',cap:'Campo de Trigo com Ciprestes',aud:'en_wheat_field',artist:'Van Gogh',year:'1889',
-   desc:'A golden wheat field stretches across the painting. A tall, dark green cypress tree rises on the right side. The sky is bright blue with fluffy white clouds. Mountains appear in the distance.'},
-  {k:'sunflowers',svg:'sunflowers',en:'SUNFLOWERS',cap:'Girassois',aud:'en_sunflowers',artist:'Van Gogh',year:'1888',
-   desc:'A simple clay vase holds several large sunflowers. Some flowers are bright yellow, others are orange or brown. Some petals are starting to droop. The background is a warm, light color.'},
-  {k:'bedroom',svg:'bedroom',en:'THE BEDROOM',cap:'O Quarto',aud:'en_bedroom',artist:'Van Gogh',year:'1888',
-   desc:'Van Gogh\'s bedroom in the city of Arles, France. A red bed with white pillows, two wooden chairs, a small table, and pictures hanging on bright blue walls. A window lets in some light.'},
-  {k:'self_portrait',svg:'self_portrait',en:'SELF PORTRAIT',cap:'Autorretrato',aud:'en_self_portrait',artist:'Van Gogh',year:'1889',
-   desc:'Van Gogh painted his own face. He has a red-orange beard, blue eyes, and wears a dark coat with a hat. The background shows swirling blue patterns. He painted more than 30 self portraits.'},
-];
+
+/* Os cinco quadros: nome em inglês, explicação e a pista do detetive. */
+const QUADROS={
+  'starry-night': {aud:'en_starry_night', exp:'qe_starry',     pista:'st_village', pAud:'dd_village', pExp:'de_starry'},
+  'wheat-field':  {aud:'en_wheat_field',  exp:'qe_wheat',      pista:'st_wheat',   pAud:'dd_wheat',   pExp:'de_wheat'},
+  'sunflowers':   {aud:'en_sunflowers',   exp:'qe_sunflowers', pista:'st_vase',    pAud:'dd_vase',    pExp:'de_sunflowers'},
+  'bedroom':      {aud:'en_bedroom',      exp:'qe_bedroom',    pista:'st_bed',     pAud:'dd_bed',     pExp:'de_bedroom'},
+  'self-portrait':{aud:'en_self_portrait',exp:'qe_self',       pista:'st_beard',   pAud:'dd_beard',   pExp:'de_self'},
+};
+
+const sticker = k => ({img:'st_'+k, aud:'en_'+k});
+const ensina = k => ['en_'+k, 'pm_'+k];   // "Brush" + "quer dizer pincel."
+
+/* Cena da Noite Estrelada: céu em cima, chão embaixo (x, y, w em % do cenário 3:2).
+   w=22 dá ~74 px no celular. */
+const CEU=[{x:3,y:5},{x:39,y:3},{x:75,y:6}];
+const CHAO=[{x:2,y:60},{x:26,y:64},{x:51,y:59},{x:76,y:63}];
+function montarCena(ceu, chao){
+  const pos=(lista,vagas)=>shuffle(vagas).slice(0,lista.length).map((v,i)=>({...lista[i], x:v.x, y:v.y, w:22}));
+  return [...pos(shuffle(ceu),CEU), ...pos(shuffle(chao),CHAO)];
+}
+const obj = (k, certo) => ({img:'st_'+k, aud:'en_'+k, certo:!!certo});
 
 /* ============================================================
-   BUILDERS — Activities with reasoning
+   CONSTRUTORES DE RODADAS — 3 rodadas por jogo, ficando mais difíceis.
    ============================================================ */
-const BUILDERS={};
+const BUILDERS={
+  /* 1. Ouvir e agir (TPR): a coruja pede em inglês, a criança entrega. 1, 2 e 3 pedidos. */
+  supplies(){
+    const ordem=shuffle(SUPPLIES); let p=0;
+    return [1,2,3].map(n=>{
+      const pedidos=ordem.slice(p,p+n); p+=n;
+      const outros=shuffle(SUPPLIES.filter(k=>!pedidos.includes(k))).slice(0,3);
+      return {mode:'mascote',
+        q:'Give me '+pedidos.map(k=>`the <b>${k}</b>`).join(' and ')+'!',
+        audio:['ms_q', ...pedidos.map(k=>'give_'+k)],
+        expAud:pedidos.flatMap(ensina),
+        mascote:'st_owl',
+        itens:[...pedidos.map(k=>({...sticker(k), certo:true})), ...outros.map(k=>({...sticker(k), certo:false}))]};
+    });
+  },
 
-/* 1. ART SUPPLIES — Identify the supply by its detailed illustration */
-BUILDERS.supplies=()=>{
-  const items=shuffle(SUPPLIES).slice(0,6);
-  return items.map(it=>{
-    const wrongs=pickN(SUPPLIES.filter(x=>x.k!==it.k),3);
-    return {
-      q:'Look at this art supply. What is it called in English?',
-      audio:['q_supply_name'],
-      stage:svgStage(it.svg,160)+`<div class="label-txt">${it.cap}</div>`,
-      options:[
-        {label:`<b>${it.en}</b>`,aud:it.aud,correct:true},
-        ...wrongs.map(w=>({label:`<b>${w.en}</b>`,aud:w.aud}))
-      ]
-    };
-  });
+  /* 2. Qual material para a tarefa? Estoura o balão do material certo. */
+  studio(){
+    return shuffle(TASKS).slice(0,3).map((t,i)=>({mode:'baloes',
+      q:`I want to <b>${t.frase}</b>! Pop the right one.`,
+      audio:['tk_'+t.k, 'bt_'+t.k],
+      expAud:['tk_'+t.k, 'en_'+t.tool, 'be_'+t.k],
+      meta:[3,4,5][i],
+      itens:[{...sticker(t.tool), certo:true}, ...t.wrongs.slice(0, i===0?2:3).map(w=>({...sticker(w), certo:false}))]}));
+  },
+
+  /* 3. Memória: cada carta virada fala a palavra em inglês. 3, 4 e 5 pares. */
+  nature(){
+    return [3,4,5].map(n=>{
+      const ks=shuffle(NATURE).slice(0,n);
+      return {mode:'memoria', q:'Find the pairs! Listen to the English words.', audio:['mm_q'],
+        expAud:ks.flatMap(ensina), pares:ks.map(sticker)};
+    });
+  },
+
+  /* 4. Dia ou noite: arrastar para o grupo. Depois os quadros; por fim daytime/nighttime. */
+  daynight(){
+    const DIA={id:'day', img:'scene-day', aud:'en_day'}, NOITE={id:'night', img:'scene-night', aud:'en_night'};
+    const it=(img,aud,grupo)=>({img,aud,grupo});
+    return [
+      {mode:'classificar', q:'<b>Day</b> or <b>night</b>?', audio:['dn_q1'],
+       expAud:['en_day','dn_dia','en_night','dn_noite'], grupos:[DIA,NOITE],
+       itens:[it('st_sun','en_sun','day'), it('st_cloud','en_cloud','day'), it('st_moon','en_moon','night'), it('st_star','en_star','night')]},
+      {mode:'classificar', q:'Is the painting <b>day</b> or <b>night</b>?', audio:['dn_q2'],
+       expAud:['en_starry_night','dn_starry','en_wheat_field','dn_wheat'], grupos:[DIA,NOITE],
+       itens:[it('starry-night','en_starry_night','night'), it('wheat-field','en_wheat_field','day'), it('st_cloud','en_cloud','day'), it('st_star','en_star','night')]},
+      {mode:'classificar', q:'<b>Daytime</b> or <b>nighttime</b>?', audio:['dn_q3'],
+       expAud:['en_daytime','dn_daytime','en_nighttime','dn_nighttime'],
+       grupos:[{...DIA, aud:'en_daytime'}, {...NOITE, aud:'en_nighttime'}],
+       itens:[it('st_sun','en_sun','day'), it('st_cloud','en_cloud','day'), it('wheat-field','en_wheat_field','day'),
+              it('st_moon','en_moon','night'), it('st_star','en_star','night'), it('starry-night','en_starry_night','night')]},
+    ];
+  },
+
+  /* 5. Quebra-cabeça dos quadros famosos: 2x2, depois 3x3, por fim a Noite Estrelada. */
+  paintings(){
+    const r=(img,grade,extra)=>({mode:'quebra', q:'Make the famous painting!', audio:['qb_q','en_called',QUADROS[img].aud],
+      expAud:[QUADROS[img].aud, QUADROS[img].exp, ...(extra||[])], img, grade});
+    return [
+      r(pick(['sunflowers','self-portrait']), 2, ['en_painting','pm_painting']),
+      r(pick(['bedroom','wheat-field']), 3),
+      r('starry-night', 3),
+    ];
+  },
+
+  /* 6. Detetive: ligar cada quadro ao detalhe que aparece nele. 3, 4 e 5 pares. */
+  detective(){
+    return [3,4,5].map(n=>{
+      const qs=shuffle(Object.keys(QUADROS)).slice(0,n);
+      return {mode:'ligar', q:'Match each painting to its clue!', audio:['dt_q'],
+        expAud:qs.flatMap(k=>[QUADROS[k].aud, QUADROS[k].pExp]),
+        pares:qs.map(k=>({a:{img:k, aud:QUADROS[k].aud}, b:{img:QUADROS[k].pista, aud:QUADROS[k].pAud}}))};
+    });
+  },
+
+  /* 7. Procurar na Noite Estrelada o que a voz pede em inglês. */
+  starry(){
+    return [
+      {mode:'cena', q:'Find the <b>moon</b>!', audio:['sn_q','fd_moon'], expAud:['en_moon','pm_moon','sx_moon'], fundo:'cn_starry',
+       objetos:montarCena([obj('moon',1), obj('sun'), obj('cloud')], [obj('flower')])},
+      {mode:'cena', q:'Find the <b>stars</b>!', audio:['sn_q','fd_stars'], expAud:['en_stars','sx_stars'], fundo:'cn_starry',
+       objetos:montarCena([obj('star',1), obj('star',1), obj('sun')], [obj('cypress'), obj('flower')])},
+      {mode:'cena', q:'Find the <b>cypress tree</b> and the <b>village</b>!', audio:['sn_q','fd_cv'],
+       expAud:['en_cypress','pm_cypress','en_village','sx_village'], fundo:'cn_starry',
+       objetos:montarCena([obj('moon'), obj('star'), obj('sun')], [obj('cypress',1), obj('village',1), obj('flower')])},
+    ];
+  },
+
+  /* 8. A vida de Van Gogh: ouvir a história e pôr os quadros na ordem. */
+  vangogh(){
+    const nasceu={img:'st_holanda', aud:'vi_born'}, arles={img:'st_arles', aud:'vi_arles'};
+    const q=k=>({img:k, aud:QUADROS[k].aud});
+    return [
+      {mode:'ordenar', q:'Van Gogh\'s life: put it in order!', audio:['vg_q1'],
+       expAud:['en_netherlands','vx_holanda','en_france','vx_franca'],
+       itens:[nasceu, arles, q('sunflowers')]},
+      {mode:'ordenar', q:'Van Gogh\'s life: put it in order!', audio:['vg_q2'],
+       expAud:['en_vangogh','en_artist','vx_artist'],
+       itens:[nasceu, arles, q('sunflowers'), q('starry-night')]},
+      {mode:'ordenar', q:'Van Gogh\'s life: put it in order!', audio:['vg_q3'],
+       expAud:['en_bedroom','qe_bedroom','en_wheat_field','qe_wheat'],
+       itens:[nasceu, arles, q('bedroom'), q('wheat-field')]},
+    ];
+  },
 };
 
-/* 2. ART STUDIO — Think about which supply you need (reasoning!) */
-BUILDERS.studio=()=>{
-  const tasks=[
-    {q:'The artist wants to <b>draw a picture</b> on paper. Which supply does he need?',audio:['use_draw'],correct:'pencil',wrongs:['scissors','glue','paint']},
-    {q:'The artist wants to <b>paint a picture</b> with colors on a canvas. What does she need?',audio:['use_paint'],correct:'brush',wrongs:['scissors','pencil','paper']},
-    {q:'The artist needs to <b>cut out shapes</b> from paper. What tool does he use?',audio:['use_cut'],correct:'scissors',wrongs:['brush','crayon','palette']},
-    {q:'The artist wants to <b>stick pieces of paper</b> together for a collage. What does she need?',audio:['use_glue'],correct:'glue',wrongs:['pencil','scissors','canvas']},
-    {q:'The artist will <b>mix different colors</b> of paint together. Where does he do that?',audio:['use_mix'],correct:'palette',wrongs:['paper','glue','scissors']},
-    {q:'The artist wants to <b>color a drawing</b> with bright, waxy colors. Which supply?',audio:['use_color'],correct:'crayon',wrongs:['scissors','glue','canvas']},
-  ];
-  return shuffle(tasks).slice(0,6).map(t=>{
-    const c=SUPPLIES.find(s=>s.k===t.correct);
-    const ws=t.wrongs.map(w=>SUPPLIES.find(s=>s.k===w));
-    return {
-      q:t.q,audio:t.audio,
-      stage:`<div class="clue-box">Think carefully: which art supply solves this problem?</div>`,
-      options:[
-        {label:`<b>${c.en}</b><br><span class="opt-label">${c.cap}</span>`,svg:c.svg,aud:c.aud,correct:true},
-        ...ws.map(w=>({label:`<b>${w.en}</b><br><span class="opt-label">${w.cap}</span>`,svg:w.svg,aud:w.aud}))
-      ]
-    };
-  });
-};
-
-/* 3. NATURE WORDS — identify nature elements */
-BUILDERS.nature=()=>{
-  const items=shuffle(NATURE).slice(0,6);
-  return items.map(it=>{
-    const wrongs=pickN(NATURE.filter(x=>x.k!==it.k),3);
-    return {
-      q:'Look at this element of nature. What is it called in English?',
-      audio:['q_nature_word'],
-      stage:svgStage(it.svg,140)+`<div class="label-txt">${it.cap}</div>`,
-      options:[
-        {label:`<b>${it.en}</b>`,aud:it.aud,correct:true},
-        ...wrongs.map(w=>({label:`<b>${w.en}</b>`,aud:w.aud}))
-      ]
-    };
-  });
-};
-
-/* 4. DAY OR NIGHT — observe visual clues and reason */
-BUILDERS.daynight=()=>{
-  const rounds=[
-    {q:'Look at this scene. The sun is shining brightly in a blue sky with clouds. Is it day or night?',
-     stage:svgStage('scene_day',280),correct:'DAY',wrong:'NIGHT',caud:'en_day',waud:'en_night'},
-    {q:'Look at this scene. Stars are twinkling and a crescent moon glows. The houses have lit windows. Is it day or night?',
-     stage:svgStage('scene_night',280),correct:'NIGHT',wrong:'DAY',caud:'en_night',waud:'en_day'},
-    {q:'In <i>The Starry Night</i>, Van Gogh painted swirling stars in a dark sky. Is this painting showing day or night?',
-     stage:svgStage('starry_night',280),correct:'NIGHT',wrong:'DAY',caud:'en_night',waud:'en_day'},
-    {q:'In <i>Wheat Field with Cypresses</i>, the sky is bright blue with white clouds and sunshine. Is it day or night?',
-     stage:svgStage('wheat_field',280),correct:'DAY',wrong:'NIGHT',caud:'en_day',waud:'en_night'},
-    {q:'When you see the moon and stars in the sky, in English we say it is...',
-     stage:svgStage('moon_shape',120),correct:'NIGHTTIME',wrong:'DAYTIME',caud:'en_nighttime',waud:'en_daytime'},
-    {q:'When the sun is high and the sky is bright and clear, in English we say it is...',
-     stage:svgStage('sun_shape',120),correct:'DAYTIME',wrong:'NIGHTTIME',caud:'en_daytime',waud:'en_nighttime'},
-  ];
-  return shuffle(rounds).slice(0,6).map(r=>({
-    q:r.q,audio:['q_daynight'],stage:r.stage,
-    options:[
-      {label:`<b>${r.correct}</b>`,aud:r.caud,correct:true},
-      {label:`<b>${r.wrong}</b>`,aud:r.waud},
-    ]
-  }));
-};
-
-/* 5. FAMOUS ART — read the description, identify the painting */
-BUILDERS.paintings=()=>{
-  const items=shuffle(PAINTINGS).slice(0,5);
-  return items.map(it=>{
-    const wrongs=pickN(PAINTINGS.filter(x=>x.k!==it.k),3);
-    return {
-      q:'Look at this painting carefully. Read the description. What is its name?',
-      audio:['q_painting_id'],
-      stage:svgStage(it.svg,300)+`<div class="desc-txt">${it.desc}</div>`,
-      options:[
-        {label:`<b>${it.en}</b>`,aud:it.aud,correct:true},
-        ...wrongs.map(w=>({label:`<b>${w.en}</b>`,aud:w.aud}))
-      ]
-    };
-  });
-};
-
-/* 6. ART DETECTIVE — read clues WITHOUT seeing the image, then deduce */
-BUILDERS.detective=()=>{
-  const clues=[
-    {q:`This painting shows a <b>dark sky full of stars</b> that seem to be swirling and moving. There is a <b>tall, dark cypress tree</b> on the left side, and a <b>small sleeping village</b> at the bottom. A <b>bright crescent moon</b> shines in the corner. Which painting is this?`,
-     correct:'starry_night',wrongs:['wheat_field','sunflowers','bedroom']},
-    {q:`In this painting, you see a <b>golden wheat field</b> stretching across the bottom. On the right side stands a <b>tall, dark green tree</b> called a cypress. The sky above is <b>bright blue with fluffy white clouds</b>. Mountains can be seen far away. Which painting is this?`,
-     correct:'wheat_field',wrongs:['starry_night','sunflowers','self_portrait']},
-    {q:`A simple <b>clay vase</b> sits on a table. Inside the vase are several <b>big yellow flowers</b> with dark brown centers. Some flowers look fresh, but others are starting to <b>droop and turn brown</b>. The background is a warm, plain color. Which painting is this?`,
-     correct:'sunflowers',wrongs:['starry_night','bedroom','wheat_field']},
-    {q:`This painting shows a <b>small room</b> with a <b>red bed</b> and white pillows. There are <b>two wooden chairs</b>, a little table, and pictures on the wall. The <b>walls are blue</b>. It is the room where the artist <b>slept</b> when he lived in Arles, France. Which painting is this?`,
-     correct:'bedroom',wrongs:['self_portrait','sunflowers','starry_night']},
-    {q:`The artist painted <b>his own face</b>! He has a <b>red-orange beard</b> and <b>blue eyes</b>. He wears a dark coat and a hat. The background has <b>swirling blue patterns</b>. He painted more than 30 pictures like this. Which painting is this?`,
-     correct:'self_portrait',wrongs:['bedroom','sunflowers','wheat_field']},
-  ];
-  return shuffle(clues).slice(0,5).map(c=>{
-    const right=PAINTINGS.find(p=>p.k===c.correct);
-    const ws=c.wrongs.map(w=>PAINTINGS.find(p=>p.k===w));
-    return {
-      q:'Read the clues carefully. Which painting is being described?',
-      audio:['q_painting_describe'],
-      stage:`<div class="clue-box">${c.q}</div>`,
-      options:[
-        {label:`<b>${right.en}</b>`,aud:right.aud,correct:true},
-        ...ws.map(w=>({label:`<b>${w.en}</b>`,aud:w.aud}))
-      ]
-    };
-  });
-};
-
-/* 7. STARRY NIGHT — deep exploration of the painting */
-BUILDERS.starry=()=>{
-  const qs=[
-    {q:'In <i>The Starry Night</i>, what shines brightly in the dark sky?',
-     correct:{label:'<b>STARS</b><br>bright points of light',aud:'en_stars'},
-     wrongs:[{label:'<b>SUN</b><br>gives us daylight',aud:'en_sun'},{label:'<b>CLOUDS</b><br>white shapes in sky',aud:'en_cloud'},{label:'<b>FLOWERS</b><br>colorful plants',aud:'en_flower'}]},
-    {q:'There is a tall, dark tree on the left side of <i>The Starry Night</i>. What kind of tree is it?',
-     correct:{label:'<b>CYPRESS</b><br>tall evergreen tree',aud:'en_cypress'},
-     wrongs:[{label:'<b>WHEAT</b><br>golden grain',aud:'en_wheat'},{label:'<b>FLOWER</b><br>colorful plant',aud:'en_flower'},{label:'<b>MOUNTAIN</b><br>very tall land',aud:'en_mountain'}]},
-    {q:'Besides the stars, there is a glowing <b>crescent shape</b> in the sky. What is it?',
-     correct:{label:'<b>MOON</b><br>lights up the night',aud:'en_moon'},
-     wrongs:[{label:'<b>SUN</b><br>lights up the day',aud:'en_sun'},{label:'<b>STAR</b><br>twinkles at night',aud:'en_star'},{label:'<b>CLOUD</b><br>white and fluffy',aud:'en_cloud'}]},
-    {q:'Below the swirling sky, there is a group of small houses. In English, a small group of houses is called a...',
-     correct:{label:'<b>VILLAGE</b><br>small group of houses',aud:'en_village'},
-     wrongs:[{label:'<b>FIELD</b><br>open area of land',aud:'en_field'},{label:'<b>MOUNTAIN</b><br>very tall land',aud:'en_mountain'},{label:'<b>TREE</b><br>tall plant',aud:'en_tree'}]},
-    {q:'<i>The Starry Night</i> is a famous painting. What do we call a picture made with paint?',
-     correct:{label:'<b>PAINTING</b><br>art made with paint',aud:'en_painting'},
-     wrongs:[{label:'<b>PAPER</b><br>writing surface',aud:'en_paper'},{label:'<b>PENCIL</b><br>drawing tool',aud:'en_pencil'},{label:'<b>BRUSH</b><br>painting tool',aud:'en_brush'}]},
-    {q:'Who is the famous artist who painted <i>The Starry Night</i> in 1889?',
-     correct:{label:'<b>VINCENT VAN GOGH</b>',aud:'en_vangogh'},
-     wrongs:[{label:'<b>PABLO PICASSO</b>',aud:null},{label:'<b>LEONARDO DA VINCI</b>',aud:null},{label:'<b>CLAUDE MONET</b>',aud:null}]},
-  ];
-  return shuffle(qs).slice(0,6).map(q=>({
-    q:q.q,audio:['q_starry_detail'],
-    stage:svgStage('starry_night',300),
-    options:[{...q.correct,correct:true},...q.wrongs]
-  }));
-};
-
-/* 8. VAN GOGH — facts about the artist that require reading and thinking */
-BUILDERS.vangogh=()=>{
-  const facts=[
-    {q:'Vincent Van Gogh was born in a country in Europe. In English, that country is called...',
-     correct:{label:'<b>THE NETHERLANDS</b><br>Holland',aud:'en_netherlands'},
-     wrongs:[{label:'<b>FRANCE</b>',aud:'en_france'},{label:'<b>BRAZIL</b>',aud:null},{label:'<b>ENGLAND</b>',aud:null}]},
-    {q:'Van Gogh moved to the city of Arles to paint. Arles is in which country?',
-     correct:{label:'<b>FRANCE</b>',aud:'en_france'},
-     wrongs:[{label:'<b>THE NETHERLANDS</b>',aud:'en_netherlands'},{label:'<b>BRAZIL</b>',aud:null},{label:'<b>ITALY</b>',aud:null}]},
-    {q:'Van Gogh painted pictures of <b>his own face</b> many times. In English, a painting of your own face is called a...',
-     correct:{label:'<b>SELF PORTRAIT</b>',aud:'en_self_portrait'},
-     wrongs:[{label:'<b>LANDSCAPE</b><br>painting of nature',aud:null},{label:'<b>SUNFLOWERS</b>',aud:'en_sunflowers'},{label:'<b>THE BEDROOM</b>',aud:'en_bedroom'}]},
-    {q:'Van Gogh loved painting these big, bright, yellow flowers. What are they called in English?',
-     stage:svgStage('sunflowers',260),
-     correct:{label:'<b>SUNFLOWERS</b>',aud:'en_sunflowers'},
-     wrongs:[{label:'<b>ROSES</b>',aud:null},{label:'<b>STARS</b>',aud:'en_stars'},{label:'<b>TREES</b>',aud:'en_tree'}]},
-    {q:'Van Gogh used very bold, bright colors in his paintings. A person who creates art is called an...',
-     correct:{label:'<b>ARTIST</b>',aud:'en_artist'},
-     wrongs:[{label:'<b>PAINTING</b>',aud:'en_painting'},{label:'<b>BRUSH</b>',aud:'en_brush'},{label:'<b>CANVAS</b>',aud:'en_canvas'}]},
-    {q:'Van Gogh painted the room where he slept in Arles. What is the name of this famous painting?',
-     stage:svgStage('bedroom',260),
-     correct:{label:'<b>THE BEDROOM</b>',aud:'en_bedroom'},
-     wrongs:[{label:'<b>THE STARRY NIGHT</b>',aud:'en_starry_night'},{label:'<b>SUNFLOWERS</b>',aud:'en_sunflowers'},{label:'<b>SELF PORTRAIT</b>',aud:'en_self_portrait'}]},
-  ];
-  return shuffle(facts).slice(0,6).map(f=>({
-    q:f.q,audio:['q_vangogh_fact'],
-    stage:f.stage||svgStage('self_portrait',220),
-    options:[{...f.correct,correct:true},...f.wrongs]
-  }));
-};
-
-/* ===== SPLASH ===== */
-document.getElementById('splashIcon').innerHTML='<img src="images/mascot.png" alt="" style="width:100%;height:100%;object-fit:contain;">';
-document.getElementById('startBtn').onclick=()=>{
-  initAudio();unlockAudio();
+/* ===== INICIAR ===== */
+document.getElementById('startBtn').addEventListener('click',()=>{
+  initAudio();
+  unlockAudio(()=>goHome());
   document.getElementById('splash').style.display='none';
-  goHome();
-};
-
+});
 </script>
 </body>
 </html>
